@@ -1,0 +1,66 @@
+.button {
+    background: $blue;
+    border: none;
+    color: white;
+    display: inline-block;
+    font-weight: 300;
+    font-size: $font-size-large;
+    line-height: 1;
+    padding: $s-size;    
+    text-decoration: none;
+}
+
+.button__link {
+    text-decoration: none !important;
+}
+
+.button__secondary {
+    @extend .button;
+    background: #888;
+    margin-top: -58px;
+    display: block;
+    right: 0;
+    position: absolute;
+    z-index: 1;
+}
+
+.button__container {
+    max-width: 77rem;
+    margin: 0 auto;
+}
+
+.button__enter {
+    width: 200px;
+    border: 2px solid grey;
+    color: grey;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block !important;
+    font-size: 20px !important;
+    padding: 10px 0px !important;
+    font-family: 'Oswald', sans-serif !important;
+    margin-top: 20px;
+    &:hover {
+        color: rgb(158, 158, 158);
+    }
+    @media (max-width: $l-breakpoint) {
+        font-size: 30px;
+        width: 160px;
+	}
+	@media (max-width: $md-breakpoint) {
+        width: 140px;
+        font-size: 22px !important;
+        padding: 8px !important;
+	}
+	@media (max-width: $s-breakpoint) {
+        width: 120px;        
+        font-size: 17px !important;
+        padding: 6px !important;
+	}
+	@media (max-width: $xs-breakpoint) {
+        width: 100px;
+        font-size: 12px !important;
+        padding: 4px !important; 
+	}
+}
+

@@ -1,0 +1,137 @@
+//Welcome to the !important side of hell
+.navbar {
+	background: $off-white !important;
+	border: none !important;
+	padding-top: 5px;
+	height: 90px;
+	margin-bottom: 0 !important;
+	width: 100% !important;
+	border-bottom: 1px solid lightgrey !important;
+}
+
+#basic-nav-dropdown {
+	background: none !important;
+	color: black !important;
+	font-family: "Oswald", sans-serif !important;	
+	font-size: $font-size-medium;
+	text-align: center !important;
+}
+
+.link-item {
+	font-family: "Oswald", sans-serif !important;
+	text-decoration: none !important;
+	color: black !important;
+	font-size: $font-size-medium;
+	
+}
+
+.dropdown-menu {
+	background: url('/images/codebgblur.jpg') no-repeat center center !important; 
+	border: 1px solid black !important;
+	margin-top: 5px !important;
+}
+
+.nav > li {
+	font-family: "Oswald", sans-serif !important;	
+	font-size: $font-size-medium;
+}
+
+.nav > li > a {
+	margin-top: 20px !important;	
+	color: black !important;
+}
+
+a {
+	padding: 0 10px;			
+}
+
+.menu-items > a {
+	color: black !important;	
+	font-family: "Oswald", sans-serif !important;	
+	font-size: $font-size-medium;	
+}
+
+.menu-items > a:hover {
+	background: rgba(0, 0, 54, 0.568) !important;
+	color: black !important;
+	font-family: "Oswald", sans-serif !important;	
+	font-size: $font-size-medium;
+}
+
+.menu-items > a:focus {
+	background: rgba(0, 0, 54, 0.568) !important;
+	color: black !important;
+	font-family: "Oswald", sans-serif !important;	
+	font-size: $font-size-medium;	
+}
+
+.link-item > a:hover {
+	color: black !important;
+}
+
+.dropdown-toggle:focus {
+	background: none !important;
+}
+
+.solo-items {
+	margin-top: -6px;
+}
+
+.active--home {
+	@extend a;
+	border-bottom: 3px solid red;
+	padding-bottom: 6px;
+}
+
+.active--portfolio {
+	@extend a;
+	border-bottom: 3px solid #87C23F;
+	padding-bottom: 6px;
+}
+
+.active--certificates {
+	@extend a;
+	border-bottom: 3px solid #68C7B3;
+	padding-bottom: 6px;
+}
+
+.active--about-me {
+	@extend a;
+	border-bottom: 3px solid #A7E0EF;
+	padding-bottom: 6px;	
+}
+
+.logo {
+	margin-top: -16px;
+	height: 74px;
+}
+
+.navbar-brand {
+	margin-top: 4px;
+	border: 0px !important;
+}
+
+.seperator {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 3px solid lightgray;
+    margin-top: -6px;
+	padding: 0;
+	float: right;
+	width: 47vw !important;
+	@media (max-width: 767px) {
+		border: 0px !important;
+	}
+
+	
+}
+
+.navbar-toggle {
+	margin-top: 22px;
+	margin-right: 5vw;
+}
+
+.navbar-header {
+	margin-left: 5vw;
+}

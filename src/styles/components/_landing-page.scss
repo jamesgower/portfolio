@@ -1,0 +1,60 @@
+.landingPageBackground {
+	background: url('/images/bg.jpeg') no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+}
+.meImg {
+	width: 260px;
+	border-radius: 50%;
+	border: 6px solid grey;
+	margin: 0 auto;
+	display: block;
+	margin-top: 25vh;
+	overflow: hidden;	
+}
+
+.type-wrap {
+	padding-top: 45vh;
+}
+
+.typed {
+	color: rgb(51, 51, 51);
+	text-align: center;
+	font-family: 'Oswald', sans-serif;
+	overflow: hidden;
+	font-size: 40px;
+	@media (max-width: $l-breakpoint) {
+		font-size: 30px;
+	}
+	@media (max-width: $md-breakpoint) {
+		font-size: 22px;
+	}
+	@media (max-width: $s-breakpoint) {
+		font-size: 17px;
+	}
+	@media (max-width: $xs-breakpoint) {
+		font-size: 12px;
+	}
+}
+
+.typed-cursor {
+	opacity: 1;
+	animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
