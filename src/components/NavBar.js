@@ -1,65 +1,92 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import {
+	Collapse,
+	Navbar,
+	NavbarToggler,
+	NavbarBrand,
+	Nav,
+	NavItem,
+	UncontrolledDropdown,
+	DropdownToggle,
+	DropdownMenu,
+	DropdownItem,
+} from 'reactstrap';
 
-const NavBar = () => (
-	<div className="navbar-container">
-		<Navbar collapseOnSelect>
-			<div className="nav-header">
-				<Navbar.Header>
-					<Navbar.Brand>
-						<NavLink to="/">
-							<img className="logo" src="/images/logo.png" />
+export default class NavBar extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.toggle = this.toggle.bind(this);
+		this.state = {
+			isOpen: false,
+		};
+	}
+	toggle() {
+		this.setState({
+			isOpen: !this.state.isOpen,
+		});
+	}
+
+	render() {
+		return (
+			<div>
+				<Navbar className="navbar" color="faded" light expand="md">
+					<NavbarBrand>
+						<NavLink exact to="/">
+							<img src="/images/logo.png" className="logo" />
 						</NavLink>
-					</Navbar.Brand>
-					<Navbar.Toggle />
-				</Navbar.Header>
+					</NavbarBrand>
+					<hr className="seperator" />
+					<NavbarToggler onClick={this.toggle} />
+					<Collapse isOpen={this.state.isOpen} navbar>
+						<Nav className="ml-auto" navbar>
+							<NavItem>
+								<NavLink className="nav-item" exact to="/" activeClassName="active--home">
+									Home
+								</NavLink>
+							</NavItem>
+							<NavItem>
+								<NavLink className="nav-item" to="/portfolio" activeClassName="active--portfolio">
+									Portfolio
+								</NavLink>
+							</NavItem>
+							<NavItem>
+								<NavLink className="nav-item" to="/qualifications" activeClassName="active--portfolio">
+									Qualifications
+								</NavLink>
+							</NavItem>
+							<UncontrolledDropdown nav inNavbar>
+								<DropdownToggle className="dropdown-item" nav caret>
+									About Me
+								</DropdownToggle>
+								<DropdownMenu id="basic-nav-dropdown">
+									<DropdownItem>
+											<NavLink
+												className="nav-item"
+												to="/what-i-do"
+												activeClassName="active--portfolio"
+											>
+												What I Do
+											</NavLink>
+									</DropdownItem>
+									<DropdownItem>
+											<NavLink
+												className="nav-item"
+												to="/what-i-do"
+												activeClassName="active--portfolio"
+											>
+												Skills
+											</NavLink>
+									</DropdownItem>
+									<DropdownItem divider />
+									<DropdownItem>Contact Me</DropdownItem>
+								</DropdownMenu>
+							</UncontrolledDropdown>
+						</Nav>
+					</Collapse>
+				</Navbar>
 			</div>
-			<Navbar.Collapse>
-				<Nav pullRight>
-					<NavItem eventKey={1}>
-						<NavLink className="link-item" exact to="/" activeClassName="active--home">
-							Home
-						</NavLink>
-					</NavItem>
-					<NavItem eventKey={2}>
-						<NavLink className="link-item" to="/portfolio" activeClassName="active--portfolio">
-							Portfolio
-						</NavLink>
-					</NavItem>
-					<NavItem eventKey={3}>
-						<NavLink className="link-item" to="/certification" activeClassName="active--certificates">
-							Certifications
-						</NavLink>
-					</NavItem>
-					<NavDropdown eventKey={4} title="About Me" id="basic-nav-dropdown">
-						<MenuItem className="menu-items" eventKey={4.1}>
-							<NavLink className="link-item" to="/what-I-do">
-								What I Do
-							</NavLink>
-						</MenuItem>
-						<MenuItem className="menu-items" eventKey={4.2}>
-							<NavLink className="link-item" to="/skills" activeClassName="active--about-me">
-								Skills
-							</NavLink>
-						</MenuItem>
-						<MenuItem className="menu-items" eventKey={4.3}>
-							<NavLink className="link-item" to="/current-jobs" activeClassName="active--about-me">
-								Current Jobs
-							</NavLink>
-						</MenuItem>
-						<MenuItem divider />
-						<MenuItem className="solo-items menu-items" eventKey={4.4}>
-							<NavLink className="link-item" to="/current-jobs" activeClassName="active--about-me">
-								Contact Me
-							</NavLink>
-						</MenuItem>
-					</NavDropdown>
-				</Nav>
-			</Navbar.Collapse>
-			<hr className="seperator" />
-		</Navbar>
-	</div>
-);
-
-export default NavBar;
+		);
+	}
+}

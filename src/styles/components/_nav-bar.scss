@@ -1,108 +1,89 @@
 //Welcome to the !important side of hell
-.navbar {
+.nav-container {
+	width: 70vw;
+	margin: 0 auto;
+}
+
+.headroom {
 	background: $off-white !important;
+	border-bottom: 1px solid lightgray !important;
+	border-radius: 15px;
+}
+
+.navbar {
+	margin: 0 auto;
 	border: none !important;
 	padding-top: 5px;
-	height: 90px;
+	min-height: 90px;
 	margin-bottom: 0 !important;
 	width: 100% !important;
-	border-bottom: 1px solid lightgrey !important;
+}
+
+.nav-links {
+	margin: 0 auto;
+}
+
+.navbar-toggler-icon {
+	height: 25px;
+	width: 25px;
 }
 
 #basic-nav-dropdown {
-	background: none !important;
-	color: black !important;
-	font-family: "Oswald", sans-serif !important;	
+	background: $off-white !important;
+	font-family: 'Oswald', sans-serif !important;
 	font-size: $font-size-medium;
 	text-align: center !important;
+	padding: 10px;
 }
 
-.link-item {
-	font-family: "Oswald", sans-serif !important;
+.nav-item {
+	font-family: 'Oswald', sans-serif !important;
 	text-decoration: none !important;
 	color: black !important;
 	font-size: $font-size-medium;
-	
+	margin-top: 20px !important;
+	text-align: center;
+	padding: 10px;
+}
+
+.nav-link {	
+	margin-top: -10px;
+	padding: 10px !important;
 }
 
 .dropdown-menu {
-	background: url('/images/codebgblur.jpg') no-repeat center center !important; 
 	border: 1px solid black !important;
 	margin-top: 5px !important;
 }
 
-.nav > li {
-	font-family: "Oswald", sans-serif !important;	
-	font-size: $font-size-medium;
+.dropdown-item {
+	font-family: 'Oswald', sans-serif !important;
+	font-size: $font-size-medium !important;
 }
 
-.nav > li > a {
-	margin-top: 20px !important;	
-	color: black !important;
-}
-
-a {
-	padding: 0 10px;			
-}
-
-.menu-items > a {
-	color: black !important;	
-	font-family: "Oswald", sans-serif !important;	
-	font-size: $font-size-medium;	
-}
-
-.menu-items > a:hover {
-	background: rgba(0, 0, 54, 0.568) !important;
-	color: black !important;
-	font-family: "Oswald", sans-serif !important;	
-	font-size: $font-size-medium;
-}
-
-.menu-items > a:focus {
-	background: rgba(0, 0, 54, 0.568) !important;
-	color: black !important;
-	font-family: "Oswald", sans-serif !important;	
-	font-size: $font-size-medium;	
-}
-
-.link-item > a:hover {
-	color: black !important;
-}
-
-.dropdown-toggle:focus {
-	background: none !important;
-}
-
-.solo-items {
-	margin-top: -6px;
-}
-
+//ACTIVE CLASSES
 .active--home {
-	@extend a;
 	border-bottom: 3px solid red;
 	padding-bottom: 6px;
 }
 
 .active--portfolio {
-	@extend a;
-	border-bottom: 3px solid #87C23F;
+	border-bottom: 3px solid #87c23f;
 	padding-bottom: 6px;
 }
 
 .active--certificates {
-	@extend a;
-	border-bottom: 3px solid #68C7B3;
+	border-bottom: 3px solid #68c7b3;
 	padding-bottom: 6px;
 }
 
 .active--about-me {
-	@extend a;
-	border-bottom: 3px solid #A7E0EF;
-	padding-bottom: 6px;	
+	border-bottom: 3px solid #a7e0ef;
+	padding-bottom: 6px;
 }
 
 .logo {
-	margin-top: -16px;
+	margin-top: -10px;
 	height: 74px;
 }
 
@@ -112,19 +93,18 @@ a {
 }
 
 .seperator {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 3px solid lightgray;
-    margin-top: -6px;
-	padding: 0;
-	float: right;
-	width: 47vw !important;
+	position: fixed;
+	right: 0;
+	z-index: -1;
+	margin-top: 62px !important;
+	border-bottom: 3px solid lightgray;
+		width: 76vw;
+	@media (max-width: $md-breakpoint) {
+		width: 70vw;
+	}	
 	@media (max-width: 767px) {
 		border: 0px !important;
 	}
-
-	
 }
 
 .navbar-toggle {
@@ -134,4 +114,8 @@ a {
 
 .navbar-header {
 	margin-left: 5vw;
+}
+
+.dropdown-item {
+	color: black !important;
 }

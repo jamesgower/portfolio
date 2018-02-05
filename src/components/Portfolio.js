@@ -3,12 +3,15 @@ import NavBar from './NavBar';
 import Headroom from 'react-headroom';
 import Carousel from './Carousel';
 import { Container, Row, Col } from 'reactstrap';
+
 export default class Portfolio extends React.Component {
 	render() {
 		return (
 			<div>
 				<Headroom>
-					<NavBar/>
+					<div className="nav-container">
+						<NavBar />
+					</div>
 				</Headroom>
 				<Container className="content-container">
 					<h1 className="portfolio--title">Portfolio</h1>

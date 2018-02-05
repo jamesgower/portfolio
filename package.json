@@ -36,7 +36,6 @@
     "numeral": "2.0.6",
     "react": "15.6.1",
     "react-addons-shallow-compare": "15.6.0",
-    "react-bootstrap": "^0.32.1",
     "react-dates": "12.3.0",
     "react-dom": "15.6.1",
     "react-headroom": "^2.2.2",
