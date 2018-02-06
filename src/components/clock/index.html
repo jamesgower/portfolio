@@ -1,0 +1,62 @@
+<html>
+<title>Pomodoro Clock</title>
+
+<head>
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+        <![endif]-->
+    <!--  JQuery  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <!--  JQuery-UI  -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/1.12.1/jquery-ui.min.js"></script>
+    <script src="js/easytimer.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lobster+Two" rel="stylesheet">
+    <script src="js/soundmanager2-jsmin.js"></script>
+    <script src="js/circle-progress.min.js"></script>
+
+
+</head>
+
+<body>
+    <div class="container">
+        <div id="title">Pomodoro Clock</div>
+        <div id="subtitle" class="text-center">Many people work better when they know they have a break on the way!<br>Choose the length of time you wish to work - and the break you can reward yourself with!</div>
+        <div class="row">
+            <div class="col-sm-6 test">
+                <div id="workTimer" class="text-center">
+                    <p class="times">Minutes to work</p><br>
+                    <img src="media/arrowLeft.png" id="leftWork" class="arrows hvr-pulse-grow">
+                    <div id="workNum" class="num" value="25">25</div>
+                    <img src="media/arrowRight.png" id="rightWork" class="arrows hvr-pulse-grow">
+                </div>
+            </div>
+            <div class="col-sm-6 test">
+                <div id="breakTimer" class="text-center">
+                    <p class="times">Minutes on break</p><br>
+                    <img src="media/arrowLeft.png" id="leftBreak" class="arrows hvr-pulse-grow">
+                    <div id="breakNum" class="num">5</div>
+                    <img src="media/arrowRight.png" id="rightBreak" class="arrows hvr-pulse-grow">
+                </div>
+            </div>
+        </div>
+        <div id="circle-container"></div>
+
+        <div class="buttons">
+            <img src="media/play.png" id="goBtn" />
+            <img src="media/stop.png" id="stopBtn" />
+        </div>
+
+        <div id="countdown">
+            <div class="values">00:00:00</div>
+        </div>
+
+    </div>
+</body>
+
+</html>

@@ -6,7 +6,6 @@ import {
 	NavbarToggler,
 	NavbarBrand,
 	Nav,
-	NavItem,
 	UncontrolledDropdown,
 	DropdownToggle,
 	DropdownMenu,
@@ -32,31 +31,23 @@ export default class NavBar extends React.Component {
 		return (
 			<div>
 				<Navbar className="navbar" color="faded" light expand="md">
-					<NavbarBrand>
-						<NavLink exact to="/">
+					<NavLink to="/">
 							<img src="/images/logo.png" className="logo" />
-						</NavLink>
-					</NavbarBrand>
+					</NavLink>
 					<hr className="seperator" />
 					<NavbarToggler onClick={this.toggle} />
 					<Collapse isOpen={this.state.isOpen} navbar>
 						<Nav className="ml-auto" navbar>
-							<NavItem>
 								<NavLink className="nav-item" exact to="/" activeClassName="active--home">
 									Home
 								</NavLink>
-							</NavItem>
-							<NavItem>
 								<NavLink className="nav-item" to="/portfolio" activeClassName="active--portfolio">
 									Portfolio
 								</NavLink>
-							</NavItem>
-							<NavItem>
 								<NavLink className="nav-item" to="/qualifications" activeClassName="active--portfolio">
 									Qualifications
 								</NavLink>
-							</NavItem>
-							<UncontrolledDropdown nav inNavbar>
+							<UncontrolledDropdown nav>
 								<DropdownToggle className="dropdown-item" nav caret>
 									About Me
 								</DropdownToggle>

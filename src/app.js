@@ -6,15 +6,17 @@ import 'normalize.css/normalize.css';
 import 'react-dates/lib/css/_datepicker.css';
 import './styles/styles.scss';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+const App = () => <AppRouter />;
 
+ReactDOM.render(<App />, document.getElementById('app'));
 
-const jsx = <AppRouter />;
 let hasRendered = false;
 
 const renderApp = () => {
 	if (!hasRendered) {
-		ReactDOM.render(jsx, document.getElementById('app'));
+		ReactDOM.render(<App />, document.getElementById('app'));
 		hasRendered = true;
 	}
 };
