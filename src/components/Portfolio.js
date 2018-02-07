@@ -12,11 +12,9 @@ export default class Portfolio extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="background">
 				<Headroom>
-					<div className="nav-container">
-						<NavBar />
-					</div>
+					<NavBar />
 				</Headroom>
 				<Container className="content-container">
 					<h1 className="portfolio--title">Portfolio</h1>

@@ -1,13 +1,25 @@
 //Welcome to the !important side of hell
+.closeNav {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	z-index: 10;
+	height: 50px;
+	width: 50px;
+	font-size: 40px;
+	color: red;
+}
+
 .nav-container {
 	width: 70vw;
 	margin: 0 auto;
 }
 
 .headroom {
-	background: $off-white !important;
+	background: $off-white;
 	border-bottom: 1px solid lightgray !important;
-	border-radius: 15px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;	
 }
 
 .navbar {
@@ -29,7 +41,7 @@
 }
 
 #basic-nav-dropdown {
-	background: $off-white !important;
+	background: $off-white;
 	font-family: 'Oswald', sans-serif !important;
 	font-size: $font-size-medium;
 	text-align: center !important;
@@ -93,13 +105,13 @@
 
 .seperator {
 	position: fixed;
-	right: 0;
+	right: 15vw;
 	z-index: -1;
-	margin-top: 62px !important;
+	margin-top: 62px;
 	border-bottom: 3px solid lightgray;
-		width: 76vw;
+		width: 61vw;
 	@media (max-width: $md-breakpoint) {
-		width: 70vw;
+		width: 55vw;
 	}	
 	@media (max-width: 767px) {
 		border: 0px !important;

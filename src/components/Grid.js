@@ -2,8 +2,8 @@ import React from 'react';
 import { GridList, GridTile } from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
-import { NavLink } from 'react-router-dom';
-
+import { Link, Redirect } from 'react-router-dom';
+import LoadingPage from './LoadingPage';
 const styles = {
 	root: {
 		display: 'flex',
@@ -23,44 +23,46 @@ const tilesData = [
 		img: '/images/pomodoro.jpg',
 		title: 'Pomodoro Clock',
 		subtitle: 'Built with JavaScript & CSS',
-		href: null,
+		href: '/portfolio/pomodoro',
 	},
 	{
 		img: '/images/blogify.png',
 		title: 'Blogify App',
 		subtitle: 'Built in React 16, Redux, Webpack, SASS & Babel',
 		featured: true,
-		href: 'https://blogify-react.herokuapp.com/',
+		href: '/portfolio/blogify',
 	},
 	{
 		img: '/images/tictactoe.jpg',
 		title: 'Tic-Tac-Toe with Minimax Alogorthm',
 		author: 'pashminu',
 		featured: true,
-		href: null,
+		href: '/portfolio/tic-tac-toe',
 	},
 	{
 		img: '/images/calculator.jpg',
 		title: 'Calculator',
 		author: '',
-		href: 'https://jamesgower.github.io/twitch/twitchAPi.html',
+		href: '/portfolio/calculator',
 	},
 	{
 		img: '/images/wiki.jpg',
 		title: 'Wikipedia API',
 		author: 'fancycravel',
-		href: 'https://jamesgower.github.io/tic-tac-toe/index.html',
+		href: '/portfolio/wikipedia',
 	},
 	{
 		img: '/images/expensify.png',
 		title: 'Expensify App',
 		author: 'pashminu',
 		featured: true,
-		href: 'https://react-expenify-app.herokuapp.com/',
+		href: '/portfolio/expensify',
 	},
 ];
 
 export class Grid extends React.Component {
+
+
 	//Random animation for each element in the grid
 	randomAnimation() {
 		const e = document.getElementById(`tile${Math.floor(Math.random() * tilesData.length)}`);
@@ -70,11 +72,18 @@ export class Grid extends React.Component {
 		e.className = 'animated ' + random + ' grid';
 	}
 
-	render() {
-		//RandomAnimation function gets called every 8 seconds to animate a random element in the Grid.
-		setInterval(() => {
+	componentDidMount = () => {
+		this.animations = setInterval(() => {
 			this.randomAnimation();
 		}, 8000);
+	}
+
+	componentWillUnmount = () => {
+		clearInterval(this.animations);
+	}
+
+	render() {
+		//RandomAnimation function gets called every 8 seconds to animate a random element in the Grid.
 
 		return (
 			//GridTile are mapped from the TilesData array so each element is rendered
@@ -85,11 +94,15 @@ export class Grid extends React.Component {
 							id={`tile${i}`}
 							key={`tile${i}`}
 							className="grid-box"
+							href={tile.href}
+							target="_blank"
 							title={tile.title}
 							actionIcon={
-								<IconButton>
-									<StarBorder color="white" />
-								</IconButton>
+								<Link to={tile.href}>
+									<IconButton>
+										<StarBorder color="white"/>
+									</IconButton>
+								</Link>
 							}
 							actionPosition="left"
 							titlePosition="bottom"
@@ -97,7 +110,7 @@ export class Grid extends React.Component {
 							cols={tile.featured ? 2 : 1}
 							rows={2}
 						>
-							<img src={tile.img} />
+							<img src={tile.img} className="grid-item" />
 						</GridTile>
 					))}
 				</GridList>

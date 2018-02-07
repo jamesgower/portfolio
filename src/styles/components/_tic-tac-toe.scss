@@ -1,0 +1,338 @@
+.tic-tac-toe {
+    background: url("https://img.clipartxtras.com/a8f14587ff6e64c6e5138c33bf2da0d9_grass-clipart-background-grass-background-clipart-93-5431-sky-and-grass-background-clipart_2000-1052.jpeg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+	background-size: cover;
+	height: 100vh;
+	width: 100vw;
+	font-family: 'Neucha', sans-serif;
+}
+
+#border {
+    border: 30px solid transparent;
+    border-radius: 20px;
+    border-image: url("http://4.bp.blogspot.com/-X6Di7CPFPz8/Up5yIqS_NdI/AAAAAAAACdA/DjKB8Ir399k/s1600/Walnut-Wood-Flooring-002.jpg") 30 30 round;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 72px;
+    z-index: 100;
+    width: 492px;
+    height: 492px;
+    z-index: -1;
+}
+
+
+td {
+    border: 6px solid white;
+    height: 160px;
+    width: 160px;
+    text-align: center;
+    vertical-align: middle;
+    font-family: "Comic Sans MS", cursive;
+    font-size: 110px;
+    cursor: pointer;
+    color: white;
+}
+
+table {
+    background: url("http://www.powerpointhintergrund.com/uploads/blackboard-background-24.jpg");
+    border-collapse: collapse;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 102px;
+}
+
+table tr:first-child td {
+    border-top: 0;
+}
+
+table tr:last-child td {
+    border-bottom: 0;
+}
+
+table tr td:first-child {
+    border-left: 0;
+}
+
+table tr td:last-child {
+    border-right: 0;
+}
+
+.endgame {
+    display: none;
+    width: 300px;
+    top: 280px;
+    background-color: #4286f4;
+    position: absolute;
+    left: 50%;
+    margin-left: -130px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-size: 2em;
+    opacity: .80;
+    /* Standard: FF gt 1.5, Opera, Safari, CSS3 */
+    filter: alpha(opacity=80);
+    /* IE lt 8 */
+    -ms-filter: "alpha(opacity=80)";
+    /* IE 8 */
+    -khtml-opacity: .80;
+    /* Safari 1.x */
+    -moz-opacity: .80;
+    /* FF lt 1.5, Netscape */
+}
+
+.startgame {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    top: 102px;
+    z-index: 100;
+    border: 6px solid black;
+    width: 480px;
+    height: 480px;
+}
+
+#title {
+    text-align: center;
+    font-size: 2.4em;
+    margin-top: 120px;
+}
+
+#subtitle {
+    text-align: center;
+    font-size: 1.8em;
+    padding: 30px;
+}
+
+.choicePlayer {
+    display: inline-block;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.choicePlayer:hover {
+    border-color: blue;
+}
+
+.choiceContainer {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    background: orange;
+    height: auto;
+}
+
+#singlePlayer {
+    float: left;
+}
+
+#twoPlayer {
+    float: right;
+}
+
+.choice {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    top: 102px;
+    z-index: 4;
+    border: 6px solid black;
+    width: 480px;
+    height: 480px;
+}
+
+.aiChoice {
+    display: none;
+    margin-top: -30px;
+}
+
+.player {
+    width: 240px;
+    margin-top: 50px;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+#player2 {
+    float: right;
+}
+
+.playerName {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+    text-align: center;
+    font-size: 1.6em;
+}
+
+.playerChoice {
+    display: block;
+    font-size: 4em;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80px;
+}
+
+.name {
+    padding: 10px;
+    font-size: 25px;
+    text-align: center;
+    width: 120px;
+}
+
+.buttons {
+    margin-top: 20px;
+    border: 2px solid black;
+    display: inline-block;
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    text-align: center;
+    width: 100px;
+}
+
+#buttonContainer {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#switchChoice {
+    float: left;
+}
+
+#replayBtn {
+    position: absolute;
+    display: block;
+    padding: 7px;
+    width: 80px;
+    left: 50%;
+    margin-left: -40px;
+    margin-top: 110px;
+    float: none;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+
+#resetBtn {
+    position: absolute;
+    display: block;
+    padding: 7px;
+    width: 50px;
+    left: 50%;
+    margin-left: -25px;
+    margin-top: 70px;
+    float: none;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+
+#confirm {
+    float: right;
+}
+
+.title {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 450px;
+    font-size: 1.4em;
+    margin-top: 70px;
+}
+
+.scores {
+    margin-top: 700px;
+    width: 400px;
+    margin-bottom: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    display: block;
+    height: 200px;
+    background: url("http://www.powerpointhintergrund.com/uploads/green-blackboard-background-12.jpg");
+    background-size: 100% 100%;
+    color: white;
+}
+
+#ai {
+    margin-top: 25px;
+}
+
+.diff {
+    display: inline-block;
+    width: 80px;
+    text-align: center;
+    border: 2px solid black;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.aiChoice {
+    width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#easy {
+    float: left;
+    margin-left: 20px;
+}
+
+#normal {
+    left: 50%;
+    margin-left: 80px;
+    border-color: orange;
+}
+
+#unbeatable {
+    float: right;
+    margin-right: 20px;
+}
+
+#p1score,
+#p2score {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    font-family: Nothing You Could Do !important;
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+#p1 {
+    display: inline-block;
+    width: 180px;
+    float: left;
+    margin-top: 50px;
+}
+
+#p2 {
+    margin-top: 50px;
+    display: inline-block;
+    width: 180px;
+    float: right;
+}
+
+#player1name,
+#player2name {
+    font-size: 1.8em;
+    font-family: Nothing You Could Do !important;
+}

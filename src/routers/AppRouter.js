@@ -5,20 +5,23 @@ import DashboardPage from '../components/DashboardPage';
 import NotFoundPage from '../components/NotFoundPage';
 import LandingPage from '../components/LandingPage';
 import Portfolio from '../components/Portfolio';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Pomodoro from '../components/Pomodoro';
+import TicTacToe from '../components/TicTacToe';
 
 export const history = createHistory();
 
 const AppRouter = () => (
 	<Router history={history}>
-			<div>
-				<Switch>
-					<Route path="/" component={LandingPage} exact={true} />
-					<Route path="/dashboard" component={DashboardPage} />
-					<Route path="/portfolio" component={Portfolio} />
-					<Route component={NotFoundPage} />
-				</Switch>
-			</div>
+		<div>
+			<Switch>
+				<Route path="/" component={LandingPage} exact />
+				<Route path="/dashboard" component={DashboardPage} />
+				<Route path="/portfolio" exact component={Portfolio} />
+				<Route path="/portfolio/pomodoro" component={Pomodoro} />
+				<Route path="/portfolio/tic-tac-toe" component={TicTacToe} />				
+				<Route component={NotFoundPage} />
+			</Switch>
+		</div>
 	</Router>
 );
 

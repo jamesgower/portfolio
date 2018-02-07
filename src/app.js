@@ -2,11 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import AppRouter, { history } from './routers/AppRouter';
 import LoadingPage from './components/LoadingPage';
+import { $, jQuery } from 'jquery';
+import 'jquery-ui';
 import 'normalize.css/normalize.css';
 import 'react-dates/lib/css/_datepicker.css';
 import './styles/styles.scss';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+window.$ = $;
+window.jQuery = jQuery;
 
 const App = () => <AppRouter />;
 

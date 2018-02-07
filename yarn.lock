@@ -1896,6 +1896,10 @@ draft-js@^0.10.0, draft-js@~0.10.0:
     immutable "~3.7.4"
     object-assign "^4.1.0"
 
+easytimer@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/easytimer/-/easytimer-1.1.1.tgz#1addde725646de2592430d03048a748d63354e94"
+
 ecc-jsbn@~0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/ecc-jsbn/-/ecc-jsbn-0.1.1.tgz#0fc73a9ed5f0d53c38193398523ef7e543777505"
@@ -3341,6 +3345,20 @@ joi@^6.10.1:
     moment "2.x.x"
     topo "1.x.x"
 
+jquery-circle-progress@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/jquery-circle-progress/-/jquery-circle-progress-1.2.2.tgz#260e9130ac8e2b5572eaa7a93b9e8a6b27bc8eea"
+  dependencies:
+    jquery "*"
+
+jquery-ui@^1.12.1:
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/jquery-ui/-/jquery-ui-1.12.1.tgz#bcb4045c8dd0539c134bc1488cdd3e768a7a9e51"
+
+jquery@*, jquery@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
+
 js-base64@^2.1.8, js-base64@^2.1.9:
   version "2.1.9"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.1.9.tgz#f0e80ae039a4bd654b5f281fc93f04a914a7fcce"
@@ -4374,7 +4392,7 @@ pkg-dir@^2.0.0:
   dependencies:
     find-up "^2.1.0"
 
-popper.js@^1.12.5:
+popper.js@^1.12.5, popper.js@^1.12.9:
   version "1.12.9"
   resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.12.9.tgz#0dfbc2dff96c451bb332edcfcfaaf566d331d5b3"
 
@@ -5117,6 +5135,12 @@ react-addons-shallow-compare@15.6.0:
     fbjs "^0.8.4"
     object-assign "^4.1.0"
 
+react-circular-progressbar@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/react-circular-progressbar/-/react-circular-progressbar-0.7.0.tgz#771796fed448c2c0586fdd630f4a63aaa7c645ae"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-dates@12.3.0:
   version "12.3.0"
   resolved "https://registry.yarnpkg.com/react-dates/-/react-dates-12.3.0.tgz#430e5736bc655a21d9e40ab24b07b0d17d0df80a"
@@ -5760,6 +5784,10 @@ sort-keys@^1.0.0:
   resolved "https://registry.yarnpkg.com/sort-keys/-/sort-keys-1.1.2.tgz#441b6d4d346798f1b4e49e8920adfba0e543f9ad"
   dependencies:
     is-plain-obj "^1.0.0"
+
+soundmanager2@^2.97.20170602:
+  version "2.97.20170602"
+  resolved "https://registry.yarnpkg.com/soundmanager2/-/soundmanager2-2.97.20170602.tgz#fe3bc731bfc4d54c1364e71980263e6816981879"
 
 source-list-map@^0.1.7:
   version "0.1.8"
