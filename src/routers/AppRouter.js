@@ -6,7 +6,7 @@ import NotFoundPage from '../components/NotFoundPage';
 import LandingPage from '../components/LandingPage';
 import Portfolio from '../components/Portfolio';
 import Pomodoro from '../components/Pomodoro';
-import TicTacToe from '../components/TicTacToe';
+import PlayTicTacToe from '../components/TicTacToe/PlayTicTacToe';
 
 export const history = createHistory();
 
@@ -14,11 +14,11 @@ const AppRouter = () => (
 	<Router history={history}>
 		<div>
 			<Switch>
-				<Route path="/" component={LandingPage} exact />
+				<Route path="/" component={PlayTicTacToe} exact />
 				<Route path="/dashboard" component={DashboardPage} />
 				<Route path="/portfolio" exact component={Portfolio} />
 				<Route path="/portfolio/pomodoro" component={Pomodoro} />
-				<Route path="/portfolio/tic-tac-toe" component={TicTacToe} />				
+				<Route path="/portfolio/tic-tac-toe" component={PlayTicTacToe} />				
 				<Route component={NotFoundPage} />
 			</Switch>
 		</div>

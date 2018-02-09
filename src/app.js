@@ -8,14 +8,18 @@ import 'normalize.css/normalize.css';
 import 'react-dates/lib/css/_datepicker.css';
 import './styles/styles.scss';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import configureStore from './store/configureStore';
+import { Provider } from 'react-redux';
 
 window.$ = $;
 window.jQuery = jQuery;
 
-const App = () => <AppRouter />;
-
-ReactDOM.render(<App />, document.getElementById('app'));
+const store = configureStore();
+const App = () => (
+	<Provider store={store}>
+		<AppRouter />
+	</Provider>
+);
 
 let hasRendered = false;
 
