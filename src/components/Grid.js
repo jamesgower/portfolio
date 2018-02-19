@@ -2,8 +2,8 @@ import React from 'react';
 import { GridList, GridTile } from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
-import { Link, Redirect } from 'react-router-dom';
-import LoadingPage from './LoadingPage';
+import { Link } from 'react-router-dom';
+
 const styles = {
 	root: {
 		display: 'flex',
@@ -17,6 +17,15 @@ const styles = {
 		overflow: 'hidden',
 	},
 };
+
+/** 
+	* TODO
+	* [ ]	Change subtitles and authors in grid
+	* [ ]	Add correct href references
+	* [ ]	Add loading page
+	* [x] 	Add images to grid
+	* [x]	Style grid and add animations
+*/
 
 const tilesData = [
 	{
@@ -34,7 +43,7 @@ const tilesData = [
 	},
 	{
 		img: '/images/tictactoe.jpg',
-		title: 'Tic-Tac-Toe with Minimax Alogorthm',
+		title: 'Tic-Tac-Toe with Minimax Algorithm',
 		author: 'pashminu',
 		featured: true,
 		href: '/portfolio/tic-tac-toe',

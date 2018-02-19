@@ -2,7 +2,6 @@ import React from 'react';
 import TypedJSText from './TypedJSText';
 import { Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import NavBar from './NavBar';
 
 const LandingPage = () => (
 	<div className="landingPageBackground">

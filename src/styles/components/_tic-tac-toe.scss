@@ -1,0 +1,241 @@
+.tile {
+	margin: 10px;
+	border: 2px solid black;
+	height: 100px;
+	width: 100px;
+	display: inline-block;
+	float: left;
+	background: white;
+	font-size: 40px;
+	line-height: 100px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.tile:nth-child(3n + 1) {
+	clear: left;
+}
+
+.playerLabel {
+	font-size: 15px;
+	width: 92px;
+}
+
+.grid {
+	background: brown;
+	border: 2px solid black;
+	width: 374px;
+	padding: 5px;
+	margin: 20vh auto 0 auto;
+}
+
+.background-TTT {
+	padding-top: 1px;
+	margin-top: -1px;
+	width: 100vw !important;
+	height: 100vh !important;
+	background: url(https://static.pexels.com/photos/531756/pexels-photo-531756.jpeg) no-repeat center center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+.pNameInput {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	margin-bottom: 28px;
+}
+
+.playerLbl {
+	font-size: 15px;
+	text-align: right;
+	float: right;
+}
+
+.counter {
+	width: 50px;
+	margin: 0 auto;
+	cursor: pointer;
+	&:hover {
+		border-bottom: 2px solid red;
+		margin-bottom: -2px;
+	}
+}
+
+.counters-container {
+	font-size: 16px;
+	width: 150px;
+	display: inline-block;
+	align-content: space-between;
+	text-align: center;
+}
+
+.chooseCounterOne {
+	width: 300px;
+	margin: 0 auto -20px auto;
+}
+
+.chooseCounterTwo {
+	width: 300px;
+	margin: 0 auto;
+}
+
+.onePlayerNames {
+	width: 300px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 26px;
+	text-align: center;
+}
+
+.twoPlayerNames {
+	width: 300px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 46px;
+	text-align: center;
+}
+
+.setup-TTT {
+	width: 374px;
+	height: 40vh;
+	border: 2px solid black;
+	margin: 25vh auto;
+	padding: 5px;
+	background: white;
+}
+
+#title-TTT {
+	margin-top: 60px;
+	font-size: 30px;
+	text-align: center;
+}
+
+.subtitle-TTT {
+	margin-top: 30px;
+	font-size: 16px;
+	text-align: center;
+}
+
+.subtitle-2-TTT {
+	margin-top: 20px;
+	font-size: 13px;
+	text-align: center;
+}
+
+.playerChoice {
+	font-size: 16px;
+	border: 2px solid black;
+	border-radius: 10px;
+	display: inline-block;
+	padding: 5px 10px;
+	width: 80px;
+	text-align: center;
+	margin: 0 15px;
+	cursor: pointer;
+	&:hover {
+		border-color: red;
+	}
+}
+
+.button-container-TTT {
+	width: 220px;
+	margin: 40px auto;
+}
+
+.button-container {
+	width: 220px;
+	display: flex;
+	justify-content: space-between;
+	margin: 20px auto;
+}
+
+.chooseDiff {
+	text-align: center;
+}
+
+.diffBtn {
+	width: 70px;
+}
+
+.playBtn {
+	width: 78px;
+	margin: 0 auto;
+}
+//ScoreBoard
+.scores {
+	width: 400px;
+	margin-bottom: 40px;
+	text-align: center;
+	display: block;
+	height: 200px;
+	background: url('http://www.powerpointhintergrund.com/uploads/green-blackboard-background-12.jpg');
+	background-size: 100% 100%;
+	color: white;
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	margin-left: -200px;
+}
+
+#replayBtn {
+	position: absolute;
+	display: block;
+	padding: 7px;
+	width: 80px;
+	left: 50%;
+	margin-left: -40px;
+	margin-top: 110px;
+	float: none;
+	border-radius: 10px;
+	border: 2px solid black;
+}
+
+#resetBtn {
+	position: absolute;
+	display: block;
+	padding: 7px;
+	width: 50px;
+	left: 50%;
+	margin-left: -25px;
+	margin-top: 70px;
+	float: none;
+	border-radius: 10px;
+	border: 2px solid black;
+}
+
+.scoreNum {
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	font-family: Nothing You Could Do !important;
+	font-size: 2.5em;
+	font-weight: bold;
+}
+
+#p1 {
+	display: inline-block;
+	width: 180px;
+	float: left;
+	margin-top: 50px;
+}
+
+.p2 {
+	margin-top: 50px;
+	display: inline-block;
+	width: 180px;
+	float: right;
+}
+
+#player1name {
+	font-size: 1.8em;
+	font-family: Nothing You Could Do !important;
+}
+
+.player2name {
+	font-size: 1.8em;
+	font-family: Nothing You Could Do !important;
+}

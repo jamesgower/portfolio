@@ -5,7 +5,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = env => {
 	const isProduction = env === 'production';
 	const CSSExtract = new ExtractTextPlugin('styles.css');
-	const TicTacToeExtract = new ExtractTextPlugin('')
 
 	return {
 		entry: ['babel-polyfill', './src/app.js', 'jquery'],

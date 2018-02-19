@@ -6,7 +6,8 @@ import NotFoundPage from '../components/NotFoundPage';
 import LandingPage from '../components/LandingPage';
 import Portfolio from '../components/Portfolio';
 import Pomodoro from '../components/Pomodoro';
-import PlayTicTacToe from '../components/TicTacToe/PlayTicTacToe';
+import PlayTicTacToe from '../components/TicTacToeSetup';
+
 
 export const history = createHistory();
 

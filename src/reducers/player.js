@@ -7,7 +7,7 @@ const defaultPlayerState = {
 
 export default (state = defaultPlayerState, action) => {
 	switch (action.type) {
-	case 'ADD_MOVE':
+	case 'CHANGE_PLAYER_AFTER_MOVE':
 		return {
 			...state,
 			player1: state.player1 === 'X' ? 'O' : 'X',

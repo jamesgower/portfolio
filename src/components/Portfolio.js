@@ -1,7 +1,7 @@
 import React from 'react';
 import NavBar from './NavBar';
 import Headroom from 'react-headroom';
-import { Container, Row, Col } from 'reactstrap';
+import { Container } from 'reactstrap';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Grid from './Grid';
 
