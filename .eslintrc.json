@@ -1,42 +1,30 @@
 {
-    "env": {
-        "browser": true,
-        "es6": true,
-        "node": true
-    },
-    "extends": "eslint:recommended",
-    "parser": "babel-eslint",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "experimentalObjectRestSpread": true,
-            "jsx": true,
-            "arrowFunctions" : true,
-            "jquery": true
-        },
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-        "indent": [
-            "warn",
-            "tab"
-        ],
-        "linebreak-style": [
-            0,
-            "windows"
-        ],
-        "quotes": [
-            "warn",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ],
-        "react/no-unknown-property" : 2,
-        "react/jsx-uses-vars": 2,
-        "react/jsx-uses-react": 2
-    }
+	"env": {
+		"browser": true,
+		"es6": true,
+		"node": true,
+		"jquery": true
+	},
+	"extends": "eslint:recommended",
+	"parser": "babel-eslint",
+	"parserOptions": {
+		"ecmaFeatures": {
+			"experimentalObjectRestSpread": true,
+			"jsx": true,
+			"arrowFunctions": true
+		},
+		"sourceType": "module"
+	},
+	"plugins": ["react", "jquery", "dollar-sign"],
+	"rules": {
+		"indent": [0, "tab"],
+		"linebreak-style": [0, "windows"],
+		"quotes": ["warn", "single"],
+		"semi": ["error", "always"],
+		"react/no-unknown-property": 2,
+		"react/jsx-uses-vars": 2,
+        "react/jsx-uses-react": 2,
+        "react/jsx-indent": [2, "tab"],
+        "dollar-sign/dollar-sign": [0, "ignoreProperties"]		
+	}
 }

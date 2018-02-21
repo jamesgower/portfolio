@@ -4,24 +4,22 @@ import {
 	Collapse,
 	Navbar,
 	NavbarToggler,
-	NavbarBrand,
 	Nav,
 	UncontrolledDropdown,
 	DropdownToggle,
 	DropdownMenu,
 	DropdownItem,
 } from 'reactstrap';
-import Headroom from 'react-headroom';
 
 export default class NavBar extends React.Component {
 	constructor(props) {
 		super(props);
-
-		this.toggle = this.toggle.bind(this);
-		this.onClose = this.onClose.bind(this);
 		this.state = {
 			active: false,
+			isOpen: false
 		};
+		this.toggle = this.toggle.bind(this);
+		this.onClose = this.onClose.bind(this);
 	}
 	toggle() {
 		this.setState({
@@ -39,10 +37,9 @@ export default class NavBar extends React.Component {
 	render() {
 		return (
 			<div
-				className={
-					this.props.pomo
-						? this.state.active ? 'animated slideOutUp navbar-pomo' : 'animated slideInDown navbar-pomo'
-						: this.state.active ? 'animated slideOutUp' : 'animated slideInDown'
+			className =
+				{ 
+					this.state.active ? `animated slideOutUp ${this.props.pomo && 'navbar-pomo'} ${this.props.ttt && 'navbar-TTT'}` : `animated slideInDown ${this.props.pomo && 'navbar-pomo'} ${this.props.ttt && 'navbar-TTT'}`
 				}
 			>
 				<div className="nav-container">

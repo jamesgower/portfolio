@@ -1,16 +1,47 @@
 .tile {
-	margin: 10px;
 	border: 2px solid black;
-	height: 100px;
-	width: 100px;
+	height: 33.333%;
+	width: 33.333%;
+	padding: 10px;
 	display: inline-block;
 	float: left;
-	background: white;
-	font-size: 40px;
-	line-height: 100px;
-	text-align: center;
-	cursor: pointer;
+	background: none;
 }
+
+.tile-text {
+	font-size: 100px;
+	line-height: 100px;
+	text-align: center;	
+	cursor: pointer;
+	height: 100%;
+	width: 100%;
+}
+
+.tile:first-of-type {
+	border-left-color: transparent;
+	border-top-color: transparent;
+}
+
+.tile:nth-of-type(2) {
+	border-top-color: transparent;
+}
+
+.tile:nth-of-type(3) {
+	border-right-color: transparent;
+	border-top-color: transparent;
+}
+
+.tile:nth-of-type(4), .tile:nth-of-type(7) {
+	border-left-color: transparent;
+}
+
+.tile:nth-of-type(6), .tile:nth-of-type(9) {
+	border-right-color: transparent;
+}
+
+.tile:nth-of-type(7), .tile:nth-of-type(8), .tile:nth-of-type(9), {
+	border-bottom-color: transparent;
+} 
 
 .tile:nth-child(3n + 1) {
 	clear: left;
@@ -22,27 +53,33 @@
 }
 
 .grid {
-	background: brown;
-	border: 2px solid black;
-	width: 374px;
-	padding: 5px;
+	width: 400px;
+	height: 400px;
 	margin: 20vh auto 0 auto;
 }
 
 .background-TTT {
-	padding-top: 1px;
-	margin-top: -1px;
 	width: 100vw !important;
 	height: 100vh !important;
-	background: url(https://static.pexels.com/photos/531756/pexels-photo-531756.jpeg) no-repeat center center;
+	background: url('/images/bg-ttt.jpg') no-repeat fixed center;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
+	position: fixed;
+	top: 0;	
+	z-index: -2;
+}
+
+.playerInput {
+	border: 1px solid black !important;
+	&:focus {
+		box-shadow: 0 0 10px rgb(160, 109, 27) !important;
+	}
 }
 
 .pNameInput {
-	width: 100%;
+	width: 90%;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 30px;
@@ -50,8 +87,8 @@
 }
 
 .playerLbl {
-	font-size: 15px;
-	text-align: right;
+	line-height: 24px;
+	font-size: 18px;
 	float: right;
 }
 
@@ -71,6 +108,7 @@
 	display: inline-block;
 	align-content: space-between;
 	text-align: center;
+	
 }
 
 .chooseCounterOne {
@@ -100,44 +138,47 @@
 }
 
 .setup-TTT {
-	width: 374px;
+	width: 50vw;
 	height: 40vh;
-	border: 2px solid black;
-	margin: 25vh auto;
+	margin: 22vh auto;
 	padding: 5px;
-	background: white;
 }
 
 #title-TTT {
-	margin-top: 60px;
-	font-size: 30px;
+	font-size: 40px;
 	text-align: center;
 }
 
 .subtitle-TTT {
 	margin-top: 30px;
-	font-size: 16px;
+	font-size: 22px;
 	text-align: center;
 }
 
 .subtitle-2-TTT {
 	margin-top: 20px;
-	font-size: 13px;
+	font-size: 18px;
 	text-align: center;
 }
 
+.form-control {
+	background: none !important;
+}
+
 .playerChoice {
-	font-size: 16px;
-	border: 2px solid black;
+	font-size: 16px !important;
+	border: 2px solid rgb(189, 146, 78) !important;
 	border-radius: 10px;
 	display: inline-block;
 	padding: 5px 10px;
-	width: 80px;
+	width: 80px !important;
+	color: rgb(189, 146, 78) !important;
 	text-align: center;
 	margin: 0 15px;
 	cursor: pointer;
 	&:hover {
-		border-color: red;
+		background: rgb(189, 146, 78) !important;
+		color: white !important;
 	}
 }
 

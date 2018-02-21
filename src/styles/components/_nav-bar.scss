@@ -1,13 +1,10 @@
-//Welcome to the !important side of hell
-.closeNav {
+.openNav {
 	position: absolute;
-	top: 10px;
-	right: 10px;
-	z-index: 10;
+	margin-top: -100px;
+	left: 48%;
 	height: 50px;
 	width: 50px;
 	font-size: 40px;
-	color: red;
 }
 
 .nav-container {
@@ -129,4 +126,103 @@
 
 .dropdown-item {
 	color: black !important;
+}
+
+.closeNav {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	z-index: 10;
+	height: 50px;
+	width: 50px;
+	font-size: 40px;
+	color: red;
+}
+
+.openNav-TTT {
+	position: absolute;
+	top: 0;
+	left: 48%;
+	height: 50px;
+	width: 50px;
+	font-size: 40px;
+	cursor: pointer;	
+}
+
+#navbar-TTT {
+	position: absolute;
+	top: 0;
+}
+
+#navbar-pomo {
+	position: absolute;
+	top: 0;
+}
+
+.navbar-TTT {
+	background: url('/images/bg-ttt.jpg');
+	border-bottom: 1px solid white;
+	color: white !important;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;	
+}
+
+.navbar-pomo {
+	background: url('/images/bg-pomo.jpg') no-repeat fixed center;
+	border-bottom: 1px solid white;
+	color: white !important;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+}
+
+.navbar-pomo > div > nav > div > ul > a {
+	color: white !important;
+}
+
+.navbar-pomo > div > nav > div > ul > li > a {
+	color: white !important;
+	&:hover {
+		background: none !important;
+	}
+	&:focus {
+		background: none !important;
+	}
+}
+
+.navbar-pomo > div > nav > div > ul > li > div > button:hover {
+	background: none !important;
+}
+
+.navbar-pomo > div > nav > div > ul > li > div > button > a {
+	color: white !important;
+}
+
+.navbar-pomo > div > nav > div > ul > li > div > button > div > a {
+	color: white !important;
+}
+
+.navbar-pomo > div > nav > div > ul > li > #basic-nav-dropdown {
+	background: linear-gradient(#132227, #1f393a);
+	border: 2px solid white !important;
+	background-size: 100vw;
+}
+.navbar-pomo > div > nav > div > ul > li > #basic-nav-dropdown > button {
+	&:focus,
+	&:hover {
+		background: none !important;
+	}
+}
+
+.navbar-pomo > div > nav > hr {
+	margin-top: 60px !important;
+	border-bottom: 3px solid white;
+}
+
+.navbar-pomo > div > nav > button {
+	background: white;
+	color: black;
+	width: 32px;
+	height: 32px;
+	font-size: 12px;
+	padding: 3px;
 }

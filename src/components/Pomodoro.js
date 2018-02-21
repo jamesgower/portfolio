@@ -1,5 +1,5 @@
 import React from 'react';
-import { circleProgress } from 'jquery-circle-progress';
+import { circleProgress } from 'jquery-circle-progress'; // eslint-disable-line no-unused-vars
 import { soundManager } from 'soundmanager2';
 import Timer from 'easytimer';
 import NavBar from './NavBar';
@@ -10,12 +10,13 @@ class Pomodoro extends React.Component {
 
 		this.state = {
 			showComponent: false,
-			pomo: true
+			pomo: true,
+			navbar: true
 		};
 		this.updateState = this.updateState.bind(this);
 	}
 
-	updateState(update) {
+	updateState = (update) => {
 		this.setState({ showComponent: update });
 	}
 
@@ -71,7 +72,7 @@ class Pomodoro extends React.Component {
 			var circle = $('#circle-container'),
 				btn = $('#goBtn');
 
-			circle.circleProgress({
+			circle.circleProgress({ 
 				value: 0,
 				size: 340,
 				emptyFill: 'rgb(255, 255, 255)',
@@ -101,11 +102,11 @@ class Pomodoro extends React.Component {
 
 				//change time left every second to #countdown
 				$('#countdown .values').html(timer.getTimeValues().toString());
-				timer.addEventListener('secondsUpdated', function(e) {
+				timer.addEventListener('secondsUpdated', function() {
 					$('#countdown .values').html(timer.getTimeValues().toString());
 				});
 				//event when timer is finished
-				timer.addEventListener('targetAchieved', function(e) {
+				timer.addEventListener('targetAchieved', function() {
 					alarm.play();
 					$('#countdown .values').html('Time to rest!');
 					//start breakTimer straight after timer is finished
@@ -129,10 +130,10 @@ class Pomodoro extends React.Component {
 					});
 
 					$('#countdown .values').html(breakTimer.getTimeValues().toString());
-					breakTimer.addEventListener('secondsUpdated', function(e) {
+					breakTimer.addEventListener('secondsUpdated', function() {
 						$('#countdown .values').html(breakTimer.getTimeValues().toString());
 					});
-					breakTimer.addEventListener('targetAchieved', function(e) {
+					breakTimer.addEventListener('targetAchieved', function() {
 						alarm2.play();
 						$('#countdown .values').html('Time to work!');
 

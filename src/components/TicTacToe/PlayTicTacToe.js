@@ -47,7 +47,11 @@ export class TicTacToe extends React.Component {
 				this.state.noPlayers === 1 &&
 				!this.checkWin(this.state.origBoard, this.state.player1Counter)
 			) {
-				this.turn(this.bestSpot(), this.state.aiCounter);
+				this.setState({endGame: true});				
+				setTimeout(() => {
+					this.turn(this.bestSpot(), this.state.aiCounter);
+					this.setState({endGame: false});				
+				}, 1000);
 			}
 		}
 	};
@@ -58,7 +62,9 @@ export class TicTacToe extends React.Component {
 		this.setState({
 			origBoard: newBoard,
 		});
-		document.getElementById(squareId).innerText = playerCounter;
+		const tile = document.getElementById(squareId);
+		tile.innerText = playerCounter;
+		tile.className = 'tile-text animated fadeIn';
 		let gameWon = this.checkWin(this.state.origBoard, playerCounter);
 		if (gameWon) {
 			this.gameOver(gameWon);
@@ -84,6 +90,7 @@ export class TicTacToe extends React.Component {
 		for (let index of winCombos[gameWon.index]) {
 			document.getElementById(index).style.backgroundColor =
 				gameWon.player === this.state.player1Counter ? 'green' : 'red';
+			document.getElementById(index).className = 'tile-text animated tada';
 		}
 		if (this.state.noPlayers === 1) {
 			this.declareWinner(gameWon.player === this.state.player1Counter ? 'You Win!' : 'You Lose!');
@@ -114,7 +121,7 @@ export class TicTacToe extends React.Component {
 			endGame: false,
 		});
 		for (var i = 0; i < 9; i++) {
-			document.getElementById(i).style.background = 'white';
+			document.getElementById(i).style.background = 'none';			
 			document.getElementById(i).innerText = '';
 		}
 	};
@@ -131,7 +138,7 @@ export class TicTacToe extends React.Component {
 			endGame: false,
 		});
 		for (var i = 0; i < 9; i++) {
-			document.getElementById(i).style.background = 'white';
+			document.getElementById(i).style.background = 'none';
 			document.getElementById(i).innerText = '';
 		}
 	};
@@ -232,15 +239,33 @@ export class TicTacToe extends React.Component {
 		return (
 			<div>
 				<div className="grid">
-					<div className="tile" id={0} onClick={!this.state.endGame && this.onClick} />
-					<div className="tile" id={1} onClick={!this.state.endGame && this.onClick} />
-					<div className="tile" id={2} onClick={!this.state.endGame && this.onClick} />
-					<div className="tile" id={3} onClick={!this.state.endGame && this.onClick} />
-					<div className="tile" id={4} onClick={!this.state.endGame && this.onClick} />
-					<div className="tile" id={5} onClick={!this.state.endGame && this.onClick} />
-					<div className="tile" id={6} onClick={!this.state.endGame && this.onClick} />
-					<div className="tile" id={7} onClick={!this.state.endGame && this.onClick} />
-					<div className="tile" id={8} onClick={!this.state.endGame && this.onClick} />
+					<div className="tile">
+						<div className="tile-text" id={0} onClick={!this.state.endGame && this.onClick} />
+					</div>
+					<div className="tile">
+						<div className="tile-text" id={1} onClick={!this.state.endGame && this.onClick} />
+					</div>
+					<div className="tile">
+						<div className="tile-text" id={2} onClick={!this.state.endGame && this.onClick} />
+					</div>
+					<div className="tile">
+						<div className="tile-text" id={3} onClick={!this.state.endGame && this.onClick} />
+					</div>
+					<div className="tile">
+						<div className="tile-text" id={4} onClick={!this.state.endGame && this.onClick} />
+					</div>
+					<div className="tile">
+						<div className="tile-text" id={5} onClick={!this.state.endGame && this.onClick} />
+					</div>
+					<div className="tile">
+						<div className="tile-text" id={6} onClick={!this.state.endGame && this.onClick} />
+					</div>
+					<div className="tile">
+						<div className="tile-text" id={7} onClick={!this.state.endGame && this.onClick} />
+					</div>
+					<div className="tile">
+						<div className="tile-text" id={8} onClick={!this.state.endGame && this.onClick} />
+					</div>
 				</div>
 				<div className="scores">
 					<button id="replayBtn" onClick={this.onReplayClick}>

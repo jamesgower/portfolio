@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Input, Row, Col, FormGroup } from 'reactstrap';
+import { Button, Input, Row, Col } from 'reactstrap';
 
 class ChooseNames extends React.Component {
 	constructor(props) {
@@ -86,11 +86,11 @@ class ChooseNames extends React.Component {
 					<h2 className="twoPlayerNames">Please input your names, then optionally click on to change your coun.</h2>
 				)}
 				<Row className="pNameInput">
-					<Col xs={4}>
+					<Col xs={{size:3, offset:3}}>
 						<label className="playerLbl">Player 1:</label>
 					</Col>
-					<Col xs={8}>
-						<Input onChange={this.onP1Change} autoFocus value={this.state.p1name} />
+					<Col xs={3}>
+						<Input className="playerInput" onChange={this.onP1Change} autoFocus value={this.state.p1name} />
 					</Col>
 				</Row>
 
@@ -99,9 +99,10 @@ class ChooseNames extends React.Component {
 						<Col xs={4}>
 							<label className="playerLbl">Player 2:</label>
 						</Col>
-						<Col xs={8}>
-							<Input onChange={this.onP2Change} value={this.state.p2name} />
+						<Col xs={4}>
+							<Input className="playerInput" onChange={this.onP2Change} value={this.state.p2name} />
 						</Col>
+						<Col xs={4} />
 					</Row>
 				)}
 
