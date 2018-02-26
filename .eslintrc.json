@@ -19,7 +19,7 @@
 	"rules": {
 		"indent": [0, "tab"],
 		"linebreak-style": [0, "windows"],
-		"quotes": ["warn", "single"],
+		"quotes": [0, "single"],
 		"semi": ["error", "always"],
 		"react/no-unknown-property": 2,
 		"react/jsx-uses-vars": 2,

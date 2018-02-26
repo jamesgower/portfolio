@@ -15,7 +15,7 @@ const AppRouter = () => (
 	<Router history={history}>
 		<div>
 			<Switch>
-				<Route path="/" component={PlayTicTacToe} exact />
+				<Route path="/" component={LandingPage} exact />
 				<Route path="/dashboard" component={DashboardPage} />
 				<Route path="/portfolio" exact component={Portfolio} />
 				<Route path="/portfolio/pomodoro" component={Pomodoro} />

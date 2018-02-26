@@ -51,16 +51,16 @@ export default class NavBar extends React.Component {
 						<NavbarToggler onClick={this.toggle} />
 						<Collapse isOpen={this.state.isOpen} navbar>
 							<Nav className="ml-auto" navbar>
-								<NavLink className="nav-item" exact to="/" activeClassName="active--home">
+								<NavLink className="nav-item nav-home" exact to="/" activeClassName="active--home">
 									Home
 								</NavLink>
-								<NavLink className="nav-item" to="/portfolio" activeClassName="active--portfolio">
+								<NavLink className="nav-item nav-portfolio" to="/portfolio" activeClassName="active--portfolio">
 									Portfolio
 								</NavLink>
-								<NavLink className="nav-item" to="/qualifications" activeClassName="active--portfolio">
+								<NavLink className="nav-item nav-qual" to="/qualifications" activeClassName="active--portfolio">
 									Qualifications
 								</NavLink>
-								<UncontrolledDropdown nav>
+								<UncontrolledDropdown nav className="nav-item nav-me">
 									<DropdownToggle className="dropdown-item" nav caret>
 										About Me
 									</DropdownToggle>

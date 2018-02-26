@@ -21,7 +21,7 @@ export default class TicTacToeSetup extends React.Component {
 			readyToPlay: false,
 			showComponent: false,
 			ttt: true,
-			navbar: true
+			navbar: true,
 		};
 		this.updateState = this.updateState.bind(this);
 	}
@@ -46,20 +46,22 @@ export default class TicTacToeSetup extends React.Component {
 		});
 	};
 
+	onRestart = () => {
+		this.setState({
+			readyToPlay: false,
+			difficulty: undefined,
+			noPlayers: undefined,
+		});
+	};
+
 	updateState = update => {
-		this.setState({ showComponent: update});
+		this.setState({ showComponent: update });
 	};
 
 	render() {
 		return (
 			<div>
-				{this.state.showComponent && (
-					<NavBar
-						id="navbar-TTT"
-						update={this.updateState}
-						{...this.state}
-					/>
-				)}
+				{this.state.showComponent && <NavBar id="navbar-TTT" update={this.updateState} {...this.state} />}
 				<div className="background-TTT">
 					<span className="openNav-TTT" onClick={this.updateState}>
 						<i className="fa fa-bars animated pulse infinite" />
@@ -73,9 +75,13 @@ export default class TicTacToeSetup extends React.Component {
 						)}
 					{this.state.noPlayers !== undefined &&
 						!this.state.readyToPlay && (
-							<ChooseNames className="tic-tac-toe" update={this.onUpdate} {...this.state} />
+							<ChooseNames
+								restart={this.onRestart}
+								update={this.onUpdate}
+								{...this.state}
+							/>
 						)}
-					{this.state.readyToPlay && <TicTacToe {...this.state} />}
+					{this.state.readyToPlay && <TicTacToe restart={this.onRestart} {...this.state} />}
 				</div>
 			</div>
 		);

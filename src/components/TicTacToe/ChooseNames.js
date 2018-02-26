@@ -58,8 +58,8 @@ class ChooseNames extends React.Component {
 	onSubmit = e => {
 		e.preventDefault();
 		this.props.update({
-			p1name: this.state.p1name === '' ? 'Player 1' : this.state.p1name,
-			p2name: this.state.p2name === '' ? 'Player 2' : this.state.p2name,
+			p1name: this.state.p1name === '' ? 'Player One' : this.state.p1name,
+			p2name: this.state.p2name === '' ? 'Player Two' : this.state.p2name,
 			difficulty: this.state.difficulty === undefined ? 2 : this.state.difficulty,
 			player1Counter: this.state.player1Counter,
 			player2Counter: this.state.player2Counter,
@@ -74,35 +74,43 @@ class ChooseNames extends React.Component {
 			aiCounter: this.state.aiCounter === 'O' ? 'X' : 'O',
 		});
 	};
+
+	componentDidMount() {
+		document.getElementById('players-TTT').className = 'players-TTT animated fadeIn';
+	}
+	
 	render() {
 		return (
-			<div className="setup-TTT">
+			<div id='players-TTT'>
+				<div id="backBtnContainer" onClick={this.props.restart}><i className="fa fa-undo" /></div>
+		
 				{this.props.noPlayers === 1 && (
 					<h2 className="onePlayerNames">
 						Please input your name and choose the difficulty you wish to play on.
 					</h2>
 				)}
 				{this.props.noPlayers === 2 && (
-					<h2 className="twoPlayerNames">Please input your names, then optionally click on to change your coun.</h2>
+					<h2 className="twoPlayerNames">
+						Please input your names. You can also change your counter by clicking on your player name too.
+					</h2>
 				)}
 				<Row className="pNameInput">
-					<Col xs={{size:3, offset:3}}>
+					<Col xs={{ size: 3, offset: 2 }}>
 						<label className="playerLbl">Player 1:</label>
 					</Col>
-					<Col xs={3}>
+					<Col xs={6}>
 						<Input className="playerInput" onChange={this.onP1Change} autoFocus value={this.state.p1name} />
 					</Col>
 				</Row>
 
 				{this.props.noPlayers === 2 && (
 					<Row className="pNameInput">
-						<Col xs={4}>
+						<Col xs={{ size: 3, offset: 2 }}>
 							<label className="playerLbl">Player 2:</label>
 						</Col>
-						<Col xs={4}>
+						<Col xs={6}>
 							<Input className="playerInput" onChange={this.onP2Change} value={this.state.p2name} />
 						</Col>
-						<Col xs={4} />
 					</Row>
 				)}
 
@@ -145,12 +153,14 @@ class ChooseNames extends React.Component {
 				)}
 				<div className={this.props.noPlayers === 1 ? 'chooseCounterOne' : 'chooseCounterTwo'}>
 					<div onClick={this.changeCounter} className="counters-container">
-						<label className="counterLbl">Player One:</label>
+						<label className="counterLbl">{this.state.p1name.length > 0 ? this.state.p1name : 'Player 1'}:</label>
 						<div className="counter">{this.state.player1Counter}</div>
 					</div>
 					<div className="counters-container" onClick={this.changeCounter}>
-						<label className="counterLbl">{this.props.noPlayers === 1 ? 'Computer' : 'Player 2:'}</label>
-						<div className="counter">{this.props.noPlayers === 1 ? this.state.aiCounter : this.state.player2Counter}</div>
+						<label className="counterLbl">{this.props.noPlayers === 1 ? 'Computer' : this.state.p2name.length > 0 ? this.state.p2name : 'Player 2'}:</label>
+						<div className="counter">
+							{this.props.noPlayers === 1 ? this.state.aiCounter : this.state.player2Counter}
+						</div>
 					</div>
 				</div>
 				<div className="button-container">

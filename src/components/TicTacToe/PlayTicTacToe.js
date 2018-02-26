@@ -2,6 +2,16 @@ import React from 'react';
 
 const winCombos = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [6, 4, 2]];
 
+/*
+	TODO
+	[x]	update winning animations
+	[x] better styling for tic=tac=toe page
+	[x] remove chalkboard and scores in general and put them back in with better styling
+	[x] check if last tile winning animation works on restart  [it varies]
+	[x] setup AI to go first after p1 going first
+	[x] add setTimeout's for smoother switches to new board
+	[x] add back button to go back to previous states
+*/
 export class TicTacToe extends React.Component {
 	constructor(props) {
 		super(props);
@@ -19,16 +29,31 @@ export class TicTacToe extends React.Component {
 			aiScore: 0,
 			winningOutcome: undefined,
 			endGame: false,
-			p1name: this.props ? this.props.p1name : 'Player 1',
-			p2name: this.props ? this.props.p2name : 'Player 2',
+			p1name: this.props.p1name,
+			p2name: this.props.p2name,
+			gameFinished: false,
+			currentTurn: `It's ${this.props.p1name}'s turn`,
+			
 		};
 	}
 
 	onClick = e => {
+		document.getElementById('currentTurn').className = '';
 		const id = e.target.id;
 		if (typeof this.state.origBoard[id] === 'number') {
 			if (!this.checkTie() && this.state.noPlayers === 1) {
 				this.turn(id, this.state.player1Counter);
+				if (!this.checkTie() && !this.checkWin(this.state.origBoard, this.state.player1Counter)) {
+					this.setState({ endGame: true, currentPlayer: 2 });
+					setTimeout(() => {
+						this.turn(this.bestSpot(), this.state.aiCounter);
+						if (this.checkTie() || this.checkWin(this.state.origBoard, this.state.aiCounter)) {
+							this.setState({ gameFinished: true });
+						} else {
+							this.setState({ endGame: false, currentPlayer: 1 });
+						}
+					}, 1000);
+				}
 			} else {
 				if (this.state.currentPlayer === 1) {
 					this.turn(id, this.state.player1Counter);
@@ -42,17 +67,6 @@ export class TicTacToe extends React.Component {
 					});
 				}
 			}
-			if (
-				!this.checkTie() &&
-				this.state.noPlayers === 1 &&
-				!this.checkWin(this.state.origBoard, this.state.player1Counter)
-			) {
-				this.setState({endGame: true});				
-				setTimeout(() => {
-					this.turn(this.bestSpot(), this.state.aiCounter);
-					this.setState({endGame: false});				
-				}, 1000);
-			}
 		}
 	};
 
@@ -64,8 +78,16 @@ export class TicTacToe extends React.Component {
 		});
 		const tile = document.getElementById(squareId);
 		tile.innerText = playerCounter;
-		tile.className = 'tile-text animated fadeIn';
+		tile.className =
+			this.state.currentPlayer === 1 ? 'tile-text-p1 animated fadeIn' : 'tile-text-p2 animated fadeIn';
 		let gameWon = this.checkWin(this.state.origBoard, playerCounter);
+		if (this.state.currentPlayer === 1 && this.state.noPlayers === 2) {
+			this.setState({ currentTurn: `It's ${this.state.p2name}'s turn` });
+		} else if (this.state.currentPlayer === 1 && this.state.noPlayers === 1) {
+			this.setState({ currentTurn: 'AI is thinking...' });
+		} else if (this.state.currentPlayer === 2) {
+			this.setState({ currentTurn: `It's ${this.state.p1name}'s turn` }); 
+		}
 		if (gameWon) {
 			this.gameOver(gameWon);
 		}
@@ -94,60 +116,59 @@ export class TicTacToe extends React.Component {
 		}
 		if (this.state.noPlayers === 1) {
 			this.declareWinner(gameWon.player === this.state.player1Counter ? 'You Win!' : 'You Lose!');
+			gameWon.player === this.state.player1Counter 
+			? document.getElementById('p1score').classList = 'scoringAnimation'
+			: document.getElementById('p2score').classList = 'scoringAnimation'; 
+			
 			gameWon.player === this.state.player1Counter
 				? this.setState({
+						currentTurn: `${this.state.p1name} Wins!`,
 						player1Score: this.state.player1Score + 1,
+						currentPlayer: 2,
 					})
 				: this.setState({
+						currentTurn: 'The Computer Wins!',
 						aiScore: this.state.aiScore + 1,
+						currentPlayer: 1,
 					});
 		} else {
-			this.declareWinner(gameWon.player === this.state.player1Counter ? 'Player 1 Wins!' : 'Player 2 Wins!');
+			this.declareWinner(gameWon.player === this.state.player1Counter ? `${this.state.p1name} Wins!` : `${this.state.p2name} Wins!`);
 			gameWon.player === this.state.player1Counter
 				? this.setState({
+						currentTurn: `${this.state.p1name} Wins!`,
 						player1Score: this.state.player1Score + 1,
 					})
+					
 				: this.setState({
-						player1Score: this.state.player2Score + 1,
+						currentTurn: `${this.state.p2name} Wins!`,
+						player2Score: this.state.player2Score + 1,
 					});
 		}
-	};
-
-	onReplayClick = () => {
-		// Add AI to go first function in future
-		this.setState({
-			origBoard: Array.from(Array(9).keys()),
-			winningOutcome: undefined,
-			endGame: false,
-		});
-		for (var i = 0; i < 9; i++) {
-			document.getElementById(i).style.background = 'none';			
-			document.getElementById(i).innerText = '';
-		}
+		this.setState({ gameFinished: true });
 	};
 
 	onResetClick = () => {
-		// Add AI to go first function in future
-		this.setState({
-			currentPlayer: 1,
-			origBoard: Array.from(Array(9).keys()),
-			player1Score: 0,
-			player2Score: 0,
-			aiScore: 0,
-			winningOutcome: undefined,
-			endGame: false,
-		});
-		for (var i = 0; i < 9; i++) {
-			document.getElementById(i).style.background = 'none';
-			document.getElementById(i).innerText = '';
-		}
+		setTimeout(() => {
+			this.setState({
+				currentPlayer: 1,
+				origBoard: Array.from(Array(9).keys()),
+				player1Score: 0,
+				player2Score: 0,
+				aiScore: 0,
+				winningOutcome: undefined,
+				endGame: false,
+			});
+			for (var i = 0; i < 9; i++) {
+				document.getElementById(i).style.background = 'none';
+				document.getElementById(i).innerText = '';
+			}
+		}, 200);
 	};
 
 	declareWinner = result => {
 		this.setState({
 			endGame: true,
-		});
-		this.setState({
+			gameFinished: true,
 			winningOutcome: result,
 		});
 	};
@@ -161,10 +182,43 @@ export class TicTacToe extends React.Component {
 			return this.emptyTiles()[0];
 		} else if (this.state.difficulty === 2) {
 			var length = this.emptyTiles().length;
-			return this.emptyTiles()[Math.floor(Math.random(length) + 1)];
+			if(length === 1) {
+				return this.emptyTiles()[0];
+			} else {
+				let randomNum = Math.floor(Math.random() * Math.floor(length));
+				return this.emptyTiles()[randomNum];
+			}
 		} else if (this.state.difficulty === 3) {
 			return this.minimax(this.state.origBoard, this.state.aiCounter).index;
 		}
+	};
+
+	onResetBoard = () => {
+		setTimeout(() => {
+			this.setState({
+				origBoard: Array.from(Array(9).keys()),
+				winningOutcome: undefined,
+				endGame: false,
+				gameFinished: false,
+				currentTurn:
+					(this.state.currentPlayer === 2 && this.state.noPlayers === 2 && `It's ${this.state.p2name}'s turn`) ||
+					(this.state.currentPlayer === 2 && this.state.noPlayers === 1 && 'AI is thinking...') ||
+					(this.state.currentPlayer === 1 && `It's ${this.state.p1name}'s turn`),
+			});
+			document.getElementById('p1score').className = '';
+			document.getElementById('p2score').className = '';
+			for (var i = 0; i < 9; i++) {
+				document.getElementById(i).style.background = 'none';
+				document.getElementById(i).innerText = '';
+			}
+			if (this.state.currentPlayer === 2 && this.state.noPlayers === 1) {
+				this.setState({ endGame: true });
+				setTimeout(() => {
+					this.turn(this.bestSpot(), this.state.aiCounter);
+					this.setState({ currentPlayer: 1, endGame: false });
+				}, 1000);
+			}
+		}, 1500);
 	};
 
 	checkTie = () => {
@@ -174,6 +228,11 @@ export class TicTacToe extends React.Component {
 			!this.checkWin(this.state.origBoard, 'O')
 		) {
 			this.declareWinner('Tie Game!');
+			this.setState({
+				currentPlayer: this.state.currentPlayer === 1 ? 2 : 1,
+				gameFinished: true,
+				currentTurn: "It's a draw!"
+			});
 			return true;
 		}
 		return false;
@@ -235,9 +294,56 @@ export class TicTacToe extends React.Component {
 		return moves[bestMove];
 	};
 
+	componentDidMount() {
+		setTimeout(() => {
+			const p1score = document.getElementById('p1score');
+			p1score.style.visibility = 'visible';
+			p1score.className = 'animated fadeIn';
+			const p2score = document.getElementById('p2score');
+			p2score.style.visibility = 'visible';
+			p2score.className = 'animated fadeIn';
+		}, 1000);
+	}
+
+	componentWillUpdate(nextProps, nextState) {
+		document.getElementById('currentTurn').className = '';
+		if (nextState.gameFinished) {
+			this.onResetBoard();
+		}
+	}
+
+	componentDidUpdate() {
+		document.getElementById('currentTurn').className = 'animated fadeIn';
+		setTimeout(() => {
+			document.getElementById('currentTurn').className = '';
+		}, 300);
+	}	
+
 	render() {
 		return (
 			<div>
+				<div className="scores">
+					<div className="player1score">
+						<div className="player1Label animated slideInLeft">{this.state.p1name}: </div>
+						<div id="p1score">{this.state.player1Score > 0 ? this.state.player1Score : 0}</div>
+					</div>
+					<div className="player2score">
+						<div className="player2Label animated slideInRight">
+							{this.state.noPlayers === 2
+								? this.state.p2name
+								: `${(this.state.difficulty === 1 && 'Easy') ||
+										(this.state.difficulty === 2 && 'Normal') ||
+										(this.state.difficulty === 3 && 'Unbeatable')} AI`}:
+						</div>
+						<div id="p2score">
+							{this.state.noPlayers === 2
+								? this.state.player2Score > 0 ? this.state.player2Score : 0
+								: this.state.aiScore > 0 ? this.state.aiScore : 0}
+						</div>
+					</div>
+				</div>
+				<div id="currentTurn">{this.state.currentTurn}</div>
+				<div id="backBtnContainer" onClick={this.props.restart}><i className="fa fa-undo" /></div>
 				<div className="grid">
 					<div className="tile">
 						<div className="tile-text" id={0} onClick={!this.state.endGame && this.onClick} />
@@ -266,29 +372,6 @@ export class TicTacToe extends React.Component {
 					<div className="tile">
 						<div className="tile-text" id={8} onClick={!this.state.endGame && this.onClick} />
 					</div>
-				</div>
-				<div className="scores">
-					<button id="replayBtn" onClick={this.onReplayClick}>
-						Replay
-					</button>
-					<button id="resetBtn" onClick={this.onResetClick}>
-						Reset
-					</button>
-					<div id="p1">
-						<div id="player1name"> {this.state.p1name}:</div>
-						<span className="scoreNum"> {this.state.player1Score} </span>
-					</div>
-					{this.state.noPlayers === 1 ? (
-						<div className="p2">
-							<div className="player2name"> Computer: </div>
-							<span className="scoreNum"> {this.state.aiScore} </span>
-						</div>
-					) : (
-						<div className="p2">
-							<div className="player2name"> {this.state.p2name}: </div>
-							<span className="scoreNum"> {this.state.player2Score} </span>
-						</div>
-					)}
 				</div>
 			</div>
 		);

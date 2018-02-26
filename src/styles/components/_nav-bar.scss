@@ -16,7 +16,7 @@
 	background: $off-white;
 	border-bottom: 1px solid lightgray !important;
 	border-bottom-left-radius: 15px;
-	border-bottom-right-radius: 15px;	
+	border-bottom-right-radius: 15px;
 }
 
 .navbar {
@@ -30,6 +30,10 @@
 
 .nav-links {
 	margin: 0 auto;
+}
+
+.nav-link:hover, .nav-link:focus {
+	background: none !important;
 }
 
 .navbar-toggler-icon {
@@ -54,9 +58,14 @@
 	padding: 12px;
 }
 
-.nav-link {	
+.nav-link {
 	margin-top: -5px;
-	text-align: center;	
+	text-align: center;
+}
+
+.nav-me:hover {
+	padding-bottom: 10px;
+	border-bottom: 3px solid rgb(0, 162, 255);
 }
 
 .dropdown-menu {
@@ -71,23 +80,64 @@
 
 //ACTIVE CLASSES
 .active--home {
+	margin-left: 6px;
+	margin-right: 6px;
 	border-bottom: 3px solid red;
-	padding-bottom: 6px;
+	padding-bottom: 16px !important;
+}
+
+.nav-home {
+	margin-left: 6px;
+	margin-right: 6px;
+	&:hover {
+		border-bottom: 3px solid rgba(255, 0, 0, 0.459);
+	}
 }
 
 .active--portfolio {
+	margin-left: 6px;
+	margin-right: 6px;
 	border-bottom: 3px solid #87c23f;
-	padding-bottom: 6px;
+	padding-bottom: 16px;
+}
+
+.nav-portfolio {
+	margin-left: 6px;
+	margin-right: 6px;
+	&:hover {
+		border-bottom: 3px solid rgba(0, 255, 0, 0.459);
+	}
 }
 
 .active--certificates {
+	margin-left: 6px;
+	margin-right: 6px;
 	border-bottom: 3px solid #68c7b3;
-	padding-bottom: 6px;
+	padding-bottom: 16px;
+}
+
+.nav-qual {
+	margin-left: 6px;
+	margin-right: 6px;
+	&:hover {
+		border-bottom: 3px solid rgba(78, 255, 255, 0.459);
+	}
 }
 
 .active--about-me {
+	margin-left: 6px;
+	margin-right: 6px;
 	border-bottom: 3px solid #a7e0ef;
-	padding-bottom: 6px;
+	padding-bottom: 16px;
+}
+
+.dropdown-item {
+	&:hover {
+		background: none;
+	}
+	&:focus {
+		background: none;		
+	}
 }
 
 .logo {
@@ -106,10 +156,10 @@
 	z-index: -1;
 	margin-top: 62px;
 	border-bottom: 3px solid lightgray;
-		width: 61vw;
+	width: 61vw;
 	@media (max-width: $md-breakpoint) {
 		width: 55vw;
-	}	
+	}
 	@media (max-width: 767px) {
 		border: 0px !important;
 	}
@@ -142,11 +192,15 @@
 .openNav-TTT {
 	position: absolute;
 	top: 0;
-	left: 48%;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
 	height: 50px;
 	width: 50px;
-	font-size: 40px;
-	cursor: pointer;	
+	font-size: 50px;
+	cursor: pointer;
+	padding: 4px;
 }
 
 #navbar-TTT {
@@ -160,11 +214,16 @@
 }
 
 .navbar-TTT {
-	background: url('/images/bg-ttt.jpg');
+	width: 100vw;
+	background: url('/images/navbar-ttt.jpg') no-repeat fixed center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 	border-bottom: 1px solid white;
 	color: white !important;
 	border-bottom-left-radius: 15px;
-	border-bottom-right-radius: 15px;	
+	border-bottom-right-radius: 15px;
 }
 
 .navbar-pomo {
