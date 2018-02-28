@@ -7,7 +7,7 @@ import LandingPage from '../components/LandingPage';
 import Portfolio from '../components/Portfolio';
 import Pomodoro from '../components/Pomodoro';
 import PlayTicTacToe from '../components/TicTacToe/TicTacToeSetup';
-
+import Calculator from '../components/Calculator';
 
 export const history = createHistory();
 
@@ -15,11 +15,12 @@ const AppRouter = () => (
 	<Router history={history}>
 		<div>
 			<Switch>
-				<Route path="/" component={LandingPage} exact />
+				<Route path="/" component={Calculator} exact />
 				<Route path="/dashboard" component={DashboardPage} />
 				<Route path="/portfolio" exact component={Portfolio} />
 				<Route path="/portfolio/pomodoro" component={Pomodoro} />
-				<Route path="/portfolio/tic-tac-toe" component={PlayTicTacToe} />				
+				<Route path="/portfolio/tic-tac-toe" component={PlayTicTacToe} />	
+				<Route path="/portfolio/calculator" component={Calculator} />			
 				<Route component={NotFoundPage} />
 			</Switch>
 		</div>
