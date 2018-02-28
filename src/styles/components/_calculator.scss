@@ -37,7 +37,7 @@
     height: 10px;
     margin-top: -10px;
     bottom: 0;
-    margin-right: 14px;
+    margin-right: 16px;
     color: #8b8b7b;
     font-size: 12px;
     text-overflow: ellipsis;
@@ -68,6 +68,18 @@
 
 .calcBtn {
 	color: #fff;
+	font-weight: 600;	
+    border-radius: 8px;
+    border: none;
+    background-color: #3a3a3a;
+    margin: 0 4px 10px 8px;
+    height: 40px;
+    width: 52px;
+    box-shadow: 0px 3px 0px 0px #222121, inset -1px -3px 10px 1px #515151;
+}
+
+.calcBtn--disabled {
+    color: #fff;
 	font-weight: 600;	
     border-radius: 8px;
     border: none;

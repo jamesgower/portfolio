@@ -1,6 +1,12 @@
 import React from 'react';
 import math from 'mathjs';
-
+/* 
+	TODO
+	[x] Complete calculator
+	[ ] Put calculator component in react modal on click from portfolio 
+	[x] add CE functionality
+	[ ] add tests
+*/
 class Calculator extends React.Component {
 	constructor(props) {
 		super(props);
@@ -10,20 +16,21 @@ class Calculator extends React.Component {
 			previousNums: [],
 			equation: [],
 			lockEquations: false,
-			lockDot: false
+			lockDot: false,
+			lockNums: false,
 		};
 	}
 
 	onButtonClick = e => {
-		if(this.state.currentNumArray.length > 6 && this.state.currentNumArray.length < 10) {
+		if (this.state.currentNumArray.length > 6 && this.state.currentNumArray.length < 10) {
 			document.getElementById('outcome').classList = 'smallerInput';
-		} else if(this.state.currentNumArray.length >= 10) {
-			document.getElementById('outcome').classList = 'smallestInput';			
+		} else if (this.state.currentNumArray.length >= 10) {
+			document.getElementById('outcome').classList = 'smallestInput';
 		} else {
-			document.getElementById('outcome').classList = '';			
+			document.getElementById('outcome').classList = '';
 		}
 		const value = e.target.value;
-		if(value === '.') {
+		if (value === '.') {
 			this.setState({ lockDot: true });
 		}
 		let nums = this.state.currentNumArray;
@@ -32,14 +39,15 @@ class Calculator extends React.Component {
 	};
 
 	onEquationClick = e => {
-		document.getElementById('outcome').classList = '';			
+		document.getElementById('outcome').classList = '';
 		if (this.state.previousNums.length > 0) {
 			this.setState({
 				answer: undefined,
 				currentNumArray: [],
 				equation: [this.state.previousNums[this.state.previousNums.length - 1], [e.target.value]],
 				lockEquations: true,
-				lockDot: false
+				lockDot: false,
+				lockNums: false,
 			});
 		} else {
 			const method = e.target.value;
@@ -51,24 +59,26 @@ class Calculator extends React.Component {
 	};
 
 	onCancelClick = e => {
-		document.getElementById('outcome').classList = '';	
+		document.getElementById('outcome').classList = '';
 		const cancelType = e.target.value;
 		if (cancelType === 'ce') {
 			if (this.state.currentNumArray.length > 0) {
 				let newNumArr = this.state.currentNumArray;
-				newNumArr.slice(0, -1);
+				newNumArr = newNumArr.slice(0, -1);
 				this.setState({
 					currentNumArray: newNumArr,
+					lockNums: false,
 				});
 			}
-		} else {
+		} else if (cancelType === 'ac') {
 			this.setState({
 				answer: undefined,
 				currentNumArray: [],
 				equation: [],
 				lockEquations: false,
 				lockDot: false,
-				previousNums: []
+				lockNums: false,
+				previousNums: [],
 			});
 		}
 	};
@@ -80,14 +90,22 @@ class Calculator extends React.Component {
 			const answer = math.eval(equation.join(''));
 			const previousNums = this.state.previousNums;
 			previousNums.push(answer);
-			if(answer.toString().split('').length > 6 && answer.toString().split('').length < 10) {
+			if (answer.toString().split('').length > 6 && answer.toString().split('').length < 10) {
 				document.getElementById('outcome').classList = 'smallerInput';
-			} else if(answer.toString().split('').length >= 10) {
-				document.getElementById('outcome').classList = 'smallestInput';			
+			} else if (answer.toString().split('').length >= 10) {
+				document.getElementById('outcome').classList = 'smallestInput';
 			} else {
-				document.getElementById('outcome').classList = '';			
+				document.getElementById('outcome').classList = '';
 			}
-			this.setState({ answer, equation, previousNums, currentNumArray: [], lockEquations: false, lockDot: false });
+			this.setState({
+				answer,
+				equation,
+				previousNums,
+				currentNumArray: [],
+				lockEquations: false,
+				lockDot: false,
+				lockNums: true,
+			});
 		}
 	};
 
@@ -96,9 +114,9 @@ class Calculator extends React.Component {
 			<div className="calculator-container">
 				<div id="calculator">
 					<div id="title" className="text-center">
-						<h5>
+						<h4>
 							<b>Electronic Calculator</b>
-						</h5>
+						</h4>
 					</div>
 
 					<div id="entrybox" className="text-right">
@@ -118,71 +136,112 @@ class Calculator extends React.Component {
 							CE
 						</button>
 						<button
-							className="orange calcBtn"
+							className={!this.state.lockEquations ? 'orange calcBtn' : 'orange calcBtn--disabled'}
 							onClick={!this.state.lockEquations && this.onEquationClick}
 							value="/"
 						>
 							&divide;
 						</button>
 						<button
-							className="orange calcBtn"
+							className={!this.state.lockEquations ? 'orange calcBtn' : 'orange calcBtn--disabled'}
 							onClick={!this.state.lockEquations && this.onEquationClick}
 							value="*"
 						>
 							x
 						</button>
 
-						<button className="calcBtn" onClick={this.onButtonClick} value="7">
+						<button
+							className={!this.state.lockNums ? 'calcBtn' : 'calcBtn--disabled'}
+							onClick={!this.state.lockNums && this.onButtonClick}
+							value="7"
+						>
 							7
 						</button>
-						<button className="calcBtn" onClick={this.onButtonClick} value="8">
+						<button
+							className={!this.state.lockNums ? 'calcBtn' : 'calcBtn--disabled'}
+							onClick={!this.state.lockNums && this.onButtonClick}
+							value="8"
+						>
 							8
 						</button>
-						<button className="calcBtn" onClick={this.onButtonClick} value="9">
+						<button
+							className={!this.state.lockNums ? 'calcBtn' : 'calcBtn--disabled'}
+							onClick={!this.state.lockNums && this.onButtonClick}
+							value="9"
+						>
 							9
 						</button>
 						<button
-							className="orange calcBtn"
+							className={!this.state.lockEquations ? 'orange calcBtn' : 'orange calcBtn--disabled'}
 							onClick={!this.state.lockEquations && this.onEquationClick}
 							value="-"
 						>
 							-
 						</button>
 
-						<button className="calcBtn" onClick={this.onButtonClick} value="4">
+						<button
+							className={!this.state.lockNums ? 'calcBtn' : 'calcBtn--disabled'}
+							onClick={!this.state.lockNums && this.onButtonClick}
+							value="4"
+						>
 							4
 						</button>
-						<button className="calcBtn" onClick={this.onButtonClick} value="5">
+						<button
+							className={!this.state.lockNums ? 'calcBtn' : 'calcBtn--disabled'}
+							onClick={!this.state.lockNums && this.onButtonClick}
+							value="5"
+						>
 							5
 						</button>
-						<button className="calcBtn" onClick={this.onButtonClick} value="6">
+						<button
+							className={!this.state.lockNums ? 'calcBtn' : 'calcBtn--disabled'}
+							onClick={!this.state.lockNums && this.onButtonClick}
+							value="6"
+						>
 							6
 						</button>
 						<button
-							className="orange calcBtn"
+							className={!this.state.lockEquations ? 'orange calcBtn' : 'orange calcBtn--disabled'}
 							onClick={!this.state.lockEquations && this.onEquationClick}
 							value="+"
 						>
 							+
 						</button>
 
-						<button className="calcBtn" onClick={this.onButtonClick} value="1">
+						<button
+							className={!this.state.lockNums ? 'calcBtn' : 'calcBtn--disabled'}
+							onClick={!this.state.lockNums && this.onButtonClick}
+							value="1"
+						>
 							1
 						</button>
-						<button className="calcBtn" onClick={this.onButtonClick} value="2">
+						<button
+							className={!this.state.lockNums ? 'calcBtn' : 'calcBtn--disabled'}
+							onClick={!this.state.lockNums && this.onButtonClick}
+							value="2"
+						>
 							2
 						</button>
-						<button className="calcBtn" onClick={this.onButtonClick} value="3">
+						<button
+							className={!this.state.lockNums ? 'calcBtn' : 'calcBtn--disabled'}
+							onClick={!this.state.lockNums && this.onButtonClick}
+							value="3"
+						>
 							3
 						</button>
-						<button className="calcBtn" onClick={this.onButtonClick} id="zeroButton" value="0">
+						<button
+							className={!this.state.lockNums ? 'calcBtn' : 'calcBtn--disabled'}
+							onClick={!this.state.lockNums && this.onButtonClick}
+							id="zeroButton"
+							value="0"
+						>
 							0
 						</button>
 						<button className="calcBtn" onClick={!this.state.lockDot && this.onButtonClick} value=".">
 							.
 						</button>
 						<button
-							className="green calcBtn"
+							className={!this.state.lockEquations ? 'green calcBtn' : 'green calcBtn--disabled'}
 							onClick={!this.state.lockEquations && this.onEqualsClick}
 							id="equalButton"
 							value="="
