@@ -1,0 +1,141 @@
+#wiki {
+  top: 0;
+	background: url('https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/jVhILry/animated-world-globe-background_njlhvsoql__F0007.png') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+  margin-bottom: -1px;
+  padding-bottom: 1px;
+  z-index: -1;
+}
+
+.wiki-container {
+  font-family: Franklin Gothic !important;
+  z-index: -1;
+}
+
+.btn-group {
+	margin-left: auto !important;
+  margin-right: auto !important;
+  width: 50% !important;
+  display: block !important;
+}
+
+#searchinput {
+  width: 0;
+  height: 50px;
+  position: absolute;
+  margin-left: 45%;
+  border-radius: 20px;
+  border-color: #4569AC;
+  border-style: solid;
+  border-width: 5px;
+  padding: 10px;
+  text-align: center;
+	color: #4569AC;
+	font-size: 14px;
+}
+
+
+.openNav-wiki {
+	position: fixed;
+	top: 0;
+	left: 48%;
+	height: 50px;
+	width: 50px;
+	font-size: 40px;
+}
+#searchclear {
+  position: absolute;
+  right: 15px;
+  top: 46px;
+  height: 40px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #4569AC;
+}
+
+.contain {
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  height: 220px;
+  margin-top: 30vh;
+	border-radius: 20px;
+	background-color: white;
+	border: 5px solid black;
+}
+
+#searchBtn {
+  width: 60px;
+  height: 60px;
+  z-index: 100;
+  margin-left: 40%;
+  position: absolute;
+  z-index: 100;
+  cursor: pointer;
+  margin-top: -5px;
+}
+
+#searchTxt {
+	margin-top: 20px;
+}
+
+#randomLink {
+	margin-bottom: 12px;
+}
+
+.text-wiki {
+  color: #4569AC;
+  font-family: Franklin Gothic !important;
+	font-size: 18px;
+	text-align: center;
+}
+
+.text-wiki a {
+	color: #4569AC;
+	text-decoration: none;
+}
+
+.text-wiki a:hover {
+	color: grey;
+}
+
+#searchResults {
+  width: 60%;
+  height: 100%;
+	margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 40px;
+	padding: 20px, 50px, 20px, 50px;
+}
+
+.article {
+	padding: 20px;
+	border-style: solid;
+	border-color: black;
+	margin-top: 10px;
+	border-radius: 10px;
+	background-color: white;
+	text-align: justify;
+}
+
+.article:hover {
+	border-left: 10px solid yellow;
+	margin-left: -7px;
+	cursor: pointer;
+}
+
+#title-wiki {
+	font-weight: bold;
+	font-size: 16px;
+}
+
+#extract {
+	font-size: 12px;
+}

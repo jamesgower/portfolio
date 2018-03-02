@@ -8,6 +8,8 @@ import Portfolio from '../components/Portfolio';
 import Pomodoro from '../components/Pomodoro';
 import PlayTicTacToe from '../components/TicTacToe/TicTacToeSetup';
 import Calculator from '../components/Calculator';
+import WikipediaAPI from '../components/WikipediaAPI';
+import IndecisionApp from '../components/Indecision/IndecisionApp';
 
 export const history = createHistory();
 
@@ -15,12 +17,14 @@ const AppRouter = () => (
 	<Router history={history}>
 		<div>
 			<Switch>
-				<Route path="/" component={Calculator} exact />
+				<Route path="/" component={LandingPage} exact />
 				<Route path="/dashboard" component={DashboardPage} />
 				<Route path="/portfolio" exact component={Portfolio} />
 				<Route path="/portfolio/pomodoro" component={Pomodoro} />
 				<Route path="/portfolio/tic-tac-toe" component={PlayTicTacToe} />	
-				<Route path="/portfolio/calculator" component={Calculator} />			
+				<Route path="/portfolio/calculator" component={Calculator} />	
+				<Route path="/portfolio/wikipedia" component={WikipediaAPI} />	
+				<Route path="/portfolio/indecision-app" component={IndecisionApp} />	
 				<Route component={NotFoundPage} />
 			</Switch>
 		</div>

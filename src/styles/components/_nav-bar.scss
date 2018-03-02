@@ -97,7 +97,7 @@
 .active--portfolio {
 	margin-left: 6px;
 	margin-right: 6px;
-	border-bottom: 3px solid #87c23f;
+	border-bottom: 3px solid #509200;
 	padding-bottom: 16px;
 }
 
@@ -112,7 +112,7 @@
 .active--certificates {
 	margin-left: 6px;
 	margin-right: 6px;
-	border-bottom: 3px solid #68c7b3;
+	border-bottom: 3px solid #12b894;
 	padding-bottom: 16px;
 }
 
@@ -120,7 +120,7 @@
 	margin-left: 6px;
 	margin-right: 6px;
 	&:hover {
-		border-bottom: 3px solid rgba(78, 255, 255, 0.459);
+		border-bottom: 3px solid rgb(12, 204, 204);
 	}
 }
 
@@ -204,8 +204,9 @@
 }
 
 #navbar-TTT {
-	position: absolute;
+	position: fixed;
 	top: 0;
+	height: 200px;
 }
 
 #navbar-pomo {

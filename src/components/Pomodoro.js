@@ -193,7 +193,7 @@ class Pomodoro extends React.Component {
 							<i className="fa fa-bars animated pulse infinite" />
 						</span>
 
-						<div id="title">Pomodoro Clock</div>
+						<div id="title-pomo">Pomodoro Clock</div>
 						<div id="subtitle" className="text-center">
 							Many people work better when they know they have a break on the way! <br />
 							Choose the length of time you wish to work - and the break you can reward yourself with!
