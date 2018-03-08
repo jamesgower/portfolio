@@ -10,6 +10,7 @@ import PlayTicTacToe from '../components/TicTacToe/TicTacToeSetup';
 import Calculator from '../components/Calculator';
 import WikipediaAPI from '../components/WikipediaAPI';
 import IndecisionApp from '../components/Indecision/IndecisionApp';
+import TwitchAPI from '../components/TwitchAPI';
 
 export const history = createHistory();
 
@@ -17,7 +18,7 @@ const AppRouter = () => (
 	<Router history={history}>
 		<div>
 			<Switch>
-				<Route path="/" component={LandingPage} exact />
+				<Route path="/" component={TwitchAPI} exact />
 				<Route path="/dashboard" component={DashboardPage} />
 				<Route path="/portfolio" exact component={Portfolio} />
 				<Route path="/portfolio/pomodoro" component={Pomodoro} />

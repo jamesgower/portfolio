@@ -19,13 +19,14 @@ const styles = {
 
 /*
 	TODO
- 	[ ]	Change subtitles and authors in grid
+ 	[x]	Change subtitles and authors in grid
  	[x]	Add correct href references
  	[ ]	Add loading page
 	[ ] Restyle blogify and adjust image to suit 
 	[x] Add images to grid
 	[x]	Style grid and add animations
 	[ ] Add tags array to tiles object for sorting via tags.
+	[ ] Create different styles for the grid and text based on window size
 */
 
 const tilesData = [
