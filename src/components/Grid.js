@@ -70,10 +70,16 @@ const tilesData = [
 		href: '/portfolio/expensify',
 	},
 	{
+		img: '/images/twitch.jpg',
+		title: 'Twitch API',
+		subtitle: 'Build with React, Webpack, Twitch\'s API & SCSS',
+		featured: true,
+		href: '/portfolio/indecision-app'
+	},
+	{
 		img: '/images/indecision.jpg',
 		title: 'Indecision App',
 		subtitle: 'Build with React, Webpack & React-Router',
-		featured: true,
 		href: '/portfolio/indecision-app'
 	}
 ];
