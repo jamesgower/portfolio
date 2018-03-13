@@ -16,12 +16,12 @@ $blue: rgb(0, 0, 175);
 	-o-background-size: cover;
 	background-size: cover;
 	width: 100vw;
-	height: 100vh;
+	min-height: 100vh;
 }
 
 .simonSays {
 	width: 400px;
-	margin: 20vw auto;
+	margin: 200px auto;
 }
 
 .centerControls {

@@ -19,7 +19,7 @@ const AppRouter = () => (
 	<Router history={history}>
 		<div>
 			<Switch>
-				<Route path="/" component={SimonSays} exact />
+				<Route path="/" component={LandingPage} exact />
 				<Route path="/dashboard" component={DashboardPage} />
 				<Route path="/portfolio" exact component={Portfolio} />
 				<Route path="/portfolio/pomodoro" component={Pomodoro} />
@@ -28,6 +28,7 @@ const AppRouter = () => (
 				<Route path="/portfolio/wikipedia" component={WikipediaAPI} />	
 				<Route path="/portfolio/indecision-app" component={IndecisionApp} />
 				<Route path="/portfolio/twitch" component={TwitchAPI} />
+				<Route path="/portfolio/simon" component={SimonSays} />
 				<Route component={NotFoundPage} />
 			</Switch>
 		</div>
