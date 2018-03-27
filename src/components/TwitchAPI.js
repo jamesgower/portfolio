@@ -31,7 +31,12 @@ class TwitchAPI extends React.Component {
 	}
 
 	getData = name => {
-		fetch(`https://wind-bow.gomix.me/twitch-api/streams/${name}`)
+		fetch(`https://api.twitch.tv/kraken/streams/${name}`, {
+			headers: {
+				'Client-ID': 'acmgohwns9updtn48z6vtd67urgziz',
+				'Authorization': 'o*******'
+			}
+		})
 			.then(res => res.json())
 			.then(
 				result => {
