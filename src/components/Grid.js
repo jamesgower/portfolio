@@ -74,7 +74,7 @@ const tilesData = [
 		title: 'Twitch API',
 		subtitle: 'Build with React, Webpack, Twitch\'s API & SCSS',
 		featured: true,
-		href: '/portfolio/indecision-app'
+		href: '/portfolio/twitch'
 	},
 	{
 		img: '/images/indecision.jpg',

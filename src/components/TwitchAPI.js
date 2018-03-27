@@ -34,8 +34,8 @@ class TwitchAPI extends React.Component {
 		fetch(`https://api.twitch.tv/kraken/streams/${name}`, {
 			headers: {
 				'Client-ID': 'acmgohwns9updtn48z6vtd67urgziz',
-				'Authorization': 'oue8071wtsfxjpw0q2fdpfnewwcngk'
-			}
+				Authorization: 'oue8071wtsfxjpw0q2fdpfnewwcngk',
+			},
 		})
 			.then(res => res.json())
 			.then(
