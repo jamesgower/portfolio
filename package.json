@@ -9,7 +9,8 @@
     "build:prod": "webpack -p --env production",
     "dev-server": "webpack-dev-server",
     "test": "cross-env NODE_ENV=test jest --config=jest.config.json --watch",
-    "heroku-postbuild": "yarn run build:prod"
+    "start": "node server/server.js",
+    "heroku-postbuild": "npm run build:prod"
   },
   "dependencies": {
     "antd": "^3.1.6",
@@ -66,7 +67,17 @@
     "style-loader": "^0.20.1",
     "typed.js": "^2.0.6",
     "validator": "8.0.0",
-    "webpack": "3.1.0"
+    "webpack": "3.1.0",
+    "cross-env": "5.0.5",
+    "dotenv": "4.0.0",
+    "enzyme": "2.9.1",
+    "enzyme-to-json": "1.5.1",
+    "eslint": "^4.17.0",
+    "eslint-plugin-dollar-sign": "^1.0.1",
+    "eslint-plugin-react": "^7.6.1",
+    "jest": "20.0.4",
+    "react-test-renderer": "15.6.1",
+    "webpack-dev-server": "2.5.1"
   },
   "devDependencies": {
     "cross-env": "5.0.5",
