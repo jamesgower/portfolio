@@ -8,7 +8,7 @@ const styles = {
 		flexWrap: 'wrap',
 		justifyContent: 'space-around',
 		overflow: 'hidden',
-		marginBottom: '80px',
+		marginBottom: '80px'
 	},
 	gridList: {
 		minWidth: 'auto',
@@ -39,54 +39,49 @@ const tilesData = [
 	{
 		img: '/images/blogify.jpg',
 		title: 'Blogify App',
-		subtitle: 'Built in React 16, Redux, React-Router, Webpack, SASS & Jest',
+		subtitle: 'Built in React 16, Redux, React-Router, Webpack, SASS & Jest',		
 		featured: true,
 		href: '/portfolio/blogify',
 	},
 	{
 		img: '/images/tictactoe.jpg',
 		title: 'Tic-Tac-Toe with Minimax Algorithm',
-		subtitle: 'Built in React 16, SASS & Babel',
+		subtitle: 'Built in React 16, SASS & Babel',		
 		featured: true,
 		href: '/portfolio/tic-tac-toe',
 	},
 	{
 		img: '/images/calculator.jpg',
 		title: 'Calculator',
-		subtitle: 'Built in React 16, SASS & Babel',
+		subtitle: 'Built in React 16, SASS & Babel',		
 		href: '/portfolio/calculator',
 	},
 	{
 		img: '/images/wiki.jpg',
 		title: 'Wikipedia API',
-		subtitle: 'Built with jQuery, AJAX and pure JavaScript',
+		subtitle: 'Built with jQuery, AJAX and pure JavaScript',		
 		href: '/portfolio/wikipedia',
 	},
 	{
 		img: '/images/expensify.jpg',
 		title: 'Expensify App',
-		subtitle: 'Built in React 16, Redux, React-Router, Webpack, SASS & Jest',
+		subtitle: 'Built in React 16, Redux, React-Router, Webpack, SASS & Jest',		
 		featured: true,
 		href: '/portfolio/expensify',
 	},
 	{
 		img: '/images/twitch.jpg',
 		title: 'Twitch API',
-		subtitle: "Build with React, Webpack, Twitch's API & SCSS",
-		href: '/portfolio/twitch',
-	},
-	{
-		img: '/images/simon.jpg',
-		title: 'Simon Says Game',
-		subtitle: "Build with React, Webpack, & SCSS",
-		href: '/portfolio/simon',
+		subtitle: 'Build with React, Webpack, Twitch\'s API & SCSS',
+		featured: true,
+		href: '/portfolio/indecision-app'
 	},
 	{
 		img: '/images/indecision.jpg',
 		title: 'Indecision App',
 		subtitle: 'Build with React, Webpack & React-Router',
-		href: '/portfolio/indecision-app',
-	},
+		href: '/portfolio/indecision-app'
+	}
 ];
 
 export class Grid extends React.Component {
@@ -94,7 +89,7 @@ export class Grid extends React.Component {
 		super();
 
 		this.state = {
-			redirect: false,
+			redirect: false
 		};
 	}
 	//Random animation for each element in the grid
@@ -110,42 +105,34 @@ export class Grid extends React.Component {
 		this.animations = setInterval(() => {
 			this.randomAnimation();
 		}, 8000);
-		document.getElementById('grid').className = 'animated fadeIn';
+		document.getElementById('grid').className = 'animated fadeIn'; 
 	};
 
 	componentWillUnmount = () => {
 		clearInterval(this.animations);
 	};
 
-	handleOnClick = route => {
-		if (route === '/portfolio/expensify') {
-			window.open('https://react-expenify-app.herokuapp.com/');
-		} else if (route === '/portfolio/blogify') {
-			window.open('https://blogify-react.herokuapp.com/');
-		} else {
-			this.setState({
-				route,
-				redirect: true,
-			});
-		}
-	};
+	handleOnClick = (route) => {
+		this.setState({
+			route,
+			redirect: true
+		});
+	}
 
 	render() {
-		if (this.state.redirect) {
+		if(this.state.redirect) {
 			return <Redirect push to={this.state.route} />;
 		}
 		return (
 			//GridTile are mapped from the TilesData array so each element is rendered
 			<div className="grid-container" id="grid" style={styles.root}>
 				<GridList cols={3} cellHeight={240} padding={20} style={styles.gridList}>
-					{tilesData.map((tile, i) => (
+					{ tilesData.map((tile, i) => (
 						<GridTile
 							id={`tile${i}`}
 							key={`tile${i}`}
 							className="grid-list"
-							onClick={() => {
-								this.handleOnClick(tile.href);
-							}}
+							onClick={() => { this.handleOnClick(tile.href); } }
 							title={tile.title}
 							subtitle={tile.subtitle}
 							actionPosition="left"
@@ -154,7 +141,7 @@ export class Grid extends React.Component {
 							cols={tile.featured ? 2 : 1}
 							rows={2}
 						>
-							<img src={tile.img} className="grid-list" />
+							<img src={tile.img} className="grid-list"/>
 						</GridTile>
 					))}
 				</GridList>
