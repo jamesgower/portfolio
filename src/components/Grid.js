@@ -39,21 +39,21 @@ const tilesData = [
 	{
 		img: '/images/blogify.jpg',
 		title: 'Blogify App',
-		subtitle: 'Built in React 16, Redux, React-Router, Webpack, SASS & Jest',		
+		subtitle: 'Built with React, Redux, React-Router, Webpack, SASS & Jest',		
 		featured: true,
 		href: '/portfolio/blogify',
 	},
 	{
 		img: '/images/tictactoe.jpg',
 		title: 'Tic-Tac-Toe with Minimax Algorithm',
-		subtitle: 'Built in React 16, SASS & Babel',		
+		subtitle: 'Built with React, SASS & Babel',		
 		featured: true,
 		href: '/portfolio/tic-tac-toe',
 	},
 	{
 		img: '/images/calculator.jpg',
 		title: 'Calculator',
-		subtitle: 'Built in React 16, SASS & Babel',		
+		subtitle: 'Built with React 16, SASS & Babel',		
 		href: '/portfolio/calculator',
 	},
 	{
@@ -81,6 +81,19 @@ const tilesData = [
 		title: 'Indecision App',
 		subtitle: 'Build with React, Webpack & React-Router',
 		href: '/portfolio/indecision-app'
+	}, 
+	{
+		img: '/images/simon.jpg',
+		title: 'Simon Says',
+		subtitle: 'Build with React, Webpack & React-Router',
+		href: '/portfolio/simon-says',
+	},
+	{
+		img: '/images/emaily.jpg',
+		title: 'Emaily App',
+		subtitle: 'Full Stack App - Built with Express, SendGrid, MongoDB, React, Redux ',
+		href: '/portfolio/emaily',
+		featured: true,
 	}
 ];
 
@@ -132,7 +145,7 @@ export class Grid extends React.Component {
 							id={`tile${i}`}
 							key={`tile${i}`}
 							className="grid-list"
-							onClick={() => { this.handleOnClick(tile.href); } }
+							onClick={ () => this.handleOnClick(tile.href) }
 							title={tile.title}
 							subtitle={tile.subtitle}
 							actionPosition="left"

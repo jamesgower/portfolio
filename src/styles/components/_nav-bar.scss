@@ -47,6 +47,10 @@
 	font-size: $font-size-medium;
 	text-align: center !important;
 	padding: 10px;
+	border-radius: 10px;
+	float: right;
+	margin-left: 50px;
+	margin-top: -5px;
 }
 
 .nav-item {
@@ -61,6 +65,9 @@
 .nav-link {
 	margin-top: -5px;
 	text-align: center;
+	&:hover {
+		background: none !important;
+	}
 }
 
 .nav-me:hover {
@@ -69,7 +76,7 @@
 }
 
 .dropdown-menu {
-	border: 1px solid black !important;
+	border: 1px solid white !important;
 	margin-top: 5px !important;
 }
 
@@ -131,9 +138,9 @@
 	padding-bottom: 16px;
 }
 
-.dropdown-item {
+.dropdown-item-nav {
 	&:hover {
-		background: none;
+		background: rgb(208, 157, 255) !important;
 	}
 	&:focus {
 		background: none;		
