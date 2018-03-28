@@ -10,7 +10,7 @@ export default () => {
 				<NavBar />
 			</Headroom>
 			<Container className="content-container">
-				<h2 className="blog-title">E X P E N S I F Y</h2>
+				<h2 className="portfolio--title">E X P E N S I F Y</h2>
 				<h2 className="blog-subtitle">Accessing the project</h2>
 				<p className="blog-text">
 					The projects source code can be accessed using the 'View Source Code' button below, which is hosted
@@ -45,7 +45,7 @@ export default () => {
 					project is a finance tracking app, where all expenses are stored through the expense form, which are
 					then stored in a FireBase database.
 				</p>
-				<img src='./images/expenses.jpg' alt="Expense in app Dashboard" className="expenses"/>
+				<img src='/images/expenses.jpg' alt="Expense in app Dashboard" className="expenses"/>
 				<p className="blog-text">
 					The expenses can be filtered through the date added, or alternatively through the cost of the
 					expense. All expenses can be edited and deleted as needed. There is also an option to view all of
