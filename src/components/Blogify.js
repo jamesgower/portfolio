@@ -13,8 +13,8 @@ export default () => {
 				<NavBar />
 			</Headroom>
 			<Container className="content-container">
-				<h2 className="blog-title">B L O G I F Y</h2>
-				<h2 className="post">Accessing the project</h2>
+				<h2 className="portfolio--title">B L O G I F Y</h2>
+				<h2 className="blog-subtitle">Accessing the project</h2>
 				<p className="blog-text">
 					The project's source code can be found on GitHub using the 'View Source Code' button below, or
 					alternatively the application can be accessed using the 'View Project' button. The application is
@@ -47,7 +47,7 @@ export default () => {
 					'Search' button, or alternatively a user can log in through one of the many social media options to
 					publish a blog post to the servers.
 				</p>
-				<img src="./images/blogifyLogin.jpg" alt="Login via social media image" className="login" />
+				<img src="/images/blogifyLogin.jpg" alt="Login via social media image" className="login" />
 
 				<p className="blog-text">
 					Once logged in, there are options to filter all of your posts, so you can search, edit or delete
@@ -62,10 +62,10 @@ export default () => {
 					ability for code highlighting using the highlight.js library. This feature allows the user to add
 					different code snippets, which are highlighted in different colours for different languages.
 				</p>
-				<img src="./images/post.jpg" alt="Post creation form image" className="post" />
+				<img src="/images/post.jpg" alt="Post creation form image" className="post" />
 
-				<p className="post">Technologies Used</p>
-				<ul className="list">
+				<p className="blog-subtitle">Technologies Used</p>
+				<ul className="blog-text">
 					<li>Babel - for using latest JS features in all modern browsers</li>
 					<li>Express - for creating development server</li>
 					<li>FireBase - database for storing posts</li>
