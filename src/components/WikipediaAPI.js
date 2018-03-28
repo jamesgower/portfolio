@@ -81,33 +81,22 @@ class WikipediaAPI extends React.Component {
 						var pageid = Object.keys(data.query.pages)[0];
 						var title = data.query.pages[pageid].title;
 						var extract = data.query.pages[pageid].extract;
+						var link = `https://en.wikipedia.org/wiki/${title}`;
+						var formattedLink = link.split(" ").join("%20");
+						
 						$('#article' + i).empty();
 						$('#article' + i).hide();
 						$('#article' + i).append(
 							'<p id="title-wiki">' + title + '</p><p id="extract">' + extract + '</p>'
 						);
 						$('#article' + i).fadeIn(2000);
-						$('#article' + i).append(
-							'<a href = "https://en.wikipedia.org/wiki/' + title.replaceAll(' ', '%20') + '"></a>'
-						);
 						$('#article' + i).click(() => {
-							if ($(this).find('a').length) {
-								window.location.href = $(this)
-									.find('a:first')
-									.attr('href');
-							}
+							window.open(formattedLink);
 						});
 					},
 				});
 			}
 		});
-
-		String.prototype.replaceAll = (search, replace) => {
-			if (replace === undefined) {
-				return this.toString();
-			}
-			return this.split(search).join(replace);
-		};
 
 		return (
 			<div id="wiki">
@@ -127,7 +116,6 @@ class WikipediaAPI extends React.Component {
 									src="https://www.thesecu.com/wp-content/themes/secu/assets/images/Apps-Search-icon.png"
 								/>
 								<span id="searchclear">
-									{' '}
 									<i className="fa fa-times-circle" />{' '}
 								</span>
 							</div>
