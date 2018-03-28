@@ -53,8 +53,6 @@ export default () => {
 				<p className="blog-text" style={{paddingBottom: '100px'}}>The project's source code can be found on <a href="https://github.com/jamesgower/react-blog">GitHub</a>,
 				or alternatively the application can be accessed <a href="https://blogify-react.herokuapp.com/">here</a>. The application is hosted on Heroku's free plan, so it may
 				take a few seconds for the server to retrieve the application for the first time.</p>
-
-
 			</Container>
 		</div>
 	);
