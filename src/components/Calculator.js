@@ -129,21 +129,21 @@ class Calculator extends React.Component {
 					</div>
 
 					<div id="buttons">
-						<button className="red calcBtn" onClick={this.onCancelClick} value="ac">
+						<button className="red-btn calcBtn" onClick={this.onCancelClick} value="ac">
 							AC
 						</button>
-						<button className="red calcBtn" onClick={this.onCancelClick} value="ce">
+						<button className="red-btn calcBtn" onClick={this.onCancelClick} value="ce">
 							CE
 						</button>
 						<button
-							className={!this.state.lockEquations ? 'orange calcBtn' : 'orange calcBtn--disabled'}
+							className={!this.state.lockEquations ? 'orange-btn calcBtn' : 'orange-btn calcBtn--disabled'}
 							onClick={!this.state.lockEquations && this.onEquationClick}
 							value="/"
 						>
 							&divide;
 						</button>
 						<button
-							className={!this.state.lockEquations ? 'orange calcBtn' : 'orange calcBtn--disabled'}
+							className={!this.state.lockEquations ? 'orange-btn calcBtn' : 'orange-btn calcBtn--disabled'}
 							onClick={!this.state.lockEquations && this.onEquationClick}
 							value="*"
 						>
@@ -172,7 +172,7 @@ class Calculator extends React.Component {
 							9
 						</button>
 						<button
-							className={!this.state.lockEquations ? 'orange calcBtn' : 'orange calcBtn--disabled'}
+							className={!this.state.lockEquations ? 'orange-btn calcBtn' : 'orange-btn calcBtn--disabled'}
 							onClick={!this.state.lockEquations && this.onEquationClick}
 							value="-"
 						>
@@ -201,7 +201,7 @@ class Calculator extends React.Component {
 							6
 						</button>
 						<button
-							className={!this.state.lockEquations ? 'orange calcBtn' : 'orange calcBtn--disabled'}
+							className={!this.state.lockEquations ? 'orange-btn calcBtn' : 'orange-btn calcBtn--disabled'}
 							onClick={!this.state.lockEquations && this.onEquationClick}
 							value="+"
 						>
@@ -241,7 +241,7 @@ class Calculator extends React.Component {
 							.
 						</button>
 						<button
-							className={!this.state.lockEquations ? 'green calcBtn' : 'green calcBtn--disabled'}
+							className={!this.state.lockEquations ? 'green-btn calcBtn' : 'green-btn calcBtn--disabled'}
 							onClick={!this.state.lockEquations && this.onEqualsClick}
 							id="equalButton"
 							value="="

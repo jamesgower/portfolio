@@ -67,7 +67,7 @@ export default class NavBar extends React.Component {
 									<DropdownMenu id="basic-nav-dropdown">
 										<DropdownItem>
 											<NavLink
-												className="nav-item"
+												className="nav-item dropdown-item-nav"
 												to="/what-i-do"
 												activeClassName="active--portfolio"
 											>
@@ -76,7 +76,7 @@ export default class NavBar extends React.Component {
 										</DropdownItem>
 										<DropdownItem>
 											<NavLink
-												className="nav-item"
+												className="nav-item dropdown-item-nav"
 												to="/skills"
 												activeClassName="active--portfolio"
 											>
@@ -86,7 +86,7 @@ export default class NavBar extends React.Component {
 										<DropdownItem divider />
 										<DropdownItem>
 											<NavLink
-												className="nav-item"
+												className="nav-item dropdown-item-nav"
 												to="/contact-me"
 												activeClassName="active--portfolio"
 											>
