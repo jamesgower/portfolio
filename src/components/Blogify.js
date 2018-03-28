@@ -1,7 +1,7 @@
 import React from 'react';
 import Headroom from 'react-headroom';
 import NavBar from './NavBar';
-import { Container } from 'reactstrap';
+import { Container, Button } from 'reactstrap';
 
 // TODO
 // [ ] Media queries for mobile
@@ -14,8 +14,14 @@ export default () => {
 			</Headroom>
 			<Container className="content-container">
 				<h2 className="blog-title">B L O G I F Y</h2>
-				<div className="blogBtn--container">
-
+				<h2 className="blog-subtitle">Accessing the project</h2>
+				<p className="blog-text">The project's source code can be found on GitHub using the 'View Source Code' button below,
+				or alternatively the application can be accessed using the 'View Project' button. 
+				The application is hosted on Heroku's free plan, so it may
+				take a few seconds for the server to retrieve the application for the first time.</p>
+				<div className="blogify-btn-container">
+					<Button outline color="success" size="lg" className="btn-left" onClick={() => location.href = 'https://blogify-react.herokuapp.com/'}>View Project</Button>
+					<Button outline color="secondary" size="lg" className="btn-right" onClick={() => location.href = 'https://github.com/jamesgower/react-blog'}>View Source Code</Button>
 				</div>
 				<p className="blog-text">
 				Blogify is an application which I built to test my React and Redux skills after completing Andrew Mead's 
@@ -49,10 +55,7 @@ export default () => {
 					<li>Webpack - used for bundling all modules together</li>
 					<li>Jest & Enzyme - For testing react components</li>
 				</ul>
-				<h2 className="blog-subtitle">Accessing the project</h2>
-				<p className="blog-text" style={{paddingBottom: '100px'}}>The project's source code can be found on <a href="https://github.com/jamesgower/react-blog">GitHub</a>,
-				or alternatively the application can be accessed <a href="https://blogify-react.herokuapp.com/">here</a>. The application is hosted on Heroku's free plan, so it may
-				take a few seconds for the server to retrieve the application for the first time.</p>
+				
 			</Container>
 		</div>
 	);
