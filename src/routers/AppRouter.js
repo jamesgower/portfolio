@@ -21,7 +21,7 @@ const AppRouter = () => (
 	<Router history={history}>
 		<div>
 			<Switch>
-				<Route path="/" component={Blogify} exact />
+				<Route path="/" component={LandingPage} exact />
 				<Route path="/portfolio" exact component={Portfolio} />
 				<Route path="/portfolio/pomodoro" component={Pomodoro} />
 				<Route path="/portfolio/tic-tac-toe" component={PlayTicTacToe} />	
@@ -32,7 +32,7 @@ const AppRouter = () => (
 				<Route path="/portfolio/simon-says" component={SimonSays} />
 				<Route path="/portfolio/blogify" component={Blogify} />
 				<Route path="/portfolio/expensify" component={Expensify} />
-				<Route path="/portfolio/emaily" componenent={Emaily} />
+				<Route path="/portfolio/emaily" component={Emaily} />
 				<Route component={NotFoundPage} />
 			</Switch>
 		</div>
