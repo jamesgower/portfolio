@@ -1,8 +1,18 @@
 import React from 'react';
 import { circleProgress } from 'jquery-circle-progress'; // eslint-disable-line no-unused-vars
-import { soundManager } from 'soundmanager2';
 import Timer from 'easytimer';
 import NavBar from './NavBar';
+import { Howl } from 'howler';
+
+const alarm1 = new Howl({
+	src: ['/media/alarm.mp3'],
+	volume: 0.5
+});
+
+const alarm2 = new Howl({
+	src: ['/media/alarm2.mp3'],
+	volume: 0.5	
+});
 
 class Pomodoro extends React.Component {
 	constructor(props) {
@@ -48,27 +58,6 @@ class Pomodoro extends React.Component {
 				$('#breakNum').text(breakTime);
 			});
 
-			soundManager.setupOptions = {
-				useConsole: false,
-				consoleOnly: false,
-			};
-
-			soundManager.defaultOptions = {
-				volume: 50,
-			};
-
-			var alarm = soundManager.createSound({
-				id: 'alarm1',
-				url: '/images/alarm.mp3',
-				volume: 50,
-			});
-
-			var alarm2 = soundManager.createSound({
-				id: 'alarm2',
-				url: '/images/alarm2.mp3',
-				volume: 50,
-			});
-
 			var circle = $('#circle-container'),
 				btn = $('#goBtn');
 
@@ -107,7 +96,7 @@ class Pomodoro extends React.Component {
 				});
 				//event when timer is finished
 				timer.addEventListener('targetAchieved', function() {
-					alarm.play();
+					alarm1.play();
 					$('#countdown .values').html('Time to rest!');
 					//start breakTimer straight after timer is finished
 					breakTimer.start({
@@ -170,8 +159,8 @@ class Pomodoro extends React.Component {
 				);
 				timer.stop();
 				breakTimer.stop();
-				soundManager.stop('alarm');
-				soundManager.stop('alarm2');
+				alarm1.stop();
+				alarm2.stop();
 
 				$('#countdown .values').html('00:00:00');
 			});
