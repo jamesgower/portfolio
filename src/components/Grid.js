@@ -27,7 +27,9 @@ const styles = {
 	[x]	Style grid and add animations
 	[ ] Add tags array to tiles object for sorting via tags.
 	[ ] Create different styles for the grid and text based on window size
-	[ ] Links in Wikipedia Component not working
+	[x] Links in Wikipedia Component not working
+	[ ] Fix wrong path for fail.mp3 in Simon Component
+	[ ] Add font back to Pomodoro component
 */
 
 const tilesData = [

@@ -3,27 +3,27 @@ import { Howl } from 'howler';
 import NavBar from './NavBar';
 
 const greenSound = new Howl({
-	src: ['https://s3.amazonaws.com/freecodecamp/simonSound1.mp3'],
+	src: ['/media/green.mp3'],
 	volume: 0.5,
 });
 
 const redSound = new Howl({
-	src: ['https://s3.amazonaws.com/freecodecamp/simonSound2.mp3'],
+	src: ['/media/red.mp3'],
 	volume: 0.5,
 });
 
 const yellowSound = new Howl({
-	src: ['https://s3.amazonaws.com/freecodecamp/simonSound3.mp3'],
+	src: ['/media/yellow.mp3'],
 	volume: 0.5,
 });
 
 const blueSound = new Howl({
-	src: ['https://s3.amazonaws.com/freecodecamp/simonSound4.mp3'],
+	src: ['/media/blue.mp3'],
 	volume: 0.5,
 });
 
 const failSound = new Howl({
-	src: ['./images/fail.wav'],
+	src: ['/media/fail.wav'],
 	volume: 0.5,
 });
 
@@ -68,14 +68,40 @@ class SimonSays extends React.Component {
 		return colour;
 	};
 
+	onStartTimer = () => {
+		failTimer = setTimeout(async () => {
+			failSound.play();
+			let i = 0;
+			do {
+				document.getElementById('score').innerText = '!!';
+				await this.wait(200);
+				document.getElementById('score').innerText = '';
+				await this.wait(200);
+				i = i + 1;
+			} while (i < 5);
+			document.getElementById('score').innerText = this.state.currentStreak;
+			if (this.state.strictMode) {
+				this.onFailStrict();
+			} else if (!this.state.strictMode) {
+				this.onFailNormal();
+			}
+		}, 5000);
+	};
+
 	onTakeTurn = async e => {
+		if (!this.state.switchOn) {
+			return;
+		}
 		clearTimeout(failTimer);
+		this.onStartTimer();
 		const streak = this.state.currentStreak;
 		let turnNum = this.state.turnNum;
 		if (turnNum < this.state.combination.length) {
 			const turn = e.target.id;
 			const combination = this.state.combination;
 			if (turn === combination[turnNum]) {
+				clearTimeout(failTimer);
+				this.onStartTimer();
 				this.onFlashColour(combination[turnNum]);
 				switch (combination[turnNum]) {
 					case 'green':
@@ -90,10 +116,13 @@ class SimonSays extends React.Component {
 					case 'blue':
 						blueSound.play();
 						break;
+					default:
+						return;
 				}
 				turnNum++;
 				this.setState({ turnNum });
 				if (turnNum === combination.length) {
+					clearTimeout(failTimer);
 					if (streak <= 4) this.setState({ speed: 1000 });
 					else if (streak > 4 && streak <= 8) this.setState({ speed: 750 });
 					else this.setState({ speed: 500 });
@@ -105,6 +134,7 @@ class SimonSays extends React.Component {
 				}
 			} else {
 				failSound.play();
+				clearTimeout(failTimer);
 				let i = 0;
 				do {
 					document.getElementById('score').innerText = '!!';
@@ -123,14 +153,15 @@ class SimonSays extends React.Component {
 	};
 
 	onPowerSwitch = e => {
+		clearTimeout(failTimer);
 		const value = e.target.checked;
 		this.setState({ switchOn: value });
-		if (value === false) {
-			this.onResetGame();
-		}
+		return this.onResetGame();
 	};
 
 	async onNewCombination() {
+		if (!this.state.switchOn) return this.onResetGame();
+		clearTimeout(failTimer);
 		this.getColour();
 		let combination = this.state.combination;
 		await this.wait(500);
@@ -139,6 +170,7 @@ class SimonSays extends React.Component {
 	}
 
 	onFlashColour = async colour => {
+		if (!this.state.switchOn) return this.onResetGame();
 		switch (colour) {
 			case 'green':
 				greenSound.play();
@@ -170,34 +202,24 @@ class SimonSays extends React.Component {
 	};
 
 	async onFlashColours() {
-		if(!this.state.switchOn) {
-			return;
-		}
 		const combination = this.state.combination;
 		for (let colour in combination) {
-			await this.wait(this.state.speed);
-			await this.onFlashColour(combination[colour]);
-		}
-		failTimer = setTimeout(async () => {
-			failSound.play();
-			let i = 0;
-			do {
-				document.getElementById('score').innerText = '!!';
-				await this.wait(200);
-				document.getElementById('score').innerText = '';
-				await this.wait(200);
-				i = i + 1;
-			} while (i < 5);
-			document.getElementById('score').innerText = this.state.currentStreak;
-			if (this.state.strictMode) {
-				this.onFailStrict();
-			} else if (!this.state.strictMode) {
-				this.onFailNormal();
+			if (!this.state.switchOn) return this.onResetGame();
+			else {
+				console.log(combination[colour]);
+				await this.wait(this.state.speed);
+				await this.onFlashColour(combination[colour]);
 			}
-		}, 5000);
+		}
+		this.onStartTimer();
 	}
 
 	onFailNormal = async () => {
+		if (!this.state.switchOn) return this.onResetGame();
+		this.setState({
+			turnNum: 0,
+			userTurn: false,
+		});
 		await this.wait(500);
 		await this.onFlashColours();
 		await this.setState({
@@ -206,6 +228,7 @@ class SimonSays extends React.Component {
 	};
 
 	onFailStrict = async () => {
+		if (!this.state.switchOn) return this.onResetGame();
 		this.setState({
 			currentStreak: 0,
 			combination: [],
@@ -270,7 +293,7 @@ class SimonSays extends React.Component {
 						</div>
 						<div className="simonBtnContainer">
 							<div id="score" className={this.state.switchOn ? 'activeScore' : 'score'}>
-								{this.state.playingGame ? this.state.currentStreak : '--'}
+								{!this.state.switchOn ? '--' : this.state.playingGame ? this.state.currentStreak : '--'}
 							</div>
 							<div className="startContainer">
 								<div className={this.state.playingGame ? 'activeLight' : 'inactiveLight'} />
@@ -288,7 +311,11 @@ class SimonSays extends React.Component {
 								<div className={this.state.strictMode ? 'activeLight' : 'inactiveLight'} />
 								<div
 									onClick={this.state.switchOn && !this.state.playingGame && this.onSetStrictMode}
-									className={this.state.strictMode ? 'strictBtnPressed' : 'strictBtn'}
+									className={
+										this.state.strictMode || this.state.playingGame
+											? 'strictBtnPressed'
+											: 'strictBtn'
+									}
 								/>
 								<div className="description">STRICT</div>
 							</div>
