@@ -1,7 +1,7 @@
 .openNav {
 	position: absolute;
 	margin-top: -100px;
-	left: 48%;
+	left: 49%;
 	height: 50px;
 	width: 50px;
 	font-size: 40px;
@@ -282,8 +282,15 @@
 }
 
 .navbar-pomo > div > nav > hr {
-	margin-top: 60px !important;
+	margin-top: 26px;
 	border-bottom: 3px solid white;
+}
+
+@-moz-document url-prefix() {
+	.navbar-pomo > div > nav > hr {
+		margin-top: 62px;
+		border-bottom: 3px solid white;
+	}
 }
 
 .navbar-pomo > div > nav > button {
