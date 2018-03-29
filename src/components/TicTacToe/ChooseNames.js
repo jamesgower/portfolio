@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Input, Row, Col } from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.css';
 
 class ChooseNames extends React.Component {
 	constructor(props) {
@@ -95,20 +96,22 @@ class ChooseNames extends React.Component {
 					</h2>
 				)}
 				<Row className="pNameInput">
-					<Col xs={{ size: 3, offset: 2 }}>
+					<Col xs={{ size: 2}}></Col>
+					<Col xs={{ size: 4}}>
 						<label className="playerLbl">Player 1:</label>
 					</Col>
-					<Col xs={6}>
+					<Col xs={5}>
 						<Input className="playerInput" onChange={this.onP1Change} autoFocus value={this.state.p1name} />
 					</Col>
 				</Row>
 
 				{this.props.noPlayers === 2 && (
 					<Row className="pNameInput">
-						<Col xs={{ size: 3, offset: 2 }}>
+						<Col xs={{ size: 2}}></Col>				
+						<Col xs={{ size: 4 }}>
 							<label className="playerLbl">Player 2:</label>
 						</Col>
-						<Col xs={6}>
+						<Col xs={5}>
 							<Input className="playerInput" onChange={this.onP2Change} value={this.state.p2name} />
 						</Col>
 					</Row>
