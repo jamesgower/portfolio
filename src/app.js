@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AppRouter, { history } from './routers/AppRouter';
+import AppRouter, { history } from './routes/AppRouter';
 import LoadingPage from './components/LoadingPage';
 import { $, jQuery } from 'jquery';
 import 'jquery-ui';
@@ -15,7 +15,7 @@ window.$ = $;
 window.jQuery = jQuery;
 
 const store = configureStore();
-const App = () => (
+export const App = () => (
 	<Provider store={store}>
 		<AppRouter />
 	</Provider>
