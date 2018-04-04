@@ -18,18 +18,20 @@ const styles = {
 };
 
 /*
-	TODO
+	TO-DO
+	! Find API key in portfolio and secure it 	
+	[ ]	Add loading page
+	[ ] Make different components for Headroom Navbar and normal Navbar
+	[x]	Add correct href references
  	[x]	Change subtitles and authors in grid
- 	[x]	Add correct href references
- 	[ ]	Add loading page
 	[ ] Restyle blogify and adjust image to suit 
 	[x] Add images to grid
 	[x]	Style grid and add animations
 	[ ] Add tags array to tiles object for sorting via tags.
 	[ ] Create different styles for the grid and text based on window size
 	[x] Links in Wikipedia Component not working
-	[ ] Fix wrong path for fail.mp3 in Simon Component
-	[ ] Add font back to Pomodoro component
+	[x] Fix wrong path for fail.mp3 in Simon Component
+	[x] Add font back to Pomodoro component
 */
 
 const tilesData = [
