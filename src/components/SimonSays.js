@@ -70,6 +70,7 @@ class SimonSays extends React.Component {
 
 	onStartTimer = () => {
 		failTimer = setTimeout(async () => {
+			this.setState({ userTurn: false });
 			failSound.play();
 			let i = 0;
 			do {
@@ -79,6 +80,7 @@ class SimonSays extends React.Component {
 				await this.wait(200);
 				i = i + 1;
 			} while (i < 5);
+			this.setState({ userTurn: true });
 			document.getElementById('score').innerText = this.state.currentStreak;
 			if (this.state.strictMode) {
 				this.onFailStrict();
@@ -134,6 +136,7 @@ class SimonSays extends React.Component {
 				}
 			} else {
 				failSound.play();
+				this.setState({ userTurn: false });
 				clearTimeout(failTimer);
 				let i = 0;
 				do {
@@ -143,6 +146,8 @@ class SimonSays extends React.Component {
 					await this.wait(200);
 					i = i + 1;
 				} while (i < 5);
+					document.getElementById('score').innerText = this.state.currentStreak;
+				this.setState({ userTurn: true });
 				if (!this.state.strictMode) {
 					this.onFailNormal();
 				} else {
@@ -222,7 +227,7 @@ class SimonSays extends React.Component {
 		});
 		await this.wait(500);
 		await this.onFlashColours();
-		await this.setState({
+		this.setState({
 			userTurn: true,
 		});
 	};
@@ -233,6 +238,7 @@ class SimonSays extends React.Component {
 			currentStreak: 0,
 			combination: [],
 			userTurn: false,
+			turnNum: 0
 		});
 		await this.wait(500);
 		await this.getColour();
