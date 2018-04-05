@@ -18,8 +18,9 @@ const styles = {
 };
 
 /*
-	TO-DO
-	! Find API key in portfolio and secure it 	
+	TODO //
+	!! Find API key in portfolio and secure it 
+	!! FIX ANOTHER FUCKING BUG WITH THE TIMERS GOING OFF	
 	[ ]	Add loading page
 	[ ] Make different components for Headroom Navbar and normal Navbar
 	[x]	Add correct href references

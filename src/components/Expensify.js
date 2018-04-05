@@ -11,7 +11,7 @@ export default () => {
 			</Headroom>
 			<Container className="content-container">
 				<h2 className="portfolio--title">E X P E N S I F Y</h2>
-				<h2 className="blog-subtitle">Accessing the project</h2>
+				<h2 className="blog-header">Accessing the project</h2>
 				<p className="blog-text">
 					The projects source code can be accessed using the 'View Source Code' button below, which is hosted
 					on GitHub. The full project can be found on Heroku using the 'View Project' button. The project is
@@ -38,7 +38,7 @@ export default () => {
 						View Source Code
 					</Button>
 				</div>
-				<h2 className="blog-subtitle">Overview</h2>
+				<h2 className="blog-header">Overview</h2>
 				<p className="blog-text">
 					Expensify is a project that was built alongside Andrew Mead's 'Complete React Web Development'
 					course. During this course I learnt the fundamentals of React, Redux, FireBase and Webpack. The
@@ -52,7 +52,7 @@ export default () => {
 					the expenses which are hidden through the filter options, so a user can know how much money they've
 					input into the application from their first use.
 				</p>
-				<h2 className="blog-subtitle">Technologies Used</h2>
+				<h2 className="blog-header">Technologies Used</h2>
 				<ul className="blog-text">
 					<li>Babel - for using the latest JS features in all modern browsers</li>
 					<li>Express - for creating a development server</li>
