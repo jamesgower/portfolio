@@ -14,7 +14,7 @@ export default () => {
 			</Headroom>
 			<Container className="content-container">
 				<h2 className="portfolio--title">B L O G I F Y</h2>
-				<h2 className="blog-subtitle">Accessing the Project</h2>
+				<h2 className="blog-header">Accessing the Project</h2>
 				<p className="blog-text">
 					The project's source code can be found on GitHub using the 'View Source Code' button below, or
 					alternatively the application can be accessed using the 'View Project' button. The application is
@@ -41,7 +41,7 @@ export default () => {
 						View Source Code
 					</Button>
 				</div>
-				<h2 className="blog-subtitle">Overview</h2>
+				<h2 className="blog-header">Overview</h2>
 				<p className="blog-text">
 					Blogify is an application which I built to test my React and Redux skills after completing various
 					courses through Udemy. Blogify is a blogging application which can be browsed anonymously via the
@@ -65,7 +65,7 @@ export default () => {
 				</p>
 				<img src="/images/post.jpg" alt="Post creation form image" className="post" />
 
-				<p className="blog-subtitle">Technologies Used</p>
+				<p className="blog-header">Technologies Used</p>
 				<ul className="blog-text">
 					<li>Babel - for using latest JS features in all modern browsers</li>
 					<li>Express - for creating development server</li>
