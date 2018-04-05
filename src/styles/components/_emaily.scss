@@ -1,11 +1,49 @@
 .stripe-payment {
-	width: auto;
-	height: 300px;
+	display: inline-block;	
+	width: 80%;
+	height: auto;
+	vertical-align: middle;
+}
+
+.stripe-container {
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	vertical-align: middle;	
+}
+
+.stripe-container:before {
+	content: ' ';
+	display: inline-block;
+	vertical-align: middle;
+	height: 100%;
 }
 
 .emaily-dashboard {
-	position: relative;
-	float: left;
-	width: 500px;
-	margin: 30px;
+	display: inline-block;
+	width: 90%;
+	height: auto;
+	vertical-align: middle;
+}
+
+.emaily-container {
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+	height: 100%;
+}
+
+.emaily-container:before {
+	content: ' ';
+	display: inline-block;
+	vertical-align: middle;
+	height: 100%;
+}
+
+.blog-header {
+	margin-left: 30px;
+	margin-bottom: -10px;
+	font-size: 26px;
+	font-weight: 600;
 }
