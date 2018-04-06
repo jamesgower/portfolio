@@ -109,7 +109,7 @@ export class Grid extends React.Component {
 	//Random animation for each element in the grid
 	randomAnimation() {
 		const e = document.getElementById(`tile${Math.floor(Math.random() * tilesData.length)}`);
-		let animations = ['bounce', 'pulse', 'swing', 'tada', 'flash', 'rubberBand'];
+		let animations = ['bounce', 'pulse', 'swing', 'tada', 'rubberBand'];
 		//Random animation gets picked
 		let random = animations[Math.floor(Math.random() * animations.length)];
 		e.className = 'animated ' + random + ' grid-list';
