@@ -18,8 +18,19 @@ export default class Portfolio extends React.Component {
 				</Headroom>
 				<Container className="content-container">
 					<h1 className="portfolio--title">Portfolio</h1>
-					<h3 className="portfolio--subtitle">Here is some of the work which I have completed in my path to becoming a web developer. Most of the projects below are built in with React, however I am currently learning Node.JS, Angular5 and Vue.JS, so expect projects from these technologies soon. </h3>
-					<h3 className="portfolio--subtitle">Each project can be viewed by clicking on the image, along with source code which can be found on my GitHub page <a href="" target="_blank">here</a></h3>
+					<p className="blog-text" style={{marginTop: '20px'}}>
+						Here are a selection of some of the projects I have completed during my software engineering
+						career so far, I mainly use front-end JavaScript frameworks such as React, Vue.js and Angular to
+						build projects; however I am also able to build back-end servers/API's in Node.JS or Java if it
+						is necessary.
+					</p>
+					<p className="blog-text" style={{marginBottom: '20px'}}>
+						All web development projects are fully responsive for desktops, alongside CSS frameworks such as
+						Materialize CSS or Bootstrap 4 to make a sleek and user friendly interface. I am always open to
+						learning new frameworks or styles for any project I undertake. All projects source code can be
+						found on my GitHub page, including this portfolio <a href="https://www.github.com/jamesgower">
+						here</a>.
+					</p>
 					<MuiThemeProvider>
 						<Grid {...this.state} />
 					</MuiThemeProvider>

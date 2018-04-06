@@ -13,15 +13,15 @@
 		margin: 10px 30px;
 	}
 	@media (max-width: $md-breakpoint) {
-		font-size: 18px;
-		margin: 10px 30px;		
-	}
-	@media (max-width: $s-breakpoint) {
 		font-size: 16px;
 		margin: 10px 30px;		
 	}
+	@media (max-width: $s-breakpoint) {
+		font-size: 13px;
+		margin: 10px 30px;		
+	}
 	@media (max-width: $xs-breakpoint) {
-		font-size: 14px;
+		font-size: 10px;
 		margin: 10px 30px;		
 	}
 }
