@@ -3,20 +3,13 @@ import { GridList, GridTile } from 'material-ui/GridList';
 import { Redirect } from 'react-router-dom';
 
 /*
-	TODO //
-	!! Find API key in portfolio and secure it ?
+	!! TODO
+	? Find API key in portfolio and secure it -- possibly in other file
 	[ ]	Add loading page
 	[ ] Make different components for Headroom Navbar and normal Navbar
-	[x]	Add correct href references
- 	[x]	Change subtitles and authors in grid
 	[ ] Restyle blogify and adjust image to suit 
-	[x] Add images to grid
-	[x]	Style grid and add animations
 	[ ] Add tags array to tiles object for sorting via tags.
-	[x] Create different styles for the grid and text based on window size
-	[x] Links in Wikipedia Component not working
-	[x] Fix wrong path for fail.mp3 in Simon Component
-	[x] Add font back to Pomodoro component
+	[ ] Readme.md for all GitHub projects with relevant installation & usage info
 */
 
 const tilesData = [
@@ -167,7 +160,7 @@ export class Grid extends React.Component {
 				<GridList
 					cols={this.state.desktop ? 3 : 2}
 					cellHeight={this.state.desktop ? 240 : 140}
-					padding={20}
+					padding={this.state.desktop ? 10 : 5}
 					style={styles.gridList}
 				>
 					{tilesData.map((tile, i) => (

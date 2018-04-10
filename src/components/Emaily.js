@@ -92,7 +92,7 @@ export default () => {
 						</div>
 					</Col>
 				</Row>
-				<h2 className="blog-header">Technologies</h2>
+				<h2 className="blog-header" style={{marginBottom: '10px'}}>Technologies</h2>
 				<h2 className="blog-subtitle">Back-End</h2>
 				<ul className="blog-text">
 					<li>Body Parser - for formatting the fetch request's body</li>
