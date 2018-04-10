@@ -10,7 +10,7 @@ $blue: rgb(0, 0, 175);
 .simonBackground {
 	margin-top: -1px;
 	padding-top: 1px;
-	background: url('/images/simon-bg.jpg') no-repeat center center fixed; 
+	background: url('/images/simon-bg.jpg') no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -21,7 +21,13 @@ $blue: rgb(0, 0, 175);
 
 .simonSays {
 	width: 400px;
-	margin: 200px auto;
+	margin: 20vh auto;
+	@media (max-width: $md-breakpoint) {
+		width: 320px;
+	}
+	@media (max-width: $s-breakpoint) {
+		width: 200px;
+	}
 }
 
 .centerControls {
@@ -33,6 +39,20 @@ $blue: rgb(0, 0, 175);
 	left: 100px;
 	top: 100px;
 	position: relative;
+	@media (max-width: $md-breakpoint) {
+		width: 160px;
+		height: 160px;
+		left: 80px;
+		top: 80px;
+		border: 4px solid black;
+	}
+	@media (max-width: $s-breakpoint) {
+		width: 100px;
+		height: 100px;
+		left: 50px;
+		top: 50px;
+		border: 4px solid black;		
+	}
 }
 
 .simonContainer {
@@ -40,6 +60,12 @@ $blue: rgb(0, 0, 175);
 	text-align: center;
 	margin-top: 20px;
 	position: absolute;
+	@media (max-width: $md-breakpoint) {
+		margin-top: 16px;
+	}
+	@media (max-width: $s-breakpoint) {
+		margin-top: 12px;
+	}
 }
 
 .simonBtnContainer {
@@ -48,14 +74,28 @@ $blue: rgb(0, 0, 175);
 	justify-content: space-evenly;
 	position: absolute;
 	margin-top: 80px;
+	@media (max-width: $md-breakpoint) {
+		margin-top: 60px;
+	}
+	@media (max-width: $s-breakpoint) {
+		margin-top: 32px;
+	}
 }
 
 .onSwitchContainer {
-	width: 84px;
+	width: 100%;
 	display: flex;
 	position: absolute;
 	margin-top: 140px;
 	margin-left: 46px;
+	@media (max-width: $md-breakpoint) {
+		margin-top: 120px;
+		margin-left: 38px;
+	}
+	@media (max-width: $s-breakpoint) {
+		margin-top: 72px;
+		margin-left: 12px;				
+	}
 }
 
 /*
@@ -67,11 +107,18 @@ $blue: rgb(0, 0, 175);
 	display: inline-block;
 	width: 40px;
 	height: 24px;
-  }
-  
-  .switchSimon .onToggle {display:none;}
-  
-  .sliderSimon {
+	@media (max-width: $md-breakpoint) {
+		width: 30px;
+		height: 14px;
+	}
+
+}
+
+.switchSimon .onToggle {
+	display: none;
+}
+
+.sliderSimon {
 	position: absolute;
 	cursor: pointer;
 	top: 0;
@@ -79,35 +126,42 @@ $blue: rgb(0, 0, 175);
 	right: 0;
 	bottom: 0;
 	background-color: #ccc;
-	-webkit-transition: .4s;
-	transition: .4s;
-  }
-  
-  .sliderSimon:before {
+	-webkit-transition: 0.4s;
+	transition: 0.4s;
+}
+
+.sliderSimon:before {
 	position: absolute;
-	content: "";
+	content: '';
 	height: 16px;
 	width: 16px;
 	left: 4px;
 	bottom: 4px;
 	background-color: white;
-	-webkit-transition: .4s;
-	transition: .4s;
-  }
-  
-  .onToggle:checked + .sliderSimon {
+	-webkit-transition: 0.4s;
+	transition: 0.4s;
+	@media (max-width: $md-breakpoint) {
+		height: 10px;
+		width: 10px;
+		left: 2px;
+		top: 2px;
+	}
+
+}
+
+.onToggle:checked + .sliderSimon {
 	background-color: red;
-  }
-  
-  .onToggle:focus + .sliderSimon {
+}
+
+.onToggle:focus + .sliderSimon {
 	box-shadow: 0 0 1px red;
-  }
-  
-  .onToggle:checked + .sliderSimon:before {
+}
+
+.onToggle:checked + .sliderSimon:before {
 	-webkit-transform: translateX(15px);
 	-ms-transform: translateX(15px);
 	transform: translateX(15px);
-  }
+}
 
 /*
 !LIGHTS & Buttons
@@ -120,16 +174,34 @@ $blue: rgb(0, 0, 175);
 	width: 10px;
 	border-radius: 50%;
 	margin-left: 7px;
+	@media (max-width: $s-breakpoint) {
+		height: 6px;
+		width: 6px;
+		border: 1px solid rgb(36, 36, 36);
+		margin-left: 5px;
+		margin-top: 4px;
+		margin-bottom: -4px;
+	}
+	
 }
 
 .activeLight {
 	@extend .inactiveLight;
 	background: red;
+	@media (max-width: $s-breakpoint) {
+		margin-bottom: -2px;
+	}
 }
 
 .description {
 	margin-top: 2px;
 	text-align: center;
+	@media (max-width: $md-breakpoint) {
+		font-size: 10px;
+	}
+	@media (max-width: $s-breakpoint) {
+		font-size: 7px;
+	}
 }
 
 .simonBtns {
@@ -144,6 +216,12 @@ $blue: rgb(0, 0, 175);
 	-moz-box-shadow: 0px 3px 5px #000;
 	-webkit-box-shadow: 0px 3px 5px #000;
 	margin-top: 5px;
+	@media (max-width: $s-breakpoint) {
+		height: 16px;
+		width: 16px;
+		border: 2px solid rgb(36, 36, 36);		
+	}
+
 }
 
 .startBtn {
@@ -168,14 +246,12 @@ $blue: rgb(0, 0, 175);
 	box-shadow: none;
 	-moz-box-shadow: none;
 	-webkit-box-shadow: none;
-
 }
 
 .strictBtn {
 	@extend .simonBtns;
 	background-color: yellow;
 }
-
 
 .strictBtn:active {
 	position: relative;
@@ -196,7 +272,6 @@ $blue: rgb(0, 0, 175);
 	-webkit-box-shadow: none;
 }
 
-
 /*
 !SCORES
 */
@@ -214,6 +289,19 @@ $blue: rgb(0, 0, 175);
 	text-align: center;
 	display: inline-block;
 	margin-top: 10px;
+	@media (max-width: $md-breakpoint) {
+		margin-top: 14px;
+		width: 46px;
+		height: 32px;
+		font-size: 12px;
+		border: 2px solid rgb(36, 36, 36);		
+	}
+	@media (max-width: $s-breakpoint) {
+		margin-top: 8px;
+		width: 30px;
+		height: 26px;
+		font-size: 8px;			
+	}
 }
 
 .activeScore {
@@ -229,12 +317,26 @@ $blue: rgb(0, 0, 175);
 	vertical-align: top;
 	text-align: center;
 	display: inline-block;
+	@media (max-width: $md-breakpoint) {
+		font-size: 30px;
+	}
+	@media (max-width: $s-breakpoint) {
+		font-size: 18px;
+	}	
 }
 
 .copyright {
 	margin-top: 6px;
 	font-size: 20px;
 	display: inline-block;
+	@media (max-width: $md-breakpoint) {
+		margin-top: 4px;
+		font-size: 15px;
+	}
+	@media (max-width: $s-breakpoint) {
+		margin-top: 2px;
+		font-size: 10px;
+	}
 }
 
 .combination {
@@ -244,6 +346,14 @@ $blue: rgb(0, 0, 175);
 .toggleText {
 	padding: 2px 4px 2px 4px;
 	font-size: 12px;
+	@media (max-width: $md-breakpoint) {
+		padding: 0px 4px 0px 4px;		
+		font-size: 10px;
+	}
+	@media (max-width: $s-breakpoint) {
+		padding: 0 4px;
+		font-size: 8px;
+	}
 }
 /*
 !SIMON BUTTONS
@@ -252,6 +362,14 @@ $blue: rgb(0, 0, 175);
 	height: 200px;
 	width: 200px;
 	cursor: pointer;
+	@media (max-width: $md-breakpoint) {
+		width: 160px;
+		height: 160px;
+	}
+	@media (max-width: $s-breakpoint) {
+		width: 100px;
+		height: 100px;
+	}
 }
 
 .green {
@@ -262,6 +380,12 @@ $blue: rgb(0, 0, 175);
 	border-right: 4px solid black;
 	border-bottom: 4px solid black;
 	background: $green;
+	@media (max-width: $md-breakpoint) {
+		border-left: 4px solid black;
+		border-top: 4px solid black;
+		border-right: 2px solid black;
+		border-bottom: 2px solid black;
+	}
 }
 
 .flash-green {
@@ -277,6 +401,12 @@ $blue: rgb(0, 0, 175);
 	border-top: 8px solid black;
 	border-top-right-radius: 100%;
 	background: $red;
+	@media (max-width: $md-breakpoint) {
+		border-left: 2px solid black;
+		border-bottom: 2px solid black;
+		border-right: 4px solid black;
+		border-top: 4px solid black;
+	}
 }
 
 .flash-red {
@@ -292,6 +422,12 @@ $blue: rgb(0, 0, 175);
 	border-right: 4px solid black;
 	border-bottom-left-radius: 100%;
 	background: $yellow;
+	@media (max-width: $md-breakpoint) {
+		border-top: 2px solid black;
+		border-bottom: 4px solid black;
+		border-left: 4px solid black;
+		border-right: 2px solid black;
+	}	
 }
 
 .flash-yellow {
@@ -307,6 +443,12 @@ $blue: rgb(0, 0, 175);
 	border-top: 4px solid black;
 	border-bottom-right-radius: 100%;
 	background: $blue;
+	@media (max-width: $md-breakpoint) {
+		border-right: 4px solid black;
+		border-bottom: 4px solid black;
+		border-left: 2px solid black;
+		border-top: 2px solid black;	
+	}
 }
 
 .flash-blue {
