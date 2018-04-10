@@ -1,6 +1,7 @@
 import React from 'react';
 import { Howl } from 'howler';
 import NavBar from './NavBar';
+import { Container } from 'reactstrap';
 
 const greenSound = new Howl({
 	src: ['/media/green.mp3'],
@@ -146,7 +147,7 @@ class SimonSays extends React.Component {
 					await this.wait(200);
 					i = i + 1;
 				} while (i < 5);
-					document.getElementById('score').innerText = this.state.currentStreak;
+				document.getElementById('score').innerText = this.state.currentStreak;
 				this.setState({ userTurn: true });
 				if (!this.state.strictMode) {
 					this.onFailNormal();
@@ -238,7 +239,7 @@ class SimonSays extends React.Component {
 			currentStreak: 0,
 			combination: [],
 			userTurn: false,
-			turnNum: 0
+			turnNum: 0,
 		});
 		await this.wait(500);
 		await this.getColour();
@@ -271,77 +272,81 @@ class SimonSays extends React.Component {
 		return (
 			<div className="simonBackground">
 				<NavBar />
-				<div className="simonSays">
-					<div
-						onClick={this.state.switchOn && this.state.userTurn && this.onTakeTurn}
-						className="green circle"
-						id="green"
-					/>
-					<div
-						onClick={this.state.switchOn && this.state.userTurn && this.onTakeTurn}
-						className="red circle"
-						id="red"
-					/>
-					<div
-						onClick={this.state.switchOn && this.state.userTurn && this.onTakeTurn}
-						className="yellow circle"
-						id="yellow"
-					/>
-					<div
-						onClick={this.state.switchOn && this.state.userTurn && this.onTakeTurn}
-						className="blue circle"
-						id="blue"
-					/>
-					<div className="centerControls">
-						<div className="simonContainer">
-							<div className="simonTitle">Simon</div>
-							<div className="copyright">&copy;</div>
-						</div>
-						<div className="simonBtnContainer">
-							<div id="score" className={this.state.switchOn ? 'activeScore' : 'score'}>
-								{!this.state.switchOn ? '--' : this.state.playingGame ? this.state.currentStreak : '--'}
+				<Container>
+					<div className="simonSays">
+						<div
+							onClick={this.state.switchOn && this.state.userTurn && this.onTakeTurn}
+							className="green circle"
+							id="green"
+						/>
+						<div
+							onClick={this.state.switchOn && this.state.userTurn && this.onTakeTurn}
+							className="red circle"
+							id="red"
+						/>
+						<div
+							onClick={this.state.switchOn && this.state.userTurn && this.onTakeTurn}
+							className="yellow circle"
+							id="yellow"
+						/>
+						<div
+							onClick={this.state.switchOn && this.state.userTurn && this.onTakeTurn}
+							className="blue circle"
+							id="blue"
+						/>
+						<div className="centerControls">
+							<div className="simonContainer">
+								<div className="simonTitle">Simon</div>
+								<div className="copyright">&copy;</div>
 							</div>
-							<div className="startContainer">
-								<div className={this.state.playingGame ? 'activeLight' : 'inactiveLight'} />
-								<div
-									onClick={
-										!this.state.playingGame
-											? this.state.switchOn && this.onStartGame
-											: this.state.switchOn && this.state.playingGame && this.onResetGame
-									}
-									className={this.state.playingGame ? 'startBtnPressed' : 'startBtn'}
-								/>
-								<div className="description">START</div>
+							<div className="simonBtnContainer">
+								<div id="score" className={this.state.switchOn ? 'activeScore' : 'score'}>
+									{!this.state.switchOn
+										? '--'
+										: this.state.playingGame ? this.state.currentStreak : '--'}
+								</div>
+								<div className="startContainer">
+									<div className={this.state.playingGame ? 'activeLight' : 'inactiveLight'} />
+									<div
+										onClick={
+											!this.state.playingGame
+												? this.state.switchOn && this.onStartGame
+												: this.state.switchOn && this.state.playingGame && this.onResetGame
+										}
+										className={this.state.playingGame ? 'startBtnPressed' : 'startBtn'}
+									/>
+									<div className="description">START</div>
+								</div>
+								<div className="strictContainer">
+									<div className={this.state.strictMode ? 'activeLight' : 'inactiveLight'} />
+									<div
+										onClick={this.state.switchOn && !this.state.playingGame && this.onSetStrictMode}
+										className={
+											this.state.strictMode || this.state.playingGame
+												? 'strictBtnPressed'
+												: 'strictBtn'
+										}
+									/>
+									<div className="description">STRICT</div>
+								</div>
 							</div>
-							<div className="strictContainer">
-								<div className={this.state.strictMode ? 'activeLight' : 'inactiveLight'} />
-								<div
-									onClick={this.state.switchOn && !this.state.playingGame && this.onSetStrictMode}
-									className={
-										this.state.strictMode || this.state.playingGame
-											? 'strictBtnPressed'
-											: 'strictBtn'
-									}
-								/>
-								<div className="description">STRICT</div>
+							<div className="onSwitchContainer">
+								<div className="toggleText">OFF</div>
+								<label className="switchSimon">
+									<input
+										className="onToggle"
+										type="checkbox"
+										value={this.state.switchOn}
+										checked={this.state.switchOn}
+										onChange={this.onPowerSwitch}
+									/>
+									<span className="sliderSimon" />
+								</label>
+								<div className="toggleText">ON</div>
 							</div>
-						</div>
-						<div className="onSwitchContainer">
-							<div className="toggleText">OFF</div>
-							<label className="switchSimon">
-								<input
-									className="onToggle"
-									type="checkbox"
-									value={this.state.switchOn}
-									checked={this.state.switchOn}
-									onChange={this.onPowerSwitch}
-								/>
-								<span className="sliderSimon" />
-							</label>
-							<div className="toggleText">ON</div>
 						</div>
 					</div>
-				</div>
+				</Container>
 			</div>
 		);
 	}

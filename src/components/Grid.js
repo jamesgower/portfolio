@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 /*
 	TODO //
-	!! Find API key in portfolio and secure it 
+	!! Find API key in portfolio and secure it ?
 	[ ]	Add loading page
 	[ ] Make different components for Headroom Navbar and normal Navbar
 	[x]	Add correct href references
