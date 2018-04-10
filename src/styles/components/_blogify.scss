@@ -26,6 +26,19 @@
 	}
 }
 
+.blog-header {
+	margin-top: 10px;
+	margin-left: 30px;
+	font-size: 26px;
+	font-weight: 600;
+	@media (max-width: $md-breakpoint) {
+		font-size: 20px;
+	}
+	@media (max-width: $s-breakpoint) {
+		font-size: 15px;
+	}
+}
+
 .login {
 	float: right;
 	margin: 0px 30px 30px 30px;
@@ -45,7 +58,12 @@
 	text-decoration: underline;
 	font-size: 22px;
 	padding-left: 30px;
-	margin-top: 30px;
+	@media (max-width: $md-breakpoint) {
+		font-size: 18px;
+	}
+	@media (max-width: $s-breakpoint) {
+		font-size: 13px;
+	}
 }
 
 .list {
