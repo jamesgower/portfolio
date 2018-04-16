@@ -1,5 +1,4 @@
 import React from 'react';
-import { GridList, GridTile } from 'material-ui/GridList';
 import { Redirect } from 'react-router-dom';
 
 /*
@@ -61,7 +60,7 @@ const tilesData = [
 	{
 		img: '/images/twitch.jpg',
 		title: 'Twitch API',
-		subtitle: "React, Webpack, XHR, Twitch API & SCSS",
+		subtitle: 'React, Webpack, XHR, Twitch API & SCSS',
 		featured: true,
 		href: '/portfolio/twitch',
 		color: 'blueviolet',
@@ -102,10 +101,14 @@ export class Grid extends React.Component {
 	//Random animation for each element in the grid
 	randomAnimation() {
 		const e = document.getElementById(`tile${Math.floor(Math.random() * tilesData.length)}`);
+		const previous = e.className;
 		let animations = ['bounce', 'pulse', 'swing', 'tada', 'rubberBand'];
 		//Random animation gets picked
-		let random = animations[Math.floor(Math.random() * animations.length)];
-		e.className = 'animated ' + random + ' grid-list';
+		let random = ` animated ${animations[Math.floor(Math.random() * animations.length)]}`;
+		e.className += random;
+		setTimeout(() => {
+			e.className = previous;
+		}, 1000);
 	}
 
 	componentDidMount = () => {
@@ -139,57 +142,32 @@ export class Grid extends React.Component {
 			return <Redirect push to={this.state.route} />;
 		}
 
-		const styles = {
-			root: {
-				display: 'flex',
-				flexWrap: 'wrap',
-				justifyContent: 'space-around',
-				overflow: 'hidden',
-				marginBottom: '80px',
-			},
-			gridList: {
-				minWidth: 'auto',
-				minHeight: '100%',
-				overflow: 'hidden',
-			},
-		};
-
 		return (
 			//GridTile are mapped from the TilesData array so each element is rendered
-			<div className="grid-container" id="grid" style={styles.root}>
-				<GridList
-					cols={this.state.desktop ? 3 : 2}
-					cellHeight={this.state.desktop ? 240 : 140}
-					padding={this.state.desktop ? 10 : 5}
-					style={styles.gridList}
-				>
-					{tilesData.map((tile, i) => (
-						<GridTile
-							id={`tile${i}`}
-							key={`tile${i}`}
-							className="grid-list"
-							onClick={() => this.handleOnClick(tile.href)}
-							title={tile.title}
-							titleStyle={{
-								fontSize: this.state.desktop ? '16px' : '13px'
-							}}
-							subtitle={tile.subtitle}
-							subtitleStyle={{
-								fontSize: this.state.desktop ? '13px' : '8px',
-							}}
-							style={{
-								border: `4px solid ${tile.color}`,
-							}}
-							actionPosition="left"
-							titlePosition="bottom"
-							titleBackground={`linear-gradient(to bottom, ${tile.color} 0%, black 100%)`}
-							cols={this.state.desktop ? (tile.featured ? 2 : 1) : 1}
-							rows={2}
-						>
-							<img src={tile.img} className="grid-list" />
-						</GridTile>
-					))}
-				</GridList>
+			<div id="grid" className="container" style={{margin: '0 40px', paddingBottom: '40px'}}>
+				<div className="row">
+					{tilesData.map((tile, i) => {
+						return (
+							<div
+								className={
+									this.state.desktop
+										? tile.featured ? 'gridTile col-md-7' : 'gridTile col-md-5'
+										: 'gridTile col-6'
+								}
+								id={`tile${i}`}
+								key={i}
+								style={{border: `4px solid ${tile.color}`}}
+								onClick={() => this.handleOnClick(tile.href)}
+							>
+								<img src={tile.img} />
+								<div className="tile-information" style={{background: `linear-gradient(to bottom, ${tile.color} 0%, black 100%)`}}>
+									<p className="tile--title">{tile.title}</p>
+									<p className="tile--subtitle">{tile.subtitle}</p>
+								</div>
+							</div>
+						);
+					})}
+				</div>
 			</div>
 		);
 	}
