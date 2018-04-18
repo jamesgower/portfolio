@@ -57,7 +57,7 @@ export default class NavBar extends React.Component {
 								<NavLink className="nav-item nav-portfolio" to="/portfolio" activeClassName="active--portfolio">
 									Portfolio
 								</NavLink>
-								<NavLink className="nav-item nav-qual" to="/qualifications" activeClassName="active--portfolio">
+								<NavLink className="nav-item nav-qual" to="/qualifications" activeClassName="active--qualifications">
 									Qualifications
 								</NavLink>
 								<UncontrolledDropdown nav className="nav-item nav-me">

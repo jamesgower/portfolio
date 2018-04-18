@@ -6,9 +6,10 @@ import { Redirect } from 'react-router-dom';
 	? Find API key in portfolio and secure it -- possibly in other file
 	[ ]	Add loading page
 	[ ] Make different components for Headroom Navbar and normal Navbar
-	[ ] Restyle blogify and adjust image to suit 
+	[x] Restyle blogify and adjust image to suit 
 	[ ] Add tags array to tiles object for sorting via tags.
 	[ ] Readme.md for all GitHub projects with relevant installation & usage info
+	[ ] Post bug for Grid in Materialize UI GitHub issues.
 */
 
 const tilesData = [
@@ -21,15 +22,15 @@ const tilesData = [
 	},
 	{
 		img: '/images/emaily.jpg',
-		title: 'Emaily App',
-		subtitle: 'Full Stack App - Express, SendGrid, MongoDB, React, Redux, Stripe',
+		title: 'Emaily App (Full Stack)',
+		subtitle: 'Express, SendGrid, MongoDB, React, Redux',
 		href: '/portfolio/emaily',
 		featured: true,
 		color: 'red',
 	},
 	{
 		img: '/images/tictactoe.jpg',
-		title: 'Tic-Tac-Toe with Minimax Algorithm',
+		title: 'Tic-Tac-Toe with AI',
 		subtitle: 'React, SASS, Pure JS, Babel',
 		featured: true,
 		href: '/portfolio/tic-tac-toe',
@@ -50,17 +51,17 @@ const tilesData = [
 		color: 'blue',
 	},
 	{
-		img: '/images/expensify.jpg',
-		title: 'Expensify App',
-		subtitle: 'React, Redux, React-Router, Webpack, SASS, Jest',
+		img: '/images/blogify.jpg',
+		title: 'Blogify App',
+		subtitle: 'React, Redux, React-Router, Webpack',
 		featured: true,
-		href: '/portfolio/expensify',
-		color: '#364051',
+		href: '/portfolio/blogify',
+		color: '#2655A5',
 	},
 	{
 		img: '/images/twitch.jpg',
 		title: 'Twitch API',
-		subtitle: 'React, Webpack, XHR, Twitch API & SCSS',
+		subtitle: 'React, Webpack, Fetch API, Twitch API',
 		featured: true,
 		href: '/portfolio/twitch',
 		color: 'blueviolet',
@@ -68,7 +69,7 @@ const tilesData = [
 	{
 		img: '/images/indecision.jpg',
 		title: 'Indecision App',
-		subtitle: 'React, Webpack, React-Router, Local Storage',
+		subtitle: 'React, Webpack, SASS, LocalStorage',
 		href: '/portfolio/indecision-app',
 		color: 'darkblue',
 	},
@@ -80,12 +81,12 @@ const tilesData = [
 		color: 'turquoise',
 	},
 	{
-		img: '/images/blogify.jpg',
-		title: 'Blogify App',
-		subtitle: 'React, Redux, React-Router, Webpack, SASS, Jest',
+		img: '/images/expensify.jpg',
+		title: 'Expensify App',
+		subtitle: 'React, Redux, React-Router, Webpack, Jest',
 		featured: true,
-		href: '/portfolio/blogify',
-		color: 'blue',
+		href: '/portfolio/expensify',
+		color: '#364051',
 	},
 ];
 
@@ -95,7 +96,8 @@ export class Grid extends React.Component {
 
 		this.state = {
 			redirect: false,
-			desktop: window.innerWidth > 800,
+			desktop: window.innerWidth > 768,
+			data: 'all'
 		};
 	}
 	//Random animation for each element in the grid
@@ -133,7 +135,7 @@ export class Grid extends React.Component {
 	};
 
 	updateWindowDimensions = () => {
-		let desktop = window.innerWidth > 800;
+		let desktop = window.innerWidth > 768;
 		this.setState({ desktop });
 	};
 
@@ -142,32 +144,31 @@ export class Grid extends React.Component {
 			return <Redirect push to={this.state.route} />;
 		}
 
+		const allData = tilesData.map((tile, i) => {
+			return (
+				<div
+					className={tile.featured ? 'gridTile col-md-7 col-6' : 'gridTile col-md-5 col-6'}
+					id={`tile${i}`}
+					key={i}
+					style={{ border: `4px solid ${tile.color}` }}
+					onClick={() => this.handleOnClick(tile.href)}
+				>
+					<img src={tile.img} />
+					<div
+						className="tile-information"
+						style={{ background: `linear-gradient(to bottom, ${tile.color} 0%, black 100%)` }}
+					>
+						<p className="tile--title">{tile.title}</p>
+						<p className="tile--subtitle">{tile.subtitle}</p>
+					</div>
+				</div>
+			);
+		});
+
 		return (
 			//GridTile are mapped from the TilesData array so each element is rendered
-			<div id="grid" className="container" style={{margin: '0 40px', paddingBottom: '40px'}}>
-				<div className="row">
-					{tilesData.map((tile, i) => {
-						return (
-							<div
-								className={
-									this.state.desktop
-										? tile.featured ? 'gridTile col-md-7' : 'gridTile col-md-5'
-										: 'gridTile col-6'
-								}
-								id={`tile${i}`}
-								key={i}
-								style={{border: `4px solid ${tile.color}`}}
-								onClick={() => this.handleOnClick(tile.href)}
-							>
-								<img src={tile.img} />
-								<div className="tile-information" style={{background: `linear-gradient(to bottom, ${tile.color} 0%, black 100%)`}}>
-									<p className="tile--title">{tile.title}</p>
-									<p className="tile--subtitle">{tile.subtitle}</p>
-								</div>
-							</div>
-						);
-					})}
-				</div>
+			<div id="grid" className="container" style={{ paddingBottom: '40px', margin: '0 20px' }}>
+				<div className="row">{this.state.data === 'all' && allData}</div>
 			</div>
 		);
 	}
