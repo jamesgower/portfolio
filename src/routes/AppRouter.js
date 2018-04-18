@@ -14,14 +14,14 @@ import SimonSays from '../components/SimonSays';
 import Blogify from '../components/Blogify';
 import Emaily from '../components/Emaily';
 import Expensify from '../components/Expensify';
-
+import Skills from '../components/Skills';
 export const history = createHistory();
 
 const AppRouter = () => (
 	<Router history={history}>
 		<div>
 			<Switch>
-				<Route path="/" component={Portfolio} exact />
+				<Route path="/" component={Skills} exact />
 				<Route path="/portfolio" exact component={Portfolio} />
 				<Route path="/portfolio/pomodoro" component={Pomodoro} />
 				<Route path="/portfolio/tic-tac-toe" component={PlayTicTacToe} />	
@@ -33,6 +33,7 @@ const AppRouter = () => (
 				<Route path="/portfolio/blogify" component={Blogify} />
 				<Route path="/portfolio/expensify" component={Expensify} />
 				<Route path="/portfolio/emaily" component={Emaily} />
+				<Route path="/qualifications" component={Skills} />
 				<Route component={NotFoundPage} />
 			</Switch>
 		</div>
