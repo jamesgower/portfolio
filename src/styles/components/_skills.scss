@@ -1,0 +1,20 @@
+.skills--title {
+	text-align: center;
+	margin: 0 auto;
+	padding: 18px;
+	border-bottom: 3px solid #12b894;
+	width: 180px;
+}
+
+.skills {
+	width: 50%;
+	float: right;
+	margin: 20px;
+	
+}
+
+.skillContainer {
+	width: 100%;
+	display: inline-flex;
+	justify-content: space-around;
+}
