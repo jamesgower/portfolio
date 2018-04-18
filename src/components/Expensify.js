@@ -24,7 +24,7 @@ export default () => {
 						color="success"
 						size="lg"
 						className="btn-left"
-						onClick={() => (location.href = 'https://react-expenify-app.herokuapp.com/')}
+						onClick={() => (location.href = 'https://expensify-react-16.herokuapp.com/')}
 					>
 						View Project
 					</Button>
@@ -33,7 +33,7 @@ export default () => {
 						color="secondary"
 						size="lg"
 						className="btn-right"
-						onClick={() => (location.href = 'https://github.com/jamesgower/react-course-expensify-app')}
+						onClick={() => (location.href = 'https://github.com/jamesgower/expensify')}
 					>
 						View Source Code
 					</Button>

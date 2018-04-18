@@ -10,6 +10,7 @@ export default class Portfolio extends React.Component {
 	}
 
 	render() {
+
 		return (
 			<div className="background">
 				<Headroom>
@@ -24,11 +25,11 @@ export default class Portfolio extends React.Component {
 						is necessary.
 					</p>
 					<p className="blog-text" style={{ marginBottom: '20px' }}>
-						All web development projects are fully responsive for desktops, alongside CSS frameworks such as
-						Materialize CSS or Bootstrap 4 to make a sleek and user friendly interface. I am always open to
-						learning new frameworks or styles for any project I undertake. All projects source code can be
-						found on my GitHub page, including this portfolio{' '}
-						<a href="https://www.github.com/jamesgower">here</a>.
+						All web development projects are fully responsive for desktops, tablets and phones by using CSS
+						flexbox, or alternatively CSS frameworks such as Materialize-CSS or Bootstrap 4 to make a sleek
+						and user friendly interface. I am always open to learning new frameworks or styles for any
+						project I undertake. All projects' source code can be found on my GitHub page, including this
+						portfolio <a href="https://www.github.com/jamesgower">here</a>.
 					</p>
 					<Grid />
 				</Container>
