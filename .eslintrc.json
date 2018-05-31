@@ -25,7 +25,7 @@
 		"react/no-unknown-property": 2,
 		"react/jsx-uses-vars": 2,
         "react/jsx-uses-react": 2,
-        "react/jsx-indent": [2, "tab"],
+        "react/jsx-indent": [0, "tab"],
 		"dollar-sign/dollar-sign": [0, "ignoreProperties"]		,
 		"no-console": 0
 	}
