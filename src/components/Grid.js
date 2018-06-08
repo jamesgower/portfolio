@@ -9,7 +9,8 @@ import {Redirect} from 'react-router-dom';
 	[x] Restyle blogify and adjust image to suit
 	[ ] Add tags array to tiles object for sorting via tags.
 	[ ] Readme.md for all GitHub projects with relevant installation & usage info
-	[ ] Post bug for Grid in Materialize UI GitHub issues.
+    [ ] Post bug for Grid in Materialize UI GitHub issues.
+    [ ] Add sounds for games ??
 */
 
 const tilesData = [
@@ -38,11 +39,11 @@ const tilesData = [
         color: '#2E5D82',
         class: 'far fa-comments'
     }, {
-        img: '/images/emaily.jpg',
+        img: '/images/blogify.jpg',
         title: 'Emaily App (Full Stack)',
         subtitle: 'Built with Express, SendGrid, MongoDB, React, Redux, SASS & Stripe',
-        href: '/portfolio/emaily',
-        color: '#2E5D82',
+        href: '/portfolio/drum-machine',
+        color: '#2655a5',
         class: 'fas fa-envelope'
     }, {
         img: '/images/tictactoe.jpg',
