@@ -15,13 +15,15 @@ import Blogify from '../components/Blogify';
 import Emaily from '../components/Emaily';
 import Expensify from '../components/Expensify';
 import Skills from '../components/Skills';
+import Chatter from '../components/Chatter';
+import DrumMachine from '../components/DrumMachine';
 export const history = createHistory();
 
 const AppRouter = () => (
 	<Router history={history}>
 		<div>
 			<Switch>
-				<Route path="/" component={LandingPage} exact />
+				<Route path="/" component={DrumMachine} exact />
 				<Route path="/portfolio" exact component={Portfolio} />
 				<Route path="/portfolio/pomodoro" component={Pomodoro} />
 				<Route path="/portfolio/tic-tac-toe" component={PlayTicTacToe} />	
@@ -34,6 +36,8 @@ const AppRouter = () => (
 				<Route path="/portfolio/expensify" component={Expensify} />
 				<Route path="/portfolio/emaily" component={Emaily} />
 				<Route path="/qualifications" component={Skills} />
+				<Route path="/portfolio/chatter" component={Chatter} />
+				<Route path="/portfolio/drum-machine" component={DrumMachine} />
 				<Route component={NotFoundPage} />
 			</Switch>
 		</div>
