@@ -1,5 +1,4 @@
-//Big Button
-.big-button {
+.indecision--buttonLarge {
   background: $purple-indecision;
   border: none;
   border-bottom: .6rem solid darken($purple-indecision, 10%);
@@ -12,33 +11,36 @@
 }
 
 @media (max-width: $desktop-breakpoint) {
-  .big-button {
+  .indecision--buttonLarge {
     margin-bottom: $m-size;
   }
 }
 
-.big-button:disabled {
+.indecision--buttonLarge:disabled {
   opacity: .5;
 }
 
 //Button
-.button {
+.indecision--addOptionButton {
   background-color: $purple-indecision;
   border: none;
   border-bottom: .3rem solid darken($purple-indecision, 10%);
   color: white;
   font-weight: 500;
-  padding: $s-size
+  font-size: 18px;
+  height: 44px;
+  padding: 0 12px;
 }
 
-.button--link {
+.indecision--link {
   background: none;
   border: none;
   color: $off-white-indecision;
   padding: 0;
+  font-size: 18px;
 }
 
-.button--indecision {
+.indecision--backButton {
   float: right;
   margin-top: -48px;
 }

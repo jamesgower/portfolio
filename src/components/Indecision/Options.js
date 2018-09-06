@@ -5,7 +5,7 @@ const Options = props => (
 	<div>
 		<div className="widget-header">
 			<h3 className="widget-header__title">Your Options</h3>
-			<button onClick={props.handleDeleteOptions} className="button button--link">
+			<button onClick={props.handleDeleteOptions} className="indecision--link">
 				Remove All
 			</button>
 		</div>

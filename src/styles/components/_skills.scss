@@ -1,62 +1,158 @@
 .skills--title {
-	text-align: center;
-	margin: 0 auto;
-	padding: 18px;
-	border-bottom: 3px solid #12b894;
-	width: 180px;
+    text-align: center;
+    margin: 0 auto;
+    padding: 18px;
+    border-bottom: 3px solid #12b894;
+    width: 180px;
 }
 
 .skills {
-	width: 50%;
-	float: right;
-	margin: 20px;
+    width: 50%;
+    float: right;
+    margin: 20px;
 }
 
 .progressbar-text {
-	text-align: center !important;
+    text-align: center !important;
 }
 
 .skillSet {
-	height: auto;
-	display: inline-block;
-	margin: 0 auto;	
+    height: auto;
+    display: inline-block;
+    margin: 0 auto;
 }
 
 .skillContainer {
-	width: 80%;
-	margin: 0 auto;
-	border-radius: 50%;
-	cursor: pointer;	
+    width: 80%;
+    margin: 0 auto;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 .skillCircle {
-	width: 100%;
-	padding: 0 40px;
+    width: 100%;
+    padding: 0 40px;
 }
 
 .skillText {
-	text-align: center;
-	position: relative;
-	top: 50%;
-	-ms-transform: translateY(-50%);
-	-webkit-transform: translateY(-50%);
-	transform: translateY(-50%);
-	padding: 0 20px;
-	width: 60%;
-	float: right;
-	@media (max-width: 575px) {
-		font-size: 13px;
-	}
-	@media (min-width: 576px) {
-		font-size: 12px;
-	}
-	@media (min-width: 768px) {
-		font-size: 11px;
-	}
-	@media (min-width: 992px) {
-		font-size: 11px;
-	}
-	@media (min-width: 1200px) {
-		font-size: 13px;
-	}	
+    text-align: center;
+    position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    padding: 0 20px;
+    width: 60%;
+    float: right;
+    @media (max-width: 575px) {
+        font-size: 13px;
+    }
+    @media (min-width: 576px) {
+        font-size: 12px;
+    }
+    @media (min-width: 768px) {
+        font-size: 11px;
+    }
+    @media (min-width: 992px) {
+        font-size: 11px;
+    }
+    @media (min-width: 1200px) {
+        font-size: 13px;
+    }
+}
+
+.mainSkill--container {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.progressbar {
+    height: 100%;
+    border-radius: 4px;
+    width: 0;
+    transition: 0.4s linear;
+    transition-property: width, background-color;
+}
+
+.react-bar {
+    background: linear-gradient(to bottom, #60d8f8, darken(#60d8f8, 20%));
+}
+
+.redux-bar {
+    background: linear-gradient(to bottom, #764abc, darken(#764abc, 20%));
+}
+
+.javascript-bar {
+    background: linear-gradient(to bottom, #f9dc3d, darken(#f9dc3d, 20%));
+}
+
+.html-bar {
+    background: linear-gradient(to bottom, #e44d26, darken(#e44d26, 20%));
+}
+
+.node-bar {
+    background: linear-gradient(to bottom, #8bb340, darken(#8bb340, 20%));
+}
+
+.express-bar {
+    background: linear-gradient(to bottom, #f7df1e, darken(#f7df1e, 20%));
+}
+
+.mongo-bar {
+    background: linear-gradient(to bottom, #81c564, darken(#81c564, 20%));
+}
+
+.git-bar {
+    background: linear-gradient(to bottom, #000, lighten(#000, 20%));
+}
+
+.skill--label {
+    position: relative;
+    color: #fff;
+    bottom: 28px;
+    left: 10px;
+    font-size: 18px;
+}
+
+.skill--container {
+    width: 100%;
+    margin: 13px 0;
+    height: 30px;
+}
+.eightyPercent {
+    width: 80%;
+}
+.seventyPercent {
+    width: 70%;
+}
+
+.ninetyFivePercent {
+    width: 95%;
+}
+
+.fiftyPercent {
+    width: 50%;
+}
+
+.sixtyPercent {
+    width: 60%;
+}
+
+.fortyPercent {
+    width: 40%;
+}
+
+.mainSkill--container {
+    margin: 0 auto 50px auto;
+}
+
+.backend-delay {
+    -webkit-animation-delay: 2.1s;
+    animation-delay: 2.1s;
+}
+
+.design-delay {
+    -webkit-animation-delay: 4.1s;
+    animation-delay: 4.1s;
 }
