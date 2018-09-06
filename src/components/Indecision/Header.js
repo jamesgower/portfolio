@@ -25,7 +25,7 @@ class Header extends React.Component {
 				<div className="container">
 					<h1 className="header__title">{this.props.title}</h1>
 					{this.props.subtitle && <h2 className="header__subtitle">{this.props.subtitle}</h2>}
-					<button className="button button--indecision" onClick={this.handleOnClick}>Go Back</button>
+					<button className="indecision--backButton indecision--addOptionButton" onClick={this.handleOnClick}>Go Back</button>
 				</div>
 			</div>
 		);

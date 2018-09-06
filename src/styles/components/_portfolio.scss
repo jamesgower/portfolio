@@ -160,3 +160,25 @@ div.gridTile .tile--subtitle {
 		font-size: 7px;
 	}
 }
+
+.tile--buttonContainer {
+	width: 200px;
+	margin: -80px auto 0 auto;
+    z-index: 2;
+}
+
+.icon {
+	font-size: 60px;
+	width: 60px;
+	margin: 0 auto;
+	display: block;
+}
+
+.description {
+	display: flex;
+	flex-direction: column;
+}
+
+.home-text {
+	margin: 10px;
+}
