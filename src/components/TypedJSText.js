@@ -1,49 +1,56 @@
-import React from 'react';
-import Typed from 'typed.js';
+import React from "react";
+import Typed from "typed.js";
 
 class TypedJSText extends React.Component {
-	componentDidMount() {
-		const options = {
-			strings: [
-				'responsive websites.',
-				'full-stack applications',
-				'java applications',
-				'mobile friendly websites',
-			],
-			startDelay: 1000,
-			backDelay: 1000,
-			typeSpeed: 100,
-			loop: true,
-			loopCount: false,
-			backSpeed: 100,
-			shuffle: true,
-			autoInsertCss: true,
-			cursorChar: '|'
-		};
-		this.typed = new Typed(this.el, options);
-	}
+    constructor() {
+        super();
+        this.state = {};
+    }
 
-	componentWillUnmount() {
-		// Destroying Typed instance on unmounting to prevent memory leaks
-		this.typed.destroy();
-	}
+    componentDidMount() {
+        const { strings, name } = this.props;
+        const nameOptions = {
+            strings: name,
+            typeSpeed: 80,
+        };
+        const skillOptions = {
+            strings,
+            startDelay: 2500,
+            typeSpeed: 80,
+            backSpeed: 50,
+            loop: true,
+            showCursor: false,
+        };
+        this.nameTyped = new Typed(this.nameEl, nameOptions);
+        this.skillTyped = new Typed(this.skillEl, skillOptions);
+    }
+    render() {
+        return (
+            <div>
+                <div className="typed-wrap">
+                    <h1
+                        ref={nameEl => (this.nameEl = nameEl)}
+                        style={{
+                            whiteSpace: "pre",
+                            display: "block",
+                            textAlign: "center",
+                            color: "black",
+                        }}
+                    />
 
-	render() {
-		return (
-			<div className="type-wrap">
-				<h1 className="typed animated bounceInLeft">Hello, I am James.</h1>
-				<h2 id="typedSubHeading" className="typed animated bounceInLeft 100">
-					I design and build&nbsp;
-					<span
-						style={{ whiteSpace: 'pre' }}
-						ref={el => {
-							this.el = el;
-						}}
-					/>
-				</h2>
-			</div>
-		);
-	}
+                    <h1
+                        ref={skillEl => (this.skillEl = skillEl)}
+                        style={{
+                            whiteSpace: "pre",
+                            display: "block",
+                            textAlign: "center",
+                            color: "black",
+                        }}
+                    />
+                </div>
+            </div>
+        );
+    }
 }
 
 export default TypedJSText;

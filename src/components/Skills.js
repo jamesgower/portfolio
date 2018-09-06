@@ -1,188 +1,197 @@
-import React from 'react';
-import Headroom from 'react-headroom';
-import NavBar from './NavBar';
-import { Container } from 'reactstrap';
+import React from "react";
+import Headroom from "react-headroom";
+import NavBar from "./NavBar";
+import CircularProgressBar from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 export default class Skills extends React.Component {
-	constructor() {
-		super();
+    constructor() {
+        super();
+        this.reactSkillBar = React.createRef();
+        this.state = {
+            desktop: window.innerWidth > 768,
+            mobile: window.innerWidth < 576,
+            modalChoice: "design",
+            frontEndPercent: 0,
+            backEndPercent: 0,
+            designPercent: 0,
+        };
+    }
 
-		this.state = {
-			desktop: window.innerWidth > 768,
-			mobile: window.innerWidth < 576,
-			modalChoice: 'design'
-		};
-	}
+    componentDidMount() {
+        window.addEventListener("resize", this.updateWindowDimensions);
+        const {
+            reactSkillBar,
+            reduxSkillBar,
+            javascriptSkillBar,
+            htmlSkillBar,
+            nodeSkillBar,
+            expressSkillBar,
+            mongoSkillBar,
+            gitSkillBar,
+        } = this.refs;
 
-	componentDidMount() {
-		window.addEventListener('resize', this.updateWindowDimensions);
-	}
+        setTimeout(() => {
+            this.setState({ frontEndPercent: 80 });
+        }, 600);
 
-	componentWillUnmount() {
-		window.removeEventListener('resize', this.updateWindowDimensions);
-	}
+        setTimeout(() => {
+            reactSkillBar.classList.add("eightyPercent");
+        }, 900);
 
-	updateWindowDimensions = () => {
-		let desktop = window.innerWidth > 768;
-		let mobile = window.innerWidth < 576;
+        setTimeout(() => {
+            reduxSkillBar.classList.add("seventyPercent");
+        }, 1200);
 
-			this.setState({ desktop, mobile });
-	};
+        setTimeout(() => {
+            javascriptSkillBar.classList.add("eightyPercent");
+        }, 1500);
 
-	render() {
-		var ProgressBar = require('react-progressbar.js');
-		var Circle = ProgressBar.Circle;
+        setTimeout(() => {
+            htmlSkillBar.classList.add("ninetyFivePercent");
+        }, 1800);
 
-		const frontEndSkills = [{
-				skill: 'React',
-				rating: 80,
-				color: '#17A2B8',
-				description: 'Very strong understand of React - Completed multiple courses and built majority of apps with this technology.'
-			},
-			{
-				skill: 'Redux',
-				rating: 70,
-				color: '#007BFF',
-				description: 'Strong understanding of Redux - Used this technology in a large portion of my projects & completed courses on Redux.'
-			},
-			{
-				skill: 'HTML',
-				rating: 90,
-				color: '#DC3545',
-				description: 'Very strong understanding of all coding techniques.'
-			},
-		];
+        setTimeout(() => {
+            this.setState({ backEndPercent: 65 });
+        }, 2600);
 
-		const backEndSkills = [{
-				skill: 'Node.JS',
-				rating: 65,
-				color: '#FFC107',
-				description: 'Currently learning this technology, can build back-end servers with Node.JS with Express.'
-			},
-			{
-				skill: 'Java',
-				rating: 55,
-				color: '#6C757D',
-				description: 'Understanding of Object-Oriented concepts and good practices. Studied for years in college.'
-			},
-		];
+        setTimeout(() => {
+            nodeSkillBar.classList.add("seventyPercent");
+        }, 2900);
 
-		const designSkills = [{
-			skill: 'SASS',
-			rating: 60,
-			color: '#28A745',
-			description: 'Strong understanding of SASS functions and coding techniques. Used in almost all portfolio projects.'
-		}];
+        setTimeout(() => {
+            expressSkillBar.classList.add("eightyPercent");
+        }, 3200);
 
-		const groupSkills = [{
-			skill: 'Front End Skills',
-			rating: 80,
-			color: '#7d42f4',
-			description: 'Test'
-		},
-		{
-			skill: 'Back End Skills',
-			rating: 60,
-			color: '#417df4',
-			description: 'Test',
-		},
-		{
-			skill: 'Design Skills',
-			rating: 60,
-			color: '#f49441',
-			description: 'Test'
-		}];
+        setTimeout(() => {
+            mongoSkillBar.classList.add("seventyPercent");
+        }, 3500);
 
-		const skillSet = (skill) => {
-			return skill.sort((a, b) => {
-				return b.rating > a.rating;
-			})
-			.map((skill, i) => {
-				return (
-					<div className="col-md-4 col-sm-6 col-xs-6 skillSet">
-						<div className="skillContainer" onClick={() => alert(skill.skill)}>				
-							<Circle
-								key={i}
-								options={{
-									strokeWidth: 5,
-									color: skill.color,
-									duration: 2000,
-									easing: 'bounce',
-									trailColor: '#eee',
-									text: {
-										value: skill.skill,
-										style: {
-											fontSize: this.state.desktop ? '22px' : this.state.mobile ? '12px' : '16px',
-											position: 'absolute',
-											left: '50%',
-											top: '50%',
-											padding: 0,
-											margin: 0,
-											transform: {
-												prefix: true,
-												value: 'translate(-50%, -50%)',
-											},
-										},
-									},
-								}}
-								text={skill.skill}
-								progress={skill.rating / 100}
-								initialAnimate={true}
-								containerStyle={{
-									marginTop: '5px',
-									width: '100%',
-									height: '100%',
-								}}
-							/>
-						</div>
-					</div>
-				);
-			});
-		};
+        setTimeout(() => {
+            gitSkillBar.classList.add("sixtyPercent");
+        }, 3800);
 
-		const frontEnd = skillSet(frontEndSkills);
-		const backEnd = skillSet(backEndSkills);
-		const design = skillSet(designSkills);
-		const group = skillSet(groupSkills);
+        setTimeout(() => {
+            this.setState({ designPercent: 70});
+        }, 4600);
 
-		return (
-			<div className="background">
-				<Headroom>
-					<NavBar />
-				</Headroom>
-				<Container className="content-container">
-					<h1 className="skills--title">Skills</h1>
-					<p className="blog-text">
-						I began my programming journey by learning Java and Web Development at West Kent College while
-						completing my HNC in Computing course. I continued building these skills for a while longer
-						after I left by completed courses on Udemy and training with sites such as CodeWars and
-						HackerRank.
-					</p>
-					<p className="blog-text">
-						I then become interested the buzz around JavaScript frameworks like React and Angular, so I
-						completed various courses on all the different skills I would need to create applications, until
-						I could do just that - build applications!
-					</p>
-					<div className="row">
-						<div className="skillCircle">
-							{group}
-						</div>
-					</div>
-					<h2 className="blog-subtitle">Courses</h2>
-					<ul>
-						<li>HNC in Computing @ West Kent College - Completed course in 2017 with 3 * Pass Grade</li>
-						<li>BTEC Level 3 in ICT Practitioners @ West Kent College - Completed course in 2014 with 3 * Pass Grade</li>
-						<li>FreeCodeCamp Front End Development Certification - Completed certification in 2018</li>
-						<li>Andrew Mead's Complete React Masterclass Course (With Redux) - Completed course in 2018</li>
-						<li>Stephen Grider's Node with React: Full Stack Web Development course - Completed course in 2018</li>
-						<li>Andrew Mead's The Complete Node.js Developer Course - Currently completing</li>
-						<li>Tim Buchulka's Complete Java Masterclass course - Currently completing</li>
-						<li>Maximillian Schwarzmuller's Angular 5 - The Complete Guide course - Currently completing</li>
-						<li>Brad Hussey's Ultimate Web Designer & Developer Course - Currently completing</li>
-					</ul>
-					<img src="https://www.codewars.com/users/jamesgower94/badges/large" />
-				</Container>
-			</div>
-		);
-	}
+        setTimeout(() => {
+            
+        }, 4900);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.updateWindowDimensions);
+    }
+
+    updateWindowDimensions = () => {
+        let desktop = window.innerWidth > 768;
+        let mobile = window.innerWidth < 576;
+
+        this.setState({ desktop, mobile });
+    };
+
+    render() {
+        const { frontEndPercent, backEndPercent, designPercent } = this.state;
+        return (
+            <div className="background">
+                <Headroom>
+                    <NavBar />
+                </Headroom>
+                <div className="content-container">
+                    <h1 className="skills--title">Skills</h1>
+                    <div className="row">
+                        <div className="col-4">
+                            <div className="mainSkill--container">
+                                <CircularProgressBar
+                                    percentage={frontEndPercent}
+                                    text="Front-End"
+                                    initialAnimation={true}
+                                    strokeWidth={4}
+                                    className="animated bounceIn"
+                                />
+                            </div>
+                        </div>
+                        <div className="col-8 frontEndSkills">
+                            <div className="skill--container">
+                                <div className="progressbar react-bar" ref="reactSkillBar" />
+                                <p className="skill--label">React</p>
+                            </div>
+                            <div className="skill--container">
+                                <div className="progressbar redux-bar" ref="reduxSkillBar" />
+                                <p className="skill--label">Redux</p>
+                            </div>
+                            <div className="skill--container">
+                                <div
+                                    className="progressbar javascript-bar"
+                                    ref="javascriptSkillBar"
+                                />
+                                <p className="skill--label">Vanilla JavaScript</p>
+                            </div>
+                            <div className="skill--container">
+                                <div className="progressbar html-bar" ref="htmlSkillBar" />
+                                <p className="skill--label">HTML5</p>
+                            </div>
+                        </div>
+                        <div className="col-4">
+                            <div className="mainSkill--container animated bounceIn backend-delay">
+                                <CircularProgressBar
+                                    percentage={backEndPercent}
+                                    text="Back-End"
+                                    strokeWidth={4}
+                                />
+                            </div>
+                        </div>
+                        <div className="col-8 backEndSkills">
+                            <div className="skill--container">
+                                <div className="progressbar node-bar" ref="nodeSkillBar" />
+                                <p className="skill--label">Node.JS</p>
+                            </div>
+                            <div className="skill--container">
+                                <div className="progressbar express-bar" ref="expressSkillBar" />
+                                <p className="skill--label">Express.JS</p>
+                            </div>
+                            <div className="skill--container">
+                                <div className="progressbar mongo-bar" ref="mongoSkillBar" />
+                                <p className="skill--label">MongoDB</p>
+                            </div>
+                            <div className="skill--container">
+                                <div className="progressbar git-bar" ref="gitSkillBar" />
+                                <p className="skill--label">Git</p>
+                            </div>
+                        </div>
+                        <div className="col-4">
+                            <div className="mainSkill--container animated bounceIn design-delay">
+                                <CircularProgressBar
+                                    percentage={designPercent}
+                                    text="Design"
+                                    strokeWidth={4}
+                                />
+                            </div>
+                        </div>
+                        <div className="col-8 designSkills ">
+                            <div className="skill--container">
+                                <div className="progressbar css-bar" ref="cssSkillBar" />
+                                <p className="skill--label">CSS3</p>
+                            </div>
+                            <div className="skill--container">
+                                <div className="progressbar sass-bar" ref="sassSkillBar" />
+                                <p className="skill--label">SASS/SCSS</p>
+                            </div>
+                            <div className="skill--container">
+                                <div className="progressbar bootstrap-bar" ref="bootstrapSkillBar" />
+                                <p className="skill--label">Bootstrap/Reactstrap</p>
+                            </div>
+                            <div className="skill--container">
+                                <div className="progressbar java-bar" ref="javaSkillBar" />
+                                <p className="skill--label">Java</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <img src="https://www.codewars.com/users/jamesgower94/badges/large" />
+                </div>
+            </div>
+        );
+    }
 }
