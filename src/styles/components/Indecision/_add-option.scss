@@ -1,18 +1,18 @@
 //Add Option Error
-.add-option-error {
+.indecision--optionError {
   color: $off-white-indecision;
   font-style: italic;
   padding: 0 $m-size;
   margin: $m-size 0 0 0;
 }
 
-.add-option {
+.indecision--addOption {
   display: flex;
   flex-direction: column;
   padding: $m-size;
 }
 
-.add-option__input {
+.indecision--addOption__input {
   background: $dark-blue-indecision;
   border: none;
   border-bottom: .3rem solid darken($dark-blue-indecision, 10%);
@@ -23,11 +23,11 @@
 }
 
 @media (min-width: $desktop-breakpoint) {
-  .add-option {
+  .indecision--addOption {
     flex-direction: row;
   }
 
-  .add-option__input {
+  .indecision--addOption__input {
     margin-right: $s-size;
   }
 }
