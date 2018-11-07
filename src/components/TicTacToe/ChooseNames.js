@@ -81,8 +81,13 @@ class ChooseNames extends React.Component {
 	}
 	
 	render() {
+
+		const styles = {
+			fontFamily: "Oswald"
+		};
+
 		return (
-			<div id='players-TTT'>
+			<div id='players-TTT' style={styles}>
 				<div id="backBtnContainer" onClick={this.props.restart}><i className="fa fa-undo" /></div>
 		
 				{this.props.noPlayers === 1 && (

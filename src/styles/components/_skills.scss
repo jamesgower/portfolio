@@ -4,155 +4,72 @@
     padding: 18px;
     border-bottom: 3px solid #12b894;
     width: 180px;
+    @media screen and (min-width: 280px) {
+        padding: 8px;
+    }
+    @media screen and (min-width: 580px) {
+        padding: 12px;
+    }
+    @media screen and (min-width: 880px) {
+        padding: 14px;
+    }
+    @media screen and (min-width: 1080px) {
+        padding: 16px;
+    }
 }
 
-.skills {
-    width: 50%;
-    float: right;
-    margin: 20px;
-}
 
-.progressbar-text {
-    text-align: center !important;
-}
-
-.skillSet {
-    height: auto;
-    display: inline-block;
-    margin: 0 auto;
-}
-
-.skillContainer {
+.skills--container {
     width: 80%;
-    margin: 0 auto;
-    border-radius: 50%;
-    cursor: pointer;
+    margin: 0 auto 100px auto;
 }
 
-.skillCircle {
-    width: 100%;
-    padding: 0 40px;
-}
-
-.skillText {
+.skills--frontEndHeader {
+    font-size: 2.6rem;
+    padding: 10px;
     text-align: center;
-    position: relative;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
-    padding: 0 20px;
-    width: 60%;
-    float: right;
-    @media (max-width: 575px) {
-        font-size: 13px;
-    }
-    @media (min-width: 576px) {
-        font-size: 12px;
-    }
-    @media (min-width: 768px) {
-        font-size: 11px;
-    }
-    @media (min-width: 992px) {
-        font-size: 11px;
-    }
-    @media (min-width: 1200px) {
-        font-size: 13px;
-    }
-}
-
-.mainSkill--container {
-    width: 200px;
-    height: 200px;
+    border-bottom: 3px solid red;
+    display: block;
     margin: 0 auto;
+    @media screen and (min-width: 280px) {
+        font-size: 2.2rem;
+    }
+    @media screen and (min-width: 880px) {
+        font-size: 2.4rem;
+    }
+    @media screen and (min-width: 1080px) {
+        font-size: 2.6rem;
+    }
 }
 
-.progressbar {
-    height: 100%;
-    border-radius: 4px;
-    width: 0;
-    transition: 0.4s linear;
-    transition-property: width, background-color;
+.skills--backEndHeader {
+    @extend .skills--frontEndHeader;
+    border-bottom: 3px solid #007bff;
 }
 
-.react-bar {
-    background: linear-gradient(to bottom, #60d8f8, darken(#60d8f8, 20%));
+.skills--designHeader {
+    @extend .skills--frontEndHeader;
+    border-bottom: 3px solid #509200;
 }
 
-.redux-bar {
-    background: linear-gradient(to bottom, #764abc, darken(#764abc, 20%));
+.skills--toolsHeader {
+    @extend .skills--frontEndHeader;
+    border-bottom: 3px solid #12b894;
 }
 
-.javascript-bar {
-    background: linear-gradient(to bottom, #f9dc3d, darken(#f9dc3d, 20%));
-}
-
-.html-bar {
-    background: linear-gradient(to bottom, #e44d26, darken(#e44d26, 20%));
-}
-
-.node-bar {
-    background: linear-gradient(to bottom, #8bb340, darken(#8bb340, 20%));
-}
-
-.express-bar {
-    background: linear-gradient(to bottom, #f7df1e, darken(#f7df1e, 20%));
-}
-
-.mongo-bar {
-    background: linear-gradient(to bottom, #81c564, darken(#81c564, 20%));
-}
-
-.git-bar {
-    background: linear-gradient(to bottom, #000, lighten(#000, 20%));
-}
-
-.skill--label {
-    position: relative;
-    color: #fff;
-    bottom: 28px;
-    left: 10px;
-    font-size: 18px;
-}
-
-.skill--container {
-    width: 100%;
-    margin: 13px 0;
-    height: 30px;
-}
-.eightyPercent {
-    width: 80%;
-}
-.seventyPercent {
-    width: 70%;
-}
-
-.ninetyFivePercent {
-    width: 95%;
-}
-
-.fiftyPercent {
-    width: 50%;
-}
-
-.sixtyPercent {
-    width: 60%;
-}
-
-.fortyPercent {
-    width: 40%;
-}
-
-.mainSkill--container {
-    margin: 0 auto 50px auto;
-}
-
-.backend-delay {
-    -webkit-animation-delay: 2.1s;
-    animation-delay: 2.1s;
-}
-
-.design-delay {
-    -webkit-animation-delay: 4.1s;
-    animation-delay: 4.1s;
+.skills--text {
+    margin-top: 10px;
+    text-align: justify;
+    @media screen and (min-width: 280px) {
+        font-size: 1.5rem;
+    }
+    @media screen and (min-width: 580px) {
+        font-size: 1.6rem;
+    }
+    @media screen and (min-width: 880px) {
+        font-size: 1.7rem;
+    }
+    @media screen and (min-width: 1080px) {
+        font-size: 1.8rem;
+    }
 }

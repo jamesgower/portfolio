@@ -1,0 +1,42 @@
+.contact--title {
+    @extend .skills--title;
+    border-bottom: 3px solid rgb(0, 162, 255);
+    margin-bottom: 30px;
+}
+
+.contact--formContainer {
+    background: #87CEFA;
+    padding: 20px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.formInputs {
+    font-size: 1.8em !important;
+    width: 100%;
+    border: 1px solid #68BCFF !important;
+    resize: vertical;
+    &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #fff !important;
+        font-style: italic !important;
+        opacity: 1; /* Firefox */
+    }
+    
+    &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: #fff !important;
+        font-style: italic !important;
+    }
+    
+    &::-ms-input-placeholder { /* Microsoft Edge */
+        color:#fff !important;
+        font-style: italic !important;
+    }
+}
+
+.formLabels {
+    font-weight: 700;
+    font-size: 1.8em !important;
+}

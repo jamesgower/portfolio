@@ -59,8 +59,13 @@ export default class TicTacToeSetup extends React.Component {
 	};
 
 	render() {
+
+		const styles = {
+			fontFamily: "Oswald"
+		};
+
 		return (
-			<div>
+			<div style={styles}>
 				{this.state.showComponent && <NavBar id="navbar-TTT" update={this.updateState} {...this.state} />}
 				<div className="background-TTT">
 					<span className="openNav-TTT" onClick={this.updateState}>

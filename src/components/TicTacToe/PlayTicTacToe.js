@@ -320,8 +320,13 @@ export class TicTacToe extends React.Component {
 	}	
 
 	render() {
+		
+		const styles = {
+			fontFamily: "Oswald"
+		};
+
 		return (
-			<div>
+			<div style={styles}>
 				<div className="scores">
 					<div className="player1score">
 						<div className="player1Label animated slideInLeft">{this.state.p1name}: </div>
