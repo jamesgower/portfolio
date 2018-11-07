@@ -1,5 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
+import twitterTile from "../../public/images/twitter.jpg";
 
 /*
 	!! TODO
@@ -25,14 +26,14 @@ const tilesData = [
         class: "fas fa-envelope",
     },
     {
-        img: "/images/twitter.jpeg",
+        img: "images/twitter.jpg",
         title: "Twitter Clone",
         subtitle: "Built with React, Redux, Webpack, Express (Node.js), MongoDB, React-Router",
         href: "https://github.com/jamesgower/twitter-clone",
         color: "#1DA1F2",
         redirect: true,
         featured: true,
-        class: "fab fa-twitter",
+        class: "fab fa-twitter", 
     },
     {
         img: "/images/chatter.jpg",
@@ -74,7 +75,8 @@ const tilesData = [
         title: "Blogify App",
         subtitle: "Built with React, Redux, React-Router, Webpack",
         featured: true,
-        href: "/portfolio/blogify",
+        href: "https://github.com/jamesgower/blogify",
+        redirect: true,
         color: "#2655A5",
         class: "fas fa-pencil-alt",
     },
@@ -185,10 +187,10 @@ export class Grid extends React.Component {
         const allData = tilesData.map((tile, i) => {
             return (
                 <div
-                    className={
-                        tile.featured ? `gridTile col-md-7 col-6` : `gridTile col-md-5 col-6`
-                    }
-                    key={i}
+                className={
+                    tile.featured ? `gridTile col-md-7 col-6` : `gridTile col-md-5 col-6`
+                }
+                key={i}
                 >
                     <div
                         id={`tile${i}`}
