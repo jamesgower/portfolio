@@ -11,12 +11,12 @@ class TypedJSText extends React.Component {
         const { strings, name } = this.props;
         const nameOptions = {
             strings: name,
-            typeSpeed: 80,
+            typeSpeed: 60,
         };
         const skillOptions = {
             strings,
             startDelay: 2500,
-            typeSpeed: 80,
+            typeSpeed: 60,
             backSpeed: 50,
             loop: true,
             showCursor: false,
@@ -35,6 +35,8 @@ class TypedJSText extends React.Component {
                             display: "block",
                             textAlign: "center",
                             color: "black",
+                            fontFamily: "Oswald",
+                            fontSize: "2.8em"                    
                         }}
                     />
 
@@ -45,6 +47,8 @@ class TypedJSText extends React.Component {
                             display: "block",
                             textAlign: "center",
                             color: "black",
+                            fontFamily: "Oswald",
+                            fontSize: "2.6em"                            
                         }}
                     />
                 </div>
