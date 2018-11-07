@@ -62,17 +62,17 @@ export default class NavBar extends React.Component {
                                 </NavLink>
                                 <NavLink
                                     className="nav-item nav-qual"
-                                    to="/qualifications"
+                                    to="/skills"
                                     activeClassName="active--qualifications"
                                 >
-                                    Qualifications
+                                    Skills
                                 </NavLink>
                                 <NavLink
                                     className="nav-item nav-me"
-                                    to="/about-me"
+                                    to="/contact-me"
                                     activeClassName="active--qualifications"
                                 >
-                                    About Me
+                                    Contact Me
                                 </NavLink>
                             </Nav>
                         </Collapse>

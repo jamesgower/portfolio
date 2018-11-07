@@ -11,20 +11,18 @@ import WikipediaAPI from '../components/WikipediaAPI';
 import IndecisionApp from '../components/Indecision/IndecisionApp';
 import TwitchAPI from '../components/TwitchAPI';
 import SimonSays from '../components/SimonSays';
-import Blogify from '../components/Blogify';
-import Emaily from '../components/Emaily';
-import Expensify from '../components/Expensify';
 import Skills from '../components/Skills';
 import Chatter from '../components/Chatter';
 import DrumMachine from '../components/DrumMachine';
-import AboutMe from './../components/AboutMe';
+import ContactMe from '../components/ContactMe'
+
 export const history = createHistory();
 
 const AppRouter = () => (
 	<Router history={history}>
 		<div>
 			<Switch>
-				<Route path="/" component={Skills} exact />
+				<Route path="/" component={ContactMe} exact />
 				<Route path="/portfolio" exact component={Portfolio} />
 				<Route path="/portfolio/pomodoro" component={Pomodoro} />
 				<Route path="/portfolio/tic-tac-toe" component={PlayTicTacToe} />	
@@ -33,11 +31,8 @@ const AppRouter = () => (
 				<Route path="/portfolio/indecision-app" component={IndecisionApp} />
 				<Route path="/portfolio/twitch" component={TwitchAPI} />
 				<Route path="/portfolio/simon-says" component={SimonSays} />
-				<Route path="/portfolio/blogify" component={Blogify} />
-				<Route path="/portfolio/expensify" component={Expensify} />
-				<Route path="/portfolio/emaily" component={Emaily} />
-				<Route path="/qualifications" component={Skills} />
-				<Route path="/about-me" component={AboutMe} />
+				<Route path="/contact-me" component={ContactMe} />
+				<Route path="/skills" component={Skills} />
 				<Route path="/portfolio/chatter" component={Chatter} />
 				<Route path="/portfolio/drum-machine" component={DrumMachine} />
 				<Route component={NotFoundPage} />
