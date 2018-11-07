@@ -16,7 +16,7 @@ const LandingPage = () => (
           color="secondary"
           className="button__enter animated slideInRight"
         >
-          Enter Site
+          Open Portfolio
         </Button>
       </Link>
     </div>
