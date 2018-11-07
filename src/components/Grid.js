@@ -1,6 +1,5 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import twitterTile from "../../public/images/twitter.jpg";
 
 /*
 	!! TODO
@@ -26,13 +25,13 @@ const tilesData = [
         class: "fas fa-envelope",
     },
     {
-        img: "images/twitter.jpg",
+        img: "/images/clone.jpg",
         title: "Twitter Clone",
         subtitle: "Built with React, Redux, Webpack, Express (Node.js), MongoDB, React-Router",
         href: "https://github.com/jamesgower/twitter-clone",
-        color: "#1DA1F2",
         redirect: true,
         featured: true,
+        color: "#1DA1F2",
         class: "fab fa-twitter", 
     },
     {
