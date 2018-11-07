@@ -10,7 +10,10 @@
     "dev": "concurrently \"webpack-dev-server\" \"npm run start\"",
     "test": "cross-env NODE_ENV=test jest --config=jest.config.json --watchAll",
     "start": "node server/server.js",
-    "heroku-postbuild": "concurrently \"npm run build:prod\" \"npm run start\""  },
+    "heroku-postbuild": "npm run build:prod",
+  "engines": {
+    "node": "10.x"
+  }
   "dependencies": {
     "antd": "^3.1.6",
     "babel-cli": "6.24.1",
