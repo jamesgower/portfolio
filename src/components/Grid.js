@@ -32,7 +32,7 @@ const tilesData = [
         redirect: true,
         featured: true,
         color: "#1DA1F2",
-        class: "fab fa-twitter", 
+        class: "fab fa-twitter",
     },
     {
         img: "/images/chatter.jpg",
@@ -186,10 +186,10 @@ export class Grid extends React.Component {
         const allData = tilesData.map((tile, i) => {
             return (
                 <div
-                className={
-                    tile.featured ? `gridTile col-md-7 col-6` : `gridTile col-md-5 col-6`
-                }
-                key={i}
+                    className={
+                        tile.featured ? `gridTile col-md-7 col-6` : `gridTile col-md-5 col-6`
+                    }
+                    key={i}
                 >
                     <div
                         id={`tile${i}`}
