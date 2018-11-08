@@ -14,7 +14,7 @@ import SimonSays from '../components/SimonSays';
 import Skills from '../components/Skills';
 import Chatter from '../components/Chatter';
 import DrumMachine from '../components/DrumMachine';
-import ContactMe from '../components/ContactMe'
+import AboutMe from '../components/AboutMe'
 
 export const history = createHistory();
 
@@ -22,7 +22,7 @@ const AppRouter = () => (
 	<Router history={history}>
 		<div>
 			<Switch>
-				<Route path="/" component={LandingPage} exact />
+				<Route path="/" component={AboutMe} exact />
 				<Route path="/portfolio" exact component={Portfolio} />
 				<Route path="/portfolio/pomodoro" component={Pomodoro} />
 				<Route path="/portfolio/tic-tac-toe" component={PlayTicTacToe} />	
@@ -31,7 +31,7 @@ const AppRouter = () => (
 				<Route path="/portfolio/indecision-app" component={IndecisionApp} />
 				<Route path="/portfolio/twitch" component={TwitchAPI} />
 				<Route path="/portfolio/simon-says" component={SimonSays} />
-				<Route path="/contact-me" component={ContactMe} />
+				<Route path="/contact-me" component={AboutMe} />
 				<Route path="/skills" component={Skills} />
 				<Route path="/portfolio/chatter" component={Chatter} />
 				<Route path="/portfolio/drum-machine" component={DrumMachine} />

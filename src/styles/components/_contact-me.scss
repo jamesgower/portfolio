@@ -4,8 +4,24 @@
     margin-bottom: 30px;
 }
 
+.contact--subtitle {
+    font-size: 2.0em;
+    border-bottom: 2px solid red;
+    padding: 8px;
+    width: 120px;
+    text-align: center
+}
+
+.contact--text {
+    font-size: 1.6em;
+    text-align: justify;
+    margin: 12px 0;
+}
+
 .contact--formContainer {
-    background: #87CEFA;
+    width: 50%;
+    margin: 30px auto;
+    background: #87cefa;
     padding: 20px;
     border-radius: 10px;
     -webkit-border-radius: 10px;
@@ -17,21 +33,24 @@
 .formInputs {
     font-size: 1.8em !important;
     width: 100%;
-    border: 1px solid #68BCFF !important;
+    border: 1px solid #68bcff !important;
     resize: vertical;
-    &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    &::placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
         color: #fff !important;
         font-style: italic !important;
         opacity: 1; /* Firefox */
     }
-    
-    &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+
+    &:-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
         color: #fff !important;
         font-style: italic !important;
     }
-    
-    &::-ms-input-placeholder { /* Microsoft Edge */
-        color:#fff !important;
+
+    &::-ms-input-placeholder {
+        /* Microsoft Edge */
+        color: #fff !important;
         font-style: italic !important;
     }
 }
@@ -39,4 +58,38 @@
 .formLabels {
     font-weight: 700;
     font-size: 1.8em !important;
+}
+
+.contact--socialMediaContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-evenly;
+    margin-left: 60px;
+}
+
+.contact--socialContainer {
+    display: flex;
+    justify-content: middle;
+    flex-direction: row;
+    width: 100%;
+    cursor: pointer;
+    &:hover {
+        > p {
+            text-decoration: underline;
+        }
+    }
+}
+
+.contact--socialText {
+    font-size: 1.6em;
+    vertical-align: middle;
+    line-height: 2em;
+    text-align: center;
+    width: 100%;
+}
+
+.contact--socialIcon {
+    font-size: 4em;
+    margin-right: 30px;
 }
