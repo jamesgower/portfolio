@@ -72,7 +72,7 @@ export default class NavBar extends React.Component {
                                     to="/contact-me"
                                     activeClassName="active--qualifications"
                                 >
-                                    Contact Me
+                                    About Me
                                 </NavLink>
                             </Nav>
                         </Collapse>

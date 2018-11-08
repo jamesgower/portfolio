@@ -6,7 +6,7 @@
 		"jquery": true,
 		"jest": true
 	},
-	"extends": "eslint:recommended",
+	"extends": ["plugin:react/recommended", "eslint:recommended", "airbnb"],
 	"parser": "babel-eslint",
 	"parserOptions": {
 		"ecmaFeatures": {
