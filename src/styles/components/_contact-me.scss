@@ -1,3 +1,6 @@
+$form-bg: url("../../public/images/form-bg.jpg");
+
+
 .contact--title {
     @extend .skills--title;
     border-bottom: 3px solid rgb(0, 162, 255);
@@ -18,44 +21,52 @@
     margin: 12px 0;
 }
 
-.contact--formContainer {
-    width: 50%;
+.form--container {
+    color: #fff;
+    border: 1px solid #68bcff;
+    max-width: 400px;
     margin: 30px auto;
-    background: #87cefa;
     padding: 20px;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    background: $form-bg;
 }
 
-.formInputs {
+.form--inputs {
     font-size: 1.8em !important;
     width: 100%;
     border: 1px solid #68bcff !important;
     resize: vertical;
+    color: #fff !important;
     &::placeholder {
         /* Chrome, Firefox, Opera, Safari 10.1+ */
-        color: #fff !important;
+        color: #9ed3ff !important;
         font-style: italic !important;
         opacity: 1; /* Firefox */
     }
 
     &:-ms-input-placeholder {
         /* Internet Explorer 10-11 */
-        color: #fff !important;
+        color: #9ed3ff !important;
         font-style: italic !important;
     }
 
     &::-ms-input-placeholder {
         /* Microsoft Edge */
-        color: #fff !important;
+        color: #9ed3ff !important;
         font-style: italic !important;
     }
 }
 
-.formLabels {
+.form--title {
+    padding: 14px;
+    text-align: center;
+}
+
+.form--labels {
     font-weight: 700;
     font-size: 1.8em !important;
 }
