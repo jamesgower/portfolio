@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const publicPath = path.join(__dirname, '..', 'public');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 const nodemailer = require("nodemailer");
 
 app.use(express.static(publicPath));
@@ -24,17 +24,20 @@ app.post("/api/send_mail", async (req, res) => {
         }
     });
 
-  const { name, email, body } = req.body;
+  const { name, email, details} = req.query;
   let mailOptions = {
     from: `${name} <${email}>`,
     to: "jamesgower1994@gmail.com",
     subject: "Portfolio Contact Form -- URGENT",
-    text: body,
-    html: body,
+    text: details,
+    html: details,
   };
 
   transporter.sendMail(mailOptions, (err, info) => {
-    if(error) return res.send(error);
+    if(error) {
+      console.log(error);
+      return res.send(error);
+    }
     console.log("Message sent: %s", info.messageId);
     console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
     res.send("Message sent: %s", info.messageId);
