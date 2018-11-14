@@ -46,6 +46,7 @@
     "mathjs": "^4.0.0",
     "moment": "^2.21.0",
     "node-sass": "^4.9.4",
+    "nodemailer": "^4.6.8",
     "normalize.css": "^8.0.0",
     "popper.js": "^1.12.9",
     "progressbar.js": "^1.0.1",

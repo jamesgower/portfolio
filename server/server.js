@@ -1,50 +1,41 @@
-const path = require('path');
-const express = require('express');
+const path = require("path");
+const express = require("express");
 const app = express();
-const publicPath = path.join(__dirname, '..', 'public');
+const publicPath = path.join(__dirname, "..", "public");
 const port = process.env.PORT || 5000;
 const nodemailer = require("nodemailer");
+const keys = require("./keys");
 
 app.use(express.static(publicPath));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(publicPath, 'index.html'));
+app.get("*", (req, res) => {
+    res.sendFile(path.join(publicPath, "index.html"));
 });
 
 app.post("/api/send_mail", async (req, res) => {
-  nodemailer.createTestAccount((err, account) => {
-    // create reusable transporter object using the default SMTP transport
-    let transporter = nodemailer.createTransport({
-        host: 'smtp.ethereal.email',
-        port: 587,
-        secure: false, // true for 465, false for other ports
+    const { name, email, details } = req.query;
+    const transporter = nodemailer.createTransport({
+        service: "gmail",
         auth: {
-            user: account.user, // generated ethereal user
-            pass: account.pass // generated ethereal password
-        }
+            user: keys.googleUser,
+            pass: keys.googlePW,
+        },
     });
 
-  const { name, email, details} = req.query;
-  let mailOptions = {
-    from: `${name} <${email}>`,
-    to: "jamesgower1994@gmail.com",
-    subject: "Portfolio Contact Form -- URGENT",
-    text: details,
-    html: details,
-  };
+    const mailOptions = {
+        from: `"${name}" <${email}>`,
+        to: "jgower.dev@gmail.com",
+        subject: "!! Portfolio Message -- URGENT !!",
+        text: `${name} has sent you a message: \n
+        ${details}`,
+    };
 
-  transporter.sendMail(mailOptions, (err, info) => {
-    if(error) {
-      console.log(error);
-      return res.send(error);
-    }
-    console.log("Message sent: %s", info.messageId);
-    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-    res.send("Message sent: %s", info.messageId);
-  });
-});
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) return console.log(error);
+        console.log("Email sent: " + info.response);
+    });
 });
 
 app.listen(port, () => {
-  console.log('Server is up!');
+    console.log("Server is up at port", port);
 });
