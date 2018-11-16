@@ -11,8 +11,8 @@ app.post("/api/send_mail", async (req, res) => {
     const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-            user: isProduction ? process.env.googleUser : require("./keys").googleUser,
-            pass: isProduction ? process.env.googlePW : require("./keys").googlePW,
+            user: process.env.googleUser,
+            pass: process.env.googlePW,
         },
     });
 
