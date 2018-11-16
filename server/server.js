@@ -3,7 +3,6 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 const nodemailer = require("nodemailer");
-const keys = require("./keys");
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -12,8 +11,8 @@ app.post("/api/send_mail", async (req, res) => {
     const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-            user: isProduction ? process.env.googleUser : keys.googleUser,
-            pass: isProduction ? process.env.googlePW : keys.googlePW,
+            user: isProduction ? process.env.googleUser : require("./keys").googleUser,
+            pass: isProduction ? process.env.googlePW : require("./keys").googlePW,
         },
     });
 
