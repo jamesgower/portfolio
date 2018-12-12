@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import notFoundImage from "../../public/images/twitch-not-found.jpg";
 
 class UserDataItem extends React.Component {
 	constructor(props) {
@@ -107,7 +108,7 @@ class UserDataItem extends React.Component {
 								</div>
 								<div className="user-preview">
 									<img
-										src="/images/twitch-not-found.jpg"
+										src={notFoundImage}
 										id={`${this.props.name}-img`}
 										className="preview-img"
 									/>

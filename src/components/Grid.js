@@ -1,5 +1,17 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
+import emailyTile from "../../public/images/emaily.jpg";
+import twitterTile from "../../public/images/clone.jpg";
+import chatterTile from "../../public/images/chatter.jpg";
+import simonTile from "../../public/images/simon.jpg";
+import pomodoroTile from "../../public/images/pomodoro.jpg";
+import ticTacToeTile from "../../public/images/tictactoe.jpg";
+import blogifyTile from "../../public/images/blogify.jpg";
+import wikiTile from "../../public/images/wiki.jpg";
+import indecisionTile from "../../public/images/indecision.jpg";
+import twitchTile from "../../public/images/twitch.jpg";
+import expensifyTile from "../../public/images/expensify.jpg";
+import drumTile from "../../public/images/drum.jpg";
 
 /*
 	!! TODO
@@ -14,7 +26,7 @@ import { Redirect } from "react-router-dom";
 
 const tilesData = [
     {
-        img: "/images/emaily.jpg",
+        img: emailyTile,
         title: "Emaily App (Full Stack)",
         subtitle:
             "Built with Express, SendGrid, MongoDB, React, Redux, React-Router, SASS & Redux-" +
@@ -25,7 +37,7 @@ const tilesData = [
         class: "fas fa-envelope",
     },
     {
-        img: "/images/clone.jpg",
+        img: twitterTile,
         title: "Twitter Clone",
         subtitle: "Built with React, Redux, Webpack, Express (Node.js), MongoDB, React-Router",
         href: "https://github.com/jamesgower/twitter-clone",
@@ -35,7 +47,7 @@ const tilesData = [
         class: "fab fa-twitter",
     },
     {
-        img: "/images/chatter.jpg",
+        img: chatterTile,
         title: "Chatter (Chat App)",
         subtitle: "Built with Socket.io, Axios, Express, Moment.js, Mustache, React & CSS",
         href: "https://github.com/jamesgower/chatter",
@@ -45,7 +57,7 @@ const tilesData = [
         class: "far fa-comments",
     },
     {
-        img: "/images/simon.jpg",
+        img: simonTile,
         title: "Simon Says",
         subtitle: "Built with React, Redux, Webpack, React-Router",
         href: "/portfolio/simon-says",
@@ -53,7 +65,7 @@ const tilesData = [
         class: "fas fa-trophy",
     },
     {
-        img: "/images/pomodoro.jpg",
+        img: pomodoroTile,
         title: "Pomodoro Clock",
         subtitle: "Built with React, Pure JS, jQuery, Babel",
         href: "/portfolio/pomodoro",
@@ -61,7 +73,7 @@ const tilesData = [
         class: "far fa-clock",
     },
     {
-        img: "/images/tictactoe.jpg",
+        img: ticTacToeTile,
         title: "Tic-Tac-Toe with AI",
         subtitle: "Built with React, SASS, Pure JS, Babel",
         featured: true,
@@ -70,7 +82,7 @@ const tilesData = [
         class: "fas fa-gamepad",
     },
     {
-        img: "/images/blogify.jpg",
+        img: blogifyTile,
         title: "Blogify App",
         subtitle: "Built with React, Redux, React-Router, Webpack",
         featured: true,
@@ -80,7 +92,7 @@ const tilesData = [
         class: "fas fa-pencil-alt",
     },
     {
-        img: "/images/wiki.jpg",
+        img: wikiTile,
         title: "Wikipedia API",
         subtitle: "Built with jQuery, AJAX, Pure JS, React",
         href: "/portfolio/wikipedia",
@@ -88,7 +100,7 @@ const tilesData = [
         class: "fab fa-wikipedia-w",
     },
     {
-        img: "/images/indecision.jpg",
+        img: indecisionTile,
         title: "Indecision App",
         subtitle: "Built with React, Webpack, SASS & Local Storage",
         href: "/portfolio/indecision-app",
@@ -96,7 +108,7 @@ const tilesData = [
         class: "fas fa-question",
     },
     {
-        img: "/images/twitch.jpg",
+        img: twitchTile,
         title: "Twitch API",
         subtitle: "Built with React, Webpack, Fetch API & Twitch API",
         href: "/portfolio/twitch",
@@ -105,7 +117,7 @@ const tilesData = [
         featured: true,
     },
     {
-        img: "/images/expensify.jpg",
+        img: expensifyTile,
         title: "Expensify App",
         subtitle: "Built with React, Redux, FireBase, Webpack & Jest",
         href: "https://github.com/jamesgower/expensify",
@@ -123,7 +135,7 @@ const tilesData = [
     //     class: "fas fa-calculator",
     // },
     {
-        img: "/images/drum.jpg",
+        img: drumTile,
         title: "Drum Machine",
         subtitle: "Built with React, Vanilla JS, Howler & CSS",
         href: "/portfolio/drum-machine",
