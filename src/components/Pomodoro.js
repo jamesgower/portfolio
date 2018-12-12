@@ -3,7 +3,10 @@ import { circleProgress } from 'jquery-circle-progress'; // eslint-disable-line 
 import Timer from 'easytimer';
 import NavBar from './NavBar';
 import { Howl } from 'howler';
-
+import arrowLeft from "../../public/images/arrowLeft.png"
+import arrowRight from "../../public/images/arrowRight.png"
+import playButton from "../../public/images/play.png";
+import stopButton from "../../public/images/stop.png";
 const alarm1 = new Howl({
 	src: ['/media/alarm.mp3'],
 	volume: 0.5
@@ -191,12 +194,12 @@ class Pomodoro extends React.Component {
 							<div className="col-sm-6 test">
 								<div id="workTimer" className="text-center">
 									<p className="times">Minutes to work</p>
-									<img src="/images/arrowLeft.png" id="leftWork" className="arrows hvr-pulse-grow" />
+									<img src={arrowLeft} id="leftWork" className="arrows hvr-pulse-grow" />
 									<div id="workNum" className="num" value="25">
 										25
 									</div>
 									<img
-										src="/images/arrowRight.png"
+										src={arrowRight}
 										id="rightWork"
 										className="arrows hvr-pulse-grow"
 									/>
@@ -205,12 +208,12 @@ class Pomodoro extends React.Component {
 							<div className="col-sm-6 test">
 								<div id="breakTimer" className="text-center">
 									<p className="times">Minutes on break</p>
-									<img src="/images/arrowLeft.png" id="leftBreak" className="arrows hvr-pulse-grow" />
+									<img src={arrowLeft} id="leftBreak" className="arrows hvr-pulse-grow" />
 									<div id="breakNum" className="num">
 										5
 									</div>
 									<img
-										src="/images/arrowRight.png"
+										src={arrowRight}
 										id="rightBreak"
 										className="arrows hvr-pulse-grow"
 									/>
@@ -220,8 +223,8 @@ class Pomodoro extends React.Component {
 						<div id="circle-container" />
 
 						<div className="buttons">
-							<img src="/images/play.png" id="goBtn" />
-							<img src="/images/stop.png" id="stopBtn" />
+							<img src={playButton} id="goBtn" />
+							<img src={stopButton} id="stopBtn" />
 						</div>
 
 						<div id="countdown">

@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Collapse, Navbar, NavbarToggler, Nav } from "reactstrap";
+import logo from "../../public/images/logo.png";
 
 export default class NavBar extends React.Component {
     constructor(props) {
@@ -39,7 +40,7 @@ export default class NavBar extends React.Component {
                 <div className="nav-container">
                     <Navbar className="navbar" color="faded" light expand="md">
                         <NavLink to="/">
-                            <img src="/images/logo.png" className="logo" />
+                            <img src={logo} className="logo" />
                         </NavLink>
                         <hr className="seperator" />
                         <NavbarToggler onClick={this.toggle} />
