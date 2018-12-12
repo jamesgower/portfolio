@@ -31,7 +31,7 @@ app.post("/api/send_mail", async (req, res) => {
 });
 
 if (process.env.NODE_ENV === "production") {
-    const publicPath = path.join(__dirname, "../public",);
+    const publicPath = path.join(__dirname, "../dist");
 
     app.use(express.static(publicPath));
 
