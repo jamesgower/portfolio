@@ -40,7 +40,7 @@ module.exports = env => {
                 },
                 {
                     test: /\.(jpg|png|gif|svg|pdf|ico)$/,
-                    loader: "file-loader?name=./public/*/[name].[ext]",
+                    loader: "file-loader?name=./public/images/[name].[ext]",
                 },
             ],
         },
