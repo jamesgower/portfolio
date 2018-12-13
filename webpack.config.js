@@ -42,6 +42,10 @@ module.exports = env => {
                     test: /\.(jpg|jpeg|png|gif|svg|pdf|ico)$/i,
                     loader: "file-loader?name=./public/images/[hash].[ext]",
                 },
+                {
+                    test: /\.(mp3|wav|mpe?g)$/,
+                    loader: "file-loader?name=./public/media/[hash].[ext]",
+                },
             ],
         },
         plugins: [
