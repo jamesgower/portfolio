@@ -21,7 +21,7 @@ import drumTile from "../../public/images/drum.jpg";
 	[ ] Add tags array to tiles object for sorting via tags.
 	[ ] Readme.md for all GitHub projects with relevant installation & usage info
     [ ] Post bug for Grid in Materialize UI GitHub issues.
-    [ ] Add sounds for games ??
+    !! [ ] Add sounds for games - webpack 
 */
 
 const tilesData = [
