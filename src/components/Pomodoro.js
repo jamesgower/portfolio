@@ -32,6 +32,13 @@ class Pomodoro extends React.Component {
         this.updateState = this.updateState.bind(this);
     }
 
+    componentWillUnmount() {
+        timer.stop();
+        breakTimer.stop();
+        alarm1.stop();
+        alarm2.stop();
+    }
+
     updateState = update => {
         this.setState({ showComponent: update });
     };

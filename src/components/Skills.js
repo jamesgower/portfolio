@@ -38,7 +38,7 @@ export default class Skills extends React.Component {
                 <Headroom>
                     <NavBar />
                 </Headroom>
-                <div className="content-container">
+                <div className="content-container" style={{ paddingBottom: "20px" }}>
                     <h1 className="skills--title" style={{ marginBottom: "24px" }}>
                         Skills
                     </h1>
