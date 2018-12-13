@@ -51,6 +51,10 @@ class SimonSays extends React.Component {
         };
     }
 
+    componentWillUnmount() {
+        clearTimeout(failTimer);
+    }
+
     getColour = () => {
         const randomNum = Math.floor(Math.random() * 4);
         let colour;
