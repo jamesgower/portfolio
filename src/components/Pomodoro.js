@@ -16,7 +16,7 @@ const alarm1 = new Howl({
 });
 
 const alarm2 = new Howl({
-    src: [alarm2],
+    src: [sound2],
     volume: 0.5,
 });
 
