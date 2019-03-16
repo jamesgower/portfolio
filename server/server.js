@@ -18,7 +18,7 @@ app.post("/api/send_mail", async (req, res) => {
 
     const mailOptions = {
         from: `"${name}" <${email}>`,
-        to: "jgower.dev@gmail.com",
+        to: "contact@james-gower.dev",
         subject: "!! Portfolio Message -- URGENT !!",
         text: `${name} has sent you a message: \n
         ${details}`,
