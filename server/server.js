@@ -10,10 +10,14 @@ app.post("/api/send_mail", async (req, res) => {
     const { name, email, details } = req.query;
     const transporter = nodemailer.createTransport({
         service: "gmail",
+        secure: true,
         auth: {
             user: process.env.googleUser,
             pass: process.env.googlePW,
         },
+        tls: {
+            rejectUnauthorized: false
+        }
     });
 
     const mailOptions = {
