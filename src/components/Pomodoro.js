@@ -20,10 +20,12 @@ const alarm2 = new Howl({
     volume: 0.5,
 });
 
+var breakTimer = new Timer();
+var timer = new Timer();
+
 class Pomodoro extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
             showComponent: false,
             pomo: true,
@@ -46,9 +48,6 @@ class Pomodoro extends React.Component {
     render() {
         var workTime = 25;
         var breakTime = 5;
-        var breakTimer = new Timer();
-        var timer = new Timer();
-
         $(document).ready(function() {
             $("#leftWork").click(function() {
                 if (workTime > 1) {
@@ -82,6 +81,7 @@ class Pomodoro extends React.Component {
 
             btn.click(function() {
                 $(this).prop("disabled", true);
+                timer.stop();
                 //start work timer
                 timer.start({
                     countdown: true,
@@ -111,6 +111,7 @@ class Pomodoro extends React.Component {
                 timer.addEventListener("targetAchieved", function() {
                     alarm1.play();
                     $("#countdown .values").html("Time to rest!");
+                    breakTimer.stop();
                     //start breakTimer straight after timer is finished
                     breakTimer.start({
                         countdown: true,

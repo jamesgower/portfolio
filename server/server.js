@@ -3,6 +3,15 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 const nodemailer = require("nodemailer");
+const SMTPServer = require("smtp-server").SMTPServer;
+
+const options = {
+    onData(stream, session, cb) {
+        stream.pipe(process.stdout);
+    },
+};
+
+const server = new SMTPServer(options);
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -16,8 +25,8 @@ app.post("/api/send_mail", async (req, res) => {
             pass: process.env.googlePW,
         },
         tls: {
-            rejectUnauthorized: false
-        }
+            rejectUnauthorized: false,
+        },
     });
 
     const mailOptions = {
@@ -43,6 +52,10 @@ if (process.env.NODE_ENV === "production") {
         res.sendFile(path.join(publicPath, "index.html"));
     });
 }
+
+server.listen(450, () => {
+    console.log("SMTP server online at port 450");
+});
 
 app.listen(port, () => {
     console.log("Server is up at port", port);
