@@ -9,10 +9,13 @@ module.exports = env => {
     const isProduction = env === "production";
 
     return {
-        entry: ["@babel/polyfill", "./src/app.js", "jquery"],
+        entry: ["@babel/polyfill", "./src/app.tsx", "jquery"],
+        resolve: {
+            extensions: [".ts", ".tsx", ".js"],
+        },
         output: {
             path: path.join(__dirname, "dist"),
-            filename: "bundle.js",
+            filename: "bundle.min.js",
             publicPath: "/",
         },
         optimization: {
@@ -20,6 +23,10 @@ module.exports = env => {
         },
         module: {
             rules: [
+                {
+                    test: /\.tsx?$/,
+                    loader: "awesome-typescript-loader",
+                },
                 {
                     test: /\.js$/,
                     exclude: /node_modules/,
