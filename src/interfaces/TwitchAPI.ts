@@ -19,17 +19,18 @@ export interface UserDataItemState {
 
 export interface UserDataItemProps {
     name: string;
-    game: string;
-    status: string;
-    viewers: string;
-    fps: number;
-    image: string;
+    game?: string;
+    status?: string;
+    viewers?: string;
+    fps?: number;
+    image?: string;
     online: boolean;
-    preview: string;
-    mature: string;
+    preview?: string;
+    mature?: string;
     link: string;
     state: TwitchState;
     removeUser: Function;
+    usersToKeep: string[];
 }
 export interface OnlineUser {
     name: string;
