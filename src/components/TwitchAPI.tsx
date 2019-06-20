@@ -22,8 +22,7 @@ const initialState: TwitchState = {
 class TwitchAPI extends React.Component<{}, TwitchState> {
     state = initialState;
 
-    getData = (name: any) => {
-        const { onlineUserData, offlineUserData } = this.state;
+    getData = (name: string) => {
         fetch(`https://api.twitch.tv/kraken/streams/${name}`, {
             headers: {
                 "Client-ID": "*******",
@@ -34,7 +33,9 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
             .then(
                 result => {
                     if (result.stream !== null) {
-                        const user: OnlineUser = {
+                        let onlineUserData = this.state.onlineUserData;
+
+                        const user = {
                             name,
                             game: result.stream.game,
                             status: result.stream.channel.status,
@@ -47,7 +48,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
                             link: `https://www.twitch.tv/${name}`,
                         };
 
-                        const savedUser: SavedUser = {
+                        const savedUser = {
                             name,
                             lastGame: result.stream.game,
                             image: result.stream.channel.logo,
@@ -55,23 +56,27 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
                             link: `https://www.twitch.tv/${name}`,
                         };
 
+                        onlineUserData.push(user);
+
                         if (localStorage.getItem(savedUser.name) === null) {
                             localStorage.setItem(savedUser.name, JSON.stringify(savedUser));
                         }
 
                         this.setState({
                             isLoaded: true,
-                            onlineUserData: [...onlineUserData, user],
+                            onlineUserData,
                         });
                     } else if (result.stream === null) {
-                        const user: OfflineUser = {
+                        let offlineUserData = this.state.offlineUserData;
+                        const user = {
                             name,
                             online: false,
                             link: `https://www.twitch.tv/${name}`,
                         };
+                        offlineUserData.push(user);
                         this.setState({
                             isLoaded: true,
-                            offlineUserData: [...offlineUserData, user],
+                            offlineUserData,
                         });
                     }
                 },
@@ -85,12 +90,12 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
     };
 
     onNewStreamer = () => {
-        const streamer = this.state.newStreamer;
-        const users = this.state.users;
+        const { newStreamer, users } = this.state;
+        const streamer = newStreamer;
         users.push(streamer);
         this.getData(streamer);
         this.setState({ users });
-        const json = JSON.stringify(this.state.users);
+        const json = JSON.stringify(users);
         localStorage.setItem("users", json);
     };
 
@@ -113,34 +118,37 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
     };
 
     onOnlineChange = () => {
+        const { show } = this.state;
         const offline = document.getElementById("offline-users").childNodes;
         const online = document.getElementById("online-users").childNodes;
-        if (this.state.show === "all") {
+        if (show === "all") {
             this.onAnimate(offline, true);
             this.onAnimate(online, true);
-        } else if (this.state.show === "offline") {
+        } else if (show === "offline") {
             this.offlineToOnline(online, offline);
         }
         this.setState({ show: "online" });
     };
 
     onAllChange = () => {
+        const { show } = this.state;
         const offline = document.getElementById("offline-users").childNodes;
         const online = document.getElementById("online-users").childNodes;
-        if (this.state.show === "online") {
+        if (show === "online") {
             this.onAnimate(offline, false);
-        } else if (this.state.show === "offline") {
+        } else if (show === "offline") {
             this.onAnimate(online, false);
         }
         this.setState({ show: "all" });
     };
 
     onOfflineClick = () => {
+        const { show } = this.state;
         const offline = document.getElementById("offline-users").childNodes;
         const online = document.getElementById("online-users").childNodes;
-        if (this.state.show === "all") {
+        if (show === "all") {
             this.onAnimate(online, true);
-        } else if (this.state.show === "online") {
+        } else if (show === "online") {
             this.onlineToOffline(online, offline);
         }
         this.setState({ show: "offline" });
@@ -221,14 +229,21 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
     }
 
     componentDidMount() {
-        const { users } = this.state;
-        for (const user of users) {
-            this.getData(users[user]);
+        console.log(this.state.users);
+        for (let i = 0; i < this.state.users.length; i++) {
+            this.getData(this.state.users[i]);
         }
     }
 
     render() {
-        const { onlineUserData, offlineUserData } = this.state;
+        const {
+            onlineUserData,
+            offlineUserData,
+            show,
+            newStreamer,
+            usersToKeep,
+            matureFilter,
+        } = this.state;
         return (
             <div className="twitch">
                 <div className="header">
@@ -244,7 +259,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
                     <div className="buttons-twitch">
                         <Button
                             className="btn-twitch"
-                            active={this.state.show === "online"}
+                            active={show === "online"}
                             size="lg"
                             outline
                             color="success"
@@ -254,7 +269,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
                         </Button>
                         <Button
                             className="btn-twitch"
-                            active={this.state.show === "all"}
+                            active={show === "all"}
                             size="lg"
                             outline
                             color="warning"
@@ -264,7 +279,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
                         </Button>
                         <Button
                             className="btn-twitch"
-                            active={this.state.show === "offline"}
+                            active={show === "offline"}
                             size="lg"
                             outline
                             color="danger"
@@ -277,7 +292,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
                         <FormGroup>
                             <Input
                                 id="streamerInput"
-                                value={this.state.newStreamer}
+                                value={newStreamer}
                                 onChange={this.onStreamerChange}
                                 placeholder="Enter new streamer here"
                             />
@@ -292,12 +307,12 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
                         </FormGroup>
                     </div>
                     <div className="mature-filter">
-                        <h3 className="text-center mature-text">Mature Filter:</h3>
+                        <h3 className="mature-text">Mature Filter:</h3>
                         <div className="mature-switch">
                             <label className="switch">
                                 <input
                                     type="checkbox"
-                                    checked={this.state.matureFilter}
+                                    checked={matureFilter}
                                     onChange={this.onHandleMature}
                                 />
                                 <span className="slider round" />
@@ -314,7 +329,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
                             <UserDataItem
                                 key={index}
                                 {...user}
-                                usersToKeep={this.state.usersToKeep}
+                                usersToKeep={usersToKeep}
                                 state={this.state}
                                 removeUser={this.onRemoveUser}
                             />
@@ -329,14 +344,14 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
                             <UserDataItem
                                 key={index}
                                 {...user}
-                                usersToKeep={this.state.usersToKeep}
+                                usersToKeep={usersToKeep}
                                 state={this.state}
                                 removeUser={this.onRemoveUser}
                             />
                         ))
                     )}
                 </div>
-                <div className="footer">sjdfskdjf</div>
+                <div className="footer" />
             </div>
         );
     }
