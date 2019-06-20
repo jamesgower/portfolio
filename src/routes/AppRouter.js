@@ -22,7 +22,7 @@ const AppRouter = () => (
     <Router history={history}>
         <div>
             <Switch>
-                <Route path="/" component={LandingPage} exact />
+                <Route path="/" component={TwitchAPI} exact />
                 <Route path="/portfolio" exact component={Portfolio} />
                 <Route path="/portfolio/pomodoro" component={Pomodoro} />
                 <Route path="/portfolio/tic-tac-toe" component={PlayTicTacToe} />
