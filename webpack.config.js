@@ -47,7 +47,7 @@ module.exports = env => {
                 },
                 {
                     test: /\.(jpg|jpeg|png|gif|svg|pdf|ico)$/i,
-                    loader: "file-loader?name=./public/images/[hash].[ext]",
+                    loader: "file-loader?name=[path][name].[ext]",
                 },
                 {
                     test: /\.(mp3|wav|mpe?g)$/,

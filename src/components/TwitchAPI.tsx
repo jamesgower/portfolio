@@ -201,7 +201,6 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
         }
         var i = users.indexOf(user);
         users.splice(i, 1);
-        //May or may not remove localStorage for users when deleted ??
         const userData = JSON.parse(localStorage.getItem("users"));
         const index = userData.indexOf(user);
         userData.splice(index, 1);
@@ -299,7 +298,6 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
                                 <input
                                     type="checkbox"
                                     checked={this.state.matureFilter}
-                                    // value={this.state.matureFilter}
                                     onChange={this.onHandleMature}
                                 />
                                 <span className="slider round" />
@@ -332,6 +330,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
                                 key={index}
                                 {...user}
                                 usersToKeep={this.state.usersToKeep}
+                                state={this.state}
                                 removeUser={this.onRemoveUser}
                             />
                         ))
