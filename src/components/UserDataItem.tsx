@@ -1,6 +1,6 @@
 import * as React from "react";
-import moment from "moment";
-import notFoundImage from "../../../public/images/twitch-not-found.jpg";
+const moment = require("moment");
+const notFoundImage = require("../../public/images/twitch-not-found.jpg");
 import { UserDataItemState, UserDataItemProps } from "../interfaces/TwitchAPI";
 
 const defaultState: UserDataItemState = {
