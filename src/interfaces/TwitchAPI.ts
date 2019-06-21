@@ -15,6 +15,7 @@ export interface UserDataItemState {
     userData?: OnlineUser;
     usersToKeep?: string[];
     state?: TwitchState;
+    desktop: boolean;
 }
 
 export interface UserDataItemProps {
