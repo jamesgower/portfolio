@@ -1,12 +1,13 @@
 import * as React from "react";
 import UserDataItem from "./UserDataItem";
-import { Button, Input, FormGroup } from "reactstrap";
-import TwitchState, { OnlineUser, OfflineUser, SavedUser } from "../interfaces/TwitchAPI";
+import { Button, Input, Container } from "reactstrap";
+import TwitchState from "../interfaces/TwitchAPI";
 /*
 	TODO
 	[ ] Fix async problems
 	[ ] Look at smoother animations !! Look at onTransitionEnd
 	[ ] Add streamer on enter click
+	[ ] Look to change passing all state to UserDataItem
 */
 
 const initialState: TwitchState = {
@@ -218,8 +219,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
 
     componentWillMount() {
         try {
-            const savedUsersJSON = localStorage.getItem("users");
-            const savedUsers = JSON.parse(savedUsersJSON);
+            const savedUsers = JSON.parse(localStorage.getItem("users"));
             if (savedUsers) {
                 this.setState(() => ({ users: savedUsers }));
             }
@@ -247,49 +247,49 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
         return (
             <div className="twitch">
                 <div className="header">
-                    <h1 className="text-center twitch-title">Twitch Streamers</h1>
-                    <p className="info-text">
-                        Feel free to add any streamers you wish to track. All streamers are saved so
-                        you can come back and check their status.
-                    </p>
-                    <p className="info-subtext">
-                        You can also remove any streamers you don't want to follow by pressing the
-                        red cross.
-                    </p>
-                    <div className="buttons-twitch">
-                        <Button
-                            className="btn-twitch"
-                            active={show === "online"}
-                            size="lg"
-                            outline
-                            color="success"
-                            onClick={this.onOnlineChange}
-                        >
-                            Online
-                        </Button>
-                        <Button
-                            className="btn-twitch"
-                            active={show === "all"}
-                            size="lg"
-                            outline
-                            color="warning"
-                            onClick={this.onAllChange}
-                        >
-                            All
-                        </Button>
-                        <Button
-                            className="btn-twitch"
-                            active={show === "offline"}
-                            size="lg"
-                            outline
-                            color="danger"
-                            onClick={this.onOfflineClick}
-                        >
-                            Offline
-                        </Button>
-                    </div>
-                    <div className="newStreamer">
-                        <FormGroup>
+                    <Container>
+                        <h1 className="text-center twitch-title">Twitch Streamers</h1>
+                        <p className="info-text">
+                            Feel free to add any streamers you wish to track. All streamers are
+                            saved so you can come back and check their status.
+                        </p>
+                        <p className="info-subtext">
+                            You can also remove any streamers you don't want to follow by pressing
+                            the red cross.
+                        </p>
+                        <div className="buttons-twitch">
+                            <Button
+                                className="btn-twitch"
+                                active={show === "online"}
+                                size="lg"
+                                outline
+                                color="success"
+                                onClick={this.onOnlineChange}
+                            >
+                                Online
+                            </Button>
+                            <Button
+                                className="btn-twitch"
+                                active={show === "all"}
+                                size="lg"
+                                outline
+                                color="warning"
+                                onClick={this.onAllChange}
+                            >
+                                All
+                            </Button>
+                            <Button
+                                className="btn-twitch"
+                                active={show === "offline"}
+                                size="lg"
+                                outline
+                                color="danger"
+                                onClick={this.onOfflineClick}
+                            >
+                                Offline
+                            </Button>
+                        </div>
+                        <div className="newStreamer">
                             <Input
                                 id="streamerInput"
                                 value={newStreamer}
@@ -304,53 +304,48 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
                             >
                                 Add Streamer
                             </Button>
-                        </FormGroup>
-                    </div>
-                    <div className="mature-filter">
-                        <h3 className="mature-text">Mature Filter:</h3>
-                        <div className="mature-switch">
-                            <label className="switch">
-                                <input
-                                    type="checkbox"
-                                    checked={matureFilter}
-                                    onChange={this.onHandleMature}
-                                />
-                                <span className="slider round" />
-                            </label>
                         </div>
+                        <div className="mature-filter">
+                            <h3 className="mature-text">Mature Filter:</h3>
+                            <div className="mature-switch">
+                                <label className="switch">
+                                    <input
+                                        type="checkbox"
+                                        checked={matureFilter}
+                                        onChange={this.onHandleMature}
+                                    />
+                                    <span className="slider round" />
+                                </label>
+                            </div>
+                        </div>
+                    </Container>
+                </div>
+                <Container>
+                    <div id="online-users">
+                        {onlineUserData.length > 0 &&
+                            onlineUserData.map((user, index) => (
+                                <UserDataItem
+                                    key={index}
+                                    {...user}
+                                    usersToKeep={usersToKeep}
+                                    state={this.state}
+                                    removeUser={this.onRemoveUser}
+                                />
+                            ))}
                     </div>
-                </div>
-
-                <div id="online-users">
-                    {onlineUserData.length === 0 ? (
-                        <div className="user">No users</div>
-                    ) : (
-                        onlineUserData.map((user, index) => (
-                            <UserDataItem
-                                key={index}
-                                {...user}
-                                usersToKeep={usersToKeep}
-                                state={this.state}
-                                removeUser={this.onRemoveUser}
-                            />
-                        ))
-                    )}
-                </div>
-                <div id="offline-users">
-                    {offlineUserData.length === 0 ? (
-                        <div className="user">No Users</div>
-                    ) : (
-                        offlineUserData.map((user, index) => (
-                            <UserDataItem
-                                key={index}
-                                {...user}
-                                usersToKeep={usersToKeep}
-                                state={this.state}
-                                removeUser={this.onRemoveUser}
-                            />
-                        ))
-                    )}
-                </div>
+                    <div id="offline-users">
+                        {offlineUserData.length > 0 &&
+                            offlineUserData.map((user, index) => (
+                                <UserDataItem
+                                    key={index}
+                                    {...user}
+                                    usersToKeep={usersToKeep}
+                                    state={this.state}
+                                    removeUser={this.onRemoveUser}
+                                />
+                            ))}
+                    </div>
+                </Container>
                 <div className="footer" />
             </div>
         );
