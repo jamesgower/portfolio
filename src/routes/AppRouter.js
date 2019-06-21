@@ -20,24 +20,22 @@ export const history = createHistory();
 
 const AppRouter = () => (
     <Router history={history}>
-        <div>
-            <Switch>
-                <Route path="/" component={TwitchAPI} exact />
-                <Route path="/portfolio" exact component={Portfolio} />
-                <Route path="/portfolio/pomodoro" component={Pomodoro} />
-                <Route path="/portfolio/tic-tac-toe" component={PlayTicTacToe} />
-                <Route path="/portfolio/calculator" component={Calculator} />
-                <Route path="/portfolio/wikipedia" component={WikipediaAPI} />
-                <Route path="/portfolio/indecision-app" component={IndecisionApp} />
-                <Route path="/portfolio/twitch" component={TwitchAPI} />
-                <Route path="/portfolio/simon-says" component={SimonSays} />
-                <Route path="/contact-me" component={AboutMe} />
-                <Route path="/skills" component={Skills} />
-                <Route path="/portfolio/chatter" component={Chatter} />
-                <Route path="/portfolio/drum-machine" component={DrumMachine} />
-                <Route component={NotFoundPage} />
-            </Switch>
-        </div>
+        <Switch>
+            <Route path="/" component={TwitchAPI} exact />
+            <Route path="/portfolio" exact component={Portfolio} />
+            <Route path="/portfolio/pomodoro" component={Pomodoro} />
+            <Route path="/portfolio/tic-tac-toe" component={PlayTicTacToe} />
+            <Route path="/portfolio/calculator" component={Calculator} />
+            <Route path="/portfolio/wikipedia" component={WikipediaAPI} />
+            <Route path="/portfolio/indecision-app" component={IndecisionApp} />
+            <Route path="/portfolio/twitch" component={TwitchAPI} />
+            <Route path="/portfolio/simon-says" component={SimonSays} />
+            <Route path="/contact-me" component={AboutMe} />
+            <Route path="/skills" component={Skills} />
+            <Route path="/portfolio/chatter" component={Chatter} />
+            <Route path="/portfolio/drum-machine" component={DrumMachine} />
+            <Route component={NotFoundPage} />
+        </Switch>
     </Router>
 );
 
