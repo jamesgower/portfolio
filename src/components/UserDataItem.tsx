@@ -11,87 +11,79 @@ const defaultState: UserDataItemState = {
     showComponent: true,
     usersToKeep: [],
     desktop: false,
+    userData: null,
 };
 
 class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState> {
     state = defaultState;
 
     componentDidMount() {
-        const userDataJSON = localStorage.getItem(this.props.name);
+        const userDataJSON = localStorage.getItem(name);
         const userData = JSON.parse(userDataJSON);
-        this.setState({ userData, desktop: window.innerWidth > 740 });
+        this.setState({ userData, desktop: window.innerWidth > 1000 });
         window.addEventListener("resize", this.updateWindowDimensions);
     }
 
     updateWindowDimensions = () => {
-        let desktop = window.innerWidth > 740;
+        let desktop = window.innerWidth > 1000;
         this.setState({ desktop });
     };
 
     onRemoveUser = () => {
-        const userToRemove = document.getElementById(this.props.name);
+        const { removeUser, name, online } = this.props;
+        const userToRemove = document.getElementById(name);
         userToRemove.className = "user animated fadeOutLeft";
         setTimeout(() => {
             this.setState({ showComponent: false });
-            this.props.removeUser(this.props.name, this.props.online);
+            removeUser(name, online);
         }, 500);
     };
 
     render() {
-        const { desktop } = this.state;
+        const { desktop, showComponent } = this.state;
+        const {
+            name,
+            link,
+            online,
+            image,
+            game,
+            viewers,
+            mature,
+            preview,
+            matureFilter,
+        } = this.props;
+
         return (
-            this.state.showComponent && (
-                <a href={this.props.link} target="_blank">
-                    <div id={this.props.name} className="user animated fadeIn">
-                        {this.props.online === true ? (
-                            <div className="user-info-container">
-                                <div className="online-user">
-                                    <i
-                                        onClick={this.onRemoveUser}
-                                        className="fa fa-times deleteBtn"
-                                    />
-                                    <div className="user-image">
-                                        <img src={this.props.image} className="user-logo" />
-                                        <h4 className="user-name">{this.props.name}</h4>
-                                    </div>
-                                    <div className="user-info">
-                                        <p>
-                                            <b>Status:</b> Live now!
-                                        </p>
-                                        <p>
-                                            <b>Currently Playing:</b> {this.props.game}
-                                        </p>
-                                        <p className="sub-game">
-                                            <em>- {this.props.status}</em>
-                                        </p>
-                                        <p>
-                                            <b>Viewers:</b> {this.props.viewers}
-                                        </p>
-                                        <p>
-                                            <b>Mature Content:</b>{" "}
-                                            {this.props.mature ? " Yes " : " No "}
-                                        </p>
-                                    </div>
+            showComponent && (
+                <div className="user__container">
+                    <div id={name} className="user__details animated fadeIn">
+                        {online ? (
+                            <div className="online-user">
+                                <i onClick={this.onRemoveUser} className="fa fa-times deleteBtn" />
+                                <div className="user-image">
+                                    <img src={image} className="user-logo" />
+                                    <h4 className="user-name">{name}</h4>
                                 </div>
-                                {desktop && (
-                                    <div className="user-preview">
-                                        <img
-                                            src={this.props.preview}
-                                            id={`${this.props.name}-img`}
-                                            className={
-                                                this.props.mature
-                                                    ? this.props.state.matureFilter
-                                                        ? "preview-img-mature"
-                                                        : "preview-img"
-                                                    : "preview-img"
-                                            }
-                                        />
-                                    </div>
-                                )}
+                                <div className="user-info">
+                                    <p>
+                                        <b>Status:</b> Live now!
+                                    </p>
+                                    <p>
+                                        <b>Currently Playing:</b> {game}
+                                    </p>
+                                    <p className="sub-game">
+                                        <em>- {status}</em>
+                                    </p>
+                                    <p>
+                                        <b>Viewers:</b> {viewers}
+                                    </p>
+                                    <p>
+                                        <b>Mature Content:</b> {mature ? " Yes " : " No "}
+                                    </p>
+                                </div>
                             </div>
                         ) : (
                             <div className="offline-user">
-                                <i onClick={this.onRemoveUser} className="fa fa-times deleteBtn" />
                                 <div className="user-image">
                                     <img
                                         src={
@@ -101,7 +93,7 @@ class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState>
                                         }
                                         className="user-logo"
                                     />
-                                    <h4 className="user-name">{this.props.name}</h4>
+                                    <h4 className="user-name">{name}</h4>
                                 </div>
                                 <div
                                     className={
@@ -135,20 +127,26 @@ class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState>
                                             </p>
                                         </div>
                                     )}
+                                    <i
+                                        onClick={this.onRemoveUser}
+                                        className="fa fa-times deleteBtn"
+                                    />
                                 </div>
-                                {desktop && (
-                                    <div className="user-preview">
-                                        <img
-                                            src={notFoundImage}
-                                            id={`${this.props.name}-img`}
-                                            className="preview-img"
-                                        />
-                                    </div>
-                                )}
                             </div>
                         )}
                     </div>
-                </a>
+                    {desktop && (
+                        <div className="user__preview">
+                            <a href={link} target="_blank">
+                                <img
+                                    src={notFoundImage}
+                                    id={`${name}-img`}
+                                    className="preview-img"
+                                />
+                            </a>
+                        </div>
+                    )}
+                </div>
             )
         );
     }
