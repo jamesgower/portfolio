@@ -186,24 +186,22 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
     };
 
     onRemoveUser = (user: string, online: any) => {
-        const users = this.state.users;
-        let onlineUsers = this.state.onlineUserData;
-        let offlineUsers = this.state.offlineUserData;
+        const { users, onlineUserData, offlineUserData } = this.state;
         if (online) {
-            for (let key in onlineUsers) {
-                if (onlineUsers.hasOwnProperty(key)) {
-                    const val = onlineUsers[key];
+            for (let key in onlineUserData) {
+                if (onlineUserData.hasOwnProperty(key)) {
+                    const val = onlineUserData[key];
                     if (val.name === user) {
-                        delete onlineUsers[key];
+                        delete onlineUserData[key];
                     }
                 }
             }
         } else {
-            for (let key in offlineUsers) {
-                if (offlineUsers.hasOwnProperty(key)) {
-                    const val = offlineUsers[key];
+            for (let key in offlineUserData) {
+                if (offlineUserData.hasOwnProperty(key)) {
+                    const val = offlineUserData[key];
                     if (val.name === user) {
-                        delete offlineUsers[key];
+                        delete offlineUserData[key];
                     }
                 }
             }
@@ -214,7 +212,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
         const index = userData.indexOf(user);
         userData.splice(index, 1);
         localStorage.setItem("users", JSON.stringify(userData));
-        this.setState({ users, onlineUserData: onlineUsers, offlineUserData: offlineUsers });
+        this.setState({ users, onlineUserData, offlineUserData });
     };
 
     componentWillMount() {
@@ -229,9 +227,9 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
     }
 
     componentDidMount() {
-        console.log(this.state.users);
-        for (let i = 0; i < this.state.users.length; i++) {
-            this.getData(this.state.users[i]);
+        const { users } = this.state;
+        for (const user of users) {
+            this.getData(user);
         }
     }
 
@@ -328,7 +326,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
                                     key={index}
                                     {...user}
                                     usersToKeep={usersToKeep}
-                                    state={this.state}
+                                    matureFilter={matureFilter}
                                     removeUser={this.onRemoveUser}
                                 />
                             ))}
@@ -340,7 +338,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
                                     key={index}
                                     {...user}
                                     usersToKeep={usersToKeep}
-                                    state={this.state}
+                                    matureFilter={matureFilter}
                                     removeUser={this.onRemoveUser}
                                 />
                             ))}
