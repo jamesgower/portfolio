@@ -12,9 +12,8 @@ export default interface TwitchState {
 
 export interface UserDataItemState {
     showComponent: boolean;
-    userData?: OnlineUser;
-    usersToKeep?: string[];
-    state?: TwitchState;
+    userData: OnlineUser;
+    usersToKeep: string[];
     desktop: boolean;
 }
 
@@ -29,10 +28,11 @@ export interface UserDataItemProps {
     preview?: string;
     mature?: string;
     link: string;
-    state: TwitchState;
     removeUser: Function;
     usersToKeep: string[];
+    matureFilter: boolean;
 }
+
 export interface OnlineUser {
     name: string;
     game: string;
