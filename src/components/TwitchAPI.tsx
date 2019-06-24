@@ -105,12 +105,12 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
             (function(i) {
                 setTimeout(() => {
                     if (hide) {
-                        nodes[i].classList = "user animated fadeOutLeft";
+                        nodes[i].classList = "user__container animated fadeOutLeft";
                         setTimeout(() => {
                             nodes[i].classList = "hidden";
                         }, 500);
                     } else {
-                        nodes[i].classList = "user animated fadeInLeft";
+                        nodes[i].classList = "user__container animated fadeInLeft";
                     }
                 }, 500 * i);
             })(i);
@@ -156,10 +156,10 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
     };
 
     onStreamerChange = (e: { target: { value: string } }) => {
+        const { users } = this.state;
         let newStreamer = e.target.value;
         this.setState({ newStreamer });
-        const json = JSON.stringify(this.state.users);
-        localStorage.setItem("users", json);
+        localStorage.setItem("users", JSON.stringify(users));
     };
 
     async onlineToOffline(online, offline) {

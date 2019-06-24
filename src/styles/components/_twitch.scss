@@ -12,14 +12,14 @@
 }
 
 .user__details {
-    flex: 7 auto;
+    flex: 4 auto;
     height: 100%;
 }
 
 .user__preview {
-    flex: 3 auto;
-    min-width: 200px;
+    flex: 1 220px;
     height: 100%;
+    justify-content: center;
 }
 
 .twitch {
@@ -244,11 +244,12 @@ input:checked + .slider:before {
 }
 
 .deleteBtn {
-    position: relative;
+    position: absolute;
     z-index: 1;
     font-size: 20px !important;
     color: red;
     right: 0;
+    top: 0;
     cursor: pointer;
 }
 
@@ -256,6 +257,7 @@ input:checked + .slider:before {
     padding-top: 16px;
     font-size: 14px;
     display: inline-block;
+    position: relative;
     flex-basis: 3;
     min-height: 180px;
     vertical-align: center;
