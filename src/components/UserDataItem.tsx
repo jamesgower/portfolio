@@ -32,7 +32,7 @@ class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState>
     onRemoveUser = () => {
         const { removeUser, name, online } = this.props;
         const userToRemove = document.getElementById(name);
-        userToRemove.className = "user animated fadeOutLeft";
+        userToRemove.className = "user__container animated fadeOutLeft";
         setTimeout(() => {
             this.setState({ showComponent: false });
             removeUser(name, online);
@@ -40,7 +40,7 @@ class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState>
     };
 
     render() {
-        const { desktop, showComponent } = this.state;
+        const { desktop, showComponent, userData } = this.state;
         const {
             name,
             link,
@@ -51,97 +51,83 @@ class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState>
             mature,
             preview,
             matureFilter,
+            status,
         } = this.props;
+
+        const OnlineUserDetails = () => (
+            <>
+                <p>
+                    <b>Status:</b> Live now!
+                </p>
+                <p>
+                    <b>Currently Playing:</b> {game}
+                </p>
+                <p className="sub-game">
+                    <em>- {status} -</em>
+                </p>
+                <p>
+                    <b>Viewers:</b> {viewers}
+                </p>
+                <p>
+                    <b>Mature Content:</b> {mature ? " Yes " : " No "}
+                </p>
+            </>
+        );
+
+        const OfflineUserDetails = () => {
+            return !userData ? (
+                <>
+                    <p>
+                        <b>Status:</b> User is offline
+                    </p>
+                    <p>
+                        <b>Last Seen:</b> Never
+                    </p>
+                </>
+            ) : (
+                <>
+                    <p>
+                        <b>Status:</b> User is offline
+                    </p>
+                    <p>
+                        <b>Last Played:</b> {userData.lastGame}
+                    </p>
+                    <p>
+                        <b>Last Streamed:</b> {moment(userData.lastSeen).format("Do MMMM @ hh:mmA")}
+                    </p>
+                </>
+            );
+        };
 
         return (
             showComponent && (
-                <div className="user__container">
-                    <div id={name} className="user__details animated fadeIn">
-                        {online ? (
-                            <div className="online-user">
+                <div id={name} className="user__container animated fadeIn">
+                    <div className="user__details">
+                        <div className={online ? "online-user" : "offline-user"}>
+                            <div className="user-image">
+                                <img
+                                    src={image ? image : "/images/placeholder.png"}
+                                    className="user-logo"
+                                />
+                                <h4 className="user-name">{name}</h4>
+                            </div>
+                            <div className="user-info">
+                                {online ? <OnlineUserDetails /> : <OfflineUserDetails />}
                                 <i onClick={this.onRemoveUser} className="fa fa-times deleteBtn" />
-                                <div className="user-image">
-                                    <img src={image} className="user-logo" />
-                                    <h4 className="user-name">{name}</h4>
-                                </div>
-                                <div className="user-info">
-                                    <p>
-                                        <b>Status:</b> Live now!
-                                    </p>
-                                    <p>
-                                        <b>Currently Playing:</b> {game}
-                                    </p>
-                                    <p className="sub-game">
-                                        <em>- {status}</em>
-                                    </p>
-                                    <p>
-                                        <b>Viewers:</b> {viewers}
-                                    </p>
-                                    <p>
-                                        <b>Mature Content:</b> {mature ? " Yes " : " No "}
-                                    </p>
-                                </div>
                             </div>
-                        ) : (
-                            <div className="offline-user">
-                                <div className="user-image">
-                                    <img
-                                        src={
-                                            this.state.userData
-                                                ? this.state.userData.image
-                                                : "/images/placeholder.png"
-                                        }
-                                        className="user-logo"
-                                    />
-                                    <h4 className="user-name">{name}</h4>
-                                </div>
-                                <div
-                                    className={
-                                        this.state.userData !== null
-                                            ? "offline-with-info"
-                                            : "offline-user-info"
-                                    }
-                                >
-                                    {!this.state.userData ? (
-                                        <div>
-                                            <p>
-                                                <b>Status:</b> User is offline
-                                            </p>
-                                            <p>
-                                                <b>Last Seen:</b> Never
-                                            </p>
-                                        </div>
-                                    ) : (
-                                        <div>
-                                            <p>
-                                                <b>Status:</b> User is offline
-                                            </p>
-                                            <p>
-                                                <b>Last Played:</b> {this.state.userData.lastGame}
-                                            </p>
-                                            <p>
-                                                <b>Last Streamed:</b>{" "}
-                                                {moment(this.state.userData.lastSeen).format(
-                                                    "Do MMMM @ hh:mmA",
-                                                )}
-                                            </p>
-                                        </div>
-                                    )}
-                                    <i
-                                        onClick={this.onRemoveUser}
-                                        className="fa fa-times deleteBtn"
-                                    />
-                                </div>
-                            </div>
-                        )}
+                        </div>
                     </div>
                     {desktop && (
                         <div className="user__preview">
                             <a href={link} target="_blank">
                                 <img
-                                    src={notFoundImage}
+                                    src={preview ? preview : notFoundImage}
                                     id={`${name}-img`}
-                                    className="preview-img"
+                                    className={
+                                        mature && matureFilter
+                                            ? "preview-img-mature"
+                                            : "preview-img"
+                                    }
                                 />
                             </a>
                         </div>
