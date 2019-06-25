@@ -10,10 +10,10 @@ import configureStore from "./store/configureStore";
 import { Provider } from "react-redux";
 
 declare global {
-    interface Window {
-        $: any;
-        jQuery: any;
-    }
+  interface Window {
+    $: any;
+    jQuery: any;
+  }
 }
 
 window.$ = $;
@@ -22,18 +22,18 @@ window.jQuery = jQuery;
 const store = configureStore();
 
 export const App: React.FC = () => (
-    <Provider store={store}>
-        <AppRouter />
-    </Provider>
+  <Provider store={store}>
+    <AppRouter />
+  </Provider>
 );
 
 let hasRendered = false;
 
 const renderApp = () => {
-    if (!hasRendered) {
-        ReactDOM.render(<App />, document.getElementById("app"));
-        hasRendered = true;
-    }
+  if (!hasRendered) {
+    ReactDOM.render(<App />, document.getElementById("app"));
+    hasRendered = true;
+  }
 };
 
 ReactDOM.render(<LoadingPage />, document.getElementById("app"));

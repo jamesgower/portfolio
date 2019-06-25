@@ -120,6 +120,7 @@ class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState>
                   onClick={this.onRemoveUser}
                   onKeyPress={this.onRemoveUser}
                   className="fa fa-times deleteBtn"
+                  tabIndex={0}
                 />
               </div>
             </div>

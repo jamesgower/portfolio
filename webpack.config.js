@@ -1,5 +1,4 @@
 const path = require("path");
-const glob = require("glob");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
@@ -8,37 +7,31 @@ const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const PurgecssPlugin = require("purgecss-webpack-plugin");
 
-const PATHS = {
-  dist: path.join(__dirname, "dist"),
-  src: path.join(__dirname, "src"),
-  styles: path.join(__dirname, "src/styles"),
-};
-
 module.exports = env => {
   const isProduction = env === "production";
 
   return {
-    entry: ["@babel/polyfill", "./src/app.tsx" /*"jquery"*/],
+    entry: ["@babel/polyfill", "./src/app.tsx", "jquery"],
     resolve: {
       extensions: [".ts", ".tsx", ".js"],
     },
     output: {
       path: path.join(__dirname, "dist"),
-      fileName: "bundle.min.js",
+      filename: "bundle.min.js",
       publicPath: "/",
     },
     optimization: {
-      minimizer: [new TerserPlugin({})],
-      // splitChunks: {
+      minimizer: [new TerserPlugin({}), new OptimizeCSSAssetsPlugin({})],
+      //   splitChunks: {
       //     cacheGroups: {
-      //         styles: {
-      //             name: "styles",
-      //             test: /\.css$/,
-      //             chunks: "all",
-      //             enforce: true,
-      //         },
+      //       styles: {
+      //         name: "styles",
+      //         test: /\.css$/,
+      //         chunks: "all",
+      //         enforce: true,
+      //       },
       //     },
-      // },
+      //   },
     },
     module: {
       rules: [
@@ -89,9 +82,6 @@ module.exports = env => {
       new HtmlWebpackPlugin({
         template: "./public/index.html",
         favicon: "./public/images/favicon.png",
-      }),
-      new PurgecssPlugin({
-        paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
       }),
     ],
     devtool: isProduction ? "source-map" : "inline-source-map",
