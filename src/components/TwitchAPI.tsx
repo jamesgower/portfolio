@@ -222,7 +222,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
     this.setState({ users, onlineUserData, offlineUserData });
   };
 
-  private async offlineToOnline(online, offline): void {
+  private async offlineToOnline(online, offline): Promise<void> {
     try {
       await this.onAnimate(offline, true);
       await this.onAnimate(online, false);
