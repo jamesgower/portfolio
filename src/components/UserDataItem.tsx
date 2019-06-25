@@ -8,8 +8,7 @@ const notFoundImage = require("../../public/images/twitch-not-found.jpg");
 	TODO
 	[ ] Fix flexbox for online and offline
 */
-
-const defaultState: UserDataItemState = {
+const initialState: UserDataItemState = {
   showComponent: true,
   usersToKeep: [],
   desktop: false,
@@ -17,7 +16,7 @@ const defaultState: UserDataItemState = {
 };
 
 class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState> {
-  public state = defaultState;
+  state = initialState;
 
   public componentDidMount(): void {
     const userDataJSON = localStorage.getItem(name);
