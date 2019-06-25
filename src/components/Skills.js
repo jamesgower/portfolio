@@ -21,13 +21,13 @@ export default class Skills extends React.Component {
         window.addEventListener("resize", this.updateWindowDimensions);
     }
 
-    componentWillUnmount() {
+    componentWillUnmount() { 
         window.removeEventListener("resize", this.updateWindowDimensions);
     }
 
     updateWindowDimensions = () => {
-        let desktop = window.innerWidth > 768;
-        let mobile = window.innerWidth < 576;
+        const desktop = window.innerWidth > 768;
+        const mobile = window.innerWidth < 576;
 
         this.setState({ desktop, mobile });
     };

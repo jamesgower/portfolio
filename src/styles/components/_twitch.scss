@@ -25,6 +25,7 @@
 .twitch {
     background: url("../../public/images/twitch-bg.jpg");
     width: 100%;
+    min-height: 100vh;
     height: 100%;
     font-family: "Cairo", sans-serif;
 }
@@ -33,7 +34,7 @@
     position: relative;
     bottom: 0;
     height: 100px;
-    width: 100vw;
+    width: 100%;
     background: #20222b;
 }
 /*
@@ -261,9 +262,6 @@ input:checked + .slider:before {
     flex-basis: 3;
     min-height: 180px;
     vertical-align: center;
-    @media (max-width: $s-breakpoint) {
-        border-right: 4px solid blueviolet;
-    }
 }
 
 .offline-user-info {

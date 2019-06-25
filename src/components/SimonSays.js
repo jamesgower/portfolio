@@ -1,7 +1,7 @@
 import React from "react";
+import { Container } from "reactstrap";
 import { Howl } from "howler";
 import NavBar from "./NavBar";
-import { Container } from "reactstrap";
 import greenMp3 from "../../public/media/green.mp3";
 import redMp3 from "../../public/media/red.mp3";
 import yellowMp3 from "../../public/media/yellow.mp3";
@@ -54,29 +54,6 @@ class SimonSays extends React.Component {
     componentWillUnmount() {
         clearTimeout(failTimer);
     }
-
-    getColour = () => {
-        const randomNum = Math.floor(Math.random() * 4);
-        let colour;
-        switch (randomNum) {
-            case 0:
-                colour = "green";
-                break;
-            case 1:
-                colour = "red";
-                break;
-            case 2:
-                colour = "yellow";
-                break;
-            case 3:
-                colour = "blue";
-                break;
-        }
-        const combination = this.state.combination;
-        combination.push(colour);
-        this.setState({ combination });
-        return colour;
-    };
 
     onStartTimer = () => {
         failTimer = setTimeout(async () => {
@@ -229,21 +206,48 @@ class SimonSays extends React.Component {
         this.onStartTimer();
     }
 
+    getColour = () => {
+        const randomNum = Math.floor(Math.random() * 4);
+        let colour;
+        switch (randomNum) {
+            case 0:
+                colour = "green";
+                break;
+            case 1:
+                colour = "red";
+                break;
+            case 2:
+                colour = "yellow";
+                break;
+            case 3:
+                colour = "blue";
+                break;
+            default:
+                break;
+        }
+        const { combination } = this.state;
+        combination.push(colour);
+        this.setState({ combination });
+        return colour;
+    };
+
     onFailNormal = async () => {
-        if (!this.state.switchOn) return this.onResetGame();
+        const { switchOn } = this.state;
+        if (!switchOn) return this.onResetGame();
         this.setState({
             turnNum: 0,
             userTurn: false,
         });
         await this.wait(500);
         await this.onFlashColours();
-        this.setState({
+        return this.setState({
             userTurn: true,
         });
     };
 
     onFailStrict = async () => {
-        if (!this.state.switchOn) return this.onResetGame();
+        const { switchOn } = this.state;
+        if (!switchOn) return this.onResetGame();
         this.setState({
             currentStreak: 0,
             combination: [],
@@ -253,7 +257,7 @@ class SimonSays extends React.Component {
         await this.wait(500);
         await this.getColour();
         await this.onFlashColours();
-        this.setState({
+        return this.setState({
             userTurn: true,
         });
     };
@@ -271,11 +275,10 @@ class SimonSays extends React.Component {
         });
     };
 
-    wait = sec => {
-        return new Promise(function(resolve) {
+    wait = sec =>
+        new Promise(resolve => {
             setTimeout(resolve, sec);
         });
-    };
 
     render() {
         return (
