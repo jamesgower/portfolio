@@ -9,7 +9,7 @@ import PlayTicTacToe from "../components/TicTacToe/TicTacToeSetup";
 import Calculator from "../components/Calculator";
 import WikipediaAPI from "../components/WikipediaAPI";
 import IndecisionApp from "../components/Indecision/IndecisionApp";
-import TwitchAPI from "../components/TwitchAPI";
+import TwitchAPI from "../components/TwitchAPI.tsx";
 import SimonSays from "../components/SimonSays";
 import Skills from "../components/Skills";
 import Chatter from "../components/Chatter";
