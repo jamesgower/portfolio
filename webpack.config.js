@@ -1,25 +1,44 @@
 const path = require("path");
+const glob = require("glob");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const PurgecssPlugin = require("purgecss-webpack-plugin");
+
+const PATHS = {
+  dist: path.join(__dirname, "dist"),
+  src: path.join(__dirname, "src"),
+  styles: path.join(__dirname, "src/styles"),
+};
 
 module.exports = env => {
   const isProduction = env === "production";
 
   return {
-    entry: ["@babel/polyfill", "./src/app.tsx", "jquery"],
+    entry: ["@babel/polyfill", "./src/app.tsx" /*"jquery"*/],
     resolve: {
-      extensions: [".ts", ".tsx", ".js", ".jsx"],
+      extensions: [".ts", ".tsx", ".js"],
     },
     output: {
       path: path.join(__dirname, "dist"),
-      filename: "bundle.min.js",
+      fileName: "bundle.min.js",
       publicPath: "/",
     },
     optimization: {
-      minimizer: [new UglifyJsPlugin()],
+      minimizer: [new TerserPlugin({})],
+      // splitChunks: {
+      //     cacheGroups: {
+      //         styles: {
+      //             name: "styles",
+      //             test: /\.css$/,
+      //             chunks: "all",
+      //             enforce: true,
+      //         },
+      //     },
+      // },
     },
     module: {
       rules: [
@@ -40,34 +59,41 @@ module.exports = env => {
         {
           test: /\.(sa|sc|c)ss$/,
           use: [
-            !isProduction ? "style-loader" : MiniCssExtractPlugin.loader,
+            {
+              loader: MiniCssExtractPlugin.loader,
+              options: {
+                hmr: process.env.NODE_ENV === "development",
+              },
+            },
             "css-loader",
             "sass-loader",
           ],
         },
         {
           test: /\.(jpg|jpeg|png|gif|svg|pdf|ico)$/i,
-          loader: "file-loader?name=[path][name].[ext]",
+          loader: "file-loader?name=[path][hash].[ext]",
         },
         {
           test: /\.(mp3|wav|mpe?g)$/,
-          loader: "file-loader?name=./public/media/[hash].[ext]",
+          loader: "file-loader?name=[path][hash].[ext]",
         },
       ],
     },
     plugins: [
       new webpack.ProvidePlugin({ $: "jquery", jQuery: "jquery" }),
       new CleanWebpackPlugin(["dist"]),
-      new HtmlWebpackPlugin({
-        template: "./public/index.html",
-        favicon: "./public/images/favicon.png",
-      }),
       new MiniCssExtractPlugin({
         filename: "[name].css",
         chunkFilename: "[id].css",
       }),
+      new HtmlWebpackPlugin({
+        template: "./public/index.html",
+        favicon: "./public/images/favicon.png",
+      }),
+      new PurgecssPlugin({
+        paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
+      }),
     ],
-
     devtool: isProduction ? "source-map" : "inline-source-map",
     devServer: {
       contentBase: path.join(__dirname, "public"),
