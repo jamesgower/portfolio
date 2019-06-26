@@ -2,14 +2,16 @@ import * as React from "react";
 import { Button, Input, Container } from "reactstrap";
 import UserDataItem from "./UserDataItem";
 import TwitchState, { OnlineUser, APICall, SavedUser } from "../interfaces/TwitchAPI";
+import keys from "../keys";
+
 /*
 	TODO
 	[x] Fix async problems
 	[ ] Look at smoother animations !! Look at onTransitionEnd
-	[ ] Add streamer on enter click
+	[x] Add streamer on enter click
 	[x] Look to change passing all state to UserDataItem
-	[ ] Fix cross to be in top right
-	[ ] Fix animations when clicking online button
+	[x] Fix cross to be in top right
+	[x] Fix animations when clicking online button
 */
 
 const initialState: TwitchState = {
@@ -34,18 +36,33 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
     }
   }
 
+  public componentWillUnmount(): void {
+    const input = document.getElementById("streamerInput");
+    input.removeEventListener("keydown", e => {
+      if (e.keyCode === 13) {
+        this.onNewStreamer();
+      }
+    });
+  }
+
   public componentDidMount(): void {
     const { users } = this.state;
     for (const user of users) {
       this.getData(user);
     }
+    const input = document.getElementById("streamerInput");
+    input.addEventListener("keydown", e => {
+      if (e.keyCode === 13) {
+        this.onNewStreamer();
+      }
+    });
   }
 
-  private onNewStreamer = (): void => {
+  public onNewStreamer = (): void => {
     const { newStreamer, users } = this.state;
     users.push(newStreamer);
     this.getData(newStreamer);
-    this.setState({ users });
+    this.setState({ users, newStreamer: "" });
     localStorage.setItem("users", JSON.stringify(users));
   };
 
@@ -54,12 +71,12 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
       (function(i): void {
         setTimeout((): void => {
           if (hide) {
-            nodes[i].classList = "user__container animated fadeOutLeft";
+            nodes[i].className = "user__container animated fadeOutLeft";
             setTimeout((): void => {
-              nodes[i].classList = "hidden";
+              nodes[i].className = "hidden";
             }, 500);
           } else {
-            nodes[i].classList = "user__container animated fadeInRight";
+            nodes[i].className = "user__container animated fadeInRight";
           }
         }, 500 * i);
       })(i);
@@ -82,10 +99,15 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
     const { show } = this.state;
     const offline = document.getElementById("twitch_offlineUsers").childNodes;
     const online = document.getElementById("twitch__onlineUsers").childNodes;
-    if (show === "online") {
-      this.onAnimate(offline, false);
-    } else if (show === "offline") {
-      this.onAnimate(online, false);
+    switch (show) {
+      case "online":
+        this.onAnimate(offline, false);
+        break;
+      case "offline":
+        this.onAnimate(online, false);
+        break;
+      default:
+        return;
     }
     this.setState({ show: "all" });
   };
@@ -93,10 +115,15 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
   private onOfflineClick = (): void => {
     const { show } = this.state;
     const online = document.getElementById("twitch__onlineUsers").childNodes;
-    if (show === "all") {
-      this.onAnimate(online, true);
-    } else if (show === "online") {
-      this.onlineToOffline();
+    switch (show) {
+      case "all":
+        this.onAnimate(online, false);
+        break;
+      case "online":
+        this.onlineToOffline();
+        break;
+      default:
+        return;
     }
     this.setState({ show: "offline" });
   };
@@ -121,8 +148,8 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
   public getData = (name: string): void => {
     fetch(`https://api.twitch.tv/kraken/streams/${name}`, {
       headers: {
-        "Client-ID": "*******",
-        Authorization: "o*******",
+        "Client-ID": keys.twitch_client_id,
+        Authorization: keys.twitch_authorization,
       },
     })
       .then((res): Promise<APICall> => res.json())
