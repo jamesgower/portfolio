@@ -27,12 +27,10 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
 
   public componentWillMount(): void {
     try {
-      const savedUsers = JSON.parse(localStorage.getItem("users"));
-      if (savedUsers) {
-        this.setState(() => ({ users: savedUsers }));
-      }
-    } catch (e) {
-      console.log(e);
+      const users = JSON.parse(localStorage.getItem("users"));
+      if (users) this.setState({ users });
+    } catch (err) {
+      console.error(err);
     }
   }
 
@@ -61,7 +59,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
               nodes[i].classList = "hidden";
             }, 500);
           } else {
-            nodes[i].classList = "user__container animated fadeInLeft";
+            nodes[i].classList = "user__container animated fadeInRight";
           }
         }, 500 * i);
       })(i);
@@ -71,21 +69,19 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
 
   private onOnlineChange = (): void => {
     const { show } = this.state;
-    const offline = document.getElementById("offline-users").childNodes;
-    const online = document.getElementById("online-users").childNodes;
+    const offline = document.getElementById("twitch_offlineUsers").childNodes;
     if (show === "all") {
       this.onAnimate(offline, true);
-      this.onAnimate(online, true);
     } else if (show === "offline") {
-      this.offlineToOnline(online, offline);
+      this.offlineToOnline();
     }
     this.setState({ show: "online" });
   };
 
   private onAllChange = (): void => {
     const { show } = this.state;
-    const offline = document.getElementById("offline-users").childNodes;
-    const online = document.getElementById("online-users").childNodes;
+    const offline = document.getElementById("twitch_offlineUsers").childNodes;
+    const online = document.getElementById("twitch__onlineUsers").childNodes;
     if (show === "online") {
       this.onAnimate(offline, false);
     } else if (show === "offline") {
@@ -96,12 +92,11 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
 
   private onOfflineClick = (): void => {
     const { show } = this.state;
-    const offline = document.getElementById("offline-users").childNodes;
-    const online = document.getElementById("online-users").childNodes;
+    const online = document.getElementById("twitch__onlineUsers").childNodes;
     if (show === "all") {
       this.onAnimate(online, true);
     } else if (show === "online") {
-      this.onlineToOffline(online, offline);
+      this.onlineToOffline();
     }
     this.setState({ show: "offline" });
   };
@@ -112,14 +107,16 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
     localStorage.setItem("users", JSON.stringify(users));
   };
 
-  public async onlineToOffline(online, offline): Promise<any> {
+  private onlineToOffline = (): void => {
+    const offline = document.getElementById("twitch_offlineUsers").childNodes;
+    const online = document.getElementById("twitch__onlineUsers").childNodes;
     try {
-      await this.onAnimate(online, true);
-      await this.onAnimate(offline, false);
+      this.onAnimate(online, true);
+      this.onAnimate(offline, false);
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   public getData = (name: string): void => {
     fetch(`https://api.twitch.tv/kraken/streams/${name}`, {
@@ -162,7 +159,6 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
             }
 
             this.setState({
-              isLoaded: true,
               onlineUserData,
             });
           } else if (result.stream === null) {
@@ -174,16 +170,12 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
             };
             offlineUserData.push(user);
             this.setState({
-              isLoaded: true,
               offlineUserData,
             });
           }
         },
         (error): void => {
-          this.setState({
-            isLoaded: true,
-            error,
-          });
+          console.error(error);
         },
       );
   };
@@ -192,7 +184,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
     this.setState({ matureFilter: e.target.checked });
   };
 
-  private onRemoveUser = (user: string, online: any): void => {
+  private onRemoveUser = (user: string, online): void => {
     const { users, onlineUserData, offlineUserData } = this.state;
     if (online) {
       for (const key in onlineUserData) {
@@ -222,13 +214,11 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
     this.setState({ users, onlineUserData, offlineUserData });
   };
 
-  private async offlineToOnline(online, offline): Promise<void> {
-    try {
-      await this.onAnimate(offline, true);
-      await this.onAnimate(online, false);
-    } catch (err) {
-      console.log(err);
-    }
+  private offlineToOnline(): void {
+    const offline = document.getElementById("twitch_offlineUsers").childNodes;
+    const online = document.getElementById("twitch__onlineUsers").childNodes;
+    this.onAnimate(offline, true);
+    this.onAnimate(online, false);
   }
 
   public render(): JSX.Element {
@@ -240,21 +230,23 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
       usersToKeep,
       matureFilter,
     } = this.state;
+
     return (
-      <div className="twitch">
-        <div className="header">
+      <div className="twitch__container">
+        <div className="twitch__header">
           <Container>
-            <h1 className="text-center twitch-title">Twitch Streamers</h1>
-            <p className="info-text">
+            <h1 className="text-center twitch__title">Twitch Streamers</h1>
+            <p className="twitch__headerText">
               Feel free to add any streamers you wish to track. All streamers are saved so you can
               come back and check their status.
             </p>
-            <p className="info-subtext">
-              You can also remove any streamers you don't want to follow by pressing the red cross.
+            <p className="twitch__headerSubText">
+              You can also remove any streamers you don&apos;t want to follow by pressing the red
+              cross.
             </p>
-            <div className="buttons-twitch">
+            <div className="twitch__buttonsContainer">
               <Button
-                className="btn-twitch"
+                className="twitch__button"
                 active={show === "online"}
                 size="lg"
                 outline
@@ -264,7 +256,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
                 Online
               </Button>
               <Button
-                className="btn-twitch"
+                className="twitch__button"
                 active={show === "all"}
                 size="lg"
                 outline
@@ -274,7 +266,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
                 All
               </Button>
               <Button
-                className="btn-twitch"
+                className="twitch__button"
                 active={show === "offline"}
                 size="lg"
                 outline
@@ -284,7 +276,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
                 Offline
               </Button>
             </div>
-            <div className="newStreamer">
+            <div className="twitch__inputContainer">
               <Input
                 id="streamerInput"
                 value={newStreamer}
@@ -295,11 +287,16 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
                 Add Streamer
               </Button>
             </div>
-            <div className="mature-filter">
-              <h3 className="mature-text">Mature Filter:</h3>
-              <div className="mature-switch">
-                <label className="switch">
-                  <input type="checkbox" checked={matureFilter} onChange={this.onHandleMature} />
+            <div className="twitch__matureContainer">
+              <h3 className="twitch__matureText">Mature Filter:</h3>
+              <div className="twitch__matureSwitch">
+                <label htmlFor="check" className="switch">
+                  <input
+                    id="check"
+                    type="checkbox"
+                    checked={matureFilter}
+                    onChange={this.onHandleMature}
+                  />
                   <span className="slider round" />
                 </label>
               </div>
@@ -307,32 +304,38 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
           </Container>
         </div>
         <Container>
-          <div id="online-users">
+          <div id="twitch__onlineUsers">
             {onlineUserData.length > 0 &&
-              onlineUserData.map((user, index) => (
-                <UserDataItem
-                  key={index}
-                  {...user}
-                  usersToKeep={usersToKeep}
-                  matureFilter={matureFilter}
-                  removeUser={this.onRemoveUser}
-                />
-              ))}
+              onlineUserData.map(
+                (user, index): JSX.Element => (
+                  <UserDataItem
+                    key={index}
+                    {...user}
+                    usersToKeep={usersToKeep}
+                    matureFilter={matureFilter}
+                    removeUser={this.onRemoveUser}
+                  />
+                ),
+              )}
           </div>
-          <div id="offline-users">
+          <div id="twitch_offlineUsers">
             {offlineUserData.length > 0 &&
-              offlineUserData.map((user, index) => (
-                <UserDataItem
-                  key={index}
-                  {...user}
-                  usersToKeep={usersToKeep}
-                  matureFilter={matureFilter}
-                  removeUser={this.onRemoveUser}
-                />
-              ))}
+              offlineUserData.map(
+                (user, index): JSX.Element => (
+                  <UserDataItem
+                    key={index}
+                    {...user}
+                    usersToKeep={usersToKeep}
+                    matureFilter={matureFilter}
+                    removeUser={this.onRemoveUser}
+                  />
+                ),
+              )}
           </div>
         </Container>
-        <div className="footer" />
+        <div className="twitch__footerContainer">
+          <footer className="twitch__footer" />
+        </div>
       </div>
     );
   }

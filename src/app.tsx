@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { Provider } from "react-redux";
 import AppRouter, { history } from "./routes/AppRouter";
 import LoadingPage from "./components/LoadingPage";
 import "normalize.css/normalize.css";
@@ -7,7 +8,6 @@ import "react-dates/lib/css/_datepicker.css";
 import "./styles/styles.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import configureStore from "./store/configureStore";
-import { Provider } from "react-redux";
 
 declare global {
   interface Window {
@@ -21,7 +21,7 @@ window.jQuery = jQuery;
 
 const store = configureStore();
 
-export const App: React.FC = () => (
+const App: React.FC = (): JSX.Element => (
   <Provider store={store}>
     <AppRouter />
   </Provider>
@@ -38,4 +38,3 @@ const renderApp = () => {
 
 ReactDOM.render(<LoadingPage />, document.getElementById("app"));
 renderApp();
-history.push("/");
