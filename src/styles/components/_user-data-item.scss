@@ -1,0 +1,100 @@
+.user__container {
+  height: 188px;
+  width: 100%;
+  display: inline-flex;
+  margin: 20px auto 0 auto;
+  background: #20222b;
+  color: white;
+}
+
+.user__details {
+  flex: 4 auto;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.user__preview {
+  flex: 1 220px;
+  height: 100%;
+  justify-content: center;
+  border-right: 4px solid blueviolet;
+  border-top: 4px solid blueviolet;
+  border-bottom: 4px solid blueviolet;
+}
+
+.user__imageContainer {
+  display: inline-block;
+  height: 100%;
+  width: 180px;
+  vertical-align: top;
+}
+
+.user__image {
+  height: 140px;
+  max-width: 140px;
+  margin: 12px 18px 0 18px;
+  border-radius: 50%;
+  border: 4px solid red;
+}
+
+.user-info-container {
+  display: inline-flex;
+}
+
+.user__online > .user__imageContainer > .user__image {
+  border: 4px solid green;
+}
+
+.sub-game {
+  font-size: 12px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-all;
+  white-space: nowrap;
+  margin-right: 20px;
+}
+
+.user__name {
+  margin: 3px 0;
+  font-weight: 800;
+  text-align: center;
+  width: 100%;
+}
+
+.user__deleteIcon {
+  position: absolute;
+  z-index: 1;
+  font-size: 20px !important;
+  color: red;
+  right: 10px;
+  top: 8px;
+  cursor: pointer;
+}
+
+.user__infoContainer {
+  padding-top: 16px;
+  font-size: 14px;
+  display: inline-flex;
+  flex-direction: column;
+  min-height: 180px;
+}
+
+.user__streamPreview {
+  width: auto;
+  height: 100%;
+}
+
+.user__streamPreview--mature {
+  width: auto;
+  height: 100%;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+}
+
+.user__online,
+.user__offline {
+  height: 100%;
+  width: 100%;
+  border: 4px solid blueviolet;
+}
