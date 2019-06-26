@@ -1,4 +1,3 @@
 node_modules/
-src/tests
-server/keys.js
+src/keys.ts
 dist/
