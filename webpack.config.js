@@ -53,7 +53,7 @@ module.exports = env => {
           test: /\.(sa|sc|c)ss$/,
           use: [
             {
-              loader: MiniCssExtractPlugin.loader,
+              loader: !isProduction ? "style-loader" : MiniCssExtractPlugin.loader,
               options: {
                 hmr: process.env.NODE_ENV === "development",
               },

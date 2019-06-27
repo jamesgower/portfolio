@@ -62,20 +62,20 @@ class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState>
 
     const OnlineUserDetails = (): JSX.Element => (
       <>
-        <p>
-          <b>Status:</b> Live now!
+        <p className="user__text">
+          <span className="user__boldText">Status:</span> Live now!
         </p>
-        <p>
-          <b>Currently Playing:</b> {game}
+        <p className="user__text">
+          <span className="user__boldText">Currently Playing:</span> {game}
         </p>
-        <p className="sub-game">
+        <p className="user__subGame">
           <em>- {status} -</em>
         </p>
-        <p>
-          <b>Viewers:</b> {viewers}
+        <p className="user__text">
+          <span className="user__boldText">Viewers:</span> {viewers}
         </p>
-        <p>
-          <b>Mature Content:</b> {mature ? " Yes " : " No "}
+        <p className="user__text">
+          <span className="user__boldText">Mature Content:</span> {mature ? " Yes " : " No "}
         </p>
       </>
     );
@@ -83,23 +83,24 @@ class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState>
     const OfflineUserDetails = (): JSX.Element => {
       return !userData ? (
         <>
-          <p>
-            <b>Status:</b> User is offline
+          <p className="user__text">
+            <span className="user__boldText">Status:</span> User is offline
           </p>
-          <p>
-            <b>Last Seen:</b> Never
+          <p className="user__text">
+            <span className="user__boldText">Last Seen:</span> Never
           </p>
         </>
       ) : (
         <>
-          <p>
-            <b>Status:</b> User is offline
+          <p className="user__text">
+            <span className="user__boldText">Status:</span> User is offline
           </p>
-          <p>
-            <b>Last Played:</b> {userData.lastGame}
+          <p className="user__text">
+            <span className="user__boldText">Last Played:</span> {userData.lastGame}
           </p>
-          <p>
-            <b>Last Streamed:</b> {moment(userData.lastSeen).format("Do MMMM @ hh:mmA")}
+          <p className="user__text">
+            <span className="user__boldText">Last Streamed: </span>
+            {moment(userData.lastSeen).format("Do MMMM @ hh:mmA")}
           </p>
         </>
       );
@@ -111,11 +112,13 @@ class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState>
           <div className="user__details">
             <div className={online ? "user__online" : "user__offline"}>
               <div className="user__imageContainer">
-                <img
-                  alt={name}
-                  src={image ? image : "/images/placeholder.png"}
-                  className="user__image"
-                />
+                <a href={link} target="_blank" rel="noopener noreferrer">
+                  <img
+                    alt={name}
+                    src={image ? image : userData ? userData.image : "/images/placeholder.png"}
+                    className="user__image"
+                  />
+                </a>
                 <h4 className="user__name">{name}</h4>
               </div>
               <div className="user__infoContainer">
