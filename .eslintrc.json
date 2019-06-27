@@ -6,7 +6,6 @@
   },
   "extends": [
     "airbnb-typescript",
-    "airbnb",
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
@@ -23,14 +22,15 @@
     },
     "ecmaVersion": 2018,
     "sourceType": "module",
-    "project": "./tsconfig.json"
+    "project": "tsconfig.json"
   },
-  "plugins": ["react", "@typescript-eslint", "prettier", "airbnb", "airbnb-typescript"],
+  "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
     "quotes": ["warn", "double"],
     "@typescript-eslint/no-var-requires": "off",
     "no-console": "off",
     "react/jsx-one-expression-per-line": "off",
-    "react/no-array-index-key": "off"
+    "react/no-array-index-key": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".jsx", ".tsx"] }]
   }
 }
