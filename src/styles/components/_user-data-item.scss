@@ -1,5 +1,5 @@
 .user__container {
-  height: 188px;
+  height: 200px;
   width: 100%;
   display: inline-flex;
   margin: 20px auto 0 auto;
@@ -67,6 +67,11 @@
 
 .user__text {
   font-size: 14px;
+  word-wrap: none;
+  padding-right: 10px;
+  @media (max-width: $md-breakpoint) {
+    font-size: 13px;
+  }
   @media (max-width: $s-breakpoint) {
     font-size: 12px;
   }
@@ -77,15 +82,6 @@
   color: rgb(163, 65, 255);
   font-weight: bolder;
   margin: 0;
-}
-
-.user__subGame {
-  @extend .user__text;
-  width: 100%;
-  overflow: hidden;
-  word-break: break-all;
-  white-space: nowrap;
-  margin-right: 20px;
 }
 
 .user__name {

@@ -81,30 +81,6 @@
   margin: 0 auto;
 }
 
-.twitch__matureText {
-  margin-top: 7px;
-  @media (max-width: $md-breakpoint) {
-    font-size: 16px;
-  }
-  @media (max-width: $s-breakpoint) {
-    font-size: 14px;
-  }
-  @media (max-width: $xs-breakpoint) {
-    font-size: 13px;
-  }
-}
-
-.twitch__matureSwitch {
-  margin-top: 2px;
-}
-
-.twitch__matureContainer {
-  margin: 10px auto;
-  width: 200px;
-  display: flex;
-  justify-content: space-evenly;
-}
-
 .twitch__inputContainer {
   width: 100%;
   margin: 10px auto;
@@ -152,19 +128,43 @@
   display: none;
 }
 
-/* Mature Switch */
-.switch {
+/* Mature switch */
+.twitch__matureText {
+  margin-top: 7px;
+  margin-right: 5px;
+  @media (max-width: $md-breakpoint) {
+    font-size: 14px;
+  }
+}
+
+.twitch__matureSwitch {
+  margin-left: 5px;
+  margin-top: 6px;
+  @media (max-width: $md-breakpoint) {
+    margin-top: 3px;
+  }
+}
+
+.twitch__matureContainer {
+  margin: 10px auto;
+  width: 200px;
+  display: flex;
+  justify-items: start;
+  justify-content: center;
+}
+
+.twitch__switch {
   position: relative;
   display: inline-block;
   width: 40px;
   height: 24px;
 }
 
-.switch input {
+.twitch__switch input {
   display: none;
 }
 
-.slider {
+.twitch__slider {
   padding-top: -20px;
   position: absolute;
   cursor: pointer;
@@ -177,7 +177,7 @@
   transition: 0.4s;
 }
 
-.slider:before {
+.twitch__slider:before {
   position: absolute;
   content: "";
   height: 16px;
@@ -189,24 +189,24 @@
   transition: 0.4s;
 }
 
-input:checked + .slider {
+#check:checked + .twitch__slider {
   background-color: rgb(243, 33, 33);
 }
 
-input:focus + .slider {
+#check:focus + .twitch__slider {
   box-shadow: 0 0 1px rgb(243, 33, 33);
 }
 
-input:checked + .slider:before {
+#check:checked + .twitch__slider:before {
   -webkit-transform: translateX(16px);
   -ms-transform: translateX(16px);
   transform: translateX(16px);
 }
 
-.slider.round {
+.twitch__slider.twitch__round {
   border-radius: 34px;
 }
 
-.slider.round:before {
+.twitch__slider.twitch__round:before {
   border-radius: 50%;
 }
