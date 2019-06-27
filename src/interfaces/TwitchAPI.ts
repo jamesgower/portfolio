@@ -30,7 +30,7 @@ export interface APICall {
     channel: {
       status: string;
       logo: string;
-      mature: string;
+      mature: boolean;
     };
   };
   game: object;
@@ -45,7 +45,7 @@ export interface UserDataItemProps {
   image?: string;
   online: boolean;
   preview?: string;
-  mature?: string;
+  mature?: boolean;
   link: string;
   removeUser: Function;
   usersToKeep: string[];
@@ -61,7 +61,7 @@ export interface OnlineUser {
   image: string;
   online: boolean;
   preview: string;
-  mature: string;
+  mature: boolean;
   link: string;
   lastSeen?: string;
   lastGame?: string;
