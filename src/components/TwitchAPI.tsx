@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Button, Input, Container } from "reactstrap";
 import UserDataItem from "./UserDataItem";
-import TwitchState, { OnlineUser, APICall, SavedUser } from "../interfaces/TwitchAPI";
+import TwitchState, { OnlineUser, SavedUser, APICall } from "../interfaces/TwitchAPI";
 import keys from "../keys";
 
 /*
@@ -11,7 +11,8 @@ import keys from "../keys";
 	[x] Add streamer on enter click
 	[x] Look to change passing all state to UserDataItem
 	[x] Fix cross to be in top right
-	[x] Fix animations when clicking online button
+  [x] Fix animations when clicking online button
+  [ ] Fix text size for mature filter & make switch smaller with it
 */
 
 const initialState: TwitchState = {
@@ -28,6 +29,11 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
   public state = initialState;
 
   public componentWillMount(): void {
+    /**
+     * Attempt to get information from all saved users in local storage.
+     * If any data exists, store it in the state. If there are any errors,
+     * log it into the console.
+     */
     try {
       const users = JSON.parse(localStorage.getItem("users"));
       if (users) this.setState({ users });
@@ -36,26 +42,44 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
     }
   }
 
-  public componentWillUnmount(): void {
-    const input = document.getElementById("streamerInput");
-    input.removeEventListener("keydown", e => {
-      if (e.keyCode === 13) {
-        this.onNewStreamer();
-      }
-    });
-  }
-
   public componentDidMount(): void {
+    /**
+     * Get all available user data by looping through all of the users
+     * found in the state from componentWillMount using the getData function.
+     */
     const { users } = this.state;
     for (const user of users) {
       this.getData(user);
     }
+    /**
+     * Add the event listener for pressing enter while focused on the input
+     * to add a new streamer.
+     */
     const input = document.getElementById("streamerInput");
-    input.addEventListener("keydown", e => {
-      if (e.keyCode === 13) {
-        this.onNewStreamer();
-      }
-    });
+    input.addEventListener(
+      "keydown",
+      (e: KeyboardEvent): void => {
+        if (e.keyCode === 13) {
+          this.onNewStreamer();
+        }
+      },
+    );
+  }
+
+  public componentWillUnmount(): void {
+    /**
+     * Remove the event listener when the component is unmounted to avoid
+     * memory leaks.
+     */
+    const input = document.getElementById("streamerInput");
+    input.removeEventListener(
+      "keydown",
+      (e: KeyboardEvent): void => {
+        if (e.keyCode === 13) {
+          this.onNewStreamer();
+        }
+      },
+    );
   }
 
   public onNewStreamer = (): void => {
@@ -66,7 +90,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
     localStorage.setItem("users", JSON.stringify(users));
   };
 
-  private onAnimate = (nodes, hide: boolean): boolean => {
+  private onAnimate = (nodes: HTMLCollection, hide: boolean): boolean => {
     for (let i = 0; i < nodes.length; i++) {
       (function(i): void {
         setTimeout((): void => {
@@ -76,7 +100,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
               nodes[i].className = "hidden";
             }, 500);
           } else {
-            nodes[i].className = "user__container animated fadeInRight";
+            nodes[i].className = "user__container animated fadeInLeft";
           }
         }, 500 * i);
       })(i);
@@ -86,19 +110,28 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
 
   private onOnlineChange = (): void => {
     const { show } = this.state;
-    const offline = document.getElementById("twitch_offlineUsers").childNodes;
-    if (show === "all") {
-      this.onAnimate(offline, true);
-    } else if (show === "offline") {
-      this.offlineToOnline();
+    const online = document.getElementById("twitch__onlineUsers").children;
+    const offline = document.getElementById("twitch__offlineUsers").children;
+
+    switch (show) {
+      case "all":
+        this.onAnimate(offline, true);
+        break;
+      case "offline":
+        this.onAnimate(offline, true);
+        this.onAnimate(online, false);
+        break;
+      default:
+        return;
     }
     this.setState({ show: "online" });
   };
 
   private onAllChange = (): void => {
     const { show } = this.state;
-    const offline = document.getElementById("twitch_offlineUsers").childNodes;
-    const online = document.getElementById("twitch__onlineUsers").childNodes;
+    const online = document.getElementById("twitch__onlineUsers").children;
+    const offline = document.getElementById("twitch__offlineUsers").children;
+
     switch (show) {
       case "online":
         this.onAnimate(offline, false);
@@ -112,15 +145,18 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
     this.setState({ show: "all" });
   };
 
-  private onOfflineClick = (): void => {
+  private onOfflineChange = (): void => {
     const { show } = this.state;
-    const online = document.getElementById("twitch__onlineUsers").childNodes;
+    const online = document.getElementById("twitch__onlineUsers").children;
+    const offline = document.getElementById("twitch__offlineUsers").children;
+
     switch (show) {
       case "all":
-        this.onAnimate(online, false);
+        this.onAnimate(online, true);
         break;
       case "online":
-        this.onlineToOffline();
+        this.onAnimate(online, true);
+        this.onAnimate(offline, false);
         break;
       default:
         return;
@@ -128,125 +164,93 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
     this.setState({ show: "offline" });
   };
 
-  public onStreamerChange = (e: { target: { value: string } }): void => {
+  public onStreamerChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { users } = this.state;
     this.setState({ newStreamer: e.target.value });
     localStorage.setItem("users", JSON.stringify(users));
   };
 
-  private onlineToOffline = (): void => {
-    const offline = document.getElementById("twitch_offlineUsers").childNodes;
-    const online = document.getElementById("twitch__onlineUsers").childNodes;
-    try {
-      this.onAnimate(online, true);
-      this.onAnimate(offline, false);
-    } catch (err) {
-      console.log(err);
+  public getData = async (name: string): Promise<void> => {
+    const res = await fetch(`https://api.twitch.tv/kraken/streams/${name}`, {
+      headers: {
+        "Client-ID": keys.twitch_client_id || process.env.twitch_client_id,
+        Authorization: keys.twitch_authorization || process.env.twitch_authorization,
+      },
+    });
+    const result: APICall = await res.json();
+    if (result.stream !== null) {
+      const { onlineUserData } = this.state;
+      const user: OnlineUser = {
+        name,
+        game: result.stream.game || "TEST",
+        status: result.stream.channel.status,
+        viewers: result.stream.viewers,
+        fps: result.stream.average_fps,
+        image: result.stream.channel.logo,
+        online: true,
+        preview: result.stream.preview.medium,
+        mature: result.stream.channel.mature,
+        link: `https://www.twitch.tv/${name}`,
+      };
+
+      const savedUser: SavedUser = {
+        name,
+        lastGame: result.stream.game,
+        image: result.stream.channel.logo,
+        lastSeen: result.stream.created_at,
+        link: `https://www.twitch.tv/${name}`,
+      };
+
+      onlineUserData.push(user);
+      if (localStorage.getItem(savedUser.name) === null) {
+        localStorage.setItem(savedUser.name, JSON.stringify(savedUser));
+      }
+      this.setState({
+        onlineUserData,
+      });
+    } else {
+      const { offlineUserData } = this.state;
+      const user = {
+        name,
+        online: false,
+        link: `https://www.twitch.tv/${name}`,
+      };
+      offlineUserData.push(user);
+      this.setState({
+        offlineUserData,
+      });
     }
   };
 
-  public getData = (name: string): void => {
-    fetch(`https://api.twitch.tv/kraken/streams/${name}`, {
-      headers: {
-        "Client-ID": keys.twitch_client_id,
-        Authorization: keys.twitch_authorization,
-      },
-    })
-      .then((res): Promise<APICall> => res.json())
-      .then(
-        (result): void => {
-          if (result.stream !== null) {
-            const { onlineUserData } = this.state;
-
-            const user: OnlineUser = {
-              name,
-              game: result.stream.game,
-              status: result.stream.channel.status,
-              viewers: result.stream.viewers,
-              fps: result.stream.average_fps,
-              image: result.stream.channel.logo,
-              online: true,
-              preview: result.stream.preview.medium,
-              mature: result.stream.channel.mature,
-              link: `https://www.twitch.tv/${name}`,
-            };
-
-            const savedUser: SavedUser = {
-              name,
-              lastGame: result.stream.game,
-              image: result.stream.channel.logo,
-              lastSeen: result.stream.created_at,
-              link: `https://www.twitch.tv/${name}`,
-            };
-
-            onlineUserData.push(user);
-
-            if (localStorage.getItem(savedUser.name) === null) {
-              localStorage.setItem(savedUser.name, JSON.stringify(savedUser));
-            }
-
-            this.setState({
-              onlineUserData,
-            });
-          } else if (result.stream === null) {
-            const { offlineUserData } = this.state;
-            const user = {
-              name,
-              online: false,
-              link: `https://www.twitch.tv/${name}`,
-            };
-            offlineUserData.push(user);
-            this.setState({
-              offlineUserData,
-            });
-          }
-        },
-        (error): void => {
-          console.error(error);
-        },
-      );
-  };
-
-  private onHandleMature = (e: { target: { checked: boolean } }): void => {
+  private onHandleMature = (e: React.ChangeEvent<HTMLInputElement>): void => {
     this.setState({ matureFilter: e.target.checked });
   };
 
-  private onRemoveUser = (user: string, online): void => {
+  private onRemoveUser = (user: string, online: boolean): void => {
     const { users, onlineUserData, offlineUserData } = this.state;
     if (online) {
       for (const key in onlineUserData) {
         if (onlineUserData.hasOwnProperty(key)) {
           const val = onlineUserData[key];
-          if (val.name === user) {
-            delete onlineUserData[key];
-          }
+          if (val.name === user) delete onlineUserData[key];
         }
       }
     } else {
       for (const key in offlineUserData) {
         if (offlineUserData.hasOwnProperty(key)) {
           const val = offlineUserData[key];
-          if (val.name === user) {
-            delete offlineUserData[key];
-          }
+          if (val.name === user) delete offlineUserData[key];
         }
       }
     }
-    const i = users.indexOf(user);
-    users.splice(i, 1);
+    const idx = users.indexOf(user);
+    users.splice(idx, 1);
     const userData = JSON.parse(localStorage.getItem("users"));
     const index = userData.indexOf(user);
     userData.splice(index, 1);
     localStorage.setItem("users", JSON.stringify(userData));
     this.setState({ users, onlineUserData, offlineUserData });
   };
-
-  private offlineToOnline(): void {
-    const offline = document.getElementById("twitch_offlineUsers").childNodes;
-    const online = document.getElementById("twitch__onlineUsers").childNodes;
-    this.onAnimate(offline, true);
-    this.onAnimate(online, false);
-  }
 
   public render(): JSX.Element {
     const {
@@ -298,7 +302,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
                 size="lg"
                 outline
                 color="danger"
-                onClick={this.onOfflineClick}
+                onClick={this.onOfflineChange}
               >
                 Offline
               </Button>
@@ -345,7 +349,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
                 ),
               )}
           </div>
-          <div id="twitch_offlineUsers">
+          <div id="twitch__offlineUsers">
             {offlineUserData.length > 0 &&
               offlineUserData.map(
                 (user, index): JSX.Element => (
