@@ -11,8 +11,8 @@ import keys from "../keys";
 	[x] Add streamer on enter click
 	[x] Look to change passing all state to UserDataItem
 	[x] Fix cross to be in top right
-  [x] Fix animations when clicking online button
-  [ ] Fix text size for mature filter & make switch smaller with it
+	[x] Fix animations when clicking online button
+	[ ] Fix text size for mature filter & make switch smaller with it
 */
 
 const initialState: TwitchState = {
@@ -321,14 +321,14 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
             <div className="twitch__matureContainer">
               <h3 className="twitch__matureText">Mature Filter:</h3>
               <div className="twitch__matureSwitch">
-                <label htmlFor="check" className="switch">
+                <label htmlFor="check" className="twitch__switch">
                   <input
                     id="check"
                     type="checkbox"
                     checked={matureFilter}
                     onChange={this.onHandleMature}
                   />
-                  <span className="slider round" />
+                  <span className="twitch__slider twitch__round" />
                 </label>
               </div>
             </div>

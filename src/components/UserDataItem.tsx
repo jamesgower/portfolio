@@ -22,7 +22,7 @@ class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState>
     const { name } = this.props;
     const userDataJSON = localStorage.getItem(name);
     const userData = JSON.parse(userDataJSON);
-    this.setState({ userData, desktop: window.innerWidth > 1000 });
+    this.setState({ userData, desktop: window.innerWidth >= 990 });
     window.addEventListener("resize", this.updateWindowDimensions);
   }
 
@@ -31,7 +31,7 @@ class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState>
   }
 
   private updateWindowDimensions = (): void => {
-    const desktop = window.innerWidth > 1000;
+    const desktop = window.innerWidth >= 990;
     this.setState({ desktop });
   };
 
@@ -63,19 +63,19 @@ class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState>
     const OnlineUserDetails = (): JSX.Element => (
       <>
         <p className="user__text">
-          <span className="user__boldText">Status:</span> Live now!
+          <span className="user__boldText">Status: </span> Live now!
         </p>
         <p className="user__text">
-          <span className="user__boldText">Currently Playing:</span> {game}
-        </p>
-        <p className="user__subGame">
-          <em>- {status} -</em>
+          <span className="user__boldText">Currently Playing: </span> {game}
         </p>
         <p className="user__text">
-          <span className="user__boldText">Viewers:</span> {viewers}
+          <span className="user__boldText">Stream Title: </span> {status}
         </p>
         <p className="user__text">
-          <span className="user__boldText">Mature Content:</span> {mature ? " Yes " : " No "}
+          <span className="user__boldText">Viewers: </span> {viewers}
+        </p>
+        <p className="user__text">
+          <span className="user__boldText">Mature Content: </span> {mature ? " Yes " : " No "}
         </p>
       </>
     );
