@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Button, Input, Container } from "reactstrap";
 import UserDataItem from "./UserDataItem";
-import TwitchState, { OnlineUser, SavedUser, APICall } from "../interfaces/TwitchAPI";
+import TwitchState, { OnlineUser, SavedUser, APICall } from "../interfaces/twitchAPI";
 import keys from "../keys";
 
 /*
@@ -12,21 +12,20 @@ import keys from "../keys";
 	[x] Look to change passing all state to UserDataItem
 	[x] Fix cross to be in top right
 	[x] Fix animations when clicking online button
-	[ ] Fix text size for mature filter & make switch smaller with it
+	[x] Fix text size for mature filter & make switch smaller with it
 */
 
 const initialState: TwitchState = {
   users: ["Yogscast", "FreeCodeCamp", "Sips_", "888poker", "NickMercs", "BuckArmy", "BigBangs06"],
   onlineUserData: [],
   offlineUserData: [],
-  isLoaded: false,
   matureFilter: true,
   show: "all",
   newStreamer: "",
 };
 
 class TwitchAPI extends React.Component<{}, TwitchState> {
-  public state = initialState;
+  public readonly state = initialState;
 
   public componentWillMount(): void {
     /**
