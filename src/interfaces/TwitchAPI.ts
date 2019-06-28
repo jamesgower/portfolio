@@ -2,7 +2,6 @@ export default interface TwitchState {
   users: string[];
   onlineUserData: OnlineUser[];
   offlineUserData: OfflineUser[];
-  isLoaded: boolean;
   matureFilter: boolean;
   show: string;
   newStreamer: string;
