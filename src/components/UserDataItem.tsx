@@ -1,5 +1,5 @@
 import * as React from "react";
-import { UserDataItemState, UserDataItemProps } from "../interfaces/TwitchAPI";
+import { UserDataItemState, UserDataItemProps } from "../interfaces/twitchAPI";
 
 const moment = require("moment");
 const notFoundImage = require("../../public/images/twitch-not-found.jpg");
@@ -16,7 +16,7 @@ const initialState: UserDataItemState = {
 };
 
 class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState> {
-  public state = initialState;
+  public readonly state = initialState;
 
   public componentDidMount(): void {
     const { name } = this.props;
@@ -99,8 +99,8 @@ class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState>
             <span className="user__boldText">Last Played:</span> {userData.lastGame}
           </p>
           <p className="user__text">
-            <span className="user__boldText">Last Streamed: </span>
-            {moment(userData.lastSeen).format("Do MMMM @ hh:mmA")}
+            <span className="user__boldText">Last Streamed:</span>
+            {" " + moment(userData.lastSeen).format("Do MMMM @ hh:mmA")}
           </p>
         </>
       );
@@ -108,7 +108,7 @@ class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState>
 
     return (
       showComponent && (
-        <div id={name} className="user__container animated fadeIn">
+        <div id={name} className="user__container animated rotateInDownLeft">
           <div className="user__details">
             <div className={online ? "user__online" : "user__offline"}>
               <div className="user__imageContainer">
