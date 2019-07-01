@@ -1,8 +1,12 @@
 import * as React from "react";
 import { Button, Input, Container } from "reactstrap";
 import UserDataItem from "./UserDataItem";
-import TwitchState, { OnlineUser, SavedUser, APICall } from "../interfaces/twitchAPI";
-import keys from "../keys";
+import TwitchState, {
+  OnlineUser,
+  SavedUser,
+  APICall,
+} from "../../interfaces/twitchAPI";
+import keys from "../../keys";
 
 /*
 	TODO
@@ -16,7 +20,15 @@ import keys from "../keys";
 */
 
 const initialState: TwitchState = {
-  users: ["Yogscast", "FreeCodeCamp", "Sips_", "888poker", "NickMercs", "BuckArmy", "BigBangs06"],
+  users: [
+    "Yogscast",
+    "FreeCodeCamp",
+    "Sips_",
+    "888poker",
+    "NickMercs",
+    "BuckArmy",
+    "BigBangs06",
+  ],
   onlineUserData: [],
   offlineUserData: [],
   matureFilter: true,
@@ -173,7 +185,8 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
     const res = await fetch(`https://api.twitch.tv/kraken/streams/${name}`, {
       headers: {
         "Client-ID": keys.twitch_client_id || process.env.twitch_client_id,
-        Authorization: keys.twitch_authorization || process.env.twitch_authorization,
+        Authorization:
+          keys.twitch_authorization || process.env.twitch_authorization,
       },
     });
     const result: APICall = await res.json();
@@ -267,12 +280,12 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
           <Container>
             <h1 className="text-center twitch__title">Twitch Streamers</h1>
             <p className="twitch__headerText">
-              Feel free to add any streamers you wish to track. All streamers are saved so you can
-              come back and check their status.
+              Feel free to add any streamers you wish to track. All streamers
+              are saved so you can come back and check their status.
             </p>
             <p className="twitch__headerSubText">
-              You can also remove any streamers you don&apos;t want to follow by pressing the red
-              cross.
+              You can also remove any streamers you don&apos;t want to follow by
+              pressing the red cross.
             </p>
             <div className="twitch__buttonsContainer">
               <Button
@@ -313,7 +326,12 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
                 onChange={this.onStreamerChange}
                 placeholder="Enter new streamer here"
               />
-              <Button id="streamerBtn" outline color="info" onClick={this.onNewStreamer}>
+              <Button
+                id="streamerBtn"
+                outline
+                color="info"
+                onClick={this.onNewStreamer}
+              >
                 Add Streamer
               </Button>
             </div>

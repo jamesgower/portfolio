@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import createHistory from "history/createBrowserHistory";
 import NotFoundPage from "../components/NotFoundPage";
@@ -7,9 +7,9 @@ import Portfolio from "../components/Portfolio";
 import Pomodoro from "../components/Pomodoro";
 import PlayTicTacToe from "../components/TicTacToe/TicTacToeSetup";
 import Calculator from "../components/Calculator";
-import WikipediaAPI from "../components/WikipediaAPI";
+import WikipediaAPI from "../components/WikipediaAPI/WikipediaAPI";
 import IndecisionApp from "../components/Indecision/IndecisionApp";
-import TwitchAPI from "../components/TwitchAPI";
+import TwitchAPI from "../components/TwitchAPI/TwitchAPI";
 import SimonSays from "../components/SimonSays";
 import Skills from "../components/Skills";
 import Chatter from "../components/Chatter";
@@ -18,10 +18,10 @@ import AboutMe from "../components/AboutMe";
 
 export const history = createHistory();
 
-const AppRouter = () => (
+const AppRouter = (): JSX.Element => (
   <Router history={history}>
     <Switch>
-      <Route path="/" component={WikipediaAPI} exact />
+      <Route path="/" component={TwitchAPI} exact />
       <Route path="/portfolio" exact component={Portfolio} />
       <Route path="/portfolio/pomodoro" component={Pomodoro} />
       <Route path="/portfolio/tic-tac-toe" component={PlayTicTacToe} />

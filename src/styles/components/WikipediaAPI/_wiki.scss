@@ -12,7 +12,8 @@
   margin-bottom: -1px;
   padding-bottom: 1px;
   z-index: -1;
-  font-family: Franklin "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-family: Franklin "Franklin Gothic Medium", "Arial Narrow", Arial,
+    sans-serif;
 }
 
 .wiki__boxContainer {
@@ -21,6 +22,7 @@
   height: 220px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   margin-top: 30vh;
   border-radius: 20px;
   background-color: white;
@@ -104,36 +106,11 @@
   color: grey;
 }
 
-#searchResults {
+.wiki__searchResultsContainer {
   width: 60%;
   height: 100%;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 40px;
   padding: 20px, 50px, 20px, 50px;
-}
-
-.article {
-  padding: 20px;
-  border-style: solid;
-  border-color: black;
-  margin-top: 10px;
-  border-radius: 10px;
-  background-color: white;
-  text-align: justify;
-}
-
-.article:hover {
-  border-left: 10px solid yellow;
-  margin-left: -7px;
-  cursor: pointer;
-}
-
-#title-wiki {
-  font-weight: bold;
-  font-size: 16px;
-}
-
-#extract {
-  font-size: 12px;
 }
