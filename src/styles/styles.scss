@@ -16,7 +16,6 @@
 @import './components/pomodoro';
 @import './components/tic-tac-toe';
 @import './components/calculator';
-@import './components/wiki';
 @import './components/Indecision/add-option';
 @import './components/Indecision/button';
 @import './components/Indecision/container';
@@ -24,7 +23,6 @@
 @import './components/Indecision/modal';
 @import './components/Indecision/option';
 @import './components/Indecision/widget';
-@import './components/twitch';
 @import './components/simon-says';
 @import './components/blogify';
 @import './components/expensify';
@@ -32,6 +30,9 @@
 @import './components/skills';
 @import './components/drum';
 @import './components/contact-me';
-@import "./components/user-data-item";
+@import './components/TwitchAPI/twitch';
+@import "./components/TwitchAPI/user-data-item";
+@import './components/WikipediaAPI/wiki';
+@import './components/WikipediaAPI/article'
 
 

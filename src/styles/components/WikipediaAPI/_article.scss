@@ -1,0 +1,28 @@
+.article__container {
+  padding: 20px;
+  border-style: solid;
+  border-color: black;
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color: white;
+  text-align: justify;
+  width: 100%;
+  box-sizing: content-box !important;
+}
+
+.article__container:hover {
+  border-left: 10px solid yellow;
+  cursor: pointer;
+  margin-left: -7px;
+  margin-right: 10px;
+  width: 100%;
+}
+
+.article__title {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.article__snippet {
+  font-size: 12px;
+}
