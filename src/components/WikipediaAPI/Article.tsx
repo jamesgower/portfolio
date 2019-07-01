@@ -12,12 +12,14 @@ export default class Article extends React.Component<SearchResult, {}> {
   public render(): JSX.Element {
     const { pageid, title, link } = this.props;
     return (
-      <a href={link} target="_blank" rel="noopener noreferrer">
-        <div key={pageid} className="article__container animated fadeInLeft">
-          <h1 className="article__title">{title}</h1>
-          <div className="article__snippet" ref={this.snippetRef} />
-        </div>
-      </a>
+      <div
+        key={pageid}
+        className="article__container animated fadeInLeft"
+        onClick={() => window.open(link, "_blank")}
+      >
+        <h1 className="article__title">{title}</h1>
+        <div className="article__snippet" ref={this.snippetRef} />
+      </div>
     );
   }
 }
