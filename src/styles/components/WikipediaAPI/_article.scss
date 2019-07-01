@@ -6,23 +6,23 @@
   border-radius: 10px;
   background-color: white;
   text-align: justify;
-  width: 100%;
   box-sizing: content-box !important;
-}
+  text-decoration: none !important;
 
-.article__container:hover {
-  border-left: 10px solid yellow;
-  cursor: pointer;
-  margin-left: -7px;
-  margin-right: 10px;
-  width: 100%;
+  &:hover {
+    border-left: 10px solid yellow;
+    cursor: pointer;
+    background: rgb(233, 233, 233);
+    margin-left: -7px;
+  }
 }
 
 .article__title {
-  font-weight: bold;
-  font-size: 16px;
+  font-weight: bolder;
+  font-size: 20px;
+  color: #4569ac;
 }
 
 .article__snippet {
-  font-size: 12px;
+  font-size: 14px;
 }
