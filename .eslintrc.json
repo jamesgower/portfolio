@@ -6,10 +6,13 @@
   },
   "extends": [
     "airbnb-typescript",
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier"
+    "plugin:@typescript-eslint/eslint-recommended",
+    "eslint:recommended",
+    "prettier",
+    "prettier/@typescript-eslint",
+    "prettier/babel",
+    "prettier/react"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -31,6 +34,10 @@
     "no-console": "off",
     "react/jsx-one-expression-per-line": "off",
     "react/no-array-index-key": "off",
-    "react/jsx-filename-extension": [1, { "extensions": [".jsx", ".tsx", ".js"] }]
+    "react/jsx-filename-extension": [
+      1,
+      { "extensions": [".jsx", ".tsx", ".js"] }
+    ],
+    "react/prop-types": "off"
   }
 }
