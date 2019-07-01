@@ -1,8 +1,11 @@
 import * as React from "react";
-import { UserDataItemState, UserDataItemProps } from "../interfaces/twitchAPI";
+import {
+  UserDataItemState,
+  UserDataItemProps,
+} from "../../interfaces/twitchAPI";
 
 const moment = require("moment");
-const notFoundImage = require("../../public/images/twitch-not-found.jpg");
+const notFoundImage = require("../../../public/images/twitch-not-found.jpg");
 
 /* 
 	TODO
@@ -15,7 +18,10 @@ const initialState: UserDataItemState = {
   userData: null,
 };
 
-class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState> {
+class UserDataItem extends React.Component<
+  UserDataItemProps,
+  UserDataItemState
+> {
   public readonly state = initialState;
 
   public componentDidMount(): void {
@@ -75,7 +81,8 @@ class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState>
           <span className="user__boldText">Viewers: </span> {viewers}
         </p>
         <p className="user__text">
-          <span className="user__boldText">Mature Content: </span> {mature ? " Yes " : " No "}
+          <span className="user__boldText">Mature Content: </span>{" "}
+          {mature ? " Yes " : " No "}
         </p>
       </>
     );
@@ -96,7 +103,8 @@ class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState>
             <span className="user__boldText">Status:</span> User is offline
           </p>
           <p className="user__text">
-            <span className="user__boldText">Last Played:</span> {userData.lastGame}
+            <span className="user__boldText">Last Played:</span>{" "}
+            {userData.lastGame}
           </p>
           <p className="user__text">
             <span className="user__boldText">Last Streamed:</span>
@@ -108,14 +116,20 @@ class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState>
 
     return (
       showComponent && (
-        <div id={name} className="user__container animated rotateInDownLeft">
+        <div id={name} className="user__container animated fadeInLeft">
           <div className="user__details">
             <div className={online ? "user__online" : "user__offline"}>
               <div className="user__imageContainer">
                 <a href={link} target="_blank" rel="noopener noreferrer">
                   <img
                     alt={name}
-                    src={image ? image : userData ? userData.image : "/images/placeholder.png"}
+                    src={
+                      image
+                        ? image
+                        : userData
+                        ? userData.image
+                        : "/images/placeholder.png"
+                    }
                     className="user__image"
                   />
                 </a>
@@ -141,7 +155,9 @@ class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState>
                   src={preview ? preview : notFoundImage}
                   id={`${name}-img`}
                   className={
-                    mature && matureFilter ? "user__streamPreview--mature" : "user__streamPreview"
+                    mature && matureFilter
+                      ? "user__streamPreview--mature"
+                      : "user__streamPreview"
                   }
                 />
               </a>
