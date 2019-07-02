@@ -7,6 +7,6 @@ export interface WikiState {
 export interface SearchResult {
   pageid: number;
   title: string;
-  snippet: string;
+  extract: string;
   link: string;
 }

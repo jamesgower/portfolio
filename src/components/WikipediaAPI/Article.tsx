@@ -2,11 +2,11 @@ import * as React from "react";
 import { SearchResult } from "../../interfaces/wikipediaAPI";
 
 export default class Article extends React.Component<SearchResult, {}> {
-  private snippetRef = React.createRef<HTMLDivElement>();
+  private extractRef = React.createRef<HTMLDivElement>();
 
   public componentDidMount(): void {
-    const { snippet } = this.props;
-    this.snippetRef.current.innerHTML = snippet;
+    const { extract } = this.props;
+    this.extractRef.current.innerHTML = extract;
   }
 
   public render(): JSX.Element {
@@ -14,11 +14,13 @@ export default class Article extends React.Component<SearchResult, {}> {
     return (
       <div
         key={pageid}
+        role="button"
+        tabIndex={0}
         className="article__container animated fadeInLeft"
-        onClick={() => window.open(link, "_blank")}
+        onClick={(): Window => window.open(link, "_blank")}
       >
         <h1 className="article__title">{title}</h1>
-        <div className="article__snippet" ref={this.snippetRef} />
+        <div className="article__extract" ref={this.extractRef} />
       </div>
     );
   }

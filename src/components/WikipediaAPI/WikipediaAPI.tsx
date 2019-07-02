@@ -71,7 +71,6 @@ class WikipediaAPI extends React.Component<object, WikiState> {
   };
 
   private onSearchChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const box = this.boxContainerRef.current;
     this.setState({ searchQuery: e.target.value });
   };
 
@@ -79,19 +78,38 @@ class WikipediaAPI extends React.Component<object, WikiState> {
     const { searchQuery } = this.state;
     try {
       const res = await fetch(
-        `https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&utf8=1&srsearch=${searchQuery}&srlimit=10&origin=*`,
+        `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&list=search&utf8=1&srsearch=${searchQuery}&srlimit=50&origin=*`,
         {
           method: "GET",
         },
       );
       const { query } = await res.json();
+      const searchFormatted = searchQuery.replace(" ", "%20");
       if (query.searchinfo.totalhits === 0) {
         return this.setState({ searchResults: null, searchQuery: "" });
       }
-      console.log(query);
       const box = this.boxContainerRef.current;
       box.className = "wiki__containerAnimation";
-      const searchResults = this.formatSearchResults(query.search, searchQuery);
+      const searchResults: SearchResult[] = [];
+      query.search.forEach(
+        async (result): Promise<void> => {
+          const { pageid } = result;
+          const res = await fetch(
+            `https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&exsentences=4&pageids=
+          ${pageid}&origin=*`,
+            {
+              method: "GET",
+            },
+          );
+          const { query } = await res.json();
+          searchResults.push({
+            pageid,
+            title: query.pages[pageid].title,
+            extract: query.pages[pageid].extract,
+            link: `https://en.wikipedia.org/wiki/${searchFormatted}`,
+          });
+        },
+      );
       setTimeout((): void => {
         return this.setState({ searchQuery: "", searchResults });
       }, 500);
@@ -99,26 +117,6 @@ class WikipediaAPI extends React.Component<object, WikiState> {
       throw new Error(`Something went wrong!: \n
         ${err}`);
     }
-  };
-
-  private formatSearchResults = (
-    results: SearchResult[],
-    query: string,
-  ): SearchResult[] => {
-    const searchResults: SearchResult[] = [];
-    results.forEach(
-      (result): void => {
-        console.log(result);
-        const { title, snippet, pageid } = result;
-        searchResults.push({
-          pageid,
-          title,
-          snippet,
-          link: `https://en.wikipedia.org/wiki/${query.replace(" ", "%20")}`,
-        });
-      },
-    );
-    return searchResults;
   };
 
   public render(): JSX.Element {
@@ -162,9 +160,9 @@ class WikipediaAPI extends React.Component<object, WikiState> {
           {searchResults !== null && (
             <div className="wiki__searchResultsContainer">
               {searchResults.map(
-                (result): JSX.Element => (
-                  <Article key={result.pageid} {...result} />
-                ),
+                (result: SearchResult, i): JSX.Element => {
+                  while (i) return <Article key={result.pageid} {...result} />;
+                },
               )}
             </div>
           )}
