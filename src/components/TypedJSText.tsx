@@ -1,5 +1,6 @@
 import * as React from "react";
-import Typed, { TypedOptions } from "typed.js";
+
+const Typed = require("typed.js");
 
 interface TypedProps {
   strings: string[];
@@ -7,13 +8,16 @@ interface TypedProps {
 }
 
 class TypedJSText extends React.Component<TypedProps, {}> {
+  private nameRef = React.createRef<HTMLParagraphElement>();
+  private skillsRef = React.createRef<HTMLParagraphElement>();
+
   public componentDidMount(): void {
     const { strings, name } = this.props;
-    const nameOptions: TypedOptions = {
+    const nameOptions = {
       strings: [name],
       typeSpeed: 60,
     };
-    const skillOptions: TypedOptions = {
+    const skillOptions = {
       strings,
       startDelay: 2500,
       typeSpeed: 60,
@@ -21,16 +25,16 @@ class TypedJSText extends React.Component<TypedProps, {}> {
       loop: true,
       showCursor: false,
     };
-    this.nameTyped = new Typed(this.nameEl, nameOptions);
-    this.skillTyped = new Typed(this.skillEl, skillOptions);
+    new Typed(this.nameRef.current, nameOptions);
+    new Typed(this.skillsRef.current, skillOptions);
   }
 
   public render(): JSX.Element {
     return (
-      <div>
+      <>
         <div className="typed-wrap">
           <p
-            ref={nameEl => (this.nameEl = nameEl)}
+            ref={this.nameRef}
             style={{
               whiteSpace: "pre",
               display: "block",
@@ -41,7 +45,8 @@ class TypedJSText extends React.Component<TypedProps, {}> {
             }}
           />
           <p
-            ref={skillEl => (this.skillEl = skillEl)}
+            ref={this.skillsRef}
+            id="skillsContainer"
             style={{
               whiteSpace: "pre",
               display: "block",
@@ -52,7 +57,7 @@ class TypedJSText extends React.Component<TypedProps, {}> {
             }}
           />
         </div>
-      </div>
+      </>
     );
   }
 }
