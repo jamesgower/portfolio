@@ -21,7 +21,7 @@ export const history = createHistory();
 const AppRouter = (): JSX.Element => (
   <Router history={history}>
     <Switch>
-      <Route path="/" component={WikipediaAPI} exact />
+      <Route path="/" component={LandingPage} exact />
       <Route path="/portfolio" exact component={Portfolio} />
       <Route path="/portfolio/pomodoro" component={Pomodoro} />
       <Route path="/portfolio/tic-tac-toe" component={PlayTicTacToe} />

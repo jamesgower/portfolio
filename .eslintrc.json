@@ -38,6 +38,7 @@
       1,
       { "extensions": [".jsx", ".tsx", ".js"] }
     ],
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "jsx-a11y/click-events-have-key-events": "off"
   }
 }
