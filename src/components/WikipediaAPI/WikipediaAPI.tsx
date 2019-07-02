@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Container, Input } from "reactstrap";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { Container } from "reactstrap";
 import NavBar from "../NavBar";
 import Article from "./Article";
 import { WikiState, SearchResult } from "../../interfaces/wikipediaAPI";
@@ -9,6 +8,7 @@ import { WikiState, SearchResult } from "../../interfaces/wikipediaAPI";
  * TODO
  * [x] Change id references to refs
  * [ ] Add clickable navbar button to open NavBar component
+ * [ ] Add pagination for first 5 pages of results (10 per page)
  */
 
 const initialState: WikiState = {
