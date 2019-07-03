@@ -66,7 +66,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
      * Add the event listener for pressing enter while focused on the input
      * to add a new streamer.
      */
-    const input = document.getElementById("streamerInput");
+    const input = document.getElementById("streamer-input");
     input.addEventListener(
       "keydown",
       (e: KeyboardEvent): void => {
@@ -82,7 +82,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
      * Remove the event listener when the component is unmounted to avoid
      * memory leaks.
      */
-    const input = document.getElementById("streamerInput");
+    const input = document.getElementById("streamer-input");
     input.removeEventListener(
       "keydown",
       (e: KeyboardEvent): void => {
@@ -121,8 +121,8 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
 
   private onOnlineChange = (): void => {
     const { show } = this.state;
-    const online = document.getElementById("twitch__onlineUsers").children;
-    const offline = document.getElementById("twitch__offlineUsers").children;
+    const online = document.getElementById("online-users").children;
+    const offline = document.getElementById("offline-users").children;
 
     switch (show) {
       case "all":
@@ -140,8 +140,8 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
 
   private onAllChange = (): void => {
     const { show } = this.state;
-    const online = document.getElementById("twitch__onlineUsers").children;
-    const offline = document.getElementById("twitch__offlineUsers").children;
+    const online = document.getElementById("online-users").children;
+    const offline = document.getElementById("offline-users").children;
 
     switch (show) {
       case "online":
@@ -158,8 +158,8 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
 
   private onOfflineChange = (): void => {
     const { show } = this.state;
-    const online = document.getElementById("twitch__onlineUsers").children;
-    const offline = document.getElementById("twitch__offlineUsers").children;
+    const online = document.getElementById("online-users").children;
+    const offline = document.getElementById("offline-users").children;
 
     switch (show) {
       case "all":
@@ -279,15 +279,15 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
         <div className="twitch__header">
           <Container>
             <h1 className="text-center twitch__title">Twitch Streamers</h1>
-            <p className="twitch__headerText">
+            <p className="twitch__header-text">
               Feel free to add any streamers you wish to track. All streamers
               are saved so you can come back and check their status.
             </p>
-            <p className="twitch__headerSubText">
+            <p className="twitch__header-subtext">
               You can also remove any streamers you don&apos;t want to follow by
               pressing the red cross.
             </p>
-            <div className="twitch__buttonsContainer">
+            <div className="twitch__buttons-container">
               <Button
                 className="twitch__button"
                 active={show === "online"}
@@ -319,15 +319,15 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
                 Offline
               </Button>
             </div>
-            <div className="twitch__inputContainer">
+            <div className="twitch__input-container">
               <Input
-                id="streamerInput"
+                id="streamer-input"
                 value={newStreamer}
                 onChange={this.onStreamerChange}
                 placeholder="Enter new streamer here"
               />
               <Button
-                id="streamerBtn"
+                id="streamer-btn"
                 outline
                 color="info"
                 onClick={this.onNewStreamer}
@@ -335,9 +335,9 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
                 Add Streamer
               </Button>
             </div>
-            <div className="twitch__matureContainer">
-              <h3 className="twitch__matureText">Mature Filter:</h3>
-              <div className="twitch__matureSwitch">
+            <div className="twitch__mature-container">
+              <h3 className="twitch__mature-text">Mature Filter:</h3>
+              <div className="twitch__mature-switch">
                 <label htmlFor="check" className="twitch__switch">
                   <input
                     id="check"
@@ -352,7 +352,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
           </Container>
         </div>
         <Container>
-          <div id="twitch__onlineUsers">
+          <div id="online-users">
             {onlineUserData.length > 0 &&
               onlineUserData.map(
                 (user, index): JSX.Element => (
@@ -366,7 +366,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
                 ),
               )}
           </div>
-          <div id="twitch__offlineUsers">
+          <div id="offline-users">
             {offlineUserData.length > 0 &&
               offlineUserData.map(
                 (user, index): JSX.Element => (
@@ -381,7 +381,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
               )}
           </div>
         </Container>
-        <div className="twitch__footerContainer">
+        <div className="twitch__footer-container">
           <footer className="twitch__footer" />
         </div>
       </div>
