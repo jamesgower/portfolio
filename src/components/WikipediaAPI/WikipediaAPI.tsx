@@ -21,6 +21,7 @@ const initialState: WikiState = {
   inputFocus: false,
   searchResults: null,
   pageNum: 1,
+  showNav: false,
 };
 
 const pageRanges: object = {
@@ -133,11 +134,34 @@ class WikipediaAPI extends React.Component<object, WikiState> {
     }
   };
 
+  private updateNav = (update: boolean): void => {
+    this.setState({ showNav: update });
+  };
+
   public render(): JSX.Element {
-    const { searchQuery, searchResults, pageNum } = this.state;
+    const { searchQuery, searchResults, pageNum, showNav } = this.state;
     return (
       <div className="wiki__container">
-        <NavBar {...this.state} />
+        <div className="wiki__nav-container">
+          {showNav ? (
+            <NavBar update={this.updateNav} />
+          ) : (
+            <i
+              className="fa fa-bars animated pulse infinite wiki__nav-burger"
+              role="button"
+              id="nav-burger"
+              tabIndex={0}
+              onClick={(): void => {
+                const navBurger = document.getElementById("nav-burger");
+                navBurger.classList.remove("pulse", "infinite");
+                navBurger.classList.add("fadeOut");
+                setTimeout((): void => {
+                  this.setState({ showNav: true });
+                }, 300);
+              }}
+            />
+          )}
+        </div>
         <Container>
           <div className="wiki__box-container" ref={this.boxContainerRef}>
             <p className="wiki__text">

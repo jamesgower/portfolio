@@ -1,9 +1,6 @@
-$white: #fff;
 $purple-twitch: rgb(163, 65, 255);
 $check-red: rgb(243, 33, 33);
-$black: #000;
 $darker-background: #20222b;
-$slider-gray: #ccc;
 
 .twitch__container {
   background: url("../../public/images/twitch-bg.jpg");
@@ -174,7 +171,7 @@ $slider-gray: #ccc;
 
 .twitch__slider {
   -webkit-transition: 0.4s;
-  background-color: $slider-gray;
+  background-color: $gray;
   bottom: 0;
   cursor: pointer;
   left: 0;

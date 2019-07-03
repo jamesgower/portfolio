@@ -3,6 +3,7 @@ export interface WikiState {
   inputFocus: boolean;
   searchResults: SearchResult[];
   pageNum: number;
+  showNav: boolean;
 }
 
 export interface SearchResult {

@@ -1,54 +1,68 @@
-import React from "react";
+import * as React from "react";
 import { NavLink } from "react-router-dom";
 import { Collapse, Navbar, NavbarToggler, Nav } from "reactstrap";
-import logo from "../../public/images/logo.png";
 
-export default class NavBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      active: false,
-      isOpen: false,
-    };
-    this.toggle = this.toggle.bind(this);
-    this.onClose = this.onClose.bind(this);
-  }
+const logo = require("../../public/images/logo.png");
 
-  onClose() {
+/**
+ * TODO
+ * [ ] Sort out styling for TicTacToe & Pomodoro navbars
+ */
+
+interface NavBarProps {
+  update?: Function;
+  pomo?: boolean;
+  ttt?: boolean;
+}
+
+interface NavBarState {
+  active: boolean;
+  isOpen: boolean;
+}
+
+const initialState: NavBarState = {
+  active: false,
+  isOpen: false,
+};
+
+export default class NavBar extends React.Component<NavBarProps, NavBarState> {
+  public readonly state = initialState;
+
+  private onClose = (): void => {
     const { update } = this.props;
     this.setState({ active: true });
-    setTimeout(() => {
+    setTimeout((): void => {
       update(false);
     }, 1000);
-  }
+  };
 
-  toggle() {
+  private toggle = (): void => {
     const { isOpen } = this.state;
     this.setState({
       isOpen: !isOpen,
     });
-  }
-  render() {
+  };
+
+  public render(): JSX.Element {
+    const { active, isOpen } = this.state;
+    const { update } = this.props;
     return (
-      <div
-        className={
-          this.state.active
-            ? `animated slideOutUp ${this.props.pomo && "navbar-pomo"} ${this.props.ttt &&
-                "navbar-TTT"}`
-            : `animated slideInDown ${this.props.pomo && "navbar-pomo"} ${this.props.ttt &&
-                "navbar-TTT"}`
-        }
-      >
+      <div className={active ? "animated slideOutUp" : "animated slideInDown"}>
         <div className="nav-container">
           <Navbar className="navbar" color="faded" light expand="md">
             <NavLink to="/">
-              <img src={logo} className="logo" />
+              <img src={logo} alt="JG Web Developer" className="logo" />
             </NavLink>
             <hr className="seperator" />
             <NavbarToggler onClick={this.toggle} />
-            <Collapse isOpen={this.state.isOpen} navbar>
+            <Collapse isOpen={isOpen} navbar>
               <Nav className="ml-auto" navbar>
-                <NavLink className="nav-item nav-home" exact to="/" activeClassName="active--home">
+                <NavLink
+                  className="nav-item nav-home"
+                  exact
+                  to="/"
+                  activeClassName="active--home"
+                >
                   Home
                 </NavLink>
                 <NavLink
@@ -75,8 +89,13 @@ export default class NavBar extends React.Component {
               </Nav>
             </Collapse>
           </Navbar>
-          {this.props.update && (
-            <span className="closeNav" onClick={this.onClose}>
+          {update && (
+            <span
+              role="button"
+              tabIndex={0}
+              className="closeNav"
+              onClick={this.onClose}
+            >
               <i className="fa fa-times animated pulse infinite" />
             </span>
           )}
