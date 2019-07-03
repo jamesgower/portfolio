@@ -1,42 +1,29 @@
-import React from "react";
+import * as React from "react";
 import { Redirect } from "react-router-dom";
-import emailyTile from "../../public/images/emaily.jpg";
-import twitterTile from "../../public/images/clone.jpg";
-import chatterTile from "../../public/images/chatter.jpg";
-import simonTile from "../../public/images/simon.jpg";
-import pomodoroTile from "../../public/images/pomodoro.jpg";
-import ticTacToeTile from "../../public/images/tictactoe.jpg";
-import blogifyTile from "../../public/images/blogify.jpg";
-import wikiTile from "../../public/images/wiki.jpg";
-import indecisionTile from "../../public/images/indecision.jpg";
-import twitchTile from "../../public/images/twitch.jpg";
-import expensifyTile from "../../public/images/expensify.jpg";
-import drumTile from "../../public/images/drum.jpg";
 
 /*
-	!! TODO
+	TODO
 	[ ]	Add loading page
 	[ ] Make different components for Headroom Navbar and normal Navbar
 	[x] Restyle blogify and adjust image to suit
 	[ ] Add tags array to tiles object for sorting via tags.
 	[ ] Readme.md for all GitHub projects with relevant installation & usage info
-    [ ] Post bug for Grid in Materialize UI GitHub issues.
-    !! [ ] Add sounds for games - webpack 
+  [x] Add sounds for games - webpack 
 */
 
 const tilesData = [
   {
-    img: emailyTile,
+    img: require("../../public/images/emaily.jpg"),
     title: "Emaily App (Full Stack)",
     subtitle:
-      "Built with Express, SendGrid, MongoDB, React, Redux, React-Router, SASS & Redux-Form",
+      "Built with Express, SendGrid, MongoDB, React, Redux, React-Router, SCSS & Webpack",
     href: "https://github.com/jamesgower/emaily",
     redirect: true,
     color: "#ea454b",
     class: "fas fa-envelope",
   },
   {
-    img: twitterTile,
+    img: require("../../public/images/clone.jpg"),
     title: "Twitter Clone",
     subtitle:
       "Built with React, Redux, Webpack, Express (Node.JS), MongoDB, React-Router",
@@ -47,7 +34,7 @@ const tilesData = [
     class: "fab fa-twitter",
   },
   {
-    img: chatterTile,
+    img: require("../../public/images/chatter.jpg"),
     title: "Chatter (Chat App)",
     subtitle:
       "Built with Socket.io, Axios, Express, Moment.js, Mustache, React & CSS",
@@ -58,7 +45,7 @@ const tilesData = [
     class: "far fa-comments",
   },
   {
-    img: simonTile,
+    img: require("../../public/images/simon.jpg"),
     title: "Simon Says",
     subtitle: "Built with React, Redux, Webpack, React-Router",
     href: "/portfolio/simon-says",
@@ -66,7 +53,7 @@ const tilesData = [
     class: "fas fa-trophy",
   },
   {
-    img: pomodoroTile,
+    img: require("../../public/images/pomodoro.jpg"),
     title: "Pomodoro Clock",
     subtitle: "Built with React, Pure JS, jQuery, Babel",
     href: "/portfolio/pomodoro",
@@ -74,16 +61,16 @@ const tilesData = [
     class: "far fa-clock",
   },
   {
-    img: ticTacToeTile,
+    img: require("../../public/images/tictactoe.jpg"),
     title: "Tic-Tac-Toe with AI",
-    subtitle: "Built with React, SASS, Pure JS, Babel",
+    subtitle: "Built with React, SCSS, Pure JS, Babel",
     featured: true,
     href: "/portfolio/tic-tac-toe",
     color: "#c1b9a8",
     class: "fas fa-gamepad",
   },
   {
-    img: blogifyTile,
+    img: require("../../public/images/blogify.jpg"),
     title: "Blogify App",
     subtitle: "Built with React, Redux, React-Router, Webpack",
     featured: true,
@@ -93,7 +80,7 @@ const tilesData = [
     class: "fas fa-pencil-alt",
   },
   {
-    img: wikiTile,
+    img: require("../../public/images/wiki.jpg"),
     title: "Wikipedia API",
     subtitle: "Built with TypeScript, Fetch API & React",
     href: "/portfolio/wikipedia",
@@ -101,15 +88,15 @@ const tilesData = [
     class: "fab fa-wikipedia-w",
   },
   {
-    img: indecisionTile,
+    img: require("../../public/images/indecision.jpg"),
     title: "Indecision App",
-    subtitle: "Built with React, Webpack, SASS & Local Storage",
+    subtitle: "Built with React, SCSS & Local Storage",
     href: "/portfolio/indecision-app",
     color: "#8359CE",
     class: "fas fa-question",
   },
   {
-    img: twitchTile,
+    img: require("../../public/images/twitch.jpg"),
     title: "Twitch API",
     subtitle: "Built with React, TypeScript, Fetch API & Twitch API",
     href: "/portfolio/twitch",
@@ -118,9 +105,9 @@ const tilesData = [
     featured: true,
   },
   {
-    img: expensifyTile,
+    img: require("../../public/images/expensify.jpg"),
     title: "Expensify App",
-    subtitle: "Built with React, Redux, FireBase, Webpack & Jest",
+    subtitle: "Built with React, Redux, FireBase & Jest",
     href: "https://github.com/jamesgower/expensify",
     redirect: true,
     color: "#364051",
@@ -128,77 +115,39 @@ const tilesData = [
     featured: true,
   },
   {
-    img: drumTile,
+    img: require("../../public/images/drum.jpg"),
     title: "Drum Machine",
-    subtitle: "Built with React, Vanilla JS, Howler & CSS",
+    subtitle: "Built with React, Vanilla JS, Howler & SCSS",
     href: "/portfolio/drum-machine",
     color: "#c6c6c6",
     class: "fas fa-headphones",
   },
 ];
 
+interface GridState {
+  redirect: boolean;
+  desktop: boolean;
+  data: string;
+  route?: string;
+}
+
+const initialState: GridState = {
+  redirect: false,
+  desktop: window.innerWidth > 768,
+  data: "all",
+};
+
 export class Grid extends React.Component {
-  constructor() {
-    super();
+  public readonly state = initialState;
 
-    this.state = {
-      redirect: false,
-      desktop: window.innerWidth > 768,
-      data: "all",
-    };
-  }
-  //Random animation for each element in the grid
-  randomAnimation() {
-    const e = document.getElementById(
-      `tile${Math.floor(Math.random() * tilesData.length)}`,
-    );
-    const previous = e.className;
-    let animations = ["bounce", "pulse", "swing", "tada", "rubberBand"];
-    //Random animation gets picked
-    let random = ` animated ${
-      animations[Math.floor(Math.random() * animations.length)]
-    }`;
-    e.className += random;
-    setTimeout(() => {
-      e.className = previous;
-    }, 1000);
-  }
-
-  componentDidMount = () => {
-    this.animations = setInterval(() => {
-      this.randomAnimation();
-    }, 8000);
-    document.getElementById("grid").className = "animated fadeIn";
-    this.updateWindowDimensions();
-    window.addEventListener("resize", this.updateWindowDimensions);
-  };
-
-  componentWillUnmount = () => {
-    clearInterval(this.animations);
-    window.removeEventListener("resize", this.updateWindowDimensions);
-  };
-
-  handleOnClick = route => {
-    this.setState({ route, redirect: true });
-  };
-
-  updateWindowDimensions = () => {
-    let desktop = window.innerWidth > 768;
-    this.setState({ desktop });
-  };
-
-  render() {
-    if (this.state.redirect) {
-      return <Redirect push to={this.state.route} />;
-    }
-
-    const allData = tilesData.map((tile, i) => {
+  private allData = tilesData.map(
+    (tile, i): JSX.Element => {
       return (
         <div
           className={
             tile.featured
-              ? `gridTile col-md-7 col-6`
-              : `gridTile col-md-5 col-6`
+              ? "gridTile col-md-7 col-6"
+              : "gridTile col-md-5 col-6"
           }
           key={i}
         >
@@ -207,14 +156,16 @@ export class Grid extends React.Component {
             style={{
               background: tile.color,
             }}
+            role="button"
+            tabIndex={0}
             className="border"
             onClick={
               tile.redirect
-                ? () => (location.href = tile.href)
-                : () => this.handleOnClick(tile.href)
+                ? (): string => (location.href = tile.href)
+                : (): void => this.handleOnClick(tile.href)
             }
           >
-            <img src={tile.img} className="animated" />
+            <img src={tile.img} alt={tile.title} className="animated" />
             <i
               className={`${tile.class}`}
               style={{
@@ -226,7 +177,49 @@ export class Grid extends React.Component {
           </div>
         </div>
       );
-    });
+    },
+  );
+
+  public componentDidMount = (): void => {
+    this.animations = setInterval((): void => {
+      this.randomAnimation();
+    }, 8000);
+    document.getElementById("grid").className = "animated fadeIn";
+  };
+
+  public componentWillUnmount = (): void => {
+    clearInterval(this.animations);
+  };
+
+  //Random animation for each element in the grid
+  private randomAnimation = (): void => {
+    const e = document.getElementById(
+      `tile${Math.floor(Math.random() * tilesData.length)}`,
+    );
+    const previous = e.className;
+    const animations = ["bounce", "pulse", "swing", "tada", "rubberBand"];
+    //Random animation gets picked
+    const random = ` animated ${
+      animations[Math.floor(Math.random() * animations.length)]
+    }`;
+    e.className += random;
+    setTimeout((): void => {
+      e.className = previous;
+    }, 1000);
+  };
+
+  private handleOnClick = (route: string): void => {
+    this.setState({ route, redirect: true });
+  };
+
+  public animations;
+
+  public render(): JSX.Element {
+    const { redirect, route, data } = this.state;
+    if (redirect) {
+      return <Redirect push to={route} />;
+    }
+
     return (
       <div
         id="grid"
@@ -236,7 +229,7 @@ export class Grid extends React.Component {
           margin: "0 20px",
         }}
       >
-        <div className="row">{this.state.data === "all" && allData}</div>
+        <div className="row">{data === "all" && this.allData}</div>
       </div>
     );
   }

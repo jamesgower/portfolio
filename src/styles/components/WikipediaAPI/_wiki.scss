@@ -1,121 +1,113 @@
+$wiki-img: url("../../public/images/wikibg.png");
+$input-focus: #80abfc;
+$wiki-blue: #4569ac;
+
 .wiki__container {
-  top: 0;
-  background: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/jVhILry/animated-world-globe-background_njlhvsoql__F0007.png")
-    no-repeat center center fixed;
-  -webkit-background-size: cover;
   -moz-background-size: cover;
-  -o-background-size: cover;
+  -webkit-background-size: cover;
+  background: $wiki-img no-repeat center center fixed;
   background-size: cover;
-  height: 100%;
-  width: 100%;
-  min-height: 100vh;
-  margin-bottom: -1px;
-  padding-bottom: 1px;
-  z-index: -1;
   font-family: Franklin "Franklin Gothic Medium", "Arial Narrow", Arial,
     sans-serif;
+  height: 100%;
+  margin-bottom: -1px;
+  min-height: 100vh;
+  padding-bottom: 1px;
+  top: 0;
+  width: 100%;
+  z-index: -1;
 }
 
-.wiki__containerAnimation {
-  @extend .wiki__boxContainer;
-  transition: margin-top 1s;
+.wiki__container-animation {
+  @extend %wiki__box-container;
   margin-top: 20px !important;
+  transition: margin-top 1s;
 }
 
-.wiki__boxContainer {
-  margin: 30vh auto 0 auto;
-  padding: 16px;
+.wiki__box-container,
+%wiki__box-container {
+  background-color: $white;
+  border: 5px solid $black;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-radius: 20px;
-  background-color: white;
-  border: 5px solid black;
+  margin: 30vh auto 0;
+  padding: 16px;
   width: 60%;
 }
 
-.wiki__searchInput {
-  width: 100%;
-  height: 50px;
+.wiki__search-input {
+  border-color: $wiki-blue;
   border-radius: 20px;
-  border-color: #4569ac;
   border-style: solid;
   border-width: 5px;
+  color: $wiki-blue;
+  font-size: 14px;
+  height: 50px;
+  margin: 10px;
   padding: 10px;
   text-align: center;
-  color: #4569ac;
-  font-size: 14px;
-  margin: 10px;
+  width: 100%;
+
   &:focus {
+    box-shadow: 0 0 8px $input-focus;
     outline: none;
-    box-shadow: 0px 0px 8px #80abfc;
   }
 }
 
-.openNav-wiki {
-  position: fixed;
-  top: 0;
-  left: 48%;
-  height: 50px;
-  width: 50px;
-  font-size: 40px;
-}
-
-.wiki__searchClear {
-  font-size: 24px;
+.wiki__search-clear-btn {
+  background: #fff;
+  color: $wiki-blue;
   cursor: pointer;
+  font-size: 24px;
   position: absolute;
   right: 5px;
   top: 23px;
-  color: #4569ac;
-  background: #fff;
 }
 
-.wiki__searchContainer {
+.wiki__search-container {
+  height: 70px;
+  margin: 0 auto;
   position: relative;
   width: 300px;
-  margin: 0 auto;
-  height: 70px;
 }
 
-.wiki__searchBtn {
-  width: 60px;
-  height: 60px;
-  z-index: 100;
-  z-index: 100;
+.wiki__search-btn {
   cursor: pointer;
+  height: 60px;
+  left: 50%;
   margin: 5px 5px 5px -30px;
   position: absolute;
-  left: 50%;
   top: 0;
-}
-
-.wiki__searchText {
-  @extend .wiki__text;
-}
-
-.wiki__randomLinkText {
-  @extend .wiki__text;
+  width: 60px;
+  z-index: 100;
 }
 
 .wiki__text {
-  color: #4569ac;
+  color: $wiki-blue;
   font-family: Franklin Gothic !important;
   font-size: 18px;
-  text-align: center;
   margin: 0 !important;
+  text-align: center;
 }
 
-.wiki__text a {
-  color: #4569ac;
+.wiki__text > a {
+  color: $wiki-blue;
   text-decoration: none;
+
+  &:hover {
+    color: $grey;
+  }
 }
 
-.wiki__text a:hover {
-  color: grey;
-}
-
-.wiki__searchResultsContainer {
+.wiki__search-results-container {
+  margin: 0 auto 40px;
   width: 80%;
-  margin: 0 auto 40px auto;
+}
+
+.wiki__pagination-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
 }

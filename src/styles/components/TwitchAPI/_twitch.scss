@@ -1,34 +1,41 @@
+$white: #fff;
+$purple-twitch: rgb(163, 65, 255);
+$check-red: rgb(243, 33, 33);
+$black: #000;
+$darker-background: #20222b;
+$slider-gray: #ccc;
+
 .twitch__container {
   background: url("../../public/images/twitch-bg.jpg");
-  width: 100%;
-  min-height: 100vh;
-  height: 100%;
   font-family: "Cairo", sans-serif;
+  height: 100%;
+  min-height: 100vh;
   position: relative;
+  width: 100%;
 }
 
-.twitch__footerContainer {
+.twitch__footer-container {
   padding-bottom: 60px;
 }
 
 .twitch__footer {
-  position: absolute;
+  background: $darker-background;
   bottom: 0;
   height: 60px;
+  position: absolute;
   width: 100%;
-  background: #20222b;
 }
 
 .twitch__header {
-  background: $off-black-indecision;
-  color: white;
+  background: $darker-background;
+  color: $white;
   padding: $s-size 0;
 }
 
-.twitch__headerText {
-  text-align: center;
-  margin: 0 auto;
+.twitch__header-text {
   font-size: 16px;
+  margin: 0 auto;
+  text-align: center;
   @media (max-width: $md-breakpoint) {
     font-size: 14px;
   }
@@ -40,10 +47,10 @@
   }
 }
 
-.twitch__headerSubText {
-  text-align: center;
-  margin: 8px auto;
+.twitch__header-subtext {
   font-size: 15px;
+  margin: 8px auto;
+  text-align: center;
   @media (max-width: $md-breakpoint) {
     font-size: 13px;
   }
@@ -56,8 +63,8 @@
 }
 
 .twitch__title {
+  color: $purple-twitch;
   font-size: 40px;
-  color: rgb(163, 65, 255);
   @media (max-width: $md-breakpoint) {
     font-size: 38px;
   }
@@ -74,44 +81,44 @@
   width: 70px;
 }
 
-.twitch__buttonsContainer {
+.twitch__buttons-container {
   display: flex;
   justify-content: center;
-  width: 100%;
   margin: 0 auto;
+  width: 100%;
 }
 
-.twitch__inputContainer {
-  width: 100%;
-  margin: 10px auto;
+.twitch__input-container {
   display: flex;
   justify-content: center;
+  margin: 10px auto;
+  width: 100%;
 }
 
-#streamerInput {
+#streamer-input {
+  color: $white;
   display: inline-flex;
-  color: #fff;
-  font-size: 12px;
-  text-align: center;
-  max-width: 200px;
   flex-shrink: 2;
-  margin-right: 10px;
-  @media (max-width: $s-breakpoint) {
-    font-size: 11px;
-  }
-  @media (max-width: $xs-breakpoint) {
-    font-size: 10px;
-  }
-}
-
-#streamerInput::placeholder {
-  color: #fff;
-}
-
-#streamerBtn {
-  display: inline-flex;
   font-size: 12px;
+  margin-right: 10px;
+  max-width: 200px;
+  text-align: center;
+  @media (max-width: $s-breakpoint) {
+    font-size: 11px;
+  }
+  @media (max-width: $xs-breakpoint) {
+    font-size: 10px;
+  }
+
+  &::placeholder {
+    color: $white;
+  }
+}
+
+#streamer-btn {
+  display: inline-flex;
   flex-shrink: 1;
+  font-size: 12px;
   @media (max-width: $s-breakpoint) {
     font-size: 11px;
   }
@@ -120,7 +127,7 @@
   }
 }
 
-#twitch__offlineUsers {
+#offline-users {
   margin-bottom: 40px;
 }
 
@@ -129,16 +136,16 @@
   visibility: hidden;
 }
 
-/* Mature switch */
-.twitch__matureText {
-  margin-top: 7px;
+// Mature switch
+.twitch__mature-text {
   margin-right: 5px;
+  margin-top: 7px;
   @media (max-width: $md-breakpoint) {
     font-size: 14px;
   }
 }
 
-.twitch__matureSwitch {
+.twitch__mature-switch {
   margin-left: 5px;
   margin-top: 7px;
   @media (max-width: $md-breakpoint) {
@@ -146,68 +153,71 @@
   }
 }
 
-.twitch__matureContainer {
+.twitch__mature-container {
+  display: flex;
+  justify-content: center;
+  justify-items: start;
   margin: 10px auto;
   width: 200px;
-  display: flex;
-  justify-items: start;
-  justify-content: center;
 }
 
 .twitch__switch {
-  position: relative;
   display: inline-block;
-  width: 40px;
   height: 24px;
+  position: relative;
+  width: 40px;
 }
 
-.twitch__switch input {
+.twitch__switch > input {
   display: none;
 }
 
 .twitch__slider {
+  -webkit-transition: 0.4s;
+  background-color: $slider-gray;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
   padding-top: -20px;
   position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
   right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: 0.4s;
+  top: 0;
   transition: 0.4s;
+
+  &:before {
+    -webkit-transition: 0.4s;
+    background-color: $white;
+    bottom: 4px;
+    content: "";
+    height: 16px;
+    left: 4px;
+    position: absolute;
+    transition: 0.4s;
+    width: 16px;
+  }
 }
 
-.twitch__slider:before {
-  position: absolute;
-  content: "";
-  height: 16px;
-  width: 16px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
+#check {
+  &:checked + .twitch__slider {
+    background-color: $check-red;
+
+    &:before {
+      -ms-transform: translateX(16px);
+      -webkit-transform: translateX(16px);
+      transform: translateX(16px);
+    }
+  }
+
+  &:focus + .twitch__slider {
+    box-shadow: 0 0 1px $check-red;
+  }
 }
 
-#check:checked + .twitch__slider {
-  background-color: rgb(243, 33, 33);
-}
-
-#check:focus + .twitch__slider {
-  box-shadow: 0 0 1px rgb(243, 33, 33);
-}
-
-#check:checked + .twitch__slider:before {
-  -webkit-transform: translateX(16px);
-  -ms-transform: translateX(16px);
-  transform: translateX(16px);
-}
-
-.twitch__slider.twitch__round {
+.twitch__slider,
+.twitch__round {
   border-radius: 34px;
-}
 
-.twitch__slider.twitch__round:before {
-  border-radius: 50%;
+  &:before {
+    border-radius: 50%;
+  }
 }
