@@ -1,5 +1,10 @@
 import * as React from "react";
-import { Container } from "reactstrap";
+import {
+  Container,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
+} from "reactstrap";
 import NavBar from "../NavBar";
 import Article from "./Article";
 import { WikiState, SearchResult } from "../../interfaces/wikipediaAPI";
@@ -15,6 +20,15 @@ const initialState: WikiState = {
   searchQuery: "",
   inputFocus: false,
   searchResults: null,
+  pageNum: 1,
+};
+
+const pageRanges: object = {
+  1: [0, 10],
+  2: [10, 20],
+  3: [20, 30],
+  4: [30, 40],
+  5: [40, 50],
 };
 
 class WikipediaAPI extends React.Component<object, WikiState> {
@@ -36,14 +50,14 @@ class WikipediaAPI extends React.Component<object, WikiState> {
     const cancelBtn = this.cancelBtnRef.current;
     const input = this.searchInputRef.current;
 
-    searchBtn.className = "wiki__searchBtn animated fadeOut";
+    searchBtn.className = "wiki__search-btn animated fadeOut";
     setTimeout((): void => {
-      input.className = "wiki__searchInput animated zoomIn";
+      input.className = "wiki__search-input animated zoomIn";
       searchBtn.classList.add("hidden");
     }, 400);
     setTimeout((): void => {
       cancelBtn.className =
-        "wiki__searchClear fa fa-times-circle animated fadeIn delay-1s";
+        "wiki__search-clear-btn fa fa-times-circle animated fadeIn delay-1s";
     }, 1000);
   };
 
@@ -60,7 +74,7 @@ class WikipediaAPI extends React.Component<object, WikiState> {
     }, 500);
 
     setTimeout((): void => {
-      searchBtn.className = "wiki__searchBtn animated fadeIn";
+      searchBtn.className = "wiki__search-btn animated fadeIn";
     }, 800);
   };
 
@@ -89,7 +103,7 @@ class WikipediaAPI extends React.Component<object, WikiState> {
         return this.setState({ searchResults: null, searchQuery: "" });
       }
       const box = this.boxContainerRef.current;
-      box.className = "wiki__containerAnimation";
+      box.className = "wiki__container-animation";
       const searchResults: SearchResult[] = [];
       query.search.forEach(
         async (result): Promise<void> => {
@@ -120,20 +134,20 @@ class WikipediaAPI extends React.Component<object, WikiState> {
   };
 
   public render(): JSX.Element {
-    const { searchQuery, searchResults } = this.state;
+    const { searchQuery, searchResults, pageNum } = this.state;
     return (
       <div className="wiki__container">
         <NavBar {...this.state} />
         <Container>
-          <div className="wiki__boxContainer" ref={this.boxContainerRef}>
-            <p className="wiki__randomLinkText">
+          <div className="wiki__box-container" ref={this.boxContainerRef}>
+            <p className="wiki__text">
               <a href="https://en.wikipedia.org/wiki/Special:Random">
                 Click <b>here</b> for a random article
               </a>
             </p>
-            <div className="wiki__searchContainer">
+            <div className="wiki__search-container">
               <input
-                className="wiki__searchInput hidden"
+                className="wiki__search-input hidden"
                 ref={this.searchInputRef}
                 type="search"
                 value={searchQuery}
@@ -143,27 +157,98 @@ class WikipediaAPI extends React.Component<object, WikiState> {
               <img
                 alt="Search Button"
                 ref={this.searchBtnRef}
-                className="wiki__searchBtn"
+                className="wiki__search-btn"
                 src="https://www.thesecu.com/wp-content/themes/secu/assets/images/Apps-Search-icon.png"
               />
               <i
-                className="wiki__searchClear fa fa-times-circle hidden"
+                className="wiki__search-clear-btn fa fa-times-circle hidden"
                 ref={this.cancelBtnRef}
               />
             </div>
-            <p className="wiki__searchText">
+            <p className="wiki__text">
               Or click the search button to search for a particular article.
               <br />
               Press &apos;Enter&apos; to begin search.
             </p>
           </div>
           {searchResults !== null && (
-            <div className="wiki__searchResultsContainer">
-              {searchResults.map(
-                (result: SearchResult, i): JSX.Element => {
-                  while (i) return <Article key={result.pageid} {...result} />;
-                },
-              )}
+            <div className="wiki__search-results-container">
+              {searchResults
+                .slice(pageRanges[pageNum][0], pageRanges[pageNum][1])
+                .map(
+                  (result: SearchResult): JSX.Element => (
+                    <Article key={result.pageid} {...result} />
+                  ),
+                )}
+              <div className="wiki__pagination-container">
+                <Pagination size="lg" aria-label="Article Page Navigation">
+                  <PaginationItem>
+                    <PaginationLink
+                      first
+                      onClick={(): void => this.setState({ pageNum: 1 })}
+                    />
+                  </PaginationItem>
+                  <PaginationItem disabled={pageNum <= 1}>
+                    <PaginationLink
+                      previous
+                      onClick={(): void => {
+                        const newPage: number = pageNum - 1;
+                        this.setState({ pageNum: newPage });
+                      }}
+                    />
+                  </PaginationItem>
+                  <PaginationItem active={pageNum === 1}>
+                    <PaginationLink
+                      onClick={(): void => this.setState({ pageNum: 1 })}
+                    >
+                      1
+                    </PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem active={pageNum === 2}>
+                    <PaginationLink
+                      onClick={(): void => this.setState({ pageNum: 2 })}
+                    >
+                      2
+                    </PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem active={pageNum === 3}>
+                    <PaginationLink
+                      onClick={(): void => this.setState({ pageNum: 3 })}
+                    >
+                      3
+                    </PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem active={pageNum === 4}>
+                    <PaginationLink
+                      onClick={(): void => this.setState({ pageNum: 4 })}
+                    >
+                      4
+                    </PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem active={pageNum === 5}>
+                    <PaginationLink
+                      onClick={(): void => this.setState({ pageNum: 5 })}
+                    >
+                      5
+                    </PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem disabled={pageNum >= 5}>
+                    <PaginationLink
+                      next
+                      onClick={(): void => {
+                        const newPage = pageNum + 1;
+                        this.setState({ pageNum: newPage });
+                      }}
+                    />
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink
+                      last
+                      onClick={(): void => this.setState({ pageNum: 5 })}
+                    />
+                  </PaginationItem>
+                </Pagination>
+              </div>
             </div>
           )}
         </Container>
