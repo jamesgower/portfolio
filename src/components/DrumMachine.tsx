@@ -309,7 +309,7 @@ class DrumMachine extends React.Component {
           </div>
           <div className="drum__display">
             <div>
-              <div className="drum__sliderContainer">
+              <div className="drum__slider-container">
                 <p className="drum__label">Power</p>
                 <label
                   htmlFor="power"
@@ -341,7 +341,7 @@ class DrumMachine extends React.Component {
               step="1"
               onChange={this.onSetVolume}
             />
-            <div className="drum__sliderContainer">
+            <div className="drum__slider-container">
               <p className="drum__label">Kit</p>
               <label htmlFor="soundBoard" className="drum__switch">
                 <input
