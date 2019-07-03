@@ -2,6 +2,7 @@ export interface WikiState {
   searchQuery: string;
   inputFocus: boolean;
   searchResults: SearchResult[];
+  pageNum: number;
 }
 
 export interface SearchResult {
