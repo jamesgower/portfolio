@@ -1,11 +1,11 @@
 /* NavBar */
 export interface NavBarProps {
-  onCloseNav?: Function;
-  close?: boolean;
+  closeNav?: Function;
 }
 
 export interface NavBarState {
   isOpen: boolean;
+  hiddenNav: boolean;
 }
 
 /* HiddenNavBar */
