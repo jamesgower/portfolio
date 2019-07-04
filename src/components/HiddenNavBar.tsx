@@ -37,7 +37,7 @@ class HiddenNavBar extends React.Component<{}, HiddenNavState> {
     return (
       <div>
         <i
-          className="fa fa-bars animated pulse infinite wiki__nav-burger"
+          className="fa fa-bars animated pulse infinite nav__burger"
           role="button"
           ref={this.navBurgerRef}
           tabIndex={0}
@@ -45,7 +45,7 @@ class HiddenNavBar extends React.Component<{}, HiddenNavState> {
         />
         {showNav && (
           <div className="animated slideInDown">
-            <NavBar close onCloseNav={this.onCloseNav} />
+            <NavBar closeNav={this.onCloseNav} />
           </div>
         )}
       </div>
