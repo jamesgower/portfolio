@@ -4,7 +4,7 @@ import { Container } from "reactstrap";
 import GridLayout from "./Grid";
 import NavBar from "./NavBar";
 
-const Portfolio = (): JSX.Element => (
+const Portfolio: React.SFC = (): JSX.Element => (
   <div className="background">
     <Headroom>
       <NavBar />

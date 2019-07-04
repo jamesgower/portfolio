@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "reactstrap";
 import { Howl } from "howler";
-import NavBar from "./NavBar";
+import NavBar from "./HiddenNavBar";
 import greenMp3 from "../../public/media/green.mp3";
 import redMp3 from "../../public/media/red.mp3";
 import yellowMp3 from "../../public/media/yellow.mp3";
@@ -177,7 +177,9 @@ class SimonSays extends React.Component {
         blueSound.play();
         break;
     }
-    document.getElementById(colour).classList = `circle ${colour} flash-${colour}`;
+    document.getElementById(
+      colour,
+    ).classList = `circle ${colour} flash-${colour}`;
     await this.wait(300);
     document.getElementById(colour).classList = `circle ${colour}`;
   };
@@ -287,22 +289,30 @@ class SimonSays extends React.Component {
         <Container>
           <div className="simonSays">
             <div
-              onClick={this.state.switchOn && this.state.userTurn && this.onTakeTurn}
+              onClick={
+                this.state.switchOn && this.state.userTurn && this.onTakeTurn
+              }
               className="green circle"
               id="green"
             />
             <div
-              onClick={this.state.switchOn && this.state.userTurn && this.onTakeTurn}
+              onClick={
+                this.state.switchOn && this.state.userTurn && this.onTakeTurn
+              }
               className="red circle"
               id="red"
             />
             <div
-              onClick={this.state.switchOn && this.state.userTurn && this.onTakeTurn}
+              onClick={
+                this.state.switchOn && this.state.userTurn && this.onTakeTurn
+              }
               className="yellow circle"
               id="yellow"
             />
             <div
-              onClick={this.state.switchOn && this.state.userTurn && this.onTakeTurn}
+              onClick={
+                this.state.switchOn && this.state.userTurn && this.onTakeTurn
+              }
               className="blue circle"
               id="blue"
             />
@@ -312,7 +322,10 @@ class SimonSays extends React.Component {
                 <div className="copyright">&copy;</div>
               </div>
               <div className="simonBtnContainer">
-                <div id="score" className={this.state.switchOn ? "activeScore" : "score"}>
+                <div
+                  id="score"
+                  className={this.state.switchOn ? "activeScore" : "score"}
+                >
                   {!this.state.switchOn
                     ? "--"
                     : this.state.playingGame
@@ -320,21 +333,37 @@ class SimonSays extends React.Component {
                     : "--"}
                 </div>
                 <div className="startContainer">
-                  <div className={this.state.playingGame ? "activeLight" : "inactiveLight"} />
+                  <div
+                    className={
+                      this.state.playingGame ? "activeLight" : "inactiveLight"
+                    }
+                  />
                   <div
                     onClick={
                       !this.state.playingGame
                         ? this.state.switchOn && this.onStartGame
-                        : this.state.switchOn && this.state.playingGame && this.onResetGame
+                        : this.state.switchOn &&
+                          this.state.playingGame &&
+                          this.onResetGame
                     }
-                    className={this.state.playingGame ? "startBtnPressed" : "startBtn"}
+                    className={
+                      this.state.playingGame ? "startBtnPressed" : "startBtn"
+                    }
                   />
                   <div className="description">START</div>
                 </div>
                 <div className="strictContainer">
-                  <div className={this.state.strictMode ? "activeLight" : "inactiveLight"} />
                   <div
-                    onClick={this.state.switchOn && !this.state.playingGame && this.onSetStrictMode}
+                    className={
+                      this.state.strictMode ? "activeLight" : "inactiveLight"
+                    }
+                  />
+                  <div
+                    onClick={
+                      this.state.switchOn &&
+                      !this.state.playingGame &&
+                      this.onSetStrictMode
+                    }
                     className={
                       this.state.strictMode || this.state.playingGame
                         ? "strictBtnPressed"

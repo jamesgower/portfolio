@@ -5,7 +5,7 @@ import {
   PaginationItem,
   PaginationLink,
 } from "reactstrap";
-import NavBar from "../NavBar";
+import HiddenNavBar from "../HiddenNavBar";
 import Article from "./Article";
 import { WikiState, SearchResult } from "../../interfaces/wikipediaAPI";
 
@@ -16,34 +16,48 @@ import { WikiState, SearchResult } from "../../interfaces/wikipediaAPI";
  * [ ] Add pagination for first 5 pages of results (10 per page)
  */
 
-const initialState: WikiState = {
-  searchQuery: "",
-  inputFocus: false,
-  searchResults: null,
-  pageNum: 1,
-  showNav: false,
-};
-
-const pageRanges: object = {
-  1: [0, 10],
-  2: [10, 20],
-  3: [20, 30],
-  4: [30, 40],
-  5: [40, 50],
-};
-
 class WikipediaAPI extends React.Component<object, WikiState> {
-  public readonly state = initialState;
+  private initialState = {
+    searchQuery: "",
+    inputFocus: false,
+    searchResults: null,
+    pageNum: 1,
+    closeNav: false,
+  };
+
+  private pageRanges: object = {
+    1: [0, 10],
+    2: [10, 20],
+    3: [20, 30],
+    4: [30, 40],
+    5: [40, 50],
+  };
+
+  public readonly state = this.initialState;
 
   private boxContainerRef = React.createRef<HTMLDivElement>();
   private searchInputRef = React.createRef<HTMLInputElement>();
   private searchBtnRef = React.createRef<HTMLImageElement>();
   private cancelBtnRef = React.createRef<HTMLElement>();
+  private containerRef = React.createRef<HTMLDivElement>();
 
   public componentDidMount(): void {
     this.searchBtnRef.current.addEventListener("click", this.onSearchClick);
     this.cancelBtnRef.current.addEventListener("click", this.onCancelClick);
     this.searchInputRef.current.addEventListener("keydown", this.onEnterPress);
+    this.containerRef.current.addEventListener(
+      "click",
+      (): void => this.setState({ closeNav: true }),
+    );
+  }
+
+  public componentWillUnmount(): void {
+    this.searchBtnRef.current.removeEventListener("click", this.onSearchClick);
+    this.cancelBtnRef.current.removeEventListener("click", this.onCancelClick);
+    this.searchInputRef.current.removeEventListener(
+      "keydown",
+      this.onEnterPress,
+    );
   }
 
   private onSearchClick = (): void => {
@@ -134,33 +148,12 @@ class WikipediaAPI extends React.Component<object, WikiState> {
     }
   };
 
-  private updateNav = (update: boolean): void => {
-    this.setState({ showNav: update });
-  };
-
   public render(): JSX.Element {
-    const { searchQuery, searchResults, pageNum, showNav } = this.state;
+    const { searchQuery, searchResults, pageNum } = this.state;
     return (
-      <div className="wiki__container">
+      <div className="wiki__container" ref={this.containerRef}>
         <div className="wiki__nav-container">
-          {showNav ? (
-            <NavBar update={this.updateNav} />
-          ) : (
-            <i
-              className="fa fa-bars animated pulse infinite wiki__nav-burger"
-              role="button"
-              id="nav-burger"
-              tabIndex={0}
-              onClick={(): void => {
-                const navBurger = document.getElementById("nav-burger");
-                navBurger.classList.remove("pulse", "infinite");
-                navBurger.classList.add("fadeOut");
-                setTimeout((): void => {
-                  this.setState({ showNav: true });
-                }, 300);
-              }}
-            />
-          )}
+          <HiddenNavBar />
         </div>
         <Container>
           <div className="wiki__box-container" ref={this.boxContainerRef}>
@@ -198,7 +191,7 @@ class WikipediaAPI extends React.Component<object, WikiState> {
           {searchResults !== null && (
             <div className="wiki__search-results-container">
               {searchResults
-                .slice(pageRanges[pageNum][0], pageRanges[pageNum][1])
+                .slice(this.pageRanges[pageNum][0], this.pageRanges[pageNum][1])
                 .map(
                   (result: SearchResult): JSX.Element => (
                     <Article key={result.pageid} {...result} />
