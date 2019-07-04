@@ -5,7 +5,7 @@ import AppRouter, { history } from "./routes/AppRouter";
 import LoadingPage from "./components/LoadingPage";
 import "normalize.css/normalize.css";
 import "react-dates/lib/css/_datepicker.css";
-import "./styles/styles.scss";
+import "./scss/styles.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import configureStore from "./store/configureStore";
 
@@ -21,7 +21,7 @@ window.jQuery = jQuery;
 
 const store = configureStore();
 
-const App: React.FC = (): JSX.Element => (
+const App: React.SFC = (): JSX.Element => (
   <Provider store={store}>
     <AppRouter />
   </Provider>
