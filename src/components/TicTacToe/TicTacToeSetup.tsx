@@ -39,9 +39,15 @@ class TicTacToeSetup extends React.Component<SetupProps, SetupState> {
       <div>
         <HiddenNavBar />
         <div className="background-TTT">
-          {noPlayers === undefined && !readyToPlay && <ChooseOpponents />}
-          {noPlayers && !readyToPlay && <ChooseNames noPlayers={noPlayers} />}
-          {readyToPlay && <TicTacToe />}
+          {!readyToPlay ? (
+            noPlayers === undefined ? (
+              <ChooseOpponents />
+            ) : (
+              <ChooseNames noPlayers={noPlayers} />
+            )
+          ) : (
+            <TicTacToe />
+          )}
         </div>
       </div>
     );

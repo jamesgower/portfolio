@@ -11,6 +11,7 @@ const defaultPlayerState = {
       ai: false,
     },
   ],
+  difficulty: 2,
 };
 
 export default (state = defaultPlayerState, action) => {
@@ -30,7 +31,7 @@ export default (state = defaultPlayerState, action) => {
     case "SETUP_PLAYERS":
       return {
         ...state,
-        playerInfo: action.playerInfo,
+        ...action.setup,
       };
     default:
       return state;

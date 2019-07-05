@@ -23,9 +23,11 @@ export interface Player {
 export interface NameState {
   playerInfo: Player[];
   difficulty: number;
+  readyToPlay: boolean;
 }
 
 export interface NameProps {
   noPlayers: number;
-  restart: Function;
+  reset: (e) => void;
+  setupPlayers: (state) => void;
 }
