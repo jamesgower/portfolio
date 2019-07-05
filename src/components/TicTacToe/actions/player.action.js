@@ -11,7 +11,7 @@ export const setNumPlayers = numPlayers => ({
   numPlayers,
 });
 
-export const setupPlayers = playerInfo => ({
+export const setupPlayers = setup => ({
   type: "SETUP_PLAYERS",
-  playerInfo,
+  setup,
 });
