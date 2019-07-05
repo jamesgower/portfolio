@@ -26,8 +26,9 @@ class HiddenNavBar extends React.Component<{}, HiddenNavState> {
   private onCloseNav = (): void => {
     const navBurger = this.navBurgerRef.current;
     navBurger.classList.remove("fadeOut");
-    navBurger.classList.add("pulse", "infinite");
+    navBurger.classList.add("pulse", "infinite", "fadeIn");
     setTimeout((): void => {
+      navBurger.classList.remove("fadeIn");
       this.setState({ showNav: false });
     }, 300);
   };
