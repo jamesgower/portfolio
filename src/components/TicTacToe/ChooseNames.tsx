@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Button, Input, Row, Col } from "reactstrap";
 import { NameState, NameProps } from "../../interfaces/ticTacToe";
-import { reset } from "./actions/player.action";
+import { reset, setupPlayers } from "./actions/player.action";
 
 /**
  * {
@@ -28,17 +28,15 @@ class ChooseNames extends React.Component<NameProps, NameState> {
       {
         name: "",
         counter: "O",
-        ai: undefined,
+        ai: this.props.noPlayers === 1,
       },
     ],
     difficulty: 2,
+    readyToPlay: false,
   };
 
-  public componentWillMount(): void {}
-
   public componentDidMount(): void {
-    document.getElementById("players-TTT").className =
-      "players-TTT animated fadeIn";
+    document.getElementById("players-TTT").classList.add("animated", "fadeIn");
   }
 
   private onPlayerNameChange = (
@@ -53,69 +51,64 @@ class ChooseNames extends React.Component<NameProps, NameState> {
     });
   };
 
-  // private onPlayer2NameChange = (
-  //   e: React.ChangeEvent<HTMLInputElement>,
-  // ): void => {
-  //   const name = e.target.value;
-  //   const { playerInfo } = this.state;
-  //   playerInfo[1].name = name;
-  //   this.setState({
-  //     playerInfo,
-  //   });
-  // };
-
-  private onChangeDifficulty = (difficulty: number): void => {
-    this.setState({ difficulty });
-  };
-
-  private onSubmit = (e): void => {
-    e.preventDefault();
-    // this.props.update({
-    //   p1name: this.state.p1name === "" ? "Player One" : this.state.p1name,
-    //   p2name: this.state.p2name === "" ? "Player Two" : this.state.p2name,
-    //   difficulty:
-    //     this.state.difficulty === undefined ? 2 : this.state.difficulty,
-    //   player1Counter: this.state.player1Counter,
-    //   player2Counter: this.state.player2Counter,
-    //   aiCounter: this.state.aiCounter,
-    // });
-  };
-
   private onChangeCounter = (): void => {
     const { playerInfo } = this.state;
-    playerInfo[0].counter === "X" ? "O" : "X";
-    playerInfo[1].counter === "X" ? "O" : "X";
+    if (playerInfo[0].counter === "X") {
+      playerInfo[0].counter = "O";
+      playerInfo[1].counter = "X";
+    } else {
+      playerInfo[0].counter = "X";
+      playerInfo[1].counter = "O";
+    }
     this.setState({
       playerInfo,
     });
   };
 
+  private onChangeDifficulty = (difficulty: number): void => {
+    this.setState({ difficulty });
+  };
+
+  private onSubmit = (): void => {
+    const state = {
+      ...this.state,
+      readyToPlay: true,
+    };
+    const { setupPlayers } = this.props;
+    setupPlayers(state);
+  };
+
   public render(): JSX.Element {
     const { difficulty, playerInfo } = this.state;
+    const { reset, noPlayers } = this.props;
     return (
-      <div id="players-TTT">
-        <div id="backBtnContainer" onClick={this.props.restart}>
+      <div
+        id="players-TTT"
+        style={{
+          fontFamily: "Oswald",
+        }}
+      >
+        <div id="backBtnContainer" onClick={reset} role="button" tabIndex={0}>
           <i className="fa fa-undo" />
         </div>
 
-        {this.props.noPlayers === 1 && (
+        {noPlayers === 1 && (
           <h2 className="onePlayerNames">
             Please input your name and choose the difficulty you wish to play
             on.
           </h2>
         )}
-        {this.props.noPlayers === 2 && (
+        {noPlayers === 2 && (
           <h2 className="twoPlayerNames">
             Please input your names. You can also change your counter by
             clicking on your player name too.
           </h2>
         )}
         <Row className="pNameInput">
-          <Col xs={{ size: 2 }} />
-          <Col xs={{ size: 4 }}>
-            <label className="playerLbl">Player 1:</label>
+          <Col xs={{ size: 4, offset: 1 }}>
+            <p className="playerLbl">Player 1:</p>
           </Col>
-          <Col xs={5}>
+          <Col xs={6}>
             <Input
               className="playerInput"
               onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
@@ -127,13 +120,12 @@ class ChooseNames extends React.Component<NameProps, NameState> {
           </Col>
         </Row>
 
-        {this.props.noPlayers === 2 && (
+        {noPlayers === 2 && (
           <Row className="pNameInput">
-            <Col xs={{ size: 2 }} />
-            <Col xs={{ size: 4 }}>
-              <label className="playerLbl">Player 2:</label>
+            <Col xs={{ size: 4, offset: 1 }}>
+              <p className="text-center playerLbl">Player 2:</p>
             </Col>
-            <Col xs={5}>
+            <Col xs={6}>
               <Input
                 className="playerInput"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
@@ -145,7 +137,7 @@ class ChooseNames extends React.Component<NameProps, NameState> {
           </Row>
         )}
 
-        {this.props.noPlayers === 1 && (
+        {noPlayers === 1 && (
           <div>
             <h3 className="chooseDiff">
               What difficulty would you like to play against?
@@ -185,25 +177,33 @@ class ChooseNames extends React.Component<NameProps, NameState> {
           </div>
         )}
         <div
-          className={
-            this.props.noPlayers === 1 ? "chooseCounterOne" : "chooseCounterTwo"
-          }
+          className={noPlayers === 1 ? "chooseCounterOne" : "chooseCounterTwo"}
         >
-          <div onClick={this.onChangeCounter} className="counters-container">
-            <label className="counterLbl">
+          <div
+            onClick={this.onChangeCounter}
+            role="button"
+            tabIndex={0}
+            className="counters-container"
+          >
+            <p className="counterLbl">
               {playerInfo[0].name.length > 0 ? playerInfo[0].name : "Player 1"}:
-            </label>
+            </p>
             <div className="counter">{playerInfo[0].counter}</div>
           </div>
-          <div className="counters-container" onClick={this.onChangeCounter}>
-            <label className="counterLbl">
-              {this.props.noPlayers === 1
+          <div
+            className="counters-container"
+            onClick={this.onChangeCounter}
+            role="button"
+            tabIndex={0}
+          >
+            <p className="counterLbl">
+              {noPlayers === 1
                 ? "Computer"
                 : playerInfo[1].name.length > 0
                 ? playerInfo[1].name
                 : "Player 2"}
               :
-            </label>
+            </p>
             <div className="counter">{playerInfo[1].counter}</div>
           </div>
         </div>
@@ -225,9 +225,10 @@ class ChooseNames extends React.Component<NameProps, NameState> {
 
 const mapDispatchToProps = dispatch => ({
   reset: () => dispatch(reset()),
+  setupPlayers: state => dispatch(setupPlayers(state)),
 });
 
 export default connect(
-  mapStateToProps,
+  undefined,
   mapDispatchToProps,
 )(ChooseNames);

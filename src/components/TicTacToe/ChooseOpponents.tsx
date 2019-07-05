@@ -10,14 +10,14 @@ interface ChooseOpponentsProps {
 const ChooseOpponents: React.SFC<ChooseOpponentsProps> = (
   props,
 ): JSX.Element => {
-  const styles = {
-    fontFamily: "Oswald",
-  };
-
   const { setNumPlayers } = props;
 
   return (
-    <div style={styles}>
+    <div
+      style={{
+        fontFamily: "Oswald",
+      }}
+    >
       <div className="setup-TTT animated slideInDown">
         <h1 id="title-TTT">Welcome to Tic-Tac-Toe!</h1>
         <h3 className="subtitle-TTT">
