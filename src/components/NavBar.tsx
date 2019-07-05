@@ -42,6 +42,7 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
 
     nav.classList.add("animated", "slideOutUp");
     closeBtn.classList.add("animated", "slideOutUp");
+
     setTimeout((): void => {
       closeNav();
     }, 300);
@@ -54,9 +55,9 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
         <div className="nav__container" ref={this.navBarRef}>
           <Navbar color="faded" light expand="md">
             <NavLink to="/">
-              <img src={logo} alt="JG Web Developer" className="logo" />
+              <img src={logo} alt="JG Web Developer" className="nav__logo" />
             </NavLink>
-            <hr className="seperator" />
+            <hr className="nav__separator" />
             <NavbarToggler onClick={this.onNavToggle} />
             <Collapse isOpen={isOpen} navbar>
               <Nav className="ml-auto" navbar>
@@ -94,17 +95,13 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
           </Navbar>
         </div>
         {hiddenNav && (
-          <span
-            role="button"
-            tabIndex={0}
-            className="closeNav"
-            onClick={this.onCloseButton}
-          >
+          <span role="button" tabIndex={0} className="closeNav">
             <img
               alt="Close Nav Button"
               src={closeIcon}
-              className="animated pulse infinite"
+              className="animated pulse infinite nav__close-button"
               ref={this.closeBtnRef}
+              onClick={this.onCloseButton}
             />
           </span>
         )}

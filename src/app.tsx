@@ -7,12 +7,13 @@ import "normalize.css/normalize.css";
 import "react-dates/lib/css/_datepicker.css";
 import "./scss/styles.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
-import configureStore from "./store/configureStore";
+import configureStore from "./components/TicTacToe/store/store";
 
 declare global {
   interface Window {
     $: any;
     jQuery: any;
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any;
   }
 }
 
