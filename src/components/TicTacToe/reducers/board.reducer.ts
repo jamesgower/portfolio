@@ -11,10 +11,12 @@ export default (state: BoardState, action: BoardActionsTypes): BoardState => {
     case ADD_MOVE:
       return {
         ...state,
-        tiles: action.board,
+        tiles: action.tiles,
       };
     case RESET_BOARD:
-      return defaultBoardState;
+      return {
+        ...defaultBoardState,
+      };
     default:
       return state;
   }
