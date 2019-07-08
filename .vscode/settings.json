@@ -9,5 +9,8 @@
 		"tada",
 		"tictactoe",
 		"udemy"
-	]
+  ],
+  "workbench.colorCustomizations": {
+    "tab.unfocusedActiveBorder": "#fff0"
+  }
 }
