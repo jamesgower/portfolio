@@ -40,6 +40,11 @@ export interface PlayProps {
   board: BoardState;
   reset: () => void;
   addMove: (board) => void;
+  changePlayer: () => void;
+  playerScore: (num) => void;
+  updateCurrentTurn: (turn) => void;
+  resetBoard: () => void;
+  resetScore: () => void;
 }
 
 export interface PlayState {

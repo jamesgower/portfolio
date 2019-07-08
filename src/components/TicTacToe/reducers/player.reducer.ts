@@ -5,6 +5,8 @@ import {
   SET_NUM_PLAYERS,
   SETUP_PLAYERS,
   PLAYER_SCORE,
+  UPDATE_CURRENT_TURN,
+  RESET_SCORE,
 } from "../interfaces/actions";
 import { PlayerState } from "../interfaces/components";
 
@@ -57,6 +59,23 @@ export default (state = defaultPlayerState, action: PlayerActionTypes): PlayerSt
           ...state.player2,
           score: action.player === 2 && state.player2.score + 1,
         },
+      };
+    case RESET_SCORE:
+      return {
+        ...state,
+        player1: {
+          ...state.player1,
+          score: 0,
+        },
+        player2: {
+          ...state.player2,
+          score: 0,
+        },
+      };
+    case UPDATE_CURRENT_TURN:
+      return {
+        ...state,
+        currentTurn: action.turn,
       };
     default:
       return state;
