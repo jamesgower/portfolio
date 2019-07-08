@@ -1,36 +1,21 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { Button, Input, Row, Col } from "reactstrap";
-import { NameState, NameProps } from "../../interfaces/ticTacToe";
+import { NameState, NameProps } from "./interfaces/components";
 import { reset, setupPlayers } from "./actions/player.action";
-
-/**
- * {
-    p1name: "",
-    p2name: "",
-    difficulty: 2,
-    easySelected: false,
-    normalSelected: true,
-    unbeatableSelected: false,
-    player1Counter: this.props.player1Counter,
-    player2Counter: this.props.player2Counter,
-    aiCounter: this.props.aiCounter,
-  };
- */
 
 class ChooseNames extends React.Component<NameProps, NameState> {
   public readonly state: NameState = {
-    playerInfo: [
-      {
-        name: "",
-        counter: "X",
-      },
-      {
-        name: "",
-        counter: "O",
-        ai: this.props.noPlayers === 1,
-      },
-    ],
+    player1: {
+      name: "",
+      counter: "X",
+      score: 0,
+    },
+    player2: {
+      name: "",
+      counter: "X",
+      score: 0,
+    },
     difficulty: 2,
     readyToPlay: false,
   };
@@ -44,24 +29,33 @@ class ChooseNames extends React.Component<NameProps, NameState> {
     player: number,
   ): void => {
     const name = e.target.value;
-    const { playerInfo } = this.state;
-    playerInfo[player === 1 ? 0 : 1].name = name;
-    this.setState({
-      playerInfo,
-    });
+    const { player1, player2 } = this.state;
+    player === 1
+      ? this.setState({
+          player1: {
+            ...player1,
+            name,
+          },
+        })
+      : this.setState({
+          player2: {
+            ...player2,
+            name,
+          },
+        });
   };
 
   private onChangeCounter = (): void => {
-    const { playerInfo } = this.state;
-    if (playerInfo[0].counter === "X") {
-      playerInfo[0].counter = "O";
-      playerInfo[1].counter = "X";
-    } else {
-      playerInfo[0].counter = "X";
-      playerInfo[1].counter = "O";
-    }
+    const { player1, player2 } = this.state;
     this.setState({
-      playerInfo,
+      player1: {
+        ...player1,
+        counter: player1.counter === "X" ? "O" : "X",
+      },
+      player2: {
+        ...player2,
+        counter: player2.counter === "X" ? "O" : "X",
+      },
     });
   };
 
@@ -70,16 +64,27 @@ class ChooseNames extends React.Component<NameProps, NameState> {
   };
 
   private onSubmit = (): void => {
+    const { player1, player2 } = this.state;
+    const { setupPlayers } = this.props;
+
     const state = {
       ...this.state,
+      player1: {
+        ...player1,
+        name: player1.name.length === 0 ? "Player 1" : name,
+      },
+      player2: {
+        ...player2,
+        name: player2.name.length === 0 ? "Player 2" : name,
+      },
       readyToPlay: true,
     };
-    const { setupPlayers } = this.props;
+
     setupPlayers(state);
   };
 
   public render(): JSX.Element {
-    const { difficulty, playerInfo } = this.state;
+    const { difficulty, player1, player2 } = this.state;
     const { reset, noPlayers } = this.props;
     return (
       <div
@@ -92,16 +97,14 @@ class ChooseNames extends React.Component<NameProps, NameState> {
           <i className="fa fa-undo" />
         </div>
 
-        {noPlayers === 1 && (
+        {noPlayers === 1 ? (
           <h2 className="onePlayerNames">
-            Please input your name and choose the difficulty you wish to play
-            on.
+            Please input your name and choose the difficulty you wish to play on.
           </h2>
-        )}
-        {noPlayers === 2 && (
+        ) : (
           <h2 className="twoPlayerNames">
-            Please input your names. You can also change your counter by
-            clicking on your player name too.
+            Please input your names. You can also change your counter by clicking on your
+            player name too.
           </h2>
         )}
         <Row className="pNameInput">
@@ -115,7 +118,7 @@ class ChooseNames extends React.Component<NameProps, NameState> {
                 this.onPlayerNameChange(e, 1)
               }
               autoFocus
-              value={playerInfo[0].name}
+              value={player1.name}
             />
           </Col>
         </Row>
@@ -131,7 +134,7 @@ class ChooseNames extends React.Component<NameProps, NameState> {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
                   this.onPlayerNameChange(e, 2)
                 }
-                value={playerInfo[1].name}
+                value={player2.name}
               />
             </Col>
           </Row>
@@ -176,9 +179,7 @@ class ChooseNames extends React.Component<NameProps, NameState> {
             </div>
           </div>
         )}
-        <div
-          className={noPlayers === 1 ? "chooseCounterOne" : "chooseCounterTwo"}
-        >
+        <div className={noPlayers === 1 ? "chooseCounterOne" : "chooseCounterTwo"}>
           <div
             onClick={this.onChangeCounter}
             role="button"
@@ -186,9 +187,9 @@ class ChooseNames extends React.Component<NameProps, NameState> {
             className="counters-container"
           >
             <p className="counterLbl">
-              {playerInfo[0].name.length > 0 ? playerInfo[0].name : "Player 1"}:
+              {player1.name.length > 0 ? player1.name : "Player 1"}:
             </p>
-            <div className="counter">{playerInfo[0].counter}</div>
+            <div className="counter">{player1.counter}</div>
           </div>
           <div
             className="counters-container"
@@ -199,12 +200,12 @@ class ChooseNames extends React.Component<NameProps, NameState> {
             <p className="counterLbl">
               {noPlayers === 1
                 ? "Computer"
-                : playerInfo[1].name.length > 0
-                ? playerInfo[1].name
+                : player2.name.length > 0
+                ? player2.name
                 : "Player 2"}
               :
             </p>
-            <div className="counter">{playerInfo[1].counter}</div>
+            <div className="counter">{player2.counter}</div>
           </div>
         </div>
         <div className="button-container">
