@@ -5,10 +5,9 @@ import {
   ResetBoardAction,
 } from "../interfaces/actions";
 
-export const addMove = (tile: number, currentPlayer: string): AddMoveAction => ({
+export const addMove = (tiles: number[]): AddMoveAction => ({
   type: ADD_MOVE,
-  tile,
-  currentPlayer,
+  tiles,
 });
 
 export const resetBoard = (): ResetBoardAction => ({

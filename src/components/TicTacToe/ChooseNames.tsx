@@ -13,7 +13,7 @@ class ChooseNames extends React.Component<NameProps, NameState> {
     },
     player2: {
       name: "",
-      counter: "X",
+      counter: "O",
       score: 0,
     },
     difficulty: 2,
@@ -71,11 +71,11 @@ class ChooseNames extends React.Component<NameProps, NameState> {
       ...this.state,
       player1: {
         ...player1,
-        name: player1.name.length === 0 ? "Player 1" : name,
+        name: player1.name.length === 0 ? "Player 1" : player1.name,
       },
       player2: {
         ...player2,
-        name: player2.name.length === 0 ? "Player 2" : name,
+        name: player2.name.length === 0 ? "Player 2" : player2.name,
       },
       readyToPlay: true,
     };
