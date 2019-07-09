@@ -31,8 +31,8 @@ export interface NameState {
 
 export interface NameProps {
   noPlayers: number;
-  reset: (e) => void;
-  setupPlayers: (state) => void;
+  reset?: (e) => void;
+  setupPlayers?: (state) => void;
 }
 
 export interface PlayProps {
@@ -45,11 +45,13 @@ export interface PlayProps {
   updateCurrentTurn: (turn) => void;
   resetBoard: () => void;
   resetScore: () => void;
+  setCurrentPlayer: (player) => void;
 }
 
 export interface PlayState {
   endGame: boolean;
   gameFinished: boolean;
+  playerToStart: number;
 }
 
 export interface GameWon {

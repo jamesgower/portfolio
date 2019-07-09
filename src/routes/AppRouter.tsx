@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Router, Route, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
 import createHistory from "history/createBrowserHistory";
 import NotFoundPage from "../components/NotFoundPage";
 import LandingPage from "../components/LandingPage";
@@ -15,8 +16,11 @@ import Skills from "../components/Skills";
 import Chatter from "../components/Chatter";
 import DrumMachine from "../components/DrumMachine";
 import AboutMe from "../components/AboutMe";
+import configureStore from "../components/TicTacToe/store/store";
 
 export const history = createHistory();
+
+const store = configureStore();
 
 const AppRouter = (): JSX.Element => (
   <Router history={history}>
@@ -24,7 +28,9 @@ const AppRouter = (): JSX.Element => (
       <Route path="/" component={PlayTicTacToe} exact />
       <Route path="/portfolio" exact component={Portfolio} />
       <Route path="/portfolio/pomodoro" component={Pomodoro} />
-      <Route path="/portfolio/tic-tac-toe" component={PlayTicTacToe} />
+      <Provider store={store}>
+        <Route path="/portfolio/tic-tac-toe" component={PlayTicTacToe} />
+      </Provider>
       <Route path="/portfolio/calculator" component={Calculator} />
       <Route path="/portfolio/wikipedia" component={WikipediaAPI} />
       <Route path="/portfolio/indecision-app" component={IndecisionApp} />
