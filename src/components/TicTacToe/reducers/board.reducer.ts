@@ -1,21 +1,19 @@
 import { BoardState } from "../interfaces/components";
-import { BoardActionsTypes, RESET_BOARD, ADD_MOVE } from "../interfaces/actions";
+import BoardActionsTypes, { RESET_BOARD, ADD_MOVE } from "../interfaces/board.actions";
 
 const defaultBoardState: BoardState = {
   tiles: Array.from(Array(9).keys()),
 };
 
-export default (state: BoardState, action: BoardActionsTypes): BoardState => {
-  state = defaultBoardState;
+export default (state = defaultBoardState, action: BoardActionsTypes): BoardState => {
   switch (action.type) {
     case ADD_MOVE:
       return {
-        ...state,
         tiles: action.tiles,
       };
     case RESET_BOARD:
       return {
-        ...defaultBoardState,
+        tiles: Array.from(Array(9).keys()),
       };
     default:
       return state;

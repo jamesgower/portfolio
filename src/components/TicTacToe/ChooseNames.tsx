@@ -224,9 +224,9 @@ class ChooseNames extends React.Component<NameProps, NameState> {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  reset: () => dispatch(reset()),
-  setupPlayers: state => dispatch(setupPlayers(state)),
+const mapDispatchToProps = (dispatch) => ({
+  reset: (): void => dispatch(reset()),
+  setupPlayers: (state): void => dispatch(setupPlayers(state)),
 });
 
 export default connect(

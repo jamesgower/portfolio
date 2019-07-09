@@ -7,6 +7,7 @@ export const SETUP_PLAYERS = "SETUP_PLAYERS";
 export const PLAYER_SCORE = "PLAYER_SCORE";
 export const UPDATE_CURRENT_TURN = "UPDATE_CURRENT_TURN";
 export const RESET_SCORE = "RESET_SCORE";
+export const SET_CURRENT_PLAYER = "SET_CURRENT_PLAYER";
 
 export interface ChangePlayerAction {
   type: typeof CHANGE_PLAYER_AFTER_MOVE;
@@ -40,25 +41,19 @@ export interface UpdateCurrentTurnAction {
   turn: string;
 }
 
-export const ADD_MOVE = "ADD_MOVE";
-export const RESET_BOARD = "RESET_BOARD";
-
-export interface AddMoveAction {
-  type: typeof ADD_MOVE;
-  tiles: number[];
+export interface setCurrentPlayerAction {
+  type: typeof SET_CURRENT_PLAYER;
+  player: number;
 }
 
-export interface ResetBoardAction {
-  type: typeof RESET_BOARD;
-}
-
-export type BoardActionsTypes = AddMoveAction | ResetBoardAction;
-
-export type PlayerActionTypes =
+type PlayerActionTypes =
   | ChangePlayerAction
   | ResetAction
   | SetNumPlayersAction
   | SetupPlayersAction
   | PlayerScoreAction
   | ResetScoreAction
-  | UpdateCurrentTurnAction;
+  | UpdateCurrentTurnAction
+  | setCurrentPlayerAction;
+
+export default PlayerActionTypes;

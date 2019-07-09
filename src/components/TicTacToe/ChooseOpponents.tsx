@@ -7,11 +7,9 @@ interface ChooseOpponentsProps {
   setNumPlayers: Function;
 }
 
-const ChooseOpponents: React.SFC<ChooseOpponentsProps> = (
-  props,
-): JSX.Element => {
-  const { setNumPlayers } = props;
-
+const ChooseOpponents: React.SFC<ChooseOpponentsProps> = ({
+  setNumPlayers,
+}): JSX.Element => {
   return (
     <div
       style={{
@@ -35,7 +33,7 @@ const ChooseOpponents: React.SFC<ChooseOpponentsProps> = (
             outline
             color="secondary"
             size="lg"
-            onClick={() => setNumPlayers(1)}
+            onClick={(): void => setNumPlayers(1)}
           >
             1 Player
           </Button>
@@ -44,7 +42,7 @@ const ChooseOpponents: React.SFC<ChooseOpponentsProps> = (
             outline
             color="secondary"
             size="lg"
-            onClick={() => setNumPlayers(2)}
+            onClick={(): void => setNumPlayers(2)}
           >
             2 Player
           </Button>
@@ -55,7 +53,7 @@ const ChooseOpponents: React.SFC<ChooseOpponentsProps> = (
 };
 
 const mapDispatchToProps = dispatch => ({
-  setNumPlayers: numPlayers => dispatch(setNumPlayers(numPlayers)),
+  setNumPlayers: (num: number): void => dispatch(setNumPlayers(num)),
 });
 
 export default connect(
