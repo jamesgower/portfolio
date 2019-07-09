@@ -14,7 +14,9 @@ import {
   UpdateCurrentTurnAction,
   RESET_SCORE,
   ResetScoreAction,
-} from "../interfaces/actions";
+  SET_CURRENT_PLAYER,
+  setCurrentPlayerAction,
+} from "../interfaces/player.actions";
 
 export const changePlayer = (): ChangePlayerAction => ({
   type: CHANGE_PLAYER_AFTER_MOVE,
@@ -27,6 +29,11 @@ export const reset = (): ResetAction => ({
 export const setNumPlayers = (numPlayers: number): SetNumPlayersAction => ({
   type: SET_NUM_PLAYERS,
   numPlayers,
+});
+
+export const setCurrentPlayer = (player: number): setCurrentPlayerAction => ({
+  type: SET_CURRENT_PLAYER,
+  player,
 });
 
 export const setupPlayers = (setup: PlayerState): SetupPlayersAction => ({

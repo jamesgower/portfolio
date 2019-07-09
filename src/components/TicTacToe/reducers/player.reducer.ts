@@ -1,5 +1,4 @@
-import {
-  PlayerActionTypes,
+import PlayerActionTypes, {
   CHANGE_PLAYER_AFTER_MOVE,
   RESET,
   SET_NUM_PLAYERS,
@@ -7,7 +6,8 @@ import {
   PLAYER_SCORE,
   UPDATE_CURRENT_TURN,
   RESET_SCORE,
-} from "../interfaces/actions";
+  SET_CURRENT_PLAYER,
+} from "../interfaces/player.actions";
 import { PlayerState } from "../interfaces/components";
 
 const defaultPlayerState: PlayerState = {
@@ -76,6 +76,11 @@ export default (state = defaultPlayerState, action: PlayerActionTypes): PlayerSt
       return {
         ...state,
         currentTurn: action.turn,
+      };
+    case SET_CURRENT_PLAYER:
+      return {
+        ...state,
+        currentPlayer: action.player,
       };
     default:
       return state;
