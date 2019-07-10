@@ -6,7 +6,7 @@ import ChooseOpponents from "./ChooseOpponents";
 import HiddenNavBar from "../HiddenNavBar";
 import { SetupProps } from "./interfaces/components";
 
-const TicTacToeSetup: React.SFC<SetupProps> = ({ player }, props): JSX.Element => {
+const TicTacToeSetup: React.SFC<SetupProps> = ({ player }): JSX.Element => {
   const { noPlayers, readyToPlay } = player;
 
   return (
@@ -20,7 +20,7 @@ const TicTacToeSetup: React.SFC<SetupProps> = ({ player }, props): JSX.Element =
             <ChooseNames noPlayers={noPlayers} />
           )
         ) : (
-          <TicTacToe {...props} />
+          <TicTacToe />
         )}
       </div>
     </div>

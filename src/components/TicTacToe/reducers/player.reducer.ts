@@ -3,7 +3,8 @@ import PlayerActionTypes, {
   RESET,
   SET_NUM_PLAYERS,
   SETUP_PLAYERS,
-  PLAYER_SCORE,
+  PLAYER_ONE_SCORE,
+  PLAYER_TWO_SCORE,
   UPDATE_CURRENT_TURN,
   RESET_SCORE,
   SET_CURRENT_PLAYER,
@@ -48,16 +49,20 @@ export default (state = defaultPlayerState, action: PlayerActionTypes): PlayerSt
         ...action.setup,
         currentTurn: `It's ${action.setup.player1.name}'s turn.`,
       };
-    case PLAYER_SCORE:
+    case PLAYER_ONE_SCORE:
       return {
         ...state,
         player1: {
           ...state.player1,
-          score: action.player === 1 && state.player1.score + 1,
+          score: state.player1.score + 1,
         },
+      };
+    case PLAYER_TWO_SCORE:
+      return {
+        ...state,
         player2: {
           ...state.player2,
-          score: action.player === 2 && state.player2.score + 1,
+          score: state.player2.score + 1,
         },
       };
     case RESET_SCORE:

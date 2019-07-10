@@ -36,22 +36,22 @@ export interface NameProps {
 }
 
 export interface PlayProps {
-  player: PlayerState;
-  board: BoardState;
-  reset: () => void;
-  addMove: (board) => void;
-  changePlayer: () => void;
-  playerScore: (num) => void;
-  updateCurrentTurn: (turn) => void;
-  resetBoard: () => void;
-  resetScore: () => void;
-  setCurrentPlayer: (player) => void;
+  player?: PlayerState;
+  board?: BoardState;
+  reset?: () => void;
+  addMove?: (board) => void;
+  changePlayer?: () => void;
+  playerOneScore?: () => void;
+  playerTwoScore?: () => void;
+  updateCurrentTurn?: (turn) => void;
+  resetBoard?: () => void;
+  resetScore?: () => void;
+  setCurrentPlayer?: (player) => void;
 }
 
 export interface PlayState {
-  endGame: boolean;
+  disableClicks: boolean;
   gameFinished: boolean;
-  playerToStart: number;
 }
 
 export interface GameWon {
