@@ -8,14 +8,16 @@ import {
   SetupPlayersAction,
   SET_NUM_PLAYERS,
   SetNumPlayersAction,
-  PLAYER_SCORE,
-  PlayerScoreAction,
+  PLAYER_ONE_SCORE,
+  PLAYER_TWO_SCORE,
+  PlayerOneScoreAction,
+  PlayerTwoScoreAction,
   UPDATE_CURRENT_TURN,
   UpdateCurrentTurnAction,
   RESET_SCORE,
   ResetScoreAction,
   SET_CURRENT_PLAYER,
-  setCurrentPlayerAction,
+  SetCurrentPlayerAction,
 } from "../interfaces/player.actions";
 
 export const changePlayer = (): ChangePlayerAction => ({
@@ -31,7 +33,7 @@ export const setNumPlayers = (numPlayers: number): SetNumPlayersAction => ({
   numPlayers,
 });
 
-export const setCurrentPlayer = (player: number): setCurrentPlayerAction => ({
+export const setCurrentPlayer = (player: number): SetCurrentPlayerAction => ({
   type: SET_CURRENT_PLAYER,
   player,
 });
@@ -41,9 +43,12 @@ export const setupPlayers = (setup: PlayerState): SetupPlayersAction => ({
   setup,
 });
 
-export const playerScore = (player: number): PlayerScoreAction => ({
-  type: PLAYER_SCORE,
-  player,
+export const playerOneScore = (): PlayerOneScoreAction => ({
+  type: PLAYER_ONE_SCORE,
+});
+
+export const playerTwoScore = (): PlayerTwoScoreAction => ({
+  type: PLAYER_TWO_SCORE,
 });
 
 export const resetScore = (): ResetScoreAction => ({

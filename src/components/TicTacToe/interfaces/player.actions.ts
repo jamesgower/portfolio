@@ -4,7 +4,8 @@ export const CHANGE_PLAYER_AFTER_MOVE = "CHANGE_PLAYER_AFTER_MOVE";
 export const RESET = "RESET";
 export const SET_NUM_PLAYERS = "SET_NUM_PLAYERS";
 export const SETUP_PLAYERS = "SETUP_PLAYERS";
-export const PLAYER_SCORE = "PLAYER_SCORE";
+export const PLAYER_ONE_SCORE = "PLAYER_ONE_SCORE";
+export const PLAYER_TWO_SCORE = "PLAYER_TWO_SCORE";
 export const UPDATE_CURRENT_TURN = "UPDATE_CURRENT_TURN";
 export const RESET_SCORE = "RESET_SCORE";
 export const SET_CURRENT_PLAYER = "SET_CURRENT_PLAYER";
@@ -27,9 +28,12 @@ export interface SetupPlayersAction {
   setup: PlayerState;
 }
 
-export interface PlayerScoreAction {
-  type: typeof PLAYER_SCORE;
-  player: number;
+export interface PlayerOneScoreAction {
+  type: typeof PLAYER_ONE_SCORE;
+}
+
+export interface PlayerTwoScoreAction {
+  type: typeof PLAYER_TWO_SCORE;
 }
 
 export interface ResetScoreAction {
@@ -41,7 +45,7 @@ export interface UpdateCurrentTurnAction {
   turn: string;
 }
 
-export interface setCurrentPlayerAction {
+export interface SetCurrentPlayerAction {
   type: typeof SET_CURRENT_PLAYER;
   player: number;
 }
@@ -51,9 +55,10 @@ type PlayerActionTypes =
   | ResetAction
   | SetNumPlayersAction
   | SetupPlayersAction
-  | PlayerScoreAction
+  | PlayerOneScoreAction
+  | PlayerTwoScoreAction
   | ResetScoreAction
   | UpdateCurrentTurnAction
-  | setCurrentPlayerAction;
+  | SetCurrentPlayerAction;
 
 export default PlayerActionTypes;
