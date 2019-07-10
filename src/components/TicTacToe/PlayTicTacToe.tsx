@@ -1,15 +1,8 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { PlayProps, PlayState, GameWon, Move } from "./interfaces/components";
-import {
-  reset,
-  changePlayer,
-  updateCurrentTurn,
-  playerScore,
-  resetScore,
-  setCurrentPlayer,
-} from "./actions/player.action";
-import { resetBoard, addMove } from "./actions/board.action";
+import * as playerActions from "./actions/player.action";
+import * as boardActions from "./actions/board.action";
 
 /**
  * TODO
@@ -33,9 +26,8 @@ const winCombos = [
 
 class TicTacToe extends React.Component<PlayProps, PlayState> {
   public readonly state = {
-    endGame: false,
+    disableClicks: false,
     gameFinished: false,
-    playerToStart: 2,
   };
 
   public componentDidMount(): void {
@@ -50,25 +42,22 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
   }
 
   public componentWillUpdate(nextProps, nextState): void {
-    const { updateCurrentTurn, player } = this.props;
-    const { noPlayers, player1, player2 } = player;
+    const { player, updateCurrentTurn } = this.props;
+    const { player1, player2, noPlayers, currentPlayer } = player;
 
     document.getElementById("currentTurn").className = "";
     if (nextState.gameFinished) {
       nextState.gameFinished = false;
 
       setTimeout((): void => {
-        if (nextState.playerToStart === 2) {
+        if (currentPlayer === 1) {
           updateCurrentTurn(`It's ${player1.name}'s turn`);
         } else {
-          if (noPlayers === 1) {
-            updateCurrentTurn("AI is thinking...");
-          } else {
-            updateCurrentTurn(`It's ${player2.name}'s turn`);
-          }
+          noPlayers === 1
+            ? updateCurrentTurn("AI is thinking...")
+            : updateCurrentTurn(`It's ${player2.name}'s turn`);
         }
-      }, 1400);
-
+      }, 1500);
       this.onResetBoard();
     }
   }
@@ -81,47 +70,44 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
   }
 
   private onTileClick = (event): void => {
-    const { player, board, updateCurrentTurn } = this.props;
+    const { player, board } = this.props;
     const { noPlayers, player1, player2, currentPlayer } = player;
     const { tiles } = board;
-
-    const id = event.target.id;
+    const { id } = event.target;
     document.getElementById("currentTurn").className = "";
 
     if (typeof tiles[id] === "number") {
-      if (!this.checkTie() && noPlayers === 1) {
-        this.takeTurn(id, player1.counter);
-        if (!this.checkTie() && !this.checkWin(player1.counter)) {
-          this.setState({ endGame: true });
-          updateCurrentTurn("AI is thinking...");
+      this.checkTie();
+      if (noPlayers === 1) {
+        const aiTurn = this.takeTurn(id, player1.counter);
+        this.setState({ disableClicks: true });
+        if (aiTurn) {
           setTimeout((): void => {
             this.takeAITurn();
           }, 1000);
         }
+      } else if (currentPlayer === 1) {
+        this.takeTurn(id, player1.counter);
       } else {
-        if (currentPlayer === 1) {
-          this.takeTurn(id, player1.counter);
-        } else if (currentPlayer === 2 && !this.checkTie()) {
-          this.takeTurn(id, player2.counter);
-        }
+        this.takeTurn(id, player2.counter);
       }
     }
   };
 
   private takeAITurn = (): void => {
-    const { player } = this.props;
+    const { player, changePlayer } = this.props;
     const { player1, player2 } = player;
-    if (!this.checkTie() && !this.checkWin(player1.counter)) {
+    if (!this.checkTie()) {
       this.takeTurn(this.bestSpot(), player2.counter);
-      if (!this.checkTie() && !this.checkWin(player2.counter)) {
-        this.setState({ endGame: false });
+      if (!this.checkTie()) {
+        this.setState({ disableClicks: false });
       }
     }
   };
 
-  private takeTurn = (squareId: string, playerCounter: string): void => {
-    const { player, addMove, changePlayer, board, updateCurrentTurn } = this.props;
-    const { currentPlayer, player1, player2 } = player;
+  private takeTurn = (squareId: string, playerCounter: string): boolean => {
+    const { player, addMove, board, updateCurrentTurn, setCurrentPlayer } = this.props;
+    const { currentPlayer, player1, player2, noPlayers } = player;
     const { tiles } = board;
 
     // ! CHANGE TO MAPPING SOON (addMove) //
@@ -136,25 +122,34 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
         ? "tile-text-p1 animated fadeIn"
         : "tile-text-p2 animated fadeIn";
 
-    currentPlayer === 1 ? this.checkWin(player1.counter) : this.checkWin(player2.counter);
-    if (currentPlayer === 1) {
-      updateCurrentTurn(`It's ${player2.name}'s turn`);
-    } else {
-      updateCurrentTurn(`It's ${player1.name}'s turn`);
+    if (!this.checkWin(playerCounter)) {
+      if (currentPlayer === 1) {
+        setCurrentPlayer(2);
+        noPlayers === 1
+          ? updateCurrentTurn("AI is thinking...")
+          : updateCurrentTurn(`It's ${player2.name}'s turn`);
+      } else {
+        setCurrentPlayer(1);
+        updateCurrentTurn(`It's ${player1.name}'s turn`);
+      }
+      return true;
     }
-    changePlayer();
+    return false;
   };
 
   public checkWin = (counter, minMax?: boolean): GameWon => {
     const { board } = this.props;
     const { tiles } = board;
 
-    const plays = tiles.reduce((a, e, i) => (e === counter ? a.concat(i) : a), []);
+    const plays = tiles.reduce(
+      (a, e, i): number[] => (e === counter ? a.concat(i) : a),
+      [],
+    );
     let gameWon = null;
     for (const [index, win] of winCombos.entries()) {
-      if (win.every((elem) => plays.indexOf(elem) > -1)) {
+      if (win.every((elem: number): boolean => plays.indexOf(elem) > -1)) {
         gameWon = {
-          index: index,
+          index,
           player: counter,
         };
         break;
@@ -167,17 +162,14 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
   };
 
   private checkTie = (): boolean => {
-    const { updateCurrentTurn, player } = this.props;
-    const { currentPlayer, noPlayers, player1, player2 } = player;
-    const { playerToStart } = this.state;
+    const { updateCurrentTurn } = this.props;
 
     if (this.emptyTiles().length === 0 && !this.checkWin("X") && !this.checkWin("O")) {
       updateCurrentTurn("It's a draw!");
       setTimeout((): void => {
         this.setState({
-          endGame: true,
+          disableClicks: true,
           gameFinished: true,
-          playerToStart: playerToStart === 1 ? 2 : 1,
         });
       }, 1000);
       return true;
@@ -186,41 +178,36 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
   };
 
   private gameOver = (gameWon: GameWon): void => {
-    const { player, playerScore, updateCurrentTurn } = this.props;
-    const { player1, player2, noPlayers } = player;
-    const { playerToStart } = this.state;
+    const {
+      player,
+      changePlayer,
+      playerOneScore,
+      playerTwoScore,
+      updateCurrentTurn,
+    } = this.props;
+    const { player1, player2, noPlayers, currentPlayer } = player;
 
     for (const index of winCombos[gameWon.index]) {
       document.getElementById(index).style.backgroundColor =
         gameWon.player === player1.counter ? "green" : "red";
       document.getElementById(index).className = "tile-text animated tada";
     }
-    if (noPlayers === 1) {
-      gameWon.player === player1.counter
-        ? document.getElementById("p1score").classList.add("scoringAnimation")
-        : document.getElementById("p2score").classList.add("scoringAnimation");
 
-      if (gameWon.player === player1.counter) {
-        playerScore(1);
-        updateCurrentTurn(`${player1.name} Wins!`);
-      } else {
-        playerScore(2);
-        updateCurrentTurn("The Computer Wins!");
-      }
+    gameWon.player === player1.counter
+      ? document.getElementById("p1score").classList.add("scoringAnimation")
+      : document.getElementById("p2score").classList.add("scoringAnimation");
+
+    changePlayer();
+    if (gameWon.player === player1.counter) {
+      playerOneScore();
+      updateCurrentTurn(`${player1.name} Wins!`);
     } else {
-      if (gameWon.player === player1.counter) {
-        playerScore(1);
-        updateCurrentTurn(`${player1.name} Wins!`);
-      } else {
-        playerScore(2);
-        updateCurrentTurn(`${player2.name} Wins!`);
-      }
+      playerTwoScore();
+      updateCurrentTurn(noPlayers === 1 ? "The Computer Wins!" : `${player2.name} Wins!`);
     }
-
     this.setState({
-      endGame: true,
+      disableClicks: true,
       gameFinished: true,
-      playerToStart: playerToStart === 1 ? 2 : 1,
     });
 
     document.getElementById("currentTurn").className = "";
@@ -230,7 +217,7 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
     const { resetBoard, resetScore } = this.props;
     setTimeout((): void => {
       this.setState({
-        endGame: false,
+        disableClicks: false,
       });
       resetScore();
       resetBoard();
@@ -246,13 +233,13 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
   private emptyTiles = (): number[] => {
     const { board } = this.props;
     const { tiles } = board;
-    return tiles.filter((tile: number): boolean => typeof tile == "number");
+    return tiles.filter((tile: number): boolean => typeof tile === "number");
   };
 
   private bestSpot = (): string => {
     const { player } = this.props;
     const { difficulty, player2 } = player;
-    const length = this.emptyTiles().length;
+    const { length } = this.emptyTiles();
     const randomNum = Math.floor(Math.random() * Math.floor(length));
 
     switch (difficulty) {
@@ -265,49 +252,32 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
         return this.emptyTiles()[randomNum].toString();
       case 3:
         return this.minimax(player2.counter).index.toString();
+      default:
+        return null;
     }
   };
 
   private onResetBoard = (): void => {
-    const { player, resetBoard, setCurrentPlayer } = this.props;
-    const { noPlayers, currentPlayer, player1, player2 } = player;
-    const { playerToStart } = this.state;
+    const { player, resetBoard } = this.props;
+    const { noPlayers, currentPlayer } = player;
 
-    setTimeout(async (): Promise<void> => {
+    setTimeout((): void => {
       for (let i = 0; i < 9; i++) {
         const index = i.toString();
         document.getElementById(index).style.background = "none";
         document.getElementById(index).innerText = "";
       }
 
-      currentPlayer === 1
-        ? updateCurrentTurn(`It's ${player2.name}'s turn`)
-        : noPlayers === 1
-        ? updateCurrentTurn(`It's ${player1.name}'s turn`)
-        : updateCurrentTurn("AI is thinking...");
-
       resetBoard();
-      if (currentPlayer !== playerToStart) {
-        await setCurrentPlayer(playerToStart);
-      }
 
-      if (noPlayers === 2) {
-        this.setState({
-          endGame: false,
-        });
+      if (noPlayers === 1 && currentPlayer === 2) {
+        setTimeout((): void => {
+          this.takeAITurn();
+        }, 1000);
       } else {
-        if (playerToStart === 2) {
-          updateCurrentTurn("AI is thinking...");
-          setTimeout((): void => {
-            this.takeTurn(this.bestSpot(), player2.counter);
-            this.setState({ endGame: false });
-          }, 1000);
-        } else {
-          this.setState({ endGame: false });
-
-          updateCurrentTurn(`It's ${player1.name}'s turn`);
-        }
+        this.setState({ disableClicks: false });
       }
+
       document.getElementById("p1score").className = "";
       document.getElementById("p2score").className = "";
     }, 1500);
@@ -323,11 +293,13 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
       return {
         score: -10,
       };
-    } else if (this.checkWin(player2.counter, true)) {
+    }
+    if (this.checkWin(player2.counter, true)) {
       return {
         score: 10,
       };
-    } else if (availSpots.length === 0) {
+    }
+    if (availSpots.length === 0) {
       return {
         score: 0,
       };
@@ -338,7 +310,7 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
       const move: Move = {};
       move.index = tiles[availSpots[i]];
       tiles[availSpots[i]] = counter;
-      if (counter == player2.counter) {
+      if (counter === player2.counter) {
         const result = this.minimax(player1.counter);
         move.score = result.score;
       } else {
@@ -376,7 +348,7 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
       fontFamily: "Oswald",
     };
 
-    const { endGame } = this.state;
+    const { disableClicks } = this.state;
     const { player } = this.props;
     const { difficulty, noPlayers, player1, player2, currentTurn } = player;
     return (
@@ -411,7 +383,7 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
               id="0"
               role="button"
               tabIndex={0}
-              onClick={!endGame ? this.onTileClick : undefined}
+              onClick={!disableClicks ? this.onTileClick : undefined}
             />
           </div>
           <div className="tile">
@@ -420,7 +392,7 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
               id="1"
               role="button"
               tabIndex={0}
-              onClick={!endGame ? this.onTileClick : undefined}
+              onClick={!disableClicks ? this.onTileClick : undefined}
             />
           </div>
           <div className="tile">
@@ -429,7 +401,7 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
               id="2"
               role="button"
               tabIndex={0}
-              onClick={!endGame ? this.onTileClick : undefined}
+              onClick={!disableClicks ? this.onTileClick : undefined}
             />
           </div>
           <div className="tile">
@@ -438,7 +410,7 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
               id="3"
               role="button"
               tabIndex={0}
-              onClick={!endGame ? this.onTileClick : undefined}
+              onClick={!disableClicks ? this.onTileClick : undefined}
             />
           </div>
           <div className="tile">
@@ -447,7 +419,7 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
               id="4"
               role="button"
               tabIndex={0}
-              onClick={!endGame ? this.onTileClick : undefined}
+              onClick={!disableClicks ? this.onTileClick : undefined}
             />
           </div>
           <div className="tile">
@@ -456,7 +428,7 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
               id="5"
               role="button"
               tabIndex={0}
-              onClick={!endGame ? this.onTileClick : undefined}
+              onClick={!disableClicks ? this.onTileClick : undefined}
             />
           </div>
           <div className="tile">
@@ -465,7 +437,7 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
               id="6"
               role="button"
               tabIndex={0}
-              onClick={!endGame ? this.onTileClick : undefined}
+              onClick={!disableClicks ? this.onTileClick : undefined}
             />
           </div>
           <div className="tile">
@@ -474,7 +446,7 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
               id="7"
               role="button"
               tabIndex={0}
-              onClick={!endGame ? this.onTileClick : undefined}
+              onClick={!disableClicks ? this.onTileClick : undefined}
             />
           </div>
           <div className="tile">
@@ -483,7 +455,7 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
               id="8"
               role="button"
               tabIndex={0}
-              onClick={!endGame ? this.onTileClick : undefined}
+              onClick={!disableClicks ? this.onTileClick : undefined}
             />
           </div>
         </div>
@@ -493,14 +465,17 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
 }
 
 const mapDispatchToProps = (dispatch): any => ({
-  reset: (): void => dispatch(reset()),
-  changePlayer: (): void => dispatch(changePlayer()),
-  updateCurrentTurn: (turn: string): void => dispatch(updateCurrentTurn(turn)),
-  playerScore: (player: number): void => dispatch(playerScore(player)),
-  resetScore: (): void => dispatch(resetScore()),
-  resetBoard: (): void => dispatch(resetBoard()),
-  addMove: (board): void => dispatch(addMove(board)),
-  setCurrentPlayer: (player: number): void => dispatch(setCurrentPlayer(player)),
+  reset: (): void => dispatch(playerActions.reset()),
+  changePlayer: (): void => dispatch(playerActions.changePlayer()),
+  updateCurrentTurn: (turn: string): void =>
+    dispatch(playerActions.updateCurrentTurn(turn)),
+  playerOneScore: (): void => dispatch(playerActions.playerOneScore()),
+  playerTwoScore: (): void => dispatch(playerActions.playerTwoScore()),
+  resetScore: (): void => dispatch(playerActions.resetScore()),
+  resetBoard: (): void => dispatch(boardActions.resetBoard()),
+  addMove: (board): void => dispatch(boardActions.addMove(board)),
+  setCurrentPlayer: (player: number): void =>
+    dispatch(playerActions.setCurrentPlayer(player)),
 });
 
 const mapStateToProps = ({ player, board }) => ({ player, board });
