@@ -1,11 +1,5 @@
 import thunk from "redux-thunk";
-import {
-  createStore,
-  combineReducers,
-  applyMiddleware,
-  compose,
-  Store,
-} from "redux";
+import { createStore, combineReducers, applyMiddleware, compose, Store } from "redux";
 import playerReducer from "../reducers/player.reducer";
 import boardReducer from "../reducers/board.reducer";
 

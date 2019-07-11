@@ -2,25 +2,32 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Button, Input, Row, Col } from "reactstrap";
 import { NameState, NameProps } from "./interfaces/components";
-import { reset, setupPlayers } from "./actions/player.action";
+import * as playerActions from "./actions/player.action";
 
 class ChooseNames extends React.Component<NameProps, NameState> {
   public readonly state: NameState = {
     player1: {
       name: "",
       counter: "X",
-      score: 0,
     },
     player2: {
       name: "",
       counter: "O",
-      score: 0,
     },
     difficulty: 2,
-    readyToPlay: false,
   };
 
   public componentDidMount(): void {
+    const { player2 } = this.state;
+    const { noPlayers } = this.props;
+    if (noPlayers === 1) {
+      this.setState({
+        player2: {
+          ...player2,
+          name: "Normal AI",
+        },
+      });
+    }
     document.getElementById("players-TTT").classList.add("animated", "fadeIn");
   }
 
@@ -60,27 +67,43 @@ class ChooseNames extends React.Component<NameProps, NameState> {
   };
 
   private onChangeDifficulty = (difficulty: number): void => {
-    this.setState({ difficulty });
+    let name;
+    switch (difficulty) {
+      case 1:
+        name = "Easy AI";
+        break;
+      case 2:
+        name = "Normal AI";
+        break;
+      case 3:
+        name = "Unbeatable AI";
+        break;
+      default:
+        break;
+    }
+
+    const { player2 } = this.state;
+    this.setState({
+      difficulty,
+      player2: {
+        ...player2,
+        name,
+      },
+    });
   };
 
   private onSubmit = (): void => {
-    const { player1, player2 } = this.state;
+    const { player1, player2, difficulty } = this.state;
     const { setupPlayers } = this.props;
 
-    const state = {
-      ...this.state,
-      player1: {
-        ...player1,
-        name: player1.name.length === 0 ? "Player 1" : player1.name,
-      },
-      player2: {
-        ...player2,
-        name: player2.name.length === 0 ? "Player 2" : player2.name,
-      },
-      readyToPlay: true,
-    };
+    if (player1.name.length === 0) {
+      player1.name = "Player 1";
+    }
+    if (player2.name.length === 0) {
+      player2.name = "Player 2";
+    }
 
-    setupPlayers(state);
+    setupPlayers(player1, player2, difficulty);
   };
 
   public render(): JSX.Element {
@@ -198,12 +221,7 @@ class ChooseNames extends React.Component<NameProps, NameState> {
             tabIndex={0}
           >
             <p className="counterLbl">
-              {noPlayers === 1
-                ? "Computer"
-                : player2.name.length > 0
-                ? player2.name
-                : "Player 2"}
-              :
+              {player2.name.length > 0 ? player2.name : "Player 2"}:
             </p>
             <div className="counter">{player2.counter}</div>
           </div>
@@ -224,9 +242,10 @@ class ChooseNames extends React.Component<NameProps, NameState> {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  reset: (): void => dispatch(reset()),
-  setupPlayers: (state): void => dispatch(setupPlayers(state)),
+const mapDispatchToProps = (dispatch): any => ({
+  reset: (): void => dispatch(playerActions.reset()),
+  setupPlayers: (player1, player2, difficulty): void =>
+    dispatch(playerActions.setupPlayers(player1, player2, difficulty)),
 });
 
 export default connect(
