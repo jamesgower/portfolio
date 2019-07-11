@@ -11,6 +11,8 @@ import * as boardActions from "./actions/board.action";
  * [ ] Fix reset after result
  * [ ] Create tile component instead of divs ??
  * [ ] Fix correct names for next player when outcome is achieved.
+ *
+ * !! TAKE TURN AND ONTILECLICK NEEDS FIX
  */
 
 const winCombos = [
@@ -42,23 +44,22 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
   }
 
   public componentWillUpdate(nextProps, nextState): void {
-    const { player, updateCurrentTurn } = this.props;
-    const { player1, player2, noPlayers, currentPlayer } = player;
-
     document.getElementById("currentTurn").className = "";
     if (nextState.gameFinished) {
       nextState.gameFinished = false;
-
       setTimeout((): void => {
+        const { player, updateCurrentTurn, changePlayer } = this.props;
+        const { player1, player2, noPlayers, currentPlayer } = player;
+
         if (currentPlayer === 1) {
-          updateCurrentTurn(`It's ${player1.name}'s turn`);
+          updateCurrentTurn(`It's ${player1.name}'s turn.`);
         } else {
           noPlayers === 1
             ? updateCurrentTurn("AI is thinking...")
-            : updateCurrentTurn(`It's ${player2.name}'s turn`);
+            : updateCurrentTurn(`It's ${player2.name}'s turn.`);
         }
+        this.onResetBoard();
       }, 1500);
-      this.onResetBoard();
     }
   }
 
@@ -77,7 +78,6 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
     document.getElementById("currentTurn").className = "";
 
     if (typeof tiles[id] === "number") {
-      this.checkTie();
       if (noPlayers === 1) {
         const aiTurn = this.takeTurn(id, player1.counter);
         this.setState({ disableClicks: true });
@@ -95,18 +95,21 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
   };
 
   private takeAITurn = (): void => {
-    const { player, changePlayer } = this.props;
-    const { player1, player2 } = player;
-    if (!this.checkTie()) {
-      this.takeTurn(this.bestSpot(), player2.counter);
-      if (!this.checkTie()) {
-        this.setState({ disableClicks: false });
-      }
-    }
+    const { player } = this.props;
+    const { player2 } = player;
+    this.takeTurn(this.bestSpot(), player2.counter);
+    this.setState({ disableClicks: false });
   };
 
   private takeTurn = (squareId: string, playerCounter: string): boolean => {
-    const { player, addMove, board, updateCurrentTurn, setCurrentPlayer } = this.props;
+    const {
+      player,
+      addMove,
+      board,
+      updateCurrentTurn,
+      setCurrentPlayer,
+      changePlayer,
+    } = this.props;
     const { currentPlayer, player1, player2, noPlayers } = player;
     const { tiles } = board;
 
@@ -122,16 +125,17 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
         ? "tile-text-p1 animated fadeIn"
         : "tile-text-p2 animated fadeIn";
 
-    if (!this.checkWin(playerCounter)) {
+    const draw = this.checkTie();
+    const won = this.checkWin(playerCounter);
+    if (!won && !draw) {
       if (currentPlayer === 1) {
-        setCurrentPlayer(2);
         noPlayers === 1
           ? updateCurrentTurn("AI is thinking...")
           : updateCurrentTurn(`It's ${player2.name}'s turn`);
       } else {
-        setCurrentPlayer(1);
         updateCurrentTurn(`It's ${player1.name}'s turn`);
       }
+      changePlayer();
       return true;
     }
     return false;
@@ -162,7 +166,7 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
   };
 
   private checkTie = (): boolean => {
-    const { updateCurrentTurn } = this.props;
+    const { updateCurrentTurn, changePlayer } = this.props;
 
     if (this.emptyTiles().length === 0 && !this.checkWin("X") && !this.checkWin("O")) {
       updateCurrentTurn("It's a draw!");
@@ -172,6 +176,7 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
           gameFinished: true,
         });
       }, 1000);
+      changePlayer();
       return true;
     }
     return false;
@@ -179,13 +184,10 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
 
   private gameOver = (gameWon: GameWon): void => {
     const {
-      player,
-      changePlayer,
+      player: { player1 },
       playerOneScore,
       playerTwoScore,
-      updateCurrentTurn,
     } = this.props;
-    const { player1, player2, noPlayers, currentPlayer } = player;
 
     for (const index of winCombos[gameWon.index]) {
       document.getElementById(index).style.backgroundColor =
@@ -197,14 +199,8 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
       ? document.getElementById("p1score").classList.add("scoringAnimation")
       : document.getElementById("p2score").classList.add("scoringAnimation");
 
-    changePlayer();
-    if (gameWon.player === player1.counter) {
-      playerOneScore();
-      updateCurrentTurn(`${player1.name} Wins!`);
-    } else {
-      playerTwoScore();
-      updateCurrentTurn(noPlayers === 1 ? "The Computer Wins!" : `${player2.name} Wins!`);
-    }
+    gameWon.player === player1.counter ? playerOneScore() : playerTwoScore();
+
     this.setState({
       disableClicks: true,
       gameFinished: true,
@@ -258,29 +254,27 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
   };
 
   private onResetBoard = (): void => {
-    const { player, resetBoard } = this.props;
+    const { player, resetBoard, changePlayer } = this.props;
     const { noPlayers, currentPlayer } = player;
 
-    setTimeout((): void => {
-      for (let i = 0; i < 9; i++) {
-        const index = i.toString();
-        document.getElementById(index).style.background = "none";
-        document.getElementById(index).innerText = "";
-      }
+    for (let i = 0; i < 9; i++) {
+      const index = i.toString();
+      document.getElementById(index).style.background = "none";
+      document.getElementById(index).innerText = "";
+    }
 
-      resetBoard();
+    resetBoard();
 
-      if (noPlayers === 1 && currentPlayer === 2) {
-        setTimeout((): void => {
-          this.takeAITurn();
-        }, 1000);
-      } else {
-        this.setState({ disableClicks: false });
-      }
+    if (noPlayers === 1 && currentPlayer === 2) {
+      setTimeout((): void => {
+        this.takeAITurn();
+      }, 1000);
+    } else {
+      this.setState({ disableClicks: false });
+    }
 
-      document.getElementById("p1score").className = "";
-      document.getElementById("p2score").className = "";
-    }, 1500);
+    document.getElementById("p1score").className = "";
+    document.getElementById("p2score").className = "";
   };
 
   private minimax = (counter): Move => {
@@ -350,7 +344,14 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
 
     const { disableClicks } = this.state;
     const { player } = this.props;
-    const { difficulty, noPlayers, player1, player2, currentTurn } = player;
+    const {
+      difficulty,
+      noPlayers,
+      player1,
+      player2,
+      currentTurn,
+      currentPlayer,
+    } = player;
     return (
       <div style={styles}>
         <div className="scores">
@@ -359,6 +360,7 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
               {player1.name || "Player 1"}:{" "}
             </div>
             <div id="p1score">{player1.score}</div>
+            <div>{currentPlayer}</div>
           </div>
           <div className="player2score">
             <div className="player2Label animated slideInRight">
@@ -472,10 +474,10 @@ const mapDispatchToProps = (dispatch): any => ({
   playerOneScore: (): void => dispatch(playerActions.playerOneScore()),
   playerTwoScore: (): void => dispatch(playerActions.playerTwoScore()),
   resetScore: (): void => dispatch(playerActions.resetScore()),
-  resetBoard: (): void => dispatch(boardActions.resetBoard()),
-  addMove: (board): void => dispatch(boardActions.addMove(board)),
   setCurrentPlayer: (player: number): void =>
     dispatch(playerActions.setCurrentPlayer(player)),
+  resetBoard: (): void => dispatch(boardActions.resetBoard()),
+  addMove: (board): void => dispatch(boardActions.addMove(board)),
 });
 
 const mapStateToProps = ({ player, board }) => ({ player, board });

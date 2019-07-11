@@ -56,6 +56,8 @@ export default (state = defaultPlayerState, action: PlayerActionTypes): PlayerSt
           ...state.player1,
           score: state.player1.score + 1,
         },
+        currentPlayer: 2,
+        currentTurn: `${state.player1.name} wins!`,
       };
     case PLAYER_TWO_SCORE:
       return {
@@ -64,6 +66,8 @@ export default (state = defaultPlayerState, action: PlayerActionTypes): PlayerSt
           ...state.player2,
           score: state.player2.score + 1,
         },
+        currentPlayer: 1,
+        currentTurn: `${state.player2.name} wins!`,
       };
     case RESET_SCORE:
       return {
