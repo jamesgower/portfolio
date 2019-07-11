@@ -47,6 +47,7 @@
     ],
     "no-param-reassign": "off",
     "no-shadow": "off",
-    "class-methods-use-this": "error"
+    "class-methods-use-this": "error",
+    "no-nested-ternary": "off"
   }
 }

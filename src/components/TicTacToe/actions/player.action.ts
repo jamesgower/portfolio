@@ -1,4 +1,4 @@
-import { PlayerState } from "../interfaces/components";
+import { Player } from "../interfaces/components";
 import {
   CHANGE_PLAYER_AFTER_MOVE,
   ChangePlayerAction,
@@ -38,9 +38,15 @@ export const setCurrentPlayer = (player: number): SetCurrentPlayerAction => ({
   player,
 });
 
-export const setupPlayers = (setup: PlayerState): SetupPlayersAction => ({
+export const setupPlayers = (
+  player1: Player,
+  player2: Player,
+  difficulty: number,
+): SetupPlayersAction => ({
   type: SETUP_PLAYERS,
-  setup,
+  player1,
+  player2,
+  difficulty,
 });
 
 export const playerOneScore = (): PlayerOneScoreAction => ({

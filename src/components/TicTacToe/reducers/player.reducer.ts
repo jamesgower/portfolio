@@ -46,8 +46,17 @@ export default (state = defaultPlayerState, action: PlayerActionTypes): PlayerSt
     case SETUP_PLAYERS:
       return {
         ...state,
-        ...action.setup,
-        currentTurn: `It's ${action.setup.player1.name}'s turn.`,
+        player1: {
+          ...state.player1,
+          ...action.player1,
+        },
+        player2: {
+          ...state.player2,
+          ...action.player2,
+        },
+        difficulty: action.difficulty,
+        readyToPlay: true,
+        currentTurn: `It's ${action.player1.name}'s turn.`,
       };
     case PLAYER_ONE_SCORE:
       return {

@@ -12,6 +12,7 @@ const initialState: HiddenNavState = {
 
 class HiddenNavBar extends React.Component<{}, HiddenNavState> {
   public readonly state = initialState;
+
   private navBurgerRef = React.createRef<HTMLElement>();
 
   private onOpenNav = (): void => {

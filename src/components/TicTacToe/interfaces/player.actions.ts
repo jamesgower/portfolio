@@ -1,4 +1,4 @@
-import { PlayerState } from "./components";
+import { Player } from "./components";
 
 export const CHANGE_PLAYER_AFTER_MOVE = "CHANGE_PLAYER_AFTER_MOVE";
 export const RESET = "RESET";
@@ -25,7 +25,9 @@ export interface SetNumPlayersAction {
 
 export interface SetupPlayersAction {
   type: typeof SETUP_PLAYERS;
-  setup: PlayerState;
+  player1: Player;
+  player2: Player;
+  difficulty: number;
 }
 
 export interface PlayerOneScoreAction {
