@@ -19,20 +19,19 @@ export interface SetupProps {
 export interface Player {
   name: string;
   counter: string;
-  score: number;
+  score?: number;
 }
 
 export interface NameState {
   player1: Player;
   player2: Player;
   difficulty: number;
-  readyToPlay: boolean;
 }
 
 export interface NameProps {
   noPlayers: number;
   reset?: (e) => void;
-  setupPlayers?: (state) => void;
+  setupPlayers?: (player1, player2, difficulty) => void;
 }
 
 export interface PlayProps {

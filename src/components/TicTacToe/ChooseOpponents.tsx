@@ -52,7 +52,7 @@ const ChooseOpponents: React.SFC<ChooseOpponentsProps> = ({
   );
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   setNumPlayers: (num: number): void => dispatch(setNumPlayers(num)),
 });
 

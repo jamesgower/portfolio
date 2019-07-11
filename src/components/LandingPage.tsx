@@ -5,7 +5,7 @@ import TypedJSText from "./TypedJSText";
 
 const meImg = require("../../public/images/displayImg.jpg");
 
-const LandingPage = (): JSX.Element => (
+const LandingPage: React.SFC = (): JSX.Element => (
   <div className="landingPageBackground">
     <img src={meImg} alt="Me!" className="profileImg" />
     <div className="button__container">
