@@ -3,16 +3,18 @@ import { connect } from "react-redux";
 import { PlayProps, PlayState, GameWon, Move } from "./interfaces/components";
 import * as playerActions from "./actions/player.action";
 import * as boardActions from "./actions/board.action";
+import Tile from "./Tile";
 
 /**
  * TODO
  * [x] Fix onTileClick
  * [ ] Refactor
- * [ ] Fix reset after result
- * [ ] Create tile component instead of divs ??
- * [ ] Fix correct names for next player when outcome is achieved.
- *
- * !! TAKE TURN AND ONTILECLICK NEEDS FIX
+ * [x] Fix reset after result
+ * [x] Create tile component instead of divs ??
+ * [x] Fix correct names for next player when outcome is achieved.
+ * [x] Set medium difficulty to be 50/50 chance of minimax
+ * [x] Set easy difficulty to be random
+ * [ ] Fix bug when draw is achieved on last move
  */
 
 const winCombos = [
@@ -30,6 +32,7 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
   public readonly state = {
     disableClicks: false,
     gameFinished: false,
+    tileData: ["0", "1", "2", "3", "4", "5", "6", "7", "8"],
   };
 
   public componentDidMount(): void {
@@ -70,30 +73,6 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
     }, 300);
   }
 
-  private onTileClick = (event): void => {
-    const { player, board } = this.props;
-    const { noPlayers, player1, player2, currentPlayer } = player;
-    const { tiles } = board;
-    const { id } = event.target;
-    document.getElementById("currentTurn").className = "";
-
-    if (typeof tiles[id] === "number") {
-      if (noPlayers === 1) {
-        const aiTurn = this.takeTurn(id, player1.counter);
-        this.setState({ disableClicks: true });
-        if (aiTurn) {
-          setTimeout((): void => {
-            this.takeAITurn();
-          }, 1000);
-        }
-      } else if (currentPlayer === 1) {
-        this.takeTurn(id, player1.counter);
-      } else {
-        this.takeTurn(id, player2.counter);
-      }
-    }
-  };
-
   private takeAITurn = (): void => {
     const { player } = this.props;
     const { player2 } = player;
@@ -125,9 +104,8 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
         ? "tile-text-p1 animated fadeIn"
         : "tile-text-p2 animated fadeIn";
 
-    const draw = this.checkTie();
-    const won = this.checkWin(playerCounter);
-    if (!won && !draw) {
+    const gameOver = this.checkWin(playerCounter);
+    if (!gameOver) {
       if (currentPlayer === 1) {
         noPlayers === 1
           ? updateCurrentTurn("AI is thinking...")
@@ -142,6 +120,7 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
   };
 
   public checkWin = (counter, minMax?: boolean): GameWon => {
+    const { updateCurrentTurn, changePlayer } = this.props;
     const { board } = this.props;
     const { tiles } = board;
 
@@ -159,16 +138,12 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
         break;
       }
     }
+
     if (gameWon && !minMax) {
       this.gameOver(gameWon);
     }
-    return gameWon;
-  };
 
-  private checkTie = (): boolean => {
-    const { updateCurrentTurn, changePlayer } = this.props;
-
-    if (this.emptyTiles().length === 0 && !this.checkWin("X") && !this.checkWin("O")) {
+    if (!gameWon && !minMax && this.emptyTiles().length === 0) {
       updateCurrentTurn("It's a draw!");
       setTimeout((): void => {
         this.setState({
@@ -177,9 +152,8 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
         });
       }, 1000);
       changePlayer();
-      return true;
     }
-    return false;
+    return gameWon;
   };
 
   private gameOver = (gameWon: GameWon): void => {
@@ -227,6 +201,9 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
   };
 
   private emptyTiles = (): number[] => {
+    /**
+     * Return all of the tiles which are empty (typeof number)
+     */
     const { board } = this.props;
     const { tiles } = board;
     return tiles.filter((tile: number): boolean => typeof tile === "number");
@@ -238,23 +215,38 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
     const { length } = this.emptyTiles();
     const randomNum = Math.floor(Math.random() * Math.floor(length));
 
+    const miniMax = Math.floor(Math.random() * Math.floor(2)) === 1;
+
     switch (difficulty) {
       case 1:
-        return this.emptyTiles()[0].toString();
-      case 2:
-        if (length === 1) {
-          return this.emptyTiles()[0].toString();
-        }
         return this.emptyTiles()[randomNum].toString();
+      /**
+       * Easy difficulty -> Pick a random spot to place a counter
+       */
+      case 2:
+        return miniMax
+          ? this.minimax(player2.counter).index.toString()
+          : length === 1
+          ? this.emptyTiles()[0].toString()
+          : this.emptyTiles()[randomNum].toString();
+      /**
+       * Normal difficulty -> There is a 50/50 chance that the AI will
+       * choose the best possible move, or choose a random spot to place
+       * a counter in.
+       */
       case 3:
         return this.minimax(player2.counter).index.toString();
+      /**
+       * Unbeatable difficulty -> The AI will always choose the best option
+       * to place a counter. Cannot be beaten.
+       */
       default:
         return null;
     }
   };
 
   private onResetBoard = (): void => {
-    const { player, resetBoard, changePlayer } = this.props;
+    const { player, resetBoard } = this.props;
     const { noPlayers, currentPlayer } = player;
 
     for (let i = 0; i < 9; i++) {
@@ -342,16 +334,9 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
       fontFamily: "Oswald",
     };
 
-    const { disableClicks } = this.state;
-    const { player } = this.props;
-    const {
-      difficulty,
-      noPlayers,
-      player1,
-      player2,
-      currentTurn,
-      currentPlayer,
-    } = player;
+    const { disableClicks, tileData } = this.state;
+    const { player, board } = this.props;
+    const { player1, player2, currentTurn } = player;
     return (
       <div style={styles}>
         <div className="scores">
@@ -360,17 +345,9 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
               {player1.name || "Player 1"}:{" "}
             </div>
             <div id="p1score">{player1.score}</div>
-            <div>{currentPlayer}</div>
           </div>
           <div className="player2score">
-            <div className="player2Label animated slideInRight">
-              {noPlayers === 2
-                ? player2.name
-                : `${(difficulty === 1 && "Easy") ||
-                    (difficulty === 2 && "Normal") ||
-                    (difficulty === 3 && "Unbeatable")} AI`}
-              :
-            </div>
+            <div className="player2Label animated slideInRight">{player2.name}</div>
             <div id="p2score">{player2.score}</div>
           </div>
         </div>
@@ -379,87 +356,20 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
           <i className="fa fa-undo" />
         </div>
         <div className="grid">
-          <div className="tile">
-            <div
-              className="tile-text"
-              id="0"
-              role="button"
-              tabIndex={0}
-              onClick={!disableClicks ? this.onTileClick : undefined}
-            />
-          </div>
-          <div className="tile">
-            <div
-              className="tile-text"
-              id="1"
-              role="button"
-              tabIndex={0}
-              onClick={!disableClicks ? this.onTileClick : undefined}
-            />
-          </div>
-          <div className="tile">
-            <div
-              className="tile-text"
-              id="2"
-              role="button"
-              tabIndex={0}
-              onClick={!disableClicks ? this.onTileClick : undefined}
-            />
-          </div>
-          <div className="tile">
-            <div
-              className="tile-text"
-              id="3"
-              role="button"
-              tabIndex={0}
-              onClick={!disableClicks ? this.onTileClick : undefined}
-            />
-          </div>
-          <div className="tile">
-            <div
-              className="tile-text"
-              id="4"
-              role="button"
-              tabIndex={0}
-              onClick={!disableClicks ? this.onTileClick : undefined}
-            />
-          </div>
-          <div className="tile">
-            <div
-              className="tile-text"
-              id="5"
-              role="button"
-              tabIndex={0}
-              onClick={!disableClicks ? this.onTileClick : undefined}
-            />
-          </div>
-          <div className="tile">
-            <div
-              className="tile-text"
-              id="6"
-              role="button"
-              tabIndex={0}
-              onClick={!disableClicks ? this.onTileClick : undefined}
-            />
-          </div>
-          <div className="tile">
-            <div
-              className="tile-text"
-              id="7"
-              role="button"
-              tabIndex={0}
-              onClick={!disableClicks ? this.onTileClick : undefined}
-            />
-          </div>
-          <div className="tile">
-            <div
-              className="tile-text"
-              id="8"
-              role="button"
-              tabIndex={0}
-              onClick={!disableClicks ? this.onTileClick : undefined}
-            />
-          </div>
+          {tileData.map(
+            (tile): JSX.Element => (
+              <Tile
+                takeTurn={this.takeTurn}
+                key={tile}
+                id={tile}
+                player={player}
+                board={board}
+                takeAITurn={this.takeAITurn}
+                disableClicks={disableClicks}
+                disableTileClicks={(): void => this.setState({ disableClicks: true })}
+              />
+            ),
+          )}
         </div>
       </div>
     );
