@@ -8,13 +8,17 @@ import Tile from "./Tile";
 /**
  * TODO
  * [x] Fix onTileClick
- * [ ] Refactor
+ * [x] Refactor
  * [x] Fix reset after result
- * [x] Create tile component instead of divs ??
+ * [x] Create tile component instead of div's ??
  * [x] Fix correct names for next player when outcome is achieved.
  * [x] Set medium difficulty to be 50/50 chance of minimax
  * [x] Set easy difficulty to be random
- * [ ] Fix bug when draw is achieved on last move
+ * [x] Fix bug when draw is achieved on last move
+ * [ ] Investigate why sometimes not all animations trigger
+ * [ ] Change addMove to be changing the array in state rather than  always sending a new one
+ * [ ] Refactor class names to fit scss naming conventions
+ * [ ] Remove id's and replace with refs where possible.
  */
 
 const winCombos = [
@@ -51,7 +55,7 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
     if (nextState.gameFinished) {
       nextState.gameFinished = false;
       setTimeout((): void => {
-        const { player, updateCurrentTurn, changePlayer } = this.props;
+        const { player, updateCurrentTurn } = this.props;
         const { player1, player2, noPlayers, currentPlayer } = player;
 
         if (currentPlayer === 1) {
@@ -81,18 +85,10 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
   };
 
   private takeTurn = (squareId: string, playerCounter: string): boolean => {
-    const {
-      player,
-      addMove,
-      board,
-      updateCurrentTurn,
-      setCurrentPlayer,
-      changePlayer,
-    } = this.props;
+    const { player, addMove, board, updateCurrentTurn, changePlayer } = this.props;
     const { currentPlayer, player1, player2, noPlayers } = player;
     const { tiles } = board;
 
-    // ! CHANGE TO MAPPING SOON (addMove) //
     const newBoard = tiles;
     newBoard[squareId] = playerCounter;
     addMove(newBoard);
@@ -104,7 +100,7 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
         ? "tile-text-p1 animated fadeIn"
         : "tile-text-p2 animated fadeIn";
 
-    const gameOver = this.checkWin(playerCounter);
+    const gameOver = this.checkResult(playerCounter);
     if (!gameOver) {
       if (currentPlayer === 1) {
         noPlayers === 1
@@ -119,7 +115,7 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
     return false;
   };
 
-  public checkWin = (counter, minMax?: boolean): GameWon => {
+  public checkResult = (counter, minMax?: boolean): GameWon | boolean => {
     const { updateCurrentTurn, changePlayer } = this.props;
     const { board } = this.props;
     const { tiles } = board;
@@ -139,11 +135,8 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
       }
     }
 
-    if (gameWon && !minMax) {
-      this.gameOver(gameWon);
-    }
-
-    if (!gameWon && !minMax && this.emptyTiles().length === 0) {
+    if (!minMax && this.emptyTiles().length === 0) {
+      changePlayer();
       updateCurrentTurn("It's a draw!");
       setTimeout((): void => {
         this.setState({
@@ -151,8 +144,14 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
           gameFinished: true,
         });
       }, 1000);
-      changePlayer();
+      return true;
     }
+
+    if (gameWon && !minMax) {
+      this.gameOver(gameWon);
+      return true;
+    }
+
     return gameWon;
   };
 
@@ -184,6 +183,10 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
   };
 
   private onResetClick = (): void => {
+    /**
+     * Reset the score and the board when the user clicks the back arrow to
+     * signify they want to reset.
+     */
     const { resetBoard, resetScore } = this.props;
     setTimeout((): void => {
       this.setState({
@@ -215,11 +218,18 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
     const { length } = this.emptyTiles();
     const randomNum = Math.floor(Math.random() * Math.floor(length));
 
+    /**
+     * Get a randomly generated number 0/1. If it's 1 then the AI
+     * will take the best possible position, if it's a 0 then it will
+     * take a random position.
+     */
     const miniMax = Math.floor(Math.random() * Math.floor(2)) === 1;
 
     switch (difficulty) {
       case 1:
-        return this.emptyTiles()[randomNum].toString();
+        return length === 1
+          ? this.emptyTiles()[0].toString()
+          : this.emptyTiles()[randomNum].toString();
       /**
        * Easy difficulty -> Pick a random spot to place a counter
        */
@@ -238,7 +248,7 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
         return this.minimax(player2.counter).index.toString();
       /**
        * Unbeatable difficulty -> The AI will always choose the best option
-       * to place a counter. Cannot be beaten.
+       * to place a counter. The AI cannot be beaten.
        */
       default:
         return null;
@@ -275,12 +285,12 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
     const { tiles } = board;
     const availSpots = this.emptyTiles();
 
-    if (this.checkWin(player1.counter, true)) {
+    if (this.checkResult(player1.counter, true)) {
       return {
         score: -10,
       };
     }
-    if (this.checkWin(player2.counter, true)) {
+    if (this.checkResult(player2.counter, true)) {
       return {
         score: 10,
       };
@@ -347,7 +357,7 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
             <div id="p1score">{player1.score}</div>
           </div>
           <div className="player2score">
-            <div className="player2Label animated slideInRight">{player2.name}</div>
+            <div className="player2Label animated slideInRight">{player2.name}: </div>
             <div id="p2score">{player2.score}</div>
           </div>
         </div>
