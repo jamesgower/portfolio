@@ -6,7 +6,7 @@ import NotFoundPage from "../components/NotFoundPage";
 import LandingPage from "../components/LandingPage";
 import Portfolio from "../components/Portfolio";
 import Pomodoro from "../components/Pomodoro";
-import PlayTicTacToe from "../components/TicTacToe/TicTacToeSetup";
+import PlayTicTacToe from "../components/TicTacToe/components/TicTacToeSetup";
 import Calculator from "../components/Calculator";
 import WikipediaAPI from "../components/WikipediaAPI/WikipediaAPI";
 import IndecisionApp from "../components/Indecision/IndecisionApp";
@@ -22,7 +22,7 @@ export const history = createHistory();
 
 const store = configureStore();
 
-const AppRouter = (): JSX.Element => (
+const AppRouter: React.SFC = (): JSX.Element => (
   <Router history={history}>
     <Switch>
       <Route path="/" component={PlayTicTacToe} exact />

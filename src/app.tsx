@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import AppRouter from "./routes/AppRouter";
+import AppRouter from "./routes/Router";
 import LoadingPage from "./components/LoadingPage";
 import "normalize.css/normalize.css";
 import "react-dates/lib/css/_datepicker.css";
