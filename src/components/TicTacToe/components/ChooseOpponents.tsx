@@ -21,20 +21,20 @@ const ChooseOpponents: React.SFC<ChooseOpponentsProps> = ({
         fontFamily: "Oswald",
       }}
     >
-      <div className="setup-TTT animated slideInDown">
-        <h1 id="title-TTT">Welcome to Tic-Tac-Toe!</h1>
-        <h3 className="subtitle-TTT">
+      <div className="opponents__container animated slideInDown">
+        <h1 className="opponents__title">Welcome to Tic-Tac-Toe!</h1>
+        <h3 className="opponents__subtitle">
           Would you like to try your luck against the computer,
           <br />
           or play against a friend?
         </h3>
-        <h3 className="subtitle-2-TTT">
+        <h3 className="opponents__subtitle-two">
           There are 3 different difficulties to choose <br />
           when playing a one player game!
         </h3>
-        <div className="ttt__button-container--players">
+        <div className="opponents__button-container">
           <Button
-            className="ttt__player-button"
+            className="opponents__button"
             outline
             color="secondary"
             size="lg"
@@ -43,7 +43,7 @@ const ChooseOpponents: React.SFC<ChooseOpponentsProps> = ({
             1 Player
           </Button>
           <Button
-            className="ttt__player-button"
+            className="opponents__button"
             outline
             color="secondary"
             size="lg"
