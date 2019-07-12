@@ -40,6 +40,10 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
     gameFinished: false,
   };
 
+  private currentTurn = React.createRef<HTMLDivElement>();
+  private player1Score = React.createRef<HTMLDivElement>();
+  private player2Score = React.createRef<HTMLDivElement>();
+
   private winCombos = [
     [0, 1, 2],
     [3, 4, 5],
@@ -372,10 +376,10 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
           </div>
         </div>
         <div id="current-turn">{currentTurn}</div>
-        <div id="backBtnContainer" role="button" tabIndex={0} onClick={this.onResetClick}>
+        <div id="ttt-back-button" role="button" tabIndex={0} onClick={this.onResetClick}>
           <i className="fa fa-undo" />
         </div>
-        <div className="grid">
+        <div className="tic-tac-toe__grid">
           {this.tileData.map(
             (tile): JSX.Element => (
               <Tile
