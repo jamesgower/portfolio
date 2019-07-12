@@ -1,3 +1,8 @@
+export interface AppState {
+  player?: PlayerState;
+  board?: BoardState;
+}
+
 export interface PlayerState {
   noPlayers: number;
   player1: Player;
@@ -16,12 +21,6 @@ export interface SetupProps {
   player: PlayerState;
 }
 
-export interface Player {
-  name: string;
-  counter: string;
-  score?: number;
-}
-
 export interface NameState {
   player1: Player;
   player2: Player;
@@ -29,9 +28,9 @@ export interface NameState {
 }
 
 export interface NameProps {
-  noPlayers: number;
-  reset?: (e) => void;
+  reset?: () => void;
   setupPlayers?: (player1, player2, difficulty) => void;
+  noPlayers: number;
 }
 
 export interface PlayProps {
@@ -51,6 +50,22 @@ export interface PlayProps {
 export interface PlayState {
   disableClicks: boolean;
   gameFinished: boolean;
+}
+
+export interface TileProps {
+  takeTurn: (id, counter) => boolean;
+  takeAITurn: () => void;
+  id: string;
+  disableClicks: boolean;
+  disableTileClicks: () => void;
+  player: PlayerState;
+  board: BoardState;
+}
+
+export interface Player {
+  name: string;
+  counter: string;
+  score?: number;
 }
 
 export interface GameWon {

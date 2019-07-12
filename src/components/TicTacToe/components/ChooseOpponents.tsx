@@ -1,7 +1,12 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { Dispatch } from "redux";
 import { Button } from "reactstrap";
-import { setNumPlayers } from "./actions/player.action";
+import { setNumPlayers } from "../actions/player.action";
+import ActionTypes, {
+  SetNumPlayersAction,
+  OpponentDispatchProps,
+} from "../interfaces/actions";
 
 interface ChooseOpponentsProps {
   setNumPlayers: Function;
@@ -52,11 +57,11 @@ const ChooseOpponents: React.SFC<ChooseOpponentsProps> = ({
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  setNumPlayers: (num: number): void => dispatch(setNumPlayers(num)),
+const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>): OpponentDispatchProps => ({
+  setNumPlayers: (num: number): SetNumPlayersAction => dispatch(setNumPlayers(num)),
 });
 
-export default connect(
-  undefined,
+export default connect<{}, OpponentDispatchProps>(
+  null,
   mapDispatchToProps,
 )(ChooseOpponents);

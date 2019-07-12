@@ -48,6 +48,8 @@
     "no-param-reassign": "off",
     "no-shadow": "off",
     "class-methods-use-this": "error",
-    "no-nested-ternary": "off"
+    "no-nested-ternary": "off",
+    "react-redux/prefer-separate-component-file": "off",
+    "no-underscore-dangle": "off"
   }
 }

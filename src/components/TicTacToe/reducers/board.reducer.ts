@@ -1,9 +1,16 @@
 import { BoardState } from "../interfaces/components";
-import BoardActionsTypes, { RESET_BOARD, ADD_MOVE } from "../interfaces/board.actions";
+import {
+  AddMoveAction,
+  ResetBoardAction,
+  RESET_BOARD,
+  ADD_MOVE,
+} from "../interfaces/actions";
 
 const defaultBoardState: BoardState = {
   tiles: Array.from(Array(9).keys()),
 };
+
+type BoardActionsTypes = AddMoveAction | ResetBoardAction;
 
 export default (state = defaultBoardState, action: BoardActionsTypes): BoardState => {
   switch (action.type) {
