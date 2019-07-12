@@ -1,8 +1,21 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { PlayProps, PlayState, GameWon, Move } from "./interfaces/components";
-import * as playerActions from "./actions/player.action";
-import * as boardActions from "./actions/board.action";
+import { Dispatch } from "redux";
+import { PlayProps, PlayState, GameWon, Move, AppState } from "../interfaces/components";
+import ActionTypes, {
+  ResetAction,
+  ChangePlayerAction,
+  UpdateCurrentTurnAction,
+  PlayerOneScoreAction,
+  PlayerTwoScoreAction,
+  ResetScoreAction,
+  SetCurrentPlayerAction,
+  ResetBoardAction,
+  AddMoveAction,
+  PlayDispatchProps,
+} from "../interfaces/actions";
+import * as playerActions from "../actions/player.action";
+import * as boardActions from "../actions/board.action";
 import Tile from "./Tile";
 
 /**
@@ -10,7 +23,7 @@ import Tile from "./Tile";
  * [x] Fix onTileClick
  * [x] Refactor
  * [x] Fix reset after result
- * [x] Create tile component instead of div's ??
+ * [x] Create tile component instead of div ??
  * [x] Fix correct names for next player when outcome is achieved.
  * [x] Set medium difficulty to be 50/50 chance of minimax
  * [x] Set easy difficulty to be random
@@ -386,23 +399,23 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
   }
 }
 
-const mapDispatchToProps = (dispatch): any => ({
-  reset: (): void => dispatch(playerActions.reset()),
-  changePlayer: (): void => dispatch(playerActions.changePlayer()),
-  updateCurrentTurn: (turn: string): void =>
+const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>): PlayDispatchProps => ({
+  reset: (): ResetAction => dispatch(playerActions.reset()),
+  changePlayer: (): ChangePlayerAction => dispatch(playerActions.changePlayer()),
+  updateCurrentTurn: (turn: string): UpdateCurrentTurnAction =>
     dispatch(playerActions.updateCurrentTurn(turn)),
-  playerOneScore: (): void => dispatch(playerActions.playerOneScore()),
-  playerTwoScore: (): void => dispatch(playerActions.playerTwoScore()),
-  resetScore: (): void => dispatch(playerActions.resetScore()),
-  setCurrentPlayer: (player: number): void =>
+  playerOneScore: (): PlayerOneScoreAction => dispatch(playerActions.playerOneScore()),
+  playerTwoScore: (): PlayerTwoScoreAction => dispatch(playerActions.playerTwoScore()),
+  resetScore: (): ResetScoreAction => dispatch(playerActions.resetScore()),
+  setCurrentPlayer: (player: number): SetCurrentPlayerAction =>
     dispatch(playerActions.setCurrentPlayer(player)),
-  resetBoard: (): void => dispatch(boardActions.resetBoard()),
-  addMove: (board): void => dispatch(boardActions.addMove(board)),
+  resetBoard: (): ResetBoardAction => dispatch(boardActions.resetBoard()),
+  addMove: (board): AddMoveAction => dispatch(boardActions.addMove(board)),
 });
 
-const mapStateToProps = ({ player, board }) => ({ player, board });
+const mapStateToProps = ({ player, board }): AppState => ({ player, board });
 
-export default connect(
+export default connect<AppState, PlayDispatchProps>(
   mapStateToProps,
   mapDispatchToProps,
 )(TicTacToe);

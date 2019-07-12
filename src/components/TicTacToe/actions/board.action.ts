@@ -3,7 +3,7 @@ import {
   ADD_MOVE,
   AddMoveAction,
   ResetBoardAction,
-} from "../interfaces/board.actions";
+} from "../interfaces/actions";
 
 export const addMove = (tiles: number[]): AddMoveAction => ({
   type: ADD_MOVE,

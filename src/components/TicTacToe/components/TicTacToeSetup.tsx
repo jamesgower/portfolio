@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import TicTacToe from "./PlayTicTacToe";
 import ChooseNames from "./ChooseNames";
 import ChooseOpponents from "./ChooseOpponents";
-import HiddenNavBar from "../HiddenNavBar";
-import { SetupProps } from "./interfaces/components";
+import HiddenNavBar from "../../HiddenNavBar";
+import { SetupProps, AppState } from "../interfaces/components";
 
 const TicTacToeSetup: React.SFC<SetupProps> = ({ player }): JSX.Element => {
   const { noPlayers, readyToPlay } = player;
@@ -27,6 +27,6 @@ const TicTacToeSetup: React.SFC<SetupProps> = ({ player }): JSX.Element => {
   );
 };
 
-const mapStateToProps = ({ player }) => ({ player });
+const mapStateToProps = ({ player }): AppState => ({ player });
 
-export default connect(mapStateToProps)(TicTacToeSetup);
+export default connect<AppState>(mapStateToProps)(TicTacToeSetup);

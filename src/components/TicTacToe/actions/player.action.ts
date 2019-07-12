@@ -1,4 +1,3 @@
-import { Player } from "../interfaces/components";
 import {
   CHANGE_PLAYER_AFTER_MOVE,
   ChangePlayerAction,
@@ -18,7 +17,8 @@ import {
   ResetScoreAction,
   SET_CURRENT_PLAYER,
   SetCurrentPlayerAction,
-} from "../interfaces/player.actions";
+} from "../interfaces/actions";
+import { Player } from "../interfaces/components";
 
 export const changePlayer = (): ChangePlayerAction => ({
   type: CHANGE_PLAYER_AFTER_MOVE,

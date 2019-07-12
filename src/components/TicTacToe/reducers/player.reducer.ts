@@ -1,14 +1,14 @@
 import PlayerActionTypes, {
   CHANGE_PLAYER_AFTER_MOVE,
   RESET,
-  SET_NUM_PLAYERS,
   SETUP_PLAYERS,
+  SET_NUM_PLAYERS,
   PLAYER_ONE_SCORE,
   PLAYER_TWO_SCORE,
-  UPDATE_CURRENT_TURN,
   RESET_SCORE,
+  UPDATE_CURRENT_TURN,
   SET_CURRENT_PLAYER,
-} from "../interfaces/player.actions";
+} from "../interfaces/actions";
 import { PlayerState } from "../interfaces/components";
 
 const defaultPlayerState: PlayerState = {
