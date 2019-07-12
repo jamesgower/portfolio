@@ -12,7 +12,7 @@ const Tile: React.FC<TileProps> = (props): JSX.Element => {
     const { player, board, takeTurn, takeAITurn } = props;
     const { noPlayers, player1, player2, currentPlayer } = player;
     const { tiles } = board;
-    document.getElementById("currentTurn").className = "";
+    document.getElementById("current-turn").className = "";
 
     if (typeof tiles[id] === "number") {
       if (noPlayers === 1) {
@@ -32,9 +32,9 @@ const Tile: React.FC<TileProps> = (props): JSX.Element => {
   };
 
   return (
-    <div className="tile">
+    <div className="tile__container">
       <div
-        className="tile-text"
+        className="tile__text"
         id={id}
         role="button"
         tabIndex={0}

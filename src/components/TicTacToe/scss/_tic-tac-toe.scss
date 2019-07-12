@@ -1,0 +1,422 @@
+$p1-green: #008000;
+$p2-red: #f00;
+$player-button: rgb(189, 146, 78);
+
+.tile__container {
+  background: none;
+  border: 2px solid $black;
+  display: block;
+  float: left;
+  height: 33.333%;
+  padding: 10px;
+  width: 33.333%;
+
+  &:first-of-type {
+    border-left-color: transparent;
+    border-top-color: transparent;
+  }
+
+  &:nth-of-type(2) {
+    border-top-color: transparent;
+  }
+
+  &:nth-of-type(3) {
+    border-right-color: transparent;
+    border-top-color: transparent;
+  }
+
+  &:nth-of-type(4),
+  &:nth-of-type(7) {
+    border-left-color: transparent;
+  }
+
+  &:nth-of-type(6),
+  &:nth-of-type(9) {
+    border-right-color: transparent;
+  }
+
+  &:nth-of-type(7),
+  &:nth-of-type(8),
+  &:nth-of-type(9) {
+    border-bottom-color: transparent;
+  }
+}
+
+.tile__text,
+%tile__text {
+  cursor: pointer;
+  font-size: 100px;
+  height: 100%;
+  line-height: 100px;
+  text-align: center;
+  width: 100%;
+}
+
+.tile__text--p1 {
+  @extend %tile__text;
+  color: $p1-green;
+}
+
+.tile__text--p2 {
+  @extend %tile__text;
+  color: $p2-red !important;
+}
+
+.grid {
+  height: 400px;
+  margin: 5px auto 0;
+  width: 400px;
+}
+
+.background-TTT {
+  width: 100vw !important;
+  height: 100vh !important;
+  background: url("../../public/images/bg-ttt.jpg") no-repeat fixed center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position: fixed;
+  top: 0;
+  z-index: -2;
+}
+
+// --- CHOOSE NAMES --- //
+
+.playerInput {
+  border: 1px solid black !important;
+  font-size: 15px !important;
+  margin-bottom: 10px !important;
+  &:focus {
+    box-shadow: 0 0 10px rgb(160, 109, 27) !important;
+  }
+}
+
+.pNameInput {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.playerLbl {
+  line-height: 32px;
+  font-size: 18px;
+  float: right;
+  margin-right: -5px;
+}
+
+.counter {
+  width: 50px;
+  margin: 0 auto;
+  cursor: pointer;
+  &:hover {
+    border-bottom: 2px solid red;
+    margin-bottom: -2px;
+  }
+}
+
+.counters-container {
+  font-size: 16px;
+  width: 150px;
+  display: inline-block;
+  align-content: space-between;
+  text-align: center;
+}
+
+.chooseCounterOne {
+  width: 300px;
+  margin: 0 auto -20px auto;
+}
+
+.chooseCounterTwo {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.onePlayerNames {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 26px;
+  text-align: center;
+}
+
+.twoPlayerNames {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 46px;
+  text-align: center;
+}
+
+// --- CHOOSE DIFFICULTY --- //
+
+.setup-TTT {
+  width: 440px;
+  height: 40vh;
+  margin: 20vh auto;
+  padding: 5px;
+}
+
+#players-TTT {
+  width: 440px;
+  height: 40vw;
+  margin: 16vh auto;
+}
+
+#title-TTT {
+  font-size: 40px;
+  text-align: center;
+}
+
+#backBtnContainer {
+  height: 50px;
+  width: 50px;
+  font-size: 30px;
+  margin: 0 auto;
+  text-align: center;
+  cursor: pointer;
+}
+
+#backBtnContainer:hover {
+  -webkit-animation: spin 1s linear infinite;
+  -moz-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+}
+
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(-360deg);
+  }
+}
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(-360deg);
+  }
+}
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(-360deg);
+    transform: rotate(-360deg);
+  }
+}
+
+.subtitle-TTT {
+  margin-top: 30px;
+  font-size: 22px;
+  text-align: center;
+}
+
+.subtitle-2-TTT {
+  margin-top: 20px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.form-control {
+  background: none !important;
+}
+
+.ttt__player-button {
+  border: 2px solid $player-button !important;
+  border-radius: 10px;
+  color: $player-button !important;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px !important;
+  margin: 0 15px;
+  padding: 5px 10px;
+  text-align: center;
+  width: 80px !important;
+
+  &:hover {
+    background: $player-button !important;
+    color: $white !important;
+  }
+}
+
+.ttt__button-container--players {
+  margin: 40px auto;
+  width: 220px;
+}
+
+.ttt__button-container--names {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px auto;
+  width: 220px;
+}
+
+.ttt__choose-difficulty {
+  text-align: center;
+}
+
+.ttt__difficulty-button {
+  width: 70px;
+}
+
+.ttt__play-button {
+  margin: 0 auto;
+  width: 78px;
+}
+
+// --- SCORES --- //
+.ttt__scores-container {
+  margin: 100px auto 0;
+  width: 460px;
+}
+
+#current-turn {
+  font-size: 20px;
+  margin: 40px auto 0;
+  text-align: center;
+  width: 400px;
+}
+
+.ttt__scores--player1 {
+  display: inline-flex;
+  font-size: 20px;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.ttt__scores--player2 {
+  display: inline-flex;
+  float: right;
+  font-size: 20px;
+  justify-content: space-between;
+  text-align: center;
+}
+
+%score {
+  font-size: 30px;
+  line-height: 28px;
+  text-align: center;
+  vertical-align: center;
+  visibility: hidden;
+  width: 40px;
+}
+
+#p1score {
+  @extend %score;
+  color: $p1-green;
+}
+
+#p2score {
+  @extend %score;
+  color: $p2-red;
+}
+
+// --- ANIMATION FOR SCORE +1 --- //
+%ttt__score-animation {
+  -webkit-animation-duration: 1s;
+  -webkit-animation-play-state: running;
+  animation-duration: 1s;
+  animation-play-state: running;
+}
+
+.ttt__score-animation--p1 {
+  @extend %ttt__score-animation;
+  -webkit-animation-name: bigToSmallP1;
+  animation-name: bigToSmallP1;
+}
+
+.ttt__score-animation--p2 {
+  @extend %ttt__score-animation;
+  -webkit-animation-name: bigToSmallP2;
+  animation-name: bigToSmallP2;
+}
+
+@-webkit-keyframes bigToSmallP1 {
+  0% {
+    font-size: 30px;
+  }
+
+  25% {
+    font-size: 45px;
+  }
+
+  50% {
+    color: $p1-green;
+    font-size: 60px;
+  }
+
+  75% {
+    font-size: 45px;
+  }
+
+  100% {
+    font-size: 30px;
+  }
+}
+
+@keyframes bigToSmallP1 {
+  0% {
+    font-size: 30px;
+  }
+
+  25% {
+    font-size: 45px;
+  }
+
+  50% {
+    color: $p1-green;
+    font-size: 60px;
+  }
+
+  75% {
+    font-size: 45px;
+  }
+
+  100% {
+    font-size: 30px;
+  }
+}
+
+@-webkit-keyframes bigToSmallP2 {
+  0% {
+    font-size: 30px;
+  }
+
+  25% {
+    font-size: 45px;
+  }
+
+  50% {
+    color: $p2-red;
+    font-size: 60px;
+  }
+
+  75% {
+    font-size: 45px;
+  }
+
+  100% {
+    font-size: 30px;
+  }
+}
+
+@keyframes bigToSmallP2 {
+  0% {
+    font-size: 30px;
+  }
+
+  25% {
+    font-size: 45px;
+  }
+
+  50% {
+    color: $p2-red;
+    font-size: 60px;
+  }
+
+  75% {
+    font-size: 45px;
+  }
+
+  100% {
+    font-size: 30px;
+  }
+}

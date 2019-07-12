@@ -34,23 +34,24 @@ import Tile from "./Tile";
  * [ ] Remove id's and replace with refs where possible.
  */
 
-const winCombos = [
-  [0, 1, 2],
-  [3, 4, 5],
-  [6, 7, 8],
-  [0, 3, 6],
-  [1, 4, 7],
-  [2, 5, 8],
-  [0, 4, 8],
-  [6, 4, 2],
-];
-
-class TicTacToe extends React.Component<PlayProps, PlayState> {
-  public readonly state = {
+class PlayGame extends React.Component<PlayProps, PlayState> {
+  public readonly state: PlayState = {
     disableClicks: false,
     gameFinished: false,
-    tileData: ["0", "1", "2", "3", "4", "5", "6", "7", "8"],
   };
+
+  private winCombos = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [6, 4, 2],
+  ];
+
+  private tileData = ["0", "1", "2", "3", "4", "5", "6", "7", "8"];
 
   public componentDidMount(): void {
     setTimeout((): void => {
@@ -64,7 +65,7 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
   }
 
   public componentWillUpdate(nextProps, nextState): void {
-    document.getElementById("currentTurn").className = "";
+    document.getElementById("current-turn").className = "";
     if (nextState.gameFinished) {
       nextState.gameFinished = false;
       setTimeout((): void => {
@@ -84,9 +85,9 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
   }
 
   public componentDidUpdate(): void {
-    document.getElementById("currentTurn").className = "animated fadeIn";
+    document.getElementById("current-turn").className = "animated fadeIn";
     setTimeout((): void => {
-      document.getElementById("currentTurn").className = "";
+      document.getElementById("current-turn").className = "";
     }, 300);
   }
 
@@ -110,8 +111,8 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
     tile.innerText = playerCounter;
     tile.className =
       currentPlayer === 1
-        ? "tile-text-p1 animated fadeIn"
-        : "tile-text-p2 animated fadeIn";
+        ? "tile__text--p1 animated fadeIn"
+        : "tile__text--p2 animated fadeIn";
 
     const gameOver = this.checkResult(playerCounter);
     if (!gameOver) {
@@ -138,7 +139,7 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
       [],
     );
     let gameWon = null;
-    for (const [index, win] of winCombos.entries()) {
+    for (const [index, win] of this.winCombos.entries()) {
       if (win.every((elem: number): boolean => plays.indexOf(elem) > -1)) {
         gameWon = {
           index,
@@ -175,15 +176,15 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
       playerTwoScore,
     } = this.props;
 
-    for (const index of winCombos[gameWon.index]) {
+    for (const index of this.winCombos[gameWon.index]) {
       document.getElementById(index).style.backgroundColor =
         gameWon.player === player1.counter ? "green" : "red";
-      document.getElementById(index).className = "tile-text animated tada";
+      document.getElementById(index).className = "tile__text animated tada";
     }
 
     gameWon.player === player1.counter
-      ? document.getElementById("p1score").classList.add("scoringAnimation")
-      : document.getElementById("p2score").classList.add("scoringAnimation");
+      ? document.getElementById("p1score").classList.add("ttt__score-animation--p1")
+      : document.getElementById("p2score").classList.add("ttt__score-animation--p2");
 
     gameWon.player === player1.counter ? playerOneScore() : playerTwoScore();
 
@@ -192,7 +193,7 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
       gameFinished: true,
     });
 
-    document.getElementById("currentTurn").className = "";
+    document.getElementById("current-turn").className = "";
   };
 
   private onResetClick = (): void => {
@@ -357,29 +358,25 @@ class TicTacToe extends React.Component<PlayProps, PlayState> {
       fontFamily: "Oswald",
     };
 
-    const { disableClicks, tileData } = this.state;
+    const { disableClicks } = this.state;
     const { player, board } = this.props;
     const { player1, player2, currentTurn } = player;
     return (
       <div style={styles}>
-        <div className="scores">
-          <div className="player1score">
-            <div className="player1Label animated slideInLeft">
-              {player1.name || "Player 1"}:{" "}
-            </div>
-            <div id="p1score">{player1.score}</div>
+        <div className="ttt__scores-container">
+          <div className="ttt__scores--player1 animated slideInLeft">
+            {player1.name || "Player 1"}: <div id="p1score">{player1.score}</div>
           </div>
-          <div className="player2score">
-            <div className="player2Label animated slideInRight">{player2.name}: </div>
-            <div id="p2score">{player2.score}</div>
+          <div className="ttt__scores--player2 animated slideInRight">
+            {player2.name}: <div id="p2score">{player2.score}</div>
           </div>
         </div>
-        <div id="currentTurn">{currentTurn}</div>
+        <div id="current-turn">{currentTurn}</div>
         <div id="backBtnContainer" role="button" tabIndex={0} onClick={this.onResetClick}>
           <i className="fa fa-undo" />
         </div>
         <div className="grid">
-          {tileData.map(
+          {this.tileData.map(
             (tile): JSX.Element => (
               <Tile
                 takeTurn={this.takeTurn}
@@ -418,4 +415,4 @@ const mapStateToProps = ({ player, board }): AppState => ({ player, board });
 export default connect<AppState, PlayDispatchProps>(
   mapStateToProps,
   mapDispatchToProps,
-)(TicTacToe);
+)(PlayGame);

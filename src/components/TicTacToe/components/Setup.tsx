@@ -1,16 +1,16 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import TicTacToe from "./PlayTicTacToe";
+import PlayGame from "./PlayGame";
 import ChooseNames from "./ChooseNames";
 import ChooseOpponents from "./ChooseOpponents";
 import HiddenNavBar from "../../HiddenNavBar";
 import { SetupProps, AppState } from "../interfaces/components";
 
-const TicTacToeSetup: React.SFC<SetupProps> = ({ player }): JSX.Element => {
+const Setup: React.SFC<SetupProps> = ({ player }): JSX.Element => {
   const { noPlayers, readyToPlay } = player;
 
   return (
-    <div>
+    <>
       <HiddenNavBar />
       <div className="background-TTT">
         {!readyToPlay ? (
@@ -20,13 +20,13 @@ const TicTacToeSetup: React.SFC<SetupProps> = ({ player }): JSX.Element => {
             <ChooseNames noPlayers={noPlayers} />
           )
         ) : (
-          <TicTacToe />
+          <PlayGame />
         )}
       </div>
-    </div>
+    </>
   );
 };
 
 const mapStateToProps = ({ player }): AppState => ({ player });
 
-export default connect<AppState>(mapStateToProps)(TicTacToeSetup);
+export default connect<AppState>(mapStateToProps)(Setup);

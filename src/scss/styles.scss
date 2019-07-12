@@ -14,7 +14,8 @@
 @import "./components/nav-bar";
 @import "./components/portfolio";
 @import "./components/pomodoro";
-@import "./components/tic-tac-toe";
+@import "./../components/TicTacToe/scss/tic-tac-toe";
+@import "./../components/TicTacToe/scss/tile";
 @import "./components/calculator";
 @import "./components/Indecision/add-option";
 @import "./components/Indecision/button";
