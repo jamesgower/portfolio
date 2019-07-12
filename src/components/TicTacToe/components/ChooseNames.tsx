@@ -34,7 +34,6 @@ class ChooseNames extends React.Component<NameProps, NameState> {
         },
       });
     }
-    document.getElementById("players-TTT").classList.add("animated", "fadeIn");
   }
 
   private onPlayerNameChange = (
@@ -102,12 +101,8 @@ class ChooseNames extends React.Component<NameProps, NameState> {
     const { player1, player2, difficulty } = this.state;
     const { setupPlayers } = this.props;
 
-    if (player1.name.length === 0) {
-      player1.name = "Player 1";
-    }
-    if (player2.name.length === 0) {
-      player2.name = "Player 2";
-    }
+    if (player1.name.length === 0) player1.name = "Player 1";
+    if (player2.name.length === 0) player2.name = "Player 2";
 
     setupPlayers(player1, player2, difficulty);
   };
@@ -117,32 +112,32 @@ class ChooseNames extends React.Component<NameProps, NameState> {
     const { reset, noPlayers } = this.props;
     return (
       <div
-        id="players-TTT"
+        className="names__container animated fadeIn"
         style={{
           fontFamily: "Oswald",
         }}
       >
-        <div id="backBtnContainer" onClick={reset} role="button" tabIndex={0}>
+        <div id="ttt-back-button" onClick={reset} role="button" tabIndex={0}>
           <i className="fa fa-undo" />
         </div>
 
         {noPlayers === 1 ? (
-          <h2 className="onePlayerNames">
+          <h2 className="names__player1-text">
             Please input your name and choose the difficulty you wish to play on.
           </h2>
         ) : (
-          <h2 className="twoPlayerNames">
+          <h2 className="names__player2-text">
             Please input your names. You can also change your counter by clicking on your
             player name too.
           </h2>
         )}
-        <Row className="pNameInput">
+        <Row className="names__player-label--one">
           <Col xs={{ size: 4, offset: 1 }}>
-            <p className="playerLbl">Player 1:</p>
+            <p className="names__player-label-text">Player 1:</p>
           </Col>
-          <Col xs={6}>
+          <Col xs={5}>
             <Input
-              className="playerInput"
+              className="names__player-input"
               onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
                 this.onPlayerNameChange(e, 1)
               }
@@ -153,13 +148,13 @@ class ChooseNames extends React.Component<NameProps, NameState> {
         </Row>
 
         {noPlayers === 2 && (
-          <Row className="pNameInput">
+          <Row className="names__player-label--two">
             <Col xs={{ size: 4, offset: 1 }}>
-              <p className="text-center playerLbl">Player 2:</p>
+              <p className="names__player-label-text">Player 2:</p>
             </Col>
-            <Col xs={6}>
+            <Col xs={5}>
               <Input
-                className="playerInput"
+                className="names__player-input"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
                   this.onPlayerNameChange(e, 2)
                 }
@@ -171,13 +166,13 @@ class ChooseNames extends React.Component<NameProps, NameState> {
 
         {noPlayers === 1 && (
           <div>
-            <h3 className="ttt__choose-difficulty">
+            <h3 className="names__choose-difficulty">
               What difficulty would you like to play against?
             </h3>
-            <div className="ttt__button-container--names">
+            <div className="names__button-container">
               <Button
                 active={difficulty === 1}
-                className="ttt__difficulty-button"
+                className="names__difficulty-button"
                 color="success"
                 onClick={(): void => this.onChangeDifficulty(1)}
                 outline
@@ -187,7 +182,7 @@ class ChooseNames extends React.Component<NameProps, NameState> {
               </Button>
               <Button
                 active={difficulty === 2}
-                className="ttt__difficulty-button"
+                className="names__difficulty-button"
                 color="warning"
                 onClick={(): void => this.onChangeDifficulty(2)}
                 outline
@@ -197,7 +192,7 @@ class ChooseNames extends React.Component<NameProps, NameState> {
               </Button>
               <Button
                 active={difficulty === 3}
-                className="ttt__difficulty-button"
+                className="names__difficulty-button"
                 color="danger"
                 onClick={(): void => this.onChangeDifficulty(3)}
                 outline
@@ -208,33 +203,37 @@ class ChooseNames extends React.Component<NameProps, NameState> {
             </div>
           </div>
         )}
-        <div className={noPlayers === 1 ? "chooseCounterOne" : "chooseCounterTwo"}>
+        <div
+          className={
+            noPlayers === 1
+              ? "names__counter-container--player1"
+              : "names__counter-container--player2"
+          }
+        >
           <div
             onClick={this.onChangeCounter}
             role="button"
             tabIndex={0}
-            className="counters-container"
+            className="names__counter-container"
           >
-            <p className="counterLbl">
+            <p className="names__player-l">
               {player1.name.length > 0 ? player1.name : "Player 1"}:
             </p>
-            <div className="counter">{player1.counter}</div>
+            <div className="names__counter">{player1.counter}</div>
           </div>
           <div
-            className="counters-container"
+            className="names__counter-container"
             onClick={this.onChangeCounter}
             role="button"
             tabIndex={0}
           >
-            <p className="counterLbl">
-              {player2.name.length > 0 ? player2.name : "Player 2"}:
-            </p>
-            <div className="counter">{player2.counter}</div>
+            <p>{player2.name.length > 0 ? player2.name : "Player 2"}:</p>
+            <div className="names__counter">{player2.counter}</div>
           </div>
         </div>
-        <div className="ttt__button-container--names">
+        <div className="names__button-container">
           <Button
-            className="ttt__play-button"
+            className="names__play-button"
             outline
             size="lg"
             color="primary"

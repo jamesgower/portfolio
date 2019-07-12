@@ -50,6 +50,7 @@
     "class-methods-use-this": "error",
     "no-nested-ternary": "off",
     "react-redux/prefer-separate-component-file": "off",
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+    "lines-between-class-members": "off"
   }
 }

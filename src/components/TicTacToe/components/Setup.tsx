@@ -12,7 +12,7 @@ const Setup: React.SFC<SetupProps> = ({ player }): JSX.Element => {
   return (
     <>
       <HiddenNavBar />
-      <div className="background-TTT">
+      <div className="tic-tac-toe__container">
         {!readyToPlay ? (
           noPlayers === undefined ? (
             <ChooseOpponents />
