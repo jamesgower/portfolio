@@ -171,13 +171,13 @@ class ChooseNames extends React.Component<NameProps, NameState> {
 
         {noPlayers === 1 && (
           <div>
-            <h3 className="chooseDiff">
+            <h3 className="ttt__choose-difficulty">
               What difficulty would you like to play against?
             </h3>
-            <div className="button-container">
+            <div className="ttt__button-container--names">
               <Button
                 active={difficulty === 1}
-                className="diffBtn"
+                className="ttt__difficulty-button"
                 color="success"
                 onClick={(): void => this.onChangeDifficulty(1)}
                 outline
@@ -187,7 +187,7 @@ class ChooseNames extends React.Component<NameProps, NameState> {
               </Button>
               <Button
                 active={difficulty === 2}
-                className="diffBtn"
+                className="ttt__difficulty-button"
                 color="warning"
                 onClick={(): void => this.onChangeDifficulty(2)}
                 outline
@@ -197,7 +197,7 @@ class ChooseNames extends React.Component<NameProps, NameState> {
               </Button>
               <Button
                 active={difficulty === 3}
-                className="diffBtn"
+                className="ttt__difficulty-button"
                 color="danger"
                 onClick={(): void => this.onChangeDifficulty(3)}
                 outline
@@ -232,9 +232,9 @@ class ChooseNames extends React.Component<NameProps, NameState> {
             <div className="counter">{player2.counter}</div>
           </div>
         </div>
-        <div className="button-container">
+        <div className="ttt__button-container--names">
           <Button
-            className="playBtn"
+            className="ttt__play-button"
             outline
             size="lg"
             color="primary"

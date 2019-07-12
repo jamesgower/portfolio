@@ -6,7 +6,7 @@ import NotFoundPage from "../components/NotFoundPage";
 import LandingPage from "../components/LandingPage";
 import Portfolio from "../components/Portfolio";
 import Pomodoro from "../components/Pomodoro";
-import PlayTicTacToe from "../components/TicTacToe/components/TicTacToeSetup";
+import PlayTicTacToe from "../components/TicTacToe/components/Setup";
 import Calculator from "../components/Calculator";
 import WikipediaAPI from "../components/WikipediaAPI/WikipediaAPI";
 import IndecisionApp from "../components/Indecision/IndecisionApp";
