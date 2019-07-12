@@ -1,15 +1,5 @@
 import * as React from "react";
-import { PlayerState, BoardState } from "./interfaces/components";
-
-interface TileProps {
-  takeTurn: (id, counter) => boolean;
-  takeAITurn: () => void;
-  id: string;
-  disableClicks: boolean;
-  disableTileClicks: () => void;
-  player: PlayerState;
-  board: BoardState;
-}
+import { TileProps } from "../interfaces/components";
 
 const Tile: React.FC<TileProps> = (props): JSX.Element => {
   const { disableClicks, id, disableTileClicks } = props;

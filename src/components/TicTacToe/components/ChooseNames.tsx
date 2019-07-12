@@ -1,8 +1,14 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { Dispatch } from "redux";
 import { Button, Input, Row, Col } from "reactstrap";
-import { NameState, NameProps } from "./interfaces/components";
-import * as playerActions from "./actions/player.action";
+import * as playerActions from "../actions/player.action";
+import { NameState, Player, NameProps } from "../interfaces/components";
+import ActionTypes, {
+  ResetAction,
+  SetupPlayersAction,
+  NameDispatchProps,
+} from "../interfaces/actions";
 
 class ChooseNames extends React.Component<NameProps, NameState> {
   public readonly state: NameState = {
@@ -242,13 +248,17 @@ class ChooseNames extends React.Component<NameProps, NameState> {
   }
 }
 
-const mapDispatchToProps = (dispatch): any => ({
-  reset: (): void => dispatch(playerActions.reset()),
-  setupPlayers: (player1, player2, difficulty): void =>
+const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>): NameDispatchProps => ({
+  reset: (): ResetAction => dispatch(playerActions.reset()),
+  setupPlayers: (
+    player1: Player,
+    player2: Player,
+    difficulty: number,
+  ): SetupPlayersAction =>
     dispatch(playerActions.setupPlayers(player1, player2, difficulty)),
 });
 
-export default connect(
-  undefined,
+export default connect<NameDispatchProps>(
+  null,
   mapDispatchToProps,
 )(ChooseNames);

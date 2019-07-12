@@ -1,5 +1,23 @@
 import { Player } from "./components";
 
+// * Board Actions * //
+export const ADD_MOVE = "ADD_MOVE";
+export const RESET_BOARD = "RESET_BOARD";
+
+export interface AddMoveAction {
+  type: typeof ADD_MOVE;
+  tiles: number[];
+}
+
+export interface ResetBoardAction {
+  type: typeof RESET_BOARD;
+}
+
+export interface OpponentDispatchProps {
+  setNumPlayers: (num) => SetNumPlayersAction;
+}
+
+// * Player Actions * //
 export const CHANGE_PLAYER_AFTER_MOVE = "CHANGE_PLAYER_AFTER_MOVE";
 export const RESET = "RESET";
 export const SET_NUM_PLAYERS = "SET_NUM_PLAYERS";
@@ -52,7 +70,25 @@ export interface SetCurrentPlayerAction {
   player: number;
 }
 
-type PlayerActionTypes =
+export interface NameDispatchProps {
+  reset: () => ResetAction;
+  setupPlayers: (player1, player2, difficulty) => SetupPlayersAction;
+  noPlayers?: number;
+}
+
+export interface PlayDispatchProps {
+  reset: () => ResetAction;
+  changePlayer: () => ChangePlayerAction;
+  updateCurrentTurn: (turn) => UpdateCurrentTurnAction;
+  playerOneScore: () => PlayerOneScoreAction;
+  playerTwoScore: () => PlayerTwoScoreAction;
+  resetScore: () => ResetScoreAction;
+  setCurrentPlayer: (player) => SetCurrentPlayerAction;
+  resetBoard: () => ResetBoardAction;
+  addMove: (board) => AddMoveAction;
+}
+
+declare type ActionTypes =
   | ChangePlayerAction
   | ResetAction
   | SetNumPlayersAction
@@ -61,6 +97,8 @@ type PlayerActionTypes =
   | PlayerTwoScoreAction
   | ResetScoreAction
   | UpdateCurrentTurnAction
-  | SetCurrentPlayerAction;
+  | SetCurrentPlayerAction
+  | AddMoveAction
+  | ResetBoardAction;
 
-export default PlayerActionTypes;
+export { ActionTypes as default };
