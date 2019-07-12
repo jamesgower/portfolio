@@ -32,9 +32,9 @@ const ChooseOpponents: React.SFC<ChooseOpponentsProps> = ({
           There are 3 different difficulties to choose <br />
           when playing a one player game!
         </h3>
-        <div className="button-container-TTT">
+        <div className="ttt__button-container--players">
           <Button
-            className="playerChoice"
+            className="ttt__player-button"
             outline
             color="secondary"
             size="lg"
@@ -43,7 +43,7 @@ const ChooseOpponents: React.SFC<ChooseOpponentsProps> = ({
             1 Player
           </Button>
           <Button
-            className="playerChoice"
+            className="ttt__player-button"
             outline
             color="secondary"
             size="lg"
