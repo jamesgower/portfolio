@@ -46,6 +46,10 @@
   line-height: 100px;
   text-align: center;
   width: 100%;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .tile__text--p1 {

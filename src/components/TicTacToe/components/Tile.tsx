@@ -2,17 +2,23 @@ import * as React from "react";
 import { TileProps } from "../interfaces/components";
 
 const Tile: React.FC<TileProps> = (props): JSX.Element => {
-  const { disableClicks, id, disableTileClicks } = props;
+  const {
+    disableClicks,
+    id,
+    disableTileClicks,
+    player: { noPlayers, player1, player2, currentPlayer },
+    board: { tiles },
+    takeTurn,
+    takeAITurn,
+    currentTurn,
+  } = props;
 
   const setDisabled = (): void => {
     disableTileClicks();
   };
 
   const onTileClick = (): void => {
-    const { player, board, takeTurn, takeAITurn } = props;
-    const { noPlayers, player1, player2, currentPlayer } = player;
-    const { tiles } = board;
-    document.getElementById("current-turn").className = "";
+    currentTurn.current.className = "";
 
     if (typeof tiles[id] === "number") {
       if (noPlayers === 1) {
@@ -23,10 +29,10 @@ const Tile: React.FC<TileProps> = (props): JSX.Element => {
             takeAITurn();
           }, 1000);
         }
-      } else if (currentPlayer === 1) {
-        takeTurn(id, player1.counter);
       } else {
-        takeTurn(id, player2.counter);
+        currentPlayer === 1
+          ? takeTurn(id, player1.counter)
+          : takeTurn(id, player2.counter);
       }
     }
   };
