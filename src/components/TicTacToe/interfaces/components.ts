@@ -60,6 +60,7 @@ export interface TileProps {
   disableTileClicks: () => void;
   player: PlayerState;
   board: BoardState;
+  currentTurn: React.RefObject<HTMLDivElement>;
 }
 
 export interface Player {

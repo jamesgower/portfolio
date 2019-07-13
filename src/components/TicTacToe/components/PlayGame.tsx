@@ -30,7 +30,7 @@ import Tile from "./Tile";
  * [x] Fix bug when draw is achieved on last move
  * [ ] Investigate why sometimes not all animations trigger
  * [ ] Change addMove to be changing the array in state rather than  always sending a new one
- * [ ] Refactor class names to fit scss naming conventions
+ * [x] Refactor class names to fit scss naming conventions
  * [ ] Remove id's and replace with refs where possible.
  */
 
@@ -59,17 +59,17 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
 
   public componentDidMount(): void {
     setTimeout((): void => {
-      const p1score = document.getElementById("p1score");
+      const p1score = this.player1Score.current;
       p1score.style.visibility = "visible";
       p1score.className = "animated fadeIn";
-      const p2score = document.getElementById("p2score");
+      const p2score = this.player2Score.current;
       p2score.style.visibility = "visible";
       p2score.className = "animated fadeIn";
     }, 1000);
   }
 
   public componentWillUpdate(nextProps, nextState): void {
-    document.getElementById("current-turn").className = "";
+    this.currentTurn.current.className = "";
     if (nextState.gameFinished) {
       nextState.gameFinished = false;
       setTimeout((): void => {
@@ -89,9 +89,10 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
   }
 
   public componentDidUpdate(): void {
-    document.getElementById("current-turn").className = "animated fadeIn";
+    const currentTurn = this.currentTurn.current;
+    currentTurn.classList.add("animated", "fadeIn");
     setTimeout((): void => {
-      document.getElementById("current-turn").className = "";
+      currentTurn.className = "";
     }, 300);
   }
 
@@ -153,6 +154,11 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
       }
     }
 
+    if (gameWon && !minMax) {
+      this.gameOver(gameWon);
+      return true;
+    }
+
     if (!minMax && this.emptyTiles().length === 0) {
       changePlayer();
       updateCurrentTurn("It's a draw!");
@@ -162,11 +168,6 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
           gameFinished: true,
         });
       }, 1000);
-      return true;
-    }
-
-    if (gameWon && !minMax) {
-      this.gameOver(gameWon);
       return true;
     }
 
@@ -187,8 +188,8 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
     }
 
     gameWon.player === player1.counter
-      ? document.getElementById("p1score").classList.add("ttt__score-animation--p1")
-      : document.getElementById("p2score").classList.add("ttt__score-animation--p2");
+      ? this.player1Score.current.classList.add("ttt__score-animation--p1")
+      : this.player2Score.current.classList.add("ttt__score-animation--p2");
 
     gameWon.player === player1.counter ? playerOneScore() : playerTwoScore();
 
@@ -197,7 +198,7 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
       gameFinished: true,
     });
 
-    document.getElementById("current-turn").className = "";
+    this.currentTurn.current.className = "";
   };
 
   private onResetClick = (): void => {
@@ -225,14 +226,16 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
     /**
      * Return all of the tiles which are empty (typeof number)
      */
-    const { board } = this.props;
-    const { tiles } = board;
+    const {
+      board: { tiles },
+    } = this.props;
     return tiles.filter((tile: number): boolean => typeof tile === "number");
   };
 
   private bestSpot = (): string => {
-    const { player } = this.props;
-    const { difficulty, player2 } = player;
+    const {
+      player: { difficulty, player2 },
+    } = this.props;
     const { length } = this.emptyTiles();
     const randomNum = Math.floor(Math.random() * Math.floor(length));
 
@@ -274,8 +277,10 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
   };
 
   private onResetBoard = (): void => {
-    const { player, resetBoard } = this.props;
-    const { noPlayers, currentPlayer } = player;
+    const {
+      player: { noPlayers, currentPlayer },
+      resetBoard,
+    } = this.props;
 
     for (let i = 0; i < 9; i++) {
       const index = i.toString();
@@ -293,14 +298,15 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
       this.setState({ disableClicks: false });
     }
 
-    document.getElementById("p1score").className = "";
-    document.getElementById("p2score").className = "";
+    this.player1Score.current.className = "";
+    this.player2Score.current.className = "";
   };
 
   private minimax = (counter): Move => {
-    const { player, board } = this.props;
-    const { player1, player2 } = player;
-    const { tiles } = board;
+    const {
+      player: { player1, player2 },
+      board: { tiles },
+    } = this.props;
     const availSpots = this.emptyTiles();
 
     if (this.checkResult(player1.counter, true)) {
@@ -363,19 +369,30 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
     };
 
     const { disableClicks } = this.state;
-    const { player, board } = this.props;
-    const { player1, player2, currentTurn } = player;
+    const {
+      player: { player1, player2, currentTurn },
+      player,
+      board,
+    } = this.props;
     return (
       <div style={styles}>
         <div className="ttt__scores-container">
           <div className="ttt__scores--player1 animated slideInLeft">
-            {player1.name || "Player 1"}: <div id="p1score">{player1.score}</div>
+            {player1.name || "Player 1"}:{" "}
+            <div id="p1score" ref={this.player1Score}>
+              {player1.score}
+            </div>
           </div>
           <div className="ttt__scores--player2 animated slideInRight">
-            {player2.name}: <div id="p2score">{player2.score}</div>
+            {player2.name}:{" "}
+            <div id="p2score" ref={this.player2Score}>
+              {player2.score}
+            </div>
           </div>
         </div>
-        <div id="current-turn">{currentTurn}</div>
+        <div id="current-turn" ref={this.currentTurn}>
+          {currentTurn}
+        </div>
         <div id="ttt-back-button" role="button" tabIndex={0} onClick={this.onResetClick}>
           <i className="fa fa-undo" />
         </div>
@@ -388,6 +405,7 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
                 id={tile}
                 player={player}
                 board={board}
+                currentTurn={this.currentTurn}
                 takeAITurn={this.takeAITurn}
                 disableClicks={disableClicks}
                 disableTileClicks={(): void => this.setState({ disableClicks: true })}
