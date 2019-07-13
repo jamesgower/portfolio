@@ -6,9 +6,9 @@ import ChooseOpponents from "./ChooseOpponents";
 import HiddenNavBar from "../../HiddenNavBar";
 import { SetupProps, AppState } from "../interfaces/components";
 
-const Setup: React.SFC<SetupProps> = ({ player }): JSX.Element => {
-  const { noPlayers, readyToPlay } = player;
-
+const Setup: React.SFC<SetupProps> = ({
+  player: { noPlayers, readyToPlay },
+}): JSX.Element => {
   return (
     <>
       <HiddenNavBar />
