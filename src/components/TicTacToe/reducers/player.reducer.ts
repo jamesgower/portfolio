@@ -8,8 +8,8 @@ import PlayerActionTypes, {
   RESET_SCORE,
   UPDATE_CURRENT_TURN,
   SET_CURRENT_PLAYER,
-} from "../interfaces/actions";
-import { PlayerState } from "../interfaces/components";
+} from "../interfaces/actions.i";
+import { PlayerState } from "../interfaces/components.i";
 
 const defaultPlayerState: PlayerState = {
   noPlayers: undefined,

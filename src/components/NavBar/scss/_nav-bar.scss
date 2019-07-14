@@ -1,0 +1,112 @@
+$home-active: rgb(255, 0, 0);
+$home-hover: rgba(255, 0, 0, 0.6);
+$portfolio-active: rgb(80, 146, 0);
+$portfolio-hover: rgba(80, 146, 0, 0.6);
+$skills-active: rgb(18, 184, 148);
+$skills-hover: rgba(18, 184, 148, 0.6);
+$about-me-hover: rgb(0, 162, 255);
+$about-me-active: rgba(0, 162, 255, 0.6);
+
+.nav__container {
+  margin: 0 auto;
+  width: 70vw;
+}
+
+%nav__link {
+  border-bottom: 3px solid transparent;
+  color: $black;
+  font-family: "Oswald", sans-serif;
+  font-size: $font-size-medium;
+  margin: 0 6px;
+  padding: 12px;
+  text-align: center;
+  text-decoration: none;
+
+  &:hover {
+    color: $black;
+    text-decoration: none;
+  }
+}
+
+%nav__active {
+  padding-bottom: 16px;
+}
+
+.nav__home {
+  @extend %nav__link;
+
+  &:hover {
+    border-bottom: 3px solid $home-hover;
+  }
+}
+
+.nav__home--active {
+  @extend %nav__active;
+  border-bottom: 3px solid $home-active;
+}
+
+.nav__portfolio {
+  @extend %nav__link;
+
+  &:hover {
+    border-bottom: 3px solid $portfolio-hover;
+  }
+}
+
+.nav__portfolio--active {
+  @extend %nav__active;
+  border-bottom: 3px solid $portfolio-active;
+}
+
+.nav__skills {
+  @extend %nav__link;
+
+  &:hover {
+    border-bottom: 3px solid $skills-hover;
+  }
+}
+
+.nav__skills--active {
+  @extend %nav__active;
+  border-bottom: 3px solid $skills-active;
+}
+
+.nav__about-me {
+  @extend %nav__link;
+
+  &:hover {
+    border-bottom: 3px solid $about-me-hover;
+  }
+}
+
+.nav__about-me--active {
+  @extend %nav__active;
+  border-bottom: 3px solid $about-me-active;
+}
+
+.nav__logo {
+  height: 74px;
+}
+
+.nav__separator {
+  -webkit-margin-before: 26px;
+  border-bottom: 3px solid lightgray;
+  position: fixed;
+  right: 15vw;
+  width: 61vw;
+  z-index: -1;
+
+  @media (max-width: $md-breakpoint) {
+    width: 55vw;
+  }
+
+  @media (max-width: 767px) {
+    border: 0;
+  }
+}
+
+.nav__close-button {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}

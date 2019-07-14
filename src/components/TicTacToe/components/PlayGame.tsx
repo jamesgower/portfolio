@@ -1,7 +1,13 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { PlayProps, PlayState, GameWon, Move, AppState } from "../interfaces/components";
+import {
+  PlayProps,
+  PlayState,
+  GameWon,
+  Move,
+  AppState,
+} from "../interfaces/components.i";
 import ActionTypes, {
   ResetAction,
   ChangePlayerAction,
@@ -13,7 +19,7 @@ import ActionTypes, {
   ResetBoardAction,
   AddMoveAction,
   PlayDispatchProps,
-} from "../interfaces/actions";
+} from "../interfaces/actions.i";
 import * as playerActions from "../actions/player.action";
 import * as boardActions from "../actions/board.action";
 import Tile from "./Tile";

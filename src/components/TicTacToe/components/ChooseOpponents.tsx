@@ -6,7 +6,7 @@ import { setNumPlayers } from "../actions/player.action";
 import ActionTypes, {
   SetNumPlayersAction,
   OpponentDispatchProps,
-} from "../interfaces/actions";
+} from "../interfaces/actions.i";
 
 interface ChooseOpponentsProps {
   setNumPlayers: Function;

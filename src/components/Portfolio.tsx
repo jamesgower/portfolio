@@ -2,7 +2,7 @@ import * as React from "react";
 import Headroom from "react-headroom";
 import { Container } from "reactstrap";
 import GridLayout from "./Grid";
-import NavBar from "./NavBar";
+import NavBar from "./NavBar/components/NavBar";
 
 const Portfolio: React.SFC = (): JSX.Element => (
   <div className="background">
@@ -16,9 +16,9 @@ const Portfolio: React.SFC = (): JSX.Element => (
         </h1>
         <p className="skills--text">
           Here are a few of the projects that I have created during my Software
-          Developments career. Most <b>Front-End</b> projects are built using{" "}
-          <b>React</b>, although I am currently learning <b>Angular 6</b>, so
-          expect projects from this technology soon.
+          Developments career. Most <b>Front-End</b> projects are built using <b>React</b>
+          , although I am currently learning <b>Angular 6</b>, so expect projects from
+          this technology soon.
         </p>
         <p className="skills--text">
           For <b>Back-End</b> solutions I prefer to use <b>Node.JS</b> - mainly{" "}
