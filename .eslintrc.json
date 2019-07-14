@@ -51,6 +51,7 @@
     "no-nested-ternary": "off",
     "react-redux/prefer-separate-component-file": "off",
     "no-underscore-dangle": "off",
-    "lines-between-class-members": "off"
+    "lines-between-class-members": "off",
+    "no-prototype-builtins": "off"
   }
 }

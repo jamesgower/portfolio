@@ -1,74 +1,85 @@
 .skills--title {
-    text-align: center;
-    margin: 0 auto;
-    padding: 18px;
-    border-bottom: 3px solid #12b894;
-    width: 180px;
-    @media screen and (min-width: 280px) {
-        padding: 8px;
-    }
-    @media screen and (min-width: 580px) {
-        padding: 12px;
-    }
-    @media screen and (min-width: 880px) {
-        padding: 14px;
-    }
-    @media screen and (min-width: 1080px) {
-        padding: 16px;
-    }
+  text-align: center;
+  margin: 0 auto;
+  padding: 18px;
+  border-bottom: 3px solid #12b894;
+  width: 180px;
+
+  @media screen and (min-width: 280px) {
+    padding: 8px;
+  }
+
+  @media screen and (min-width: 580px) {
+    padding: 12px;
+  }
+
+  @media screen and (min-width: 880px) {
+    padding: 14px;
+  }
+
+  @media screen and (min-width: 1080px) {
+    padding: 16px;
+  }
 }
 
 .skills--container {
-    width: 80%;
-    margin: 0 auto;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .skills--frontEndHeader {
+  font-size: 2.6rem;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 3px solid red;
+  display: block;
+  margin: 0 auto;
+
+  @media screen and (min-width: 280px) {
+    font-size: 2.2rem;
+  }
+
+  @media screen and (min-width: 880px) {
+    font-size: 2.4rem;
+  }
+
+  @media screen and (min-width: 1080px) {
     font-size: 2.6rem;
-    padding: 10px;
-    text-align: center;
-    border-bottom: 3px solid red;
-    display: block;
-    margin: 0 auto;
-    @media screen and (min-width: 280px) {
-        font-size: 2.2rem;
-    }
-    @media screen and (min-width: 880px) {
-        font-size: 2.4rem;
-    }
-    @media screen and (min-width: 1080px) {
-        font-size: 2.6rem;
-    }
+  }
 }
 
 .skills--backEndHeader {
-    @extend .skills--frontEndHeader;
-    border-bottom: 3px solid #007bff;
+  @extend .skills--frontEndHeader;
+  border-bottom: 3px solid #007bff;
 }
 
 .skills--designHeader {
-    @extend .skills--frontEndHeader;
-    border-bottom: 3px solid #509200;
+  @extend .skills--frontEndHeader;
+  border-bottom: 3px solid #509200;
 }
 
 .skills--toolsHeader {
-    @extend .skills--frontEndHeader;
-    border-bottom: 3px solid #12b894;
+  @extend .skills--frontEndHeader;
+  border-bottom: 3px solid #12b894;
 }
 
 .skills--text {
-    margin-top: 10px;
-    text-align: justify;
-    @media screen and (min-width: 280px) {
-        font-size: 1.5rem;
-    }
-    @media screen and (min-width: 580px) {
-        font-size: 1.6rem;
-    }
-    @media screen and (min-width: 880px) {
-        font-size: 1.7rem;
-    }
-    @media screen and (min-width: 1080px) {
-        font-size: 1.8rem;
-    }
+  margin-top: 10px;
+  text-align: justify;
+
+  @media screen and (min-width: 280px) {
+    font-size: 1.5rem;
+  }
+
+  @media screen and (min-width: 580px) {
+    font-size: 1.6rem;
+  }
+
+  @media screen and (min-width: 880px) {
+    font-size: 1.7rem;
+  }
+
+  @media screen and (min-width: 1080px) {
+    font-size: 1.8rem;
+  }
 }

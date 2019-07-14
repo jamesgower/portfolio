@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { Button, Input, Row, Col } from "reactstrap";
 import * as playerActions from "../actions/player.action";
-import { NameState, Player, NameProps } from "../interfaces/components";
+import { NameState, Player, NameProps } from "../interfaces/components.i";
 import ActionTypes, {
   ResetAction,
   SetupPlayersAction,
   NameDispatchProps,
-} from "../interfaces/actions";
+} from "../interfaces/actions.i";
 
 class ChooseNames extends React.Component<NameProps, NameState> {
   public readonly state: NameState = {

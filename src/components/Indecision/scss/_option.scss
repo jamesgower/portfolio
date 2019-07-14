@@ -1,0 +1,22 @@
+.option {
+  border-bottom: 1px solid lighten($light-blue-indecision, 10%);
+  display: flex;
+  justify-content: space-between;
+  padding: $l-size $m-size;
+}
+
+.option__text {
+  color: white;
+  font-weight: 500;
+  font-size: 2rem;
+  margin: 0;
+  word-break: break-all;
+  margin-right: 15px;
+}
+
+.indecision-app {
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  background: $dark-blue-indecision;
+}

@@ -8,9 +8,9 @@ import Portfolio from "../components/Portfolio";
 import Pomodoro from "../components/Pomodoro";
 import PlayTicTacToe from "../components/TicTacToe/components/Setup";
 import Calculator from "../components/Calculator";
-import WikipediaAPI from "../components/WikipediaAPI/WikipediaAPI";
-import IndecisionApp from "../components/Indecision/IndecisionApp";
-import TwitchAPI from "../components/TwitchAPI/TwitchAPI";
+import WikipediaAPI from "../components/WikipediaAPI/components/WikipediaAPI";
+import IndecisionApp from "../components/Indecision/components/IndecisionApp";
+import TwitchAPI from "../components/TwitchAPI/components/TwitchAPI";
 import SimonSays from "../components/SimonSays";
 import Skills from "../components/Skills";
 import Chatter from "../components/Chatter";
@@ -24,24 +24,24 @@ const store = configureStore();
 
 const AppRouter: React.SFC = (): JSX.Element => (
   <Router history={history}>
-    <Switch>
-      <Route path="/" component={PlayTicTacToe} exact />
-      <Route path="/portfolio" exact component={Portfolio} />
-      <Route path="/portfolio/pomodoro" component={Pomodoro} />
-      <Provider store={store}>
+    <Provider store={store}>
+      <Switch>
+        <Route path="/" component={IndecisionApp} exact />
+        <Route path="/portfolio" exact component={Portfolio} />
+        <Route path="/portfolio/pomodoro" component={Pomodoro} />
+        <Route path="/portfolio/calculator" component={Calculator} />
+        <Route path="/portfolio/wikipedia" component={WikipediaAPI} />
+        <Route path="/portfolio/indecision-app" component={IndecisionApp} />
+        <Route path="/portfolio/twitch" component={TwitchAPI} />
+        <Route path="/portfolio/simon-says" component={SimonSays} />
+        <Route path="/contact-me" component={AboutMe} />
+        <Route path="/skills" component={Skills} />
+        <Route path="/portfolio/chatter" component={Chatter} />
+        <Route path="/portfolio/drum-machine" component={DrumMachine} />
         <Route path="/portfolio/tic-tac-toe" component={PlayTicTacToe} />
-      </Provider>
-      <Route path="/portfolio/calculator" component={Calculator} />
-      <Route path="/portfolio/wikipedia" component={WikipediaAPI} />
-      <Route path="/portfolio/indecision-app" component={IndecisionApp} />
-      <Route path="/portfolio/twitch" component={TwitchAPI} />
-      <Route path="/portfolio/simon-says" component={SimonSays} />
-      <Route path="/contact-me" component={AboutMe} />
-      <Route path="/skills" component={Skills} />
-      <Route path="/portfolio/chatter" component={Chatter} />
-      <Route path="/portfolio/drum-machine" component={DrumMachine} />
-      <Route component={NotFoundPage} />
-    </Switch>
+        <Route component={NotFoundPage} />
+      </Switch>
+    </Provider>
   </Router>
 );
 
