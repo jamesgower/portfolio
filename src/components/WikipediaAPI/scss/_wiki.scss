@@ -1,0 +1,116 @@
+$wiki-img: url("../../public/images/wikibg.png");
+$input-focus: #80abfc;
+$wiki-blue: #4569ac;
+
+.wiki__container {
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  background: $wiki-img no-repeat center center fixed;
+  background-size: cover;
+  font-family: Franklin "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  height: 100%;
+  margin-bottom: -1px;
+  min-height: 100vh;
+  padding-bottom: 1px;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+.wiki__nav-container {
+  height: 90px;
+}
+
+.wiki__container-animation {
+  @extend %wiki__box-container;
+  margin-top: 20px !important;
+  transition: margin-top 1s;
+}
+
+.wiki__box-container,
+%wiki__box-container {
+  background-color: $white;
+  border: 5px solid $black;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 30vh auto 0;
+  padding: 16px;
+  width: 60%;
+}
+
+.wiki__search-input {
+  border: 3px solid $wiki-blue;
+  border-radius: 20px;
+  color: $wiki-blue;
+  font-size: 14px;
+  height: 40px;
+  margin: 10px;
+  padding: 6px 4px;
+  text-align: center;
+  width: 100%;
+
+  &:focus {
+    box-shadow: 0 0 8px $input-focus;
+    outline: none;
+  }
+}
+
+.wiki__search-clear-btn {
+  background: $white;
+  color: $wiki-blue;
+  cursor: pointer;
+  font-size: 24px;
+  position: absolute;
+  right: 20px;
+  top: 23px;
+}
+
+.wiki__search-container {
+  align-items: center;
+  display: flex;
+  height: 70px;
+  margin: 0 auto;
+  position: relative;
+  width: 300px;
+}
+
+.wiki__search-btn {
+  cursor: pointer;
+  height: 60px;
+  left: 50%;
+  margin: 5px 5px 5px -30px;
+  position: absolute;
+  top: 0;
+  width: 60px;
+  z-index: 100;
+}
+
+.wiki__text {
+  color: $wiki-blue;
+  font-family: Franklin Gothic !important;
+  font-size: 18px;
+  margin: 0 !important;
+  text-align: center;
+}
+
+.wiki__text > a {
+  color: $wiki-blue;
+  text-decoration: none;
+
+  &:hover {
+    color: $grey;
+  }
+}
+
+.wiki__search-results-container {
+  margin: 0 auto 40px;
+  width: 80%;
+}
+
+.wiki__pagination-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}

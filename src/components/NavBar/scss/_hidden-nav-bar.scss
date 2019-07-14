@@ -1,0 +1,15 @@
+.nav__burger {
+  cursor: pointer;
+  font-size: 40px;
+  height: 40px;
+  justify-content: center;
+  left: 50%;
+  margin-left: -20px;
+  position: absolute;
+  top: 30px;
+  width: 40px;
+
+  &:focus {
+    outline: none;
+  }
+}

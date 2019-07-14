@@ -1,10 +1,10 @@
-import { BoardState } from "../interfaces/components";
+import { BoardState } from "../interfaces/components.i";
 import {
   AddMoveAction,
   ResetBoardAction,
   RESET_BOARD,
   ADD_MOVE,
-} from "../interfaces/actions";
+} from "../interfaces/actions.i";
 
 const defaultBoardState: BoardState = {
   tiles: Array.from(Array(9).keys()),

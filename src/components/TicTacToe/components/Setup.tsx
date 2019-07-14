@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import PlayGame from "./PlayGame";
 import ChooseNames from "./ChooseNames";
 import ChooseOpponents from "./ChooseOpponents";
-import HiddenNavBar from "../../HiddenNavBar";
-import { SetupProps, AppState } from "../interfaces/components";
+import HiddenNavBar from "../../NavBar/components/HiddenNavBar";
+import { SetupProps, AppState } from "../interfaces/components.i";
 
 const Setup: React.SFC<SetupProps> = ({
   player: { noPlayers, readyToPlay },
