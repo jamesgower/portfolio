@@ -45,9 +45,11 @@ body {
   margin: 0 !important;
   height: 400px;
   overflow: hidden;
+
   @media (max-width: 564px) {
     height: 200px;
   }
+
   &:hover img {
     opacity: 0.4;
     filter: grayscale(100%);

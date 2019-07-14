@@ -1,7 +1,7 @@
 import React from "react";
 import { circleProgress } from "jquery-circle-progress"; // eslint-disable-line no-unused-vars
 import Timer from "easytimer";
-import NavBar from "./HiddenNavBar";
+import NavBar from "./NavBar/components/HiddenNavBar";
 import { Howl } from "howler";
 import arrowLeft from "../../public/images/arrowLeft.png";
 import arrowRight from "../../public/images/arrowRight.png";
@@ -41,7 +41,7 @@ class Pomodoro extends React.Component {
     alarm2.stop();
   }
 
-  updateState = update => {
+  updateState = (update) => {
     this.setState({ showComponent: update });
   };
 
@@ -194,20 +194,15 @@ class Pomodoro extends React.Component {
 
             <div id="title-pomo">Pomodoro Clock</div>
             <div id="subtitle" className="text-center">
-              Many people work better when they know they have a break on the
-              way! <br />
-              Choose the length of time you wish to work - and the break you can
-              reward yourself with!
+              Many people work better when they know they have a break on the way! <br />
+              Choose the length of time you wish to work - and the break you can reward
+              yourself with!
             </div>
             <div className="row">
               <div className="col-sm-6 test">
                 <div id="workTimer" className="text-center">
                   <p className="times">Minutes to work</p>
-                  <img
-                    src={arrowLeft}
-                    id="leftWork"
-                    className="arrows hvr-pulse-grow"
-                  />
+                  <img src={arrowLeft} id="leftWork" className="arrows hvr-pulse-grow" />
                   <div id="workNum" className="num" value="25">
                     25
                   </div>
@@ -221,11 +216,7 @@ class Pomodoro extends React.Component {
               <div className="col-sm-6 test">
                 <div id="breakTimer" className="text-center">
                   <p className="times">Minutes on break</p>
-                  <img
-                    src={arrowLeft}
-                    id="leftBreak"
-                    className="arrows hvr-pulse-grow"
-                  />
+                  <img src={arrowLeft} id="leftBreak" className="arrows hvr-pulse-grow" />
                   <div id="breakNum" className="num">
                     5
                   </div>

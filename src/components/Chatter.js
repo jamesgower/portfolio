@@ -1,6 +1,6 @@
 import React from "react";
 import Headroom from "react-headroom";
-import NavBar from "./HiddenNavBar";
+import NavBar from "./NavBar/components/HiddenNavBar";
 import { Col, Row, Container, Button } from "reactstrap";
 
 export default () => (

@@ -1,87 +1,87 @@
 .blog-title {
-    font-size: 32px;
-    text-align: center;
-    text-decoration: underline;
-    padding: 20px;
+  font-size: 32px;
+  text-align: center;
+  text-decoration: underline;
+  padding: 20px;
 }
 
 .blog-text {
+  font-size: 20px;
+  margin: 10px 80px;
+  text-align: center;
+  @media (max-width: $l-breakpoint) {
     font-size: 20px;
-    margin: 10px 80px;
-    text-align: center;
-    @media (max-width: $l-breakpoint) {
-        font-size: 20px;
-        margin: 10px 30px;
-    }
-    @media (max-width: $md-breakpoint) {
-        font-size: 16px;
-        margin: 10px 30px;
-    }
-    @media (max-width: $s-breakpoint) {
-        font-size: 13px;
-        margin: 10px 30px;
-    }
-    @media (max-width: $xs-breakpoint) {
-        font-size: 10px;
-        margin: 10px 30px;
-    }
+    margin: 10px 30px;
+  }
+  @media (max-width: $md-breakpoint) {
+    font-size: 16px;
+    margin: 10px 30px;
+  }
+  @media (max-width: $s-breakpoint) {
+    font-size: 13px;
+    margin: 10px 30px;
+  }
+  @media (max-width: $xs-breakpoint) {
+    font-size: 10px;
+    margin: 10px 30px;
+  }
 }
 
 .blog-header {
-    margin-top: 10px;
-    margin-left: 30px;
-    font-size: 26px;
-    font-weight: 600;
-    @media (max-width: $md-breakpoint) {
-        font-size: 20px;
-    }
-    @media (max-width: $s-breakpoint) {
-        font-size: 15px;
-    }
+  margin-top: 10px;
+  margin-left: 30px;
+  font-size: 26px;
+  font-weight: 600;
+  @media (max-width: $md-breakpoint) {
+    font-size: 20px;
+  }
+  @media (max-width: $s-breakpoint) {
+    font-size: 15px;
+  }
 }
 
 .login {
-    float: right;
-    margin: 0px 30px 30px 30px;
-    height: 300px;
-    width: auto;
-    clear: left;
+  float: right;
+  margin: 0 30px 30px 30px;
+  height: 300px;
+  width: auto;
+  clear: left;
 }
 
 .post {
-    height: 350px;
-    clear: right;
-    float: left;
-    margin: 10px 50px 30px 30px;
+  height: 350px;
+  clear: right;
+  float: left;
+  margin: 10px 50px 30px 30px;
 }
 
 .blog-subtitle {
-    text-decoration: underline;
-    font-size: 22px;
-    padding-left: 30px;
-    @media (max-width: $md-breakpoint) {
-        font-size: 18px;
-    }
-    @media (max-width: $s-breakpoint) {
-        font-size: 13px;
-    }
+  text-decoration: underline;
+  font-size: 22px;
+  padding-left: 30px;
+  @media (max-width: $md-breakpoint) {
+    font-size: 18px;
+  }
+  @media (max-width: $s-breakpoint) {
+    font-size: 13px;
+  }
 }
 
 .list {
-    font-size: 20px;
-    margin-left: 30px;
+  font-size: 20px;
+  margin-left: 30px;
 }
 
 .blogify-btn-container {
-    width: 200px;
-    margin: 0 auto 10px auto;
-    height: 40px;
+  width: 200px;
+  margin: 0 auto 10px auto;
+  height: 40px;
 }
 
 .btn-left {
-    float: left;
+  float: left;
 }
 
 .btn-right {
-    float: right;
+  float: right;
 }

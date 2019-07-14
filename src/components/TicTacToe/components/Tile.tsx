@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TileProps } from "../interfaces/components";
+import { TileProps } from "../interfaces/components.i";
 
 const Tile: React.FC<TileProps> = (props): JSX.Element => {
   const {
