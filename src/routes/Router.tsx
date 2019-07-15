@@ -2,21 +2,20 @@ import * as React from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import createHistory from "history/createBrowserHistory";
-import NotFoundPage from "../components/NotFoundPage";
-import LandingPage from "../components/LandingPage";
-import Portfolio from "../components/Portfolio";
-import Pomodoro from "../components/Pomodoro";
-import PlayTicTacToe from "../components/TicTacToe/components/Setup";
-import Calculator from "../components/Calculator";
-import WikipediaAPI from "../components/WikipediaAPI/components/WikipediaAPI";
-import IndecisionApp from "../components/Indecision/components/IndecisionApp";
-import TwitchAPI from "../components/TwitchAPI/components/TwitchAPI";
-import SimonSays from "../components/SimonSays";
-import Skills from "../components/Skills";
-import Chatter from "../components/Chatter";
-import DrumMachine from "../components/DrumMachine";
-import AboutMe from "../components/AboutMe";
-import configureStore from "../components/TicTacToe/store/store";
+import NotFoundPage from "../pages/_misc/components/NotFoundPage";
+import LandingPage from "../pages/landing-page/components/LandingPage";
+import Portfolio from "../pages/portfolio/components/Portfolio";
+import Pomodoro from "../pages/pomodoro/components/Pomodoro";
+import PlayTicTacToe from "../pages/tic-tac-toe/components/Setup";
+import Calculator from "../pages/calculator/components/Calculator";
+import WikipediaAPI from "../pages/wikipedia-api/components/WikipediaAPI";
+import IndecisionApp from "../pages/indecision-app/components/IndecisionApp";
+import TwitchAPI from "../pages/twitch-api/components/TwitchAPI";
+import SimonSays from "../pages/simon-says/components/SimonSays";
+import Skills from "../pages/skills/components/Skills";
+import DrumMachine from "../pages/drum-machine/components/DrumMachine";
+import AboutMe from "../pages/about-me/components/AboutMe";
+import configureStore from "../pages/tic-tac-toe/store/store";
 
 export const history = createHistory();
 
@@ -26,7 +25,7 @@ const AppRouter: React.SFC = (): JSX.Element => (
   <Router history={history}>
     <Provider store={store}>
       <Switch>
-        <Route path="/" component={IndecisionApp} exact />
+        <Route path="/" component={Pomodoro} exact />
         <Route path="/portfolio" exact component={Portfolio} />
         <Route path="/portfolio/pomodoro" component={Pomodoro} />
         <Route path="/portfolio/calculator" component={Calculator} />
@@ -36,7 +35,6 @@ const AppRouter: React.SFC = (): JSX.Element => (
         <Route path="/portfolio/simon-says" component={SimonSays} />
         <Route path="/contact-me" component={AboutMe} />
         <Route path="/skills" component={Skills} />
-        <Route path="/portfolio/chatter" component={Chatter} />
         <Route path="/portfolio/drum-machine" component={DrumMachine} />
         <Route path="/portfolio/tic-tac-toe" component={PlayTicTacToe} />
         <Route component={NotFoundPage} />

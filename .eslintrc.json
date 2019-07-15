@@ -52,6 +52,8 @@
     "react-redux/prefer-separate-component-file": "off",
     "no-underscore-dangle": "off",
     "lines-between-class-members": "off",
-    "no-prototype-builtins": "off"
+    "no-prototype-builtins": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/no-noninteractive-element-to-interactive-role": "off"
   }
 }
