@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Howl } from "howler";
 import { Row, Col } from "reactstrap";
-import { CircularProgressbar } from "react-circular-progressbar";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import * as playButton from "../../../../public/images/play.png";
 import * as stopButton from "../../../../public/images/stop.png";
@@ -13,8 +13,11 @@ import Arrows from "./Arrows";
 
 class Pomodoro extends React.Component<{}, PomodoroState> {
   public readonly state: PomodoroState = {
-    workTime: 25,
-    breakTime: 5,
+    workTime: 0.1,
+    breakTime: 0.1,
+    workTimerSeconds: undefined,
+    breakTimerSeconds: undefined,
+    currentTimer: "work",
   };
 
   private workAlarm = new Howl({
@@ -26,12 +29,41 @@ class Pomodoro extends React.Component<{}, PomodoroState> {
     volume: 0.5,
   });
 
+  public workTimer: number;
+  public breakTimer: number;
+
   public componentWillUnmount(): void {
     this.workAlarm.stop();
     this.breakAlarm.stop();
   }
 
-  private onStartTimer = (): void => {};
+  private onStartTimer = (): void => {
+    const { workTime, breakTime, currentTimer } = this.state;
+    let workTimeLeft = workTime * 60 * 10;
+    let breakTimeLeft = breakTime * 60 * 10;
+    this.workTimer = window.setInterval((): void => {
+      if (workTimeLeft === 0) {
+        this.workAlarm.play();
+        clearTimeout(this.workTimer);
+        this.setState({ currentTimer: "break" });
+        this.breakTimer = window.setInterval((): void => {
+          if (breakTimeLeft === 0) {
+            this.breakAlarm.play();
+            setTimeout(() => {
+              clearTimeout(this.breakTimer);
+            }, 500);
+            this.setState({ currentTimer: "work" });
+          }
+          breakTimeLeft--;
+          console.log("BREAK", breakTimeLeft);
+          this.setState({ breakTimerSeconds: breakTimeLeft });
+        }, 100);
+      }
+      workTimeLeft--;
+      console.log("WORK", workTimeLeft);
+      this.setState({ workTimerSeconds: workTimeLeft });
+    }, 100);
+  };
 
   private onStopTimer = (): void => {};
 
@@ -50,7 +82,13 @@ class Pomodoro extends React.Component<{}, PomodoroState> {
   };
 
   public render(): JSX.Element {
-    const { workTime, breakTime } = this.state;
+    const {
+      workTime,
+      breakTime,
+      workTimerSeconds,
+      breakTimerSeconds,
+      currentTimer,
+    } = this.state;
     return (
       <div>
         <HiddenNavBar color="#FFF" />
@@ -72,9 +110,17 @@ class Pomodoro extends React.Component<{}, PomodoroState> {
             </Row>
             <div id="circle-container">
               <CircularProgressbar
-                value={workTime}
-                maxValue={workTime * 60}
-                minValue={0}
+                value={currentTimer === "work" ? workTimerSeconds : breakTimerSeconds}
+                maxValue={
+                  currentTimer === "work" ? workTime * 60 * 10 : breakTime * 60 * 10
+                }
+                styles={buildStyles({
+                  pathColor:
+                    currentTimer === "work"
+                      ? `rgba(255, 0, 0, ${workTimerSeconds})`
+                      : `rgba(0, 0, 255, ${breakTimerSeconds})`,
+                })}
+                counterClockwise={!!breakTimerSeconds}
               />
             </div>
 
