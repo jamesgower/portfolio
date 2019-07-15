@@ -9,14 +9,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 declare global {
   interface Window {
-    $: any;
-    jQuery: any;
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any;
   }
 }
-
-window.$ = $;
-window.jQuery = jQuery;
 
 let hasRendered = false;
 

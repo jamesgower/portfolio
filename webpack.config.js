@@ -1,5 +1,4 @@
 const path = require("path");
-const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -7,13 +6,13 @@ const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const PurgecssPlugin = require("purgecss-webpack-plugin");
 
-module.exports = env => {
+module.exports = (env) => {
   const isProduction = env === "production";
 
   return {
-    entry: ["@babel/polyfill", "./src/app.tsx", "jquery"],
+    entry: ["@babel/polyfill", "./src/app.tsx"],
     resolve: {
-      extensions: [".ts", ".tsx", ".js"],
+      extensions: [".ts", ".tsx", ".js", ".jsx"],
     },
     output: {
       path: path.join(__dirname, "dist"),
@@ -53,9 +52,7 @@ module.exports = env => {
           test: /\.(sa|sc|c)ss$/,
           use: [
             {
-              loader: !isProduction
-                ? "style-loader"
-                : MiniCssExtractPlugin.loader,
+              loader: !isProduction ? "style-loader" : MiniCssExtractPlugin.loader,
               options: {
                 hmr: process.env.NODE_ENV === "development",
               },
@@ -75,7 +72,6 @@ module.exports = env => {
       ],
     },
     plugins: [
-      new webpack.ProvidePlugin({ $: "jquery", jQuery: "jquery" }),
       new CleanWebpackPlugin(["dist"]),
       new MiniCssExtractPlugin({
         filename: "[name].css",
