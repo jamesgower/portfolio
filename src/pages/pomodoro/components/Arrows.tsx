@@ -7,35 +7,38 @@ const Arrows: React.FC<ArrowsProps> = ({
   onHandleArrowClick,
   workTime,
   breakTime,
+  work,
 }): JSX.Element => {
   return (
-    <div id="breakTimer" className="text-center">
-      <p className="times">Minutes on break</p>
+    <div className="arrows__container">
+      <p className="arrows__time-container">Minutes {work ? "to work" : "on break"}</p>
       <div
-        className="hvr-pulse-grow"
+        className="arrows__pulse-animation"
         role="button"
         tabIndex={0}
-        onClick={(): void => onHandleArrowClick(!!workTime, false)}
+        onClick={(): void => {
+          work ? onHandleArrowClick(true, false) : onHandleArrowClick(false, false);
+        }}
       >
         <img
           src={arrowLeft}
           alt={`Subtract one from ${workTime ? "work" : "break"} timer`}
-          className="arrows"
+          className="arrows__image"
         />
       </div>
-      <div id="breakNum" className="num">
-        {workTime || breakTime}
-      </div>
+      <div className="arrows__current-number">{workTime || breakTime}</div>
       <div
-        className="hvr-pulse-grow"
+        className="arrows__pulse-animation"
         role="button"
         tabIndex={0}
-        onClick={(): void => onHandleArrowClick(!!workTime, true)}
+        onClick={(): void => {
+          work ? onHandleArrowClick(true, true) : onHandleArrowClick(false, true);
+        }}
       >
         <img
           src={arrowRight}
           alt={`Add one to ${workTime ? "work" : "break"} timer`}
-          className="arrows"
+          className="arrows__image"
         />
       </div>
     </div>
