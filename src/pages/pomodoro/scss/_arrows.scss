@@ -1,0 +1,133 @@
+.arrows__container {
+  text-align: center;
+}
+
+.arrows__image {
+  display: inline-block;
+  width: 80px;
+  margin-top: -50px;
+}
+
+.arrows__time-container {
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: -20px;
+}
+
+.arrows__current-number {
+  display: inline-block;
+  width: 110px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width: 220px) {
+  .arrows__time-container {
+    font-size: 1.6em;
+  }
+
+  .arrows__current-number {
+    font-size: 3.8em;
+  }
+
+  .arrows__image {
+    width: 60px;
+    height: auto;
+  }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width: 480px) {
+  .arrows__time-container {
+    font-size: 1.6em;
+  }
+
+  .arrows__current-number {
+    font-size: 3.8em;
+  }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width: 768px) {
+  .arrows__time-container {
+    font-size: 1.5em;
+  }
+
+  .arrows__current-number {
+    font-size: 4.6em;
+  }
+
+  .arrows__image {
+    width: 80px;
+    height: auto;
+  }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width: 992px) {
+  .arrows__time-container {
+    font-size: 1.7em;
+  }
+
+  .arrows__current-number {
+    font-size: 5em;
+  }
+
+  .arrows__image {
+    width: 80px;
+    height: auto;
+  }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width: 1200px) {
+  .arrows__time-container {
+    font-size: 2.4em;
+  }
+
+  .arrows__current-number {
+    font-size: 5.6em;
+  }
+
+  .arrows__image {
+    width: 90px;
+    height: auto;
+  }
+}
+
+@-webkit-keyframes arrows__pulse-animation {
+  to {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+}
+
+@keyframes arrows__pulse-animation {
+  to {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+}
+
+.arrows__pulse-animation {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+}
+
+.arrows__pulse-animation:hover {
+  -webkit-animation-name: arrows__pulse-animation;
+  animation-name: arrows__pulse-animation;
+  -webkit-animation-duration: 0.3s;
+  animation-duration: 0.3s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  animation-direction: alternate;
+  outline: none;
+}
