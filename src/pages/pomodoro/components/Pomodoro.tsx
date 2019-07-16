@@ -3,21 +3,24 @@ import { Howl } from "howler";
 import { Row, Col } from "reactstrap";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import * as playButton from "../../../../public/images/play.png";
-import * as stopButton from "../../../../public/images/stop.png";
 import * as sound1 from "../../../../public/media/alarm.mp3";
 import * as sound2 from "../../../../public/media/alarm2.mp3";
 import PomodoroState from "../interfaces/pomodoro.i";
 import HiddenNavBar from "../../nav-bar/components/HiddenNavBar";
 import Arrows from "./Arrows";
 
+/**
+ * TODO
+ * [ ] Make circle container & circle smaller on smaller screens
+ */
+
 class Pomodoro extends React.Component<{}, PomodoroState> {
   public readonly state: PomodoroState = {
-    workTime: 0.1,
-    breakTime: 0.1,
-    workTimerSeconds: undefined,
-    breakTimerSeconds: undefined,
-    currentTimer: "work",
+    workTime: 25,
+    breakTime: 5,
+    timerSeconds: 0,
+    workTimerOn: true,
+    time: "00 : 00",
   };
 
   private workAlarm = new Howl({
@@ -29,120 +32,127 @@ class Pomodoro extends React.Component<{}, PomodoroState> {
     volume: 0.5,
   });
 
-  public workTimer: number;
-  public breakTimer: number;
-
   public componentWillUnmount(): void {
+    window.clearInterval(this.timer);
     this.workAlarm.stop();
     this.breakAlarm.stop();
   }
 
-  private onStartTimer = (): void => {
-    const { workTime, breakTime, currentTimer } = this.state;
-    let workTimeLeft = workTime * 60 * 10;
-    let breakTimeLeft = breakTime * 60 * 10;
-    this.workTimer = window.setInterval((): void => {
-      if (workTimeLeft === 0) {
-        this.workAlarm.play();
-        clearTimeout(this.workTimer);
-        this.setState({ currentTimer: "break" });
-        this.breakTimer = window.setInterval((): void => {
-          if (breakTimeLeft === 0) {
-            this.breakAlarm.play();
-            setTimeout(() => {
-              clearTimeout(this.breakTimer);
-            }, 500);
-            this.setState({ currentTimer: "work" });
-          }
-          breakTimeLeft--;
-          console.log("BREAK", breakTimeLeft);
-          this.setState({ breakTimerSeconds: breakTimeLeft });
-        }, 100);
-      }
-      workTimeLeft--;
-      console.log("WORK", workTimeLeft);
-      this.setState({ workTimerSeconds: workTimeLeft });
-    }, 100);
-  };
-
-  private onStopTimer = (): void => {};
-
   private onArrowClick = (work: boolean, add: boolean): void => {
     const { workTime, breakTime } = this.state;
-    if (workTime >= 1 && work) {
+    if (work) {
       add
         ? this.setState({ workTime: workTime + 1 })
-        : this.setState({ workTime: workTime - 1 });
-    }
-    if (breakTime > 1 && !work) {
+        : this.setState({ workTime: workTime > 1 ? workTime - 1 : 1 });
+    } else {
       add
         ? this.setState({ breakTime: breakTime + 1 })
-        : this.setState({ breakTime: breakTime - 1 });
+        : this.setState({ breakTime: breakTime > 1 ? breakTime - 1 : 1 });
     }
   };
 
+  private onStopTimer = (): void => {
+    clearInterval(this.timer);
+    this.workAlarm.stop();
+    this.breakAlarm.stop();
+    this.setState({ timerSeconds: 0, time: "00:00", workTimerOn: true });
+  };
+
+  private onStartTimer = (): void => {
+    const { workTime, breakTime } = this.state;
+    let current = workTime * 60;
+    this.timer = window.setInterval((): void => {
+      if (current === 0) {
+        const { workTimerOn } = this.state;
+        this.setState({ workTimerOn: !workTimerOn });
+        workTimerOn ? this.workAlarm.play() : this.breakAlarm.play();
+        setTimeout((): void => {
+          current = workTimerOn ? breakTime * 60 : workTime * 60;
+        }, 500);
+      } else {
+        const hours = current > 3600 ? Math.floor(current / 3600) : null;
+        const minutes = Math.floor(current / 60);
+        const seconds = current % 60;
+
+        const time = this.formatTime(hours, minutes, seconds);
+        this.setState({ timerSeconds: current, time });
+        current--;
+      }
+    }, 1000);
+  };
+
+  private formatTime = (hrs: number, mins: number, secs: number): string => {
+    const hours = hrs ? `${hrs} : ` : "";
+    if (hrs) {
+      mins %= 60;
+    }
+    const minutes = mins < 10 ? `0${mins}` : mins;
+
+    const seconds = secs < 10 ? `0${secs}` : secs;
+    return `${hours}${minutes} : ${seconds}`;
+  };
+
+  public timer: number;
+
   public render(): JSX.Element {
-    const {
-      workTime,
-      breakTime,
-      workTimerSeconds,
-      breakTimerSeconds,
-      currentTimer,
-    } = this.state;
+    const { workTime, breakTime, timerSeconds, workTimerOn, time } = this.state;
     return (
       <div>
         <HiddenNavBar color="#FFF" />
-        <div className="pomodoro">
-          <div id="pomo" className="animated slideInDown">
-            <div id="title-pomo">Pomodoro Clock</div>
-            <div id="subtitle" className="text-center">
+        <div className="pomodoro__background">
+          <div className="pomodoro__container animated fadeIn">
+            <div className="pomodoro__title">Pomodoro Clock</div>
+            <div className="pomodoro__subtitle">
               Many people work better when they know they have a break on the way! <br />
               Choose the length of time you wish to work - and the break you can reward
               yourself with!
             </div>
             <Row>
               <Col sm={6}>
-                <Arrows workTime={workTime} onHandleArrowClick={this.onArrowClick} />
+                <Arrows work workTime={workTime} onHandleArrowClick={this.onArrowClick} />
               </Col>
               <Col sm={6}>
                 <Arrows breakTime={breakTime} onHandleArrowClick={this.onArrowClick} />
               </Col>
             </Row>
-            <div id="circle-container">
+            <div className="pomodoro__circle-container">
               <CircularProgressbar
-                value={currentTimer === "work" ? workTimerSeconds : breakTimerSeconds}
-                maxValue={
-                  currentTimer === "work" ? workTime * 60 * 10 : breakTime * 60 * 10
-                }
+                value={timerSeconds}
+                maxValue={workTimerOn ? workTime * 60 : breakTime * 60}
+                counterClockwise={workTimerOn}
                 styles={buildStyles({
-                  pathColor:
-                    currentTimer === "work"
-                      ? `rgba(255, 0, 0, ${workTimerSeconds})`
-                      : `rgba(0, 0, 255, ${breakTimerSeconds})`,
+                  pathTransitionDuration: 1,
+                  trailColor: "rgba(191, 191, 191, 0.1)",
+                  pathColor: `rgba(255, 255, 255, ${timerSeconds / 20}`,
+                  strokeLinecap: "butt",
                 })}
-                counterClockwise={!!breakTimerSeconds}
               />
             </div>
 
-            <div className="buttons">
-              <img
-                src={playButton}
-                alt="Play button"
-                id="goBtn"
+            <div className="pomodoro__buttons-container">
+              <i
                 role="button"
+                tabIndex={0}
+                className="pomodoro__button--start far fa-play-circle"
                 onClick={this.onStartTimer}
               />
-              <img
-                src={stopButton}
-                alt="Stop button"
+              <i
                 role="button"
-                id="stopBtn"
+                tabIndex={0}
+                className="pomodoro__button--stop far fa-stop-circle"
                 onClick={this.onStopTimer}
               />
             </div>
-
-            <div id="countdown">
-              <div className="values">00:00:00</div>
+            <div className="pomodoro__countdown-container">
+              <div
+                className={
+                  timerSeconds === 0
+                    ? "pomodoro__countdown-text--inactive"
+                    : "pomodoro__countdown-text"
+                }
+              >
+                {time}
+              </div>
             </div>
           </div>
         </div>
