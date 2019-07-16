@@ -1,237 +1,163 @@
-.pomodoro {
-	background: url('../../public/images/bg-pomo.jpg') no-repeat fixed center;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
-	height: 100%;
-	width: 100vw;
-	overflow: hidden;
-	font-family: 'Lobster Two', cursive !important;
-	color: white;
-	position: fixed;
-	top: 0;
-	z-index: -2;
+$play-green: #0d8a2c;
+$stop-red: #cc1515;
+
+.pomodoro__background {
+  background: url("../../public/images/bg-pomo.jpg") no-repeat fixed center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  width: 100vw;
+  overflow: hidden;
+  font-family: "Lobster Two", cursive !important;
+  color: white;
+  position: fixed;
+  top: 0;
 }
 
-#title-pomo {
-	margin-right: auto;
-	margin-left: auto;
-	text-align: center;
-	margin-top: 120px;
-	font-size: 80px;
-	@media (max-width: $md-breakpoint) {
-		font-size: 60px;
-	}
-	@media (max-width: $s-breakpoint) {
-		font-size: 50px;
-	}
-	@media (max-width: $xs-breakpoint) {
-		font-size: 40px;
-	}
+.pomodoro__container {
+  height: 100%;
 }
 
-.arrows {
-	display: inline-block;
-	width: 80px;
-	margin-top: -50px;
+.pomodoro__title {
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  margin-top: 120px;
+  font-size: 80px;
+
+  @media (max-width: $md-breakpoint) {
+    font-size: 60px;
+  }
+
+  @media (max-width: $s-breakpoint) {
+    font-size: 50px;
+  }
+
+  @media (max-width: $xs-breakpoint) {
+    font-size: 40px;
+  }
 }
 
-.times {
-	text-align: center;
-	font-size: 40px;
-	margin-bottom: -20px;
+.pomodoro__subtitle {
+  padding: 20px 40px 40px;
+  text-align: center;
 }
 
-.num {
-	display: inline-block;
-	width: 110px;
-	text-align: center;
-	margin-top: 10px;
+.pomodoro__button--start {
+  width: 60px;
+  height: 60px;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 60px;
+  color: $play-green;
+  z-index: 2;
+
+  &:hover {
+    color: lighten($play-green, 10);
+  }
+
+  &:focus {
+    outline: none;
+  }
 }
 
-#goBtn {
-	width: 60px;
-	margin-left: auto;
-	margin-right: auto;
-	display: inline-block;
-	cursor: pointer;
-	z-index: 99999999;
+.pomodoro__button--stop {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  font-size: 60px;
+  color: $stop-red;
+  z-index: 2;
+
+  &:hover {
+    color: lighten($stop-red, 10);
+  }
+
+  &:focus {
+    outline: none;
+  }
 }
 
-.buttons {
-	width: 125px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 130px;
+.pomodoro__buttons-container {
+  width: 150px;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 130px auto 0;
 }
 
-#stopBtn {
-	width: 60px;
-	margin-left: auto;
-	margin-right: auto;
-	display: inline-block;
-	cursor: pointer;
-	z-index: 99999999;
+.pomodoro__circle-container {
+  width: 340px;
+  height: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding-bottom: 40px;
 }
 
-#circle-container {
-	width: 340px;
-	height: 500px;
-	margin-left: auto;
-	margin-right: auto;
-	position: absolute;
-	left: 0;
-	right: 0;
-	z-index: -1;
-	padding-bottom: 40px;
+.pomodoro__countdown-container {
+  text-align: center;
+  font-size: 30px;
 }
 
-#countdown {
-	text-align: center;
-	font-size: 30px;
+.pomodoro__countdown-text {
+  color: #fff;
 }
 
-#subtitle {
-	padding-top: 20px;
-	padding-bottom: 40px;
-	padding-left: 40px;
-	padding-right: 40px;
+.pomodoro__countdown-text--inactive {
+  color: rgba(191, 191, 191, 0.3);
 }
 
 /* Custom, iPhone Retina */
 @media only screen and (min-width: 220px) {
-	.times {
-		font-size: 1.6em;
-	}
-	.num {
-		font-size: 3.8em;
-	}
-	.arrows {
-		width: 60px;
-		height: auto;
-	}
-	#title {
-		font-size: 4em;
-	}
-	#subtitle {
-		font-size: 1em;
-	}
+  .pomodoro__title {
+    font-size: 4em;
+  }
+
+  .pomodoro__subtitle {
+    font-size: 1em;
+  }
 }
 
 /* Extra Small Devices, Phones */
 @media only screen and (min-width: 480px) {
-	.times {
-		font-size: 1.6em;
-	}
-	.num {
-		font-size: 3.8em;
-	}
-	#subtitle {
-		font-size: 1.1em;
-	}
+  .pomodoro__subtitle {
+    font-size: 1.1em;
+  }
 }
 
 /* Small Devices, Tablets */
 @media only screen and (min-width: 768px) {
-	.times {
-		font-size: 1.5em;
-	}
-	.num {
-		font-size: 4.6em;
-	}
-	.arrows {
-		width: 80px;
-		height: auto;
-	}
-	#title {
-		font-size: 6em;
-	}
-	#subtitle {
-		font-size: 1.4em;
-	}
+  .pomodoro__title {
+    font-size: 6em;
+  }
+
+  .pomodoro__subtitle {
+    font-size: 1.4em;
+  }
 }
 
 /* Medium Devices, Desktops */
 @media only screen and (min-width: 992px) {
-	.times {
-		font-size: 1.7em;
-	}
-	.num {
-		font-size: 5em;
-	}
-	.arrows {
-		width: 80px;
-		height: auto;
-	}
-	#title {
-		font-size: 7em;
-	}
-	#subtitle {
-		font-size: 1.6em;
-	}
+  .pomodoro__title {
+    font-size: 7em;
+  }
+
+  .pomodoro__subtitle {
+    font-size: 1.6em;
+  }
 }
 
 /* Large Devices, Wide Screens */
 @media only screen and (min-width: 1200px) {
-	.times {
-		font-size: 2.4em;
-	}
-	.num {
-		font-size: 5.6em;
-	}
-	.arrows {
-		width: 90px;
-		height: auto;
-	}
-	#title {
-		font-size: 9em;
-	}
+  .pomodoro__title {
+    font-size: 9em;
+  }
 
-	#subtitle {
-		font-size: 2em;
-	}
-}
-
-/*!
- * Hover.css (http://ianlunn.github.io/Hover/)
- * Version: 2.2.1
- * Author: Ian Lunn @IanLunn
- * Author URL: http://ianlunn.co.uk/
- * Github: https://github.com/IanLunn/Hover
- * Hover.css Copyright Ian Lunn 2017. Generated with Sass.
- */
-
-@-webkit-keyframes hvr-pulse-grow {
-	to {
-		-webkit-transform: scale(1.1);
-		transform: scale(1.1);
-	}
-}
-@keyframes hvr-pulse-grow {
-	to {
-		-webkit-transform: scale(1.1);
-		transform: scale(1.1);
-	}
-}
-.hvr-pulse-grow {
-	display: inline-block;
-	vertical-align: middle;
-	-webkit-transform: perspective(1px) translateZ(0);
-	transform: perspective(1px) translateZ(0);
-	box-shadow: 0 0 1px transparent;
-}
-.hvr-pulse-grow:hover,
-.hvr-pulse-grow:focus,
-.hvr-pulse-grow:active {
-	-webkit-animation-name: hvr-pulse-grow;
-	animation-name: hvr-pulse-grow;
-	-webkit-animation-duration: 0.3s;
-	animation-duration: 0.3s;
-	-webkit-animation-timing-function: linear;
-	animation-timing-function: linear;
-	-webkit-animation-iteration-count: infinite;
-	animation-iteration-count: infinite;
-	-webkit-animation-direction: alternate;
-	animation-direction: alternate;
+  .pomodoro__subtitle {
+    font-size: 2em;
+  }
 }

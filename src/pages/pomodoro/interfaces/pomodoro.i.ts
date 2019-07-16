@@ -1,9 +1,9 @@
 interface PomodoroState {
   workTime: number;
   breakTime: number;
-  workTimerSeconds: number;
-  breakTimerSeconds: number;
-  currentTimer: string;
+  timerSeconds: number;
+  workTimerOn: boolean;
+  time: string;
 }
 
 export { PomodoroState as default };
