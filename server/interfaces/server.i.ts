@@ -1,6 +1,6 @@
-import { Response } from "express";
+import { Request } from "express";
 
-interface EmailRequest extends Response {
+interface EmailRequest extends Request {
   query: Query;
 }
 

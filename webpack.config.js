@@ -18,6 +18,9 @@ module.exports = (env) => {
       filename: "bundle.min.js",
       publicPath: "/",
     },
+    node: {
+      fs: "empty",
+    },
     optimization: {
       minimizer: [new TerserPlugin({}), new OptimizeCSSAssetsPlugin({})],
       //   splitChunks: {
@@ -87,7 +90,7 @@ module.exports = (env) => {
       historyApiFallback: true,
       proxy: {
         "/api/*": {
-          target: "http://localhost:5000",
+          target: "http://[::1]:5000",
           secure: false,
           changeOrigin: true,
         },

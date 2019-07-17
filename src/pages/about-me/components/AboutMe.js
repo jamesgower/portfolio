@@ -15,13 +15,14 @@ class AboutMe extends Component {
     name: "",
     email: "",
     details: "",
+    emailResponse: false,
   };
 
   onSendEmail = async () => {
     const { name, email, details } = this.state;
     console.log(name, email, details);
     if (name && email && details) {
-      await axios({
+      const res = await axios({
         method: "POST",
         url: "/api/send_mail",
         params: {
@@ -30,10 +31,12 @@ class AboutMe extends Component {
           details,
         },
       });
+      if (res) this.setState({ emailResponse: true });
     }
   };
 
   render() {
+    const { emailResponse } = this.state;
     return (
       <div className="background">
         <Headroom>
@@ -175,7 +178,7 @@ class AboutMe extends Component {
                   }}
                   onClick={this.onSendEmail}
                 >
-                  Submit
+                  {emailResponse ? "Sent!" : "Submit"}
                 </Button>
               </Form>
             </div>

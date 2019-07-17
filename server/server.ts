@@ -1,25 +1,23 @@
 import * as express from "express";
-import path from "path";
 import { EmailRequest, SendResponse } from "./interfaces/server.i";
-import { googleAuth } from "../keys";
 
+const path = require("path");
 const nodemailer = require("nodemailer");
 
-const { username, password } = googleAuth;
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.post(
   "/api/send_mail",
-  async (req: EmailRequest): Promise<void> => {
+  async (req: EmailRequest, res): Promise<void> => {
     const { name, email, details } = req.query;
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
       secure: true,
       auth: {
-        user: username || process.env.googleUser,
-        pass: password || process.env.googlePW,
+        user: process.env.googleUser,
+        pass: process.env.googlePW,
       },
       tls: {
         rejectUnauthorized: false,
@@ -36,12 +34,13 @@ app.post(
 
     transporter.sendMail(
       mailOptions,
-      (error, info): void => {
+      (error, info): any => {
         if (error) {
           console.log(error);
-        } else {
-          console.log(`Email sent: ${info.response}`);
+          return res.send(false);
         }
+        console.log(`Email sent: ${info.response}`);
+        return res.send(true);
       },
     );
   },
