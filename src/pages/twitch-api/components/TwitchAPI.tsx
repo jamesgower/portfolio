@@ -2,12 +2,6 @@ import * as React from "react";
 import { Button, Input, Container } from "reactstrap";
 import UserDataItem from "./UserDataItem";
 import TwitchState, { OnlineUser, SavedUser, APICall } from "../interfaces/twitchAPI.i";
-<<<<<<< HEAD
-=======
-import { twitchAuth } from "../../../../keys";
-
-const { twitch_authorization, twitch_client_id } = twitchAuth;
->>>>>>> dev
 
 /*
 	TODO

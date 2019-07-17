@@ -1,7 +1,6 @@
 import * as express from "express";
 import path from "path";
 import { EmailRequest, SendResponse } from "./interfaces/server.i";
-import { googleAuth } from "../keys";
 
 const nodemailer = require("nodemailer");
 
