@@ -9,7 +9,7 @@ const port = process.env.PORT || 5000;
 
 app.post(
   "/api/send_mail",
-  async (req: EmailRequest): Promise<void> => {
+  async (req: EmailRequest, res): Promise<void> => {
     const { name, email, details } = req.query;
 
     const transporter = nodemailer.createTransport({
@@ -34,12 +34,13 @@ app.post(
 
     transporter.sendMail(
       mailOptions,
-      (error, info): void => {
+      (error, info): any => {
         if (error) {
           console.log(error);
-        } else {
-          console.log(`Email sent: ${info.response}`);
+          return res.send(false);
         }
+        console.log(`Email sent: ${info.response}`);
+        return res.send(true);
       },
     );
   },
