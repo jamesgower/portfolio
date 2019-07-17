@@ -8,6 +8,7 @@
   position: absolute;
   top: 30px;
   width: 40px;
+  z-index: 3;
 
   &:focus {
     outline: none;

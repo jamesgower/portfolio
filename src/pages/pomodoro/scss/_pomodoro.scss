@@ -16,23 +16,32 @@ $stop-red: #cc1515;
   top: 0;
 }
 
+.pomodoro__nav-container {
+  width: 100%;
+  height: 80px;
+  margin-bottom: -80px;
+}
+
 .pomodoro__container {
-  height: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  margin: 5vh auto;
+
+  @media (max-width: $md-breakpoint) {
+    margin: 0;
+  }
 }
 
 .pomodoro__title {
-  margin-right: auto;
-  margin-left: auto;
+  margin: 0 auto;
   text-align: center;
-  margin-top: 120px;
   font-size: 80px;
 
   @media (max-width: $md-breakpoint) {
     font-size: 60px;
-  }
-
-  @media (max-width: $s-breakpoint) {
-    font-size: 50px;
   }
 
   @media (max-width: $xs-breakpoint) {
@@ -41,18 +50,51 @@ $stop-red: #cc1515;
 }
 
 .pomodoro__subtitle {
-  padding: 20px 40px 40px;
   text-align: center;
+  font-size: 26px;
+  margin: 40px;
+
+  @media (max-width: $md-breakpoint) {
+    font-size: 22px;
+    margin: 20px;
+  }
+
+  @media (max-width: $xs-breakpoint) {
+    font-size: 14px;
+  }
+}
+
+%pomodoro__button {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  font-size: 60px;
+  display: inline-block;
+  z-index: 2;
+  margin: 0 3px;
+
+  @media (max-width: $md-breakpoint) {
+    width: 50px;
+    height: 50px;
+    font-size: 50px;
+  }
+
+  @media (max-width: $s-breakpoint) {
+    width: 40px;
+    height: 40px;
+    font-size: 40px;
+  }
+
+  @media (max-width: $xs-breakpoint) {
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+  }
 }
 
 .pomodoro__button--start {
-  width: 60px;
-  height: 60px;
-  display: inline-block;
-  cursor: pointer;
-  font-size: 60px;
+  @extend %pomodoro__button;
   color: $play-green;
-  z-index: 2;
 
   &:hover {
     color: lighten($play-green, 10);
@@ -64,12 +106,8 @@ $stop-red: #cc1515;
 }
 
 .pomodoro__button--stop {
-  width: 60px;
-  height: 60px;
-  cursor: pointer;
-  font-size: 60px;
+  @extend %pomodoro__button;
   color: $stop-red;
-  z-index: 2;
 
   &:hover {
     color: lighten($stop-red, 10);
@@ -80,22 +118,34 @@ $stop-red: #cc1515;
   }
 }
 
+.pomodoro__timer-container {
+  height: 320px;
+  width: 320px;
+  margin: 0 auto;
+
+  @media (max-width: $s-breakpoint) {
+    height: 260px;
+    width: 260px;
+  }
+
+  @media (max-width: $xs-breakpoint) {
+    height: 220px;
+    width: 220px;
+  }
+}
+
 .pomodoro__buttons-container {
-  width: 150px;
   display: flex;
-  justify-content: space-evenly;
-  margin: 130px auto 0;
+  justify-content: center;
+  position: relative;
+  left: 0;
+  right: 0;
+  margin-top: -65%;
 }
 
 .pomodoro__circle-container {
-  width: 340px;
-  height: 500px;
-  margin-left: auto;
-  margin-right: auto;
-  position: absolute;
-  left: 0;
-  right: 0;
-  padding-bottom: 40px;
+  width: 400px;
+  height: auto;
 }
 
 .pomodoro__countdown-container {
@@ -103,61 +153,24 @@ $stop-red: #cc1515;
   font-size: 30px;
 }
 
-.pomodoro__countdown-text {
+%pomodoro__countdown-text {
+  font-size: 34px;
+
+  @media (max-width: $md-breakpoint) {
+    font-size: 30px;
+  }
+
+  @media (max-width: $s-breakpoint) {
+    font-size: 24px;
+  }
+}
+
+.pomodoro__countdown-text--active {
+  @extend %pomodoro__countdown-text;
   color: #fff;
 }
 
 .pomodoro__countdown-text--inactive {
+  @extend %pomodoro__countdown-text;
   color: rgba(191, 191, 191, 0.3);
-}
-
-/* Custom, iPhone Retina */
-@media only screen and (min-width: 220px) {
-  .pomodoro__title {
-    font-size: 4em;
-  }
-
-  .pomodoro__subtitle {
-    font-size: 1em;
-  }
-}
-
-/* Extra Small Devices, Phones */
-@media only screen and (min-width: 480px) {
-  .pomodoro__subtitle {
-    font-size: 1.1em;
-  }
-}
-
-/* Small Devices, Tablets */
-@media only screen and (min-width: 768px) {
-  .pomodoro__title {
-    font-size: 6em;
-  }
-
-  .pomodoro__subtitle {
-    font-size: 1.4em;
-  }
-}
-
-/* Medium Devices, Desktops */
-@media only screen and (min-width: 992px) {
-  .pomodoro__title {
-    font-size: 7em;
-  }
-
-  .pomodoro__subtitle {
-    font-size: 1.6em;
-  }
-}
-
-/* Large Devices, Wide Screens */
-@media only screen and (min-width: 1200px) {
-  .pomodoro__title {
-    font-size: 9em;
-  }
-
-  .pomodoro__subtitle {
-    font-size: 2em;
-  }
 }
