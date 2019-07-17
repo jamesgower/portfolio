@@ -1,19 +1,8 @@
 const path = require("path");
 const express = require("express");
 const app = express();
-const nodemailer = require("nodemailer");
-const SMTPServer = require("smtp-server").SMTPServer;
-
 const port = process.env.PORT || 5000;
-const options = {
-  onData(stream, session, cb) {
-    stream.pipe(process.stdout);
-  },
-};
-
-const server = new SMTPServer(options);
-
-const isProduction = process.env.NODE_ENV === "production";
+const nodemailer = require("nodemailer");
 
 app.post("/api/send_mail", async (req, res) => {
   const { name, email, details } = req.query;
@@ -43,7 +32,7 @@ app.post("/api/send_mail", async (req, res) => {
   });
 });
 
-if (isProduction) {
+if (process.env.NODE_ENV === "production") {
   const publicPath = path.join(__dirname, "../dist");
 
   app.use(express.static(publicPath));
@@ -53,10 +42,6 @@ if (isProduction) {
   });
 }
 
-server.listen(450, () => {
-  console.log("SMTP server online at port 450");
-});
-
 app.listen(port, () => {
-  console.log(`Server is up at http://localhost:${port}`);
+  console.log("Server is up at port", port);
 });
