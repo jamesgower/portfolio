@@ -13,7 +13,7 @@
     "esModuleInterop": false,
     "baseUrl": "./",
     "paths": {
-      "components/*": ["src/components/*"]
+      "components/*": ["src/pages/*"]
     }
   },
   "exclude": ["node_modules/*"]
