@@ -180,8 +180,8 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
   public getData = async (name: string): Promise<void> => {
     const res = await fetch(`https://api.twitch.tv/kraken/streams/${name}`, {
       headers: {
-        "Client-ID": keys.twitch_client_id || process.env.twitch_client_id,
-        Authorization: keys.twitch_authorization || process.env.twitch_authorization,
+        "Client-ID": process.env.twitch_client_id || keys.twitch_client_id,
+        Authorization: process.env.twitch_authorization || keys.twitch_authorization,
       },
     });
     const result: APICall = await res.json();
