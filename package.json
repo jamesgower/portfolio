@@ -5,7 +5,7 @@
   "author": "James Gower",
   "license": "MIT",
   "scripts": {
-    "start": "node server/server.ts",
+    "start": "ts-node server/server.ts",
     "build": "webpack -p --mode production",
     "client": "webpack-dev-server --mode development --devtool inline-source-map --open --hot",
     "dev": "concurrently \"npm run client\" \"npm run start\"",
@@ -47,7 +47,7 @@
     "mini-css-extract-plugin": "^0.4.4",
     "moment": "^2.21.0",
     "node-sass": "^4.12.0",
-    "nodemailer": "^5.1.1",
+    "nodemailer": "^6.3.0",
     "normalize.css": "^8.0.0",
     "react": "^16.8.6",
     "react-circular-progressbar": "^2.0.1",
