@@ -2,7 +2,7 @@ import * as React from "react";
 import { NavLink } from "react-router-dom";
 import { Collapse, Navbar, NavbarToggler, Nav } from "reactstrap";
 import { NavBarProps, NavBarState } from "../interfaces/navBar.i";
-import logo from "../../../../public/images/logo.png";
+import * as logo from "../../../../public/images/logo.png";
 
 class NavBar extends React.Component<NavBarProps, NavBarState> {
   public readonly state: NavBarState = {
@@ -24,10 +24,12 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
 
   public componentDidMount(): void {
     const { color, closeNav } = this.props;
+
     this.homeLink.current.style.color = color;
     this.portfolioLink.current.style.color = color;
     this.skillsLink.current.style.color = color;
     this.aboutMeLink.current.style.color = color;
+
     if (closeNav) {
       this.closeBtnRef.current.style.color = color;
     }

@@ -1,5 +1,18 @@
 import * as React from "react";
 import { Redirect } from "react-router-dom";
+import * as emailyImage from "../../../../public/images/emaily.jpg";
+import * as twitterImage from "../../../../public/images/clone.jpg";
+import * as chatterImage from "../../../../public/images/chatter.jpg";
+import * as simonImage from "../../../../public/images/simon.jpg";
+import * as pomodoroImage from "../../../../public/images/pomodoro.jpg";
+import * as ticTacToeImage from "../../../../public/images/tictactoe.jpg";
+import * as blogifyImage from "../../../../public/images/blogify.jpg";
+import * as wikipediaImage from "../../../../public/images/wiki.jpg";
+import * as indecisionImage from "../../../../public/images/indecision.jpg";
+import * as twitchImage from "../../../../public/images/twitch.jpg";
+import * as expensifyImage from "../../../../public/images/expensify.jpg";
+import * as drumImage from "../../../../public/images/drum.jpg";
+import GridState from "../interfaces/grid.i";
 
 /*
 	TODO
@@ -13,7 +26,7 @@ import { Redirect } from "react-router-dom";
 
 const tilesData = [
   {
-    img: require("../../../../public/images/emaily.jpg"),
+    img: emailyImage,
     title: "Emaily App (Full Stack)",
     subtitle:
       "Built with Express, SendGrid, MongoDB, React, Redux, React-Router, SCSS & Webpack",
@@ -23,7 +36,7 @@ const tilesData = [
     class: "fas fa-envelope",
   },
   {
-    img: require("../../../../public/images/clone.jpg"),
+    img: twitterImage,
     title: "Twitter Clone",
     subtitle:
       "Built with React, Redux, Webpack, Express (Node.JS), MongoDB, React-Router",
@@ -34,7 +47,7 @@ const tilesData = [
     class: "fab fa-twitter",
   },
   {
-    img: require("../../../../public/images/chatter.jpg"),
+    img: chatterImage,
     title: "Chatter (Chat App)",
     subtitle: "Built with Socket.io, Axios, Express, Moment.js, Mustache, React & CSS",
     href: "https://github.com/jamesgower/chatter",
@@ -44,7 +57,7 @@ const tilesData = [
     class: "far fa-comments",
   },
   {
-    img: require("../../../../public/images/simon.jpg"),
+    img: simonImage,
     title: "Simon Says",
     subtitle: "Built with React, Redux, Webpack, React-Router",
     href: "/portfolio/simon-says",
@@ -52,7 +65,7 @@ const tilesData = [
     class: "fas fa-trophy",
   },
   {
-    img: require("../../../../public/images/pomodoro.jpg"),
+    img: pomodoroImage,
     title: "Pomodoro Clock",
     subtitle: "Built with React, Pure JS, jQuery, Babel",
     href: "/portfolio/pomodoro",
@@ -60,7 +73,7 @@ const tilesData = [
     class: "far fa-clock",
   },
   {
-    img: require("../../../../public/images/tictactoe.jpg"),
+    img: ticTacToeImage,
     title: "Tic-Tac-Toe with AI",
     subtitle: "Built with React, SCSS, Pure JS, Babel",
     featured: true,
@@ -69,7 +82,7 @@ const tilesData = [
     class: "fas fa-gamepad",
   },
   {
-    img: require("../../../../public/images/blogify.jpg"),
+    img: blogifyImage,
     title: "Blogify App",
     subtitle: "Built with React, Redux, React-Router, Webpack",
     featured: true,
@@ -79,7 +92,7 @@ const tilesData = [
     class: "fas fa-pencil-alt",
   },
   {
-    img: require("../../../../public/images/wiki.jpg"),
+    img: wikipediaImage,
     title: "Wikipedia API",
     subtitle: "Built with TypeScript, Fetch API & React",
     href: "/portfolio/wikipedia",
@@ -87,7 +100,7 @@ const tilesData = [
     class: "fab fa-wikipedia-w",
   },
   {
-    img: require("../../../../public/images/indecision.jpg"),
+    img: indecisionImage,
     title: "Indecision App",
     subtitle: "Built with React, SCSS & Local Storage",
     href: "/portfolio/indecision-app",
@@ -95,7 +108,7 @@ const tilesData = [
     class: "fas fa-question",
   },
   {
-    img: require("../../../../public/images/twitch.jpg"),
+    img: twitchImage,
     title: "Twitch API",
     subtitle: "Built with React, TypeScript, Fetch API & Twitch API",
     href: "/portfolio/twitch",
@@ -104,7 +117,7 @@ const tilesData = [
     featured: true,
   },
   {
-    img: require("../../../../public/images/expensify.jpg"),
+    img: expensifyImage,
     title: "Expensify App",
     subtitle: "Built with React, Redux, FireBase & Jest",
     href: "https://github.com/jamesgower/expensify",
@@ -114,7 +127,7 @@ const tilesData = [
     featured: true,
   },
   {
-    img: require("../../../../public/images/drum.jpg"),
+    img: drumImage,
     title: "Drum Machine",
     subtitle: "Built with React, Vanilla JS, Howler & SCSS",
     href: "/portfolio/drum-machine",
@@ -123,21 +136,11 @@ const tilesData = [
   },
 ];
 
-interface GridState {
-  redirect: boolean;
-  desktop: boolean;
-  data: string;
-  route?: string;
-}
-
-const initialState: GridState = {
-  redirect: false,
-  desktop: window.innerWidth > 768,
-  data: "all",
-};
-
-export class Grid extends React.Component {
-  public readonly state = initialState;
+export class Grid extends React.Component<{}, GridState> {
+  public readonly state: GridState = {
+    redirect: false,
+    data: "all",
+  };
 
   private allData = tilesData.map(
     (tile, i): JSX.Element => {
@@ -158,7 +161,9 @@ export class Grid extends React.Component {
             className="border"
             onClick={
               tile.redirect
-                ? (): string => (location.href = tile.href)
+                ? (): void => {
+                    location.href = tile.href;
+                  }
                 : (): void => this.handleOnClick(tile.href)
             }
           >
@@ -188,14 +193,14 @@ export class Grid extends React.Component {
     clearInterval(this.animations);
   };
 
-  //Random animation for each element in the grid
+  // Random animation for each element in the grid
   private randomAnimation = (): void => {
     const e = document.getElementById(
       `tile${Math.floor(Math.random() * tilesData.length)}`,
     );
     const previous = e.className;
     const animations = ["bounce", "pulse", "swing", "tada", "rubberBand"];
-    //Random animation gets picked
+    // Random animation gets picked
     const random = ` animated ${
       animations[Math.floor(Math.random() * animations.length)]
     }`;

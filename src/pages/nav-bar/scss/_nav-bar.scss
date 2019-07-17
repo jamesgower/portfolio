@@ -10,6 +10,7 @@ $about-me-active: rgba(0, 162, 255, 0.6);
 .nav__container {
   margin: 0 auto;
   width: 70vw;
+  z-index: 3;
 }
 
 %nav__link {
