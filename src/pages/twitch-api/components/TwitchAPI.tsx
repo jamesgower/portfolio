@@ -2,7 +2,7 @@ import * as React from "react";
 import { Button, Input, Container } from "reactstrap";
 import UserDataItem from "./UserDataItem";
 import TwitchState, { OnlineUser, SavedUser, APICall } from "../interfaces/twitchAPI.i";
-import keys from "../../../keys";
+import keys from "../../../../keys";
 
 /*
 	TODO
