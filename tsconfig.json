@@ -13,7 +13,11 @@
     "esModuleInterop": false,
     "baseUrl": "./",
     "paths": {
+<<<<<<< HEAD
       "components/*": ["src/pages/*"]
+=======
+      "components/*": ["src/pages/*", "server/*"]
+>>>>>>> dev
     }
   },
   "exclude": ["node_modules/*"]
