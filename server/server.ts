@@ -1,7 +1,7 @@
 import * as express from "express";
-import path from "path";
 import { EmailRequest, SendResponse } from "./interfaces/server.i";
 
+const path = require("path");
 const nodemailer = require("nodemailer");
 
 const app = express();
