@@ -7,7 +7,9 @@ import "react-dates/lib/css/_datepicker.css";
 import "./stylesheets/styles.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-require("dotenv").config();
+if (process.env.NODE_ENV === "development") {
+  require("dotenv").config();
+}
 
 declare global {
   interface Window {
