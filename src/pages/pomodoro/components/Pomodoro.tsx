@@ -97,37 +97,37 @@ class Pomodoro extends React.Component<{}, PomodoroState> {
   public render(): JSX.Element {
     const { workTime, breakTime, timerSeconds, workTimerOn, time } = this.state;
     return (
-      <div>
-        <HiddenNavBar color="#FFF" />
-        <div className="pomodoro__background">
-          <div className="pomodoro__container animated fadeIn">
-            <div className="pomodoro__title">Pomodoro Clock</div>
-            <div className="pomodoro__subtitle">
-              Many people work better when they know they have a break on the way! <br />
-              Choose the length of time you wish to work - and the break you can reward
-              yourself with!
-            </div>
-            <Row>
-              <Col sm={6}>
-                <Arrows work workTime={workTime} onHandleArrowClick={this.onArrowClick} />
-              </Col>
-              <Col sm={6}>
-                <Arrows breakTime={breakTime} onHandleArrowClick={this.onArrowClick} />
-              </Col>
-            </Row>
-            <div className="pomodoro__circle-container">
-              <CircularProgressbar
-                value={timerSeconds}
-                maxValue={workTimerOn ? workTime * 60 : breakTime * 60}
-                counterClockwise={workTimerOn}
-                styles={buildStyles({
-                  pathTransitionDuration: 1,
-                  trailColor: "rgba(191, 191, 191, 0.1)",
-                  pathColor: `rgba(255, 255, 255, ${timerSeconds / 20}`,
-                  strokeLinecap: "butt",
-                })}
-              />
-            </div>
+      <div className="pomodoro__background">
+        <div className="pomodoro__nav-container">
+          <HiddenNavBar color="#FFF" />
+        </div>
+        <div className="pomodoro__container animated fadeIn">
+          <div className="pomodoro__title">Pomodoro Clock</div>
+          <div className="pomodoro__subtitle">
+            Many people work better when they know they have a break on the way! <br />
+            Choose the length of time you wish to work - and the break you can reward
+            yourself with.
+          </div>
+          <Row>
+            <Col sm={6}>
+              <Arrows work workTime={workTime} onHandleArrowClick={this.onArrowClick} />
+            </Col>
+            <Col sm={6}>
+              <Arrows breakTime={breakTime} onHandleArrowClick={this.onArrowClick} />
+            </Col>
+          </Row>
+          <div className="pomodoro__timer-container">
+            <CircularProgressbar
+              value={timerSeconds}
+              maxValue={workTimerOn ? workTime * 60 : breakTime * 60}
+              counterClockwise={workTimerOn}
+              styles={buildStyles({
+                pathTransitionDuration: 1,
+                trailColor: "rgba(191, 191, 191, 0.1)",
+                pathColor: `rgba(255, 255, 255, ${timerSeconds / 20}`,
+                strokeLinecap: "butt",
+              })}
+            />
 
             <div className="pomodoro__buttons-container">
               <i
