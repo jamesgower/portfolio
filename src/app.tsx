@@ -7,6 +7,8 @@ import "react-dates/lib/css/_datepicker.css";
 import "./stylesheets/styles.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+require("dotenv").config();
+
 declare global {
   interface Window {
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any;

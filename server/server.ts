@@ -5,7 +5,6 @@ import { googleAuth } from "../keys";
 
 const nodemailer = require("nodemailer");
 
-const { username, password } = googleAuth;
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -18,8 +17,8 @@ app.post(
       service: "gmail",
       secure: true,
       auth: {
-        user: username || process.env.googleUser,
-        pass: password || process.env.googlePW,
+        user: process.env.googleUser,
+        pass: process.env.googlePW,
       },
       tls: {
         rejectUnauthorized: false,

@@ -1,7 +1,3 @@
 node_modules/
-<<<<<<< HEAD
-src/keys.ts
-=======
-keys.ts
->>>>>>> dev
+.env
 dist/
