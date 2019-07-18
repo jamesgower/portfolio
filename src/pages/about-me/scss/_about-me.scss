@@ -1,0 +1,56 @@
+$form-bg: url("../../public/images/form-bg.jpg");
+
+.contact--title {
+  @extend .skills--title;
+  border-bottom: 3px solid rgb(0, 162, 255);
+  margin-bottom: 30px;
+}
+
+.contact--subtitle {
+  font-size: 2em;
+  border-bottom: 2px solid red;
+  padding: 8px;
+  width: 120px;
+  text-align: center;
+}
+
+.contact--text {
+  font-size: 1.6em;
+  text-align: justify;
+  margin: 12px 0;
+}
+
+.contact--socialMediaContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-evenly;
+  margin-left: 60px;
+}
+
+.contact--socialContainer {
+  display: flex;
+  justify-content: middle;
+  flex-direction: row;
+  width: 100%;
+  cursor: pointer;
+
+  &:hover {
+    > p {
+      text-decoration: underline;
+    }
+  }
+}
+
+.contact--socialText {
+  font-size: 1.6em;
+  vertical-align: middle;
+  line-height: 2em;
+  text-align: center;
+  width: 100%;
+}
+
+.contact--socialIcon {
+  font-size: 4em;
+  margin-right: 30px;
+}

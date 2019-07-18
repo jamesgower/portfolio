@@ -46,11 +46,12 @@ app.post(
     });
 
     const mailOptions = {
-      from: `"${name}" <${email}>`,
+      from: `${name} <${email}>`,
       to: "jamesgower1994@gmail.com",
       subject: "!! Portfolio Message -- URGENT !!",
       generateTextFromHTML: true,
-      html: `<b>${name} has sent you a message:</b>\n
+      html: `<b>${name} has sent you a message:</b> <br />
+      ${name}'s email address: ${email} <br /> <br />
         ${details}`,
     };
 
