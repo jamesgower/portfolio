@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Button, Input, Container } from "reactstrap";
 import UserDataItem from "./UserDataItem";
 import TwitchState, { OnlineUser, SavedUser, APICall } from "../interfaces/twitchAPI.i";
@@ -179,8 +179,8 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
   public getData = async (name: string): Promise<void> => {
     const res = await fetch(`https://api.twitch.tv/kraken/streams/${name}`, {
       headers: {
-        "Client-ID": process.env.twitch_client_id,
-        Authorization: process.env.twitch_authorization,
+        "Client-ID": process.env.TWITCH_CLIENT_ID,
+        Authorization: process.env.TWITCH_AUTHORIZATION,
       },
     });
     const result: APICall = await res.json();

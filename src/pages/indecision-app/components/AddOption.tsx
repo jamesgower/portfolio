@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import AddOptionProps from "../interfaces/addOption.i";
 
 const { useState } = React;

@@ -55,6 +55,9 @@
     "no-prototype-builtins": "off",
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "jsx-a11y/no-noninteractive-element-to-interactive-role": "off",
-    "no-restricted-globals": "off"
+    "no-restricted-globals": "off",
+    "no-return-assign": "off",
+    "func-names": "off",
+    "global-require": "off"
   }
 }

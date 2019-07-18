@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import ArticleProps from "../interfaces/article.i";
 
 export default class Article extends React.Component<ArticleProps, {}> {

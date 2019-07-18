@@ -1,8 +1,8 @@
-import * as React from "react";
+import React from "react";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import TypedJSText from "./TypedJSText";
-import * as meImg from "../../../../public/images/displayImg.jpg";
+import meImg from "../../../../public/images/displayImg.jpg";
 
 const LandingPage: React.SFC = (): JSX.Element => (
   <div className="landing__container">

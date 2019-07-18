@@ -1,17 +1,17 @@
-import * as React from "react";
+import React from "react";
 import { Redirect } from "react-router-dom";
-import * as emailyImage from "../../../../public/images/emaily.jpg";
-import * as twitterImage from "../../../../public/images/clone.jpg";
-import * as chatterImage from "../../../../public/images/chatter.jpg";
-import * as simonImage from "../../../../public/images/simon.jpg";
-import * as pomodoroImage from "../../../../public/images/pomodoro.jpg";
-import * as ticTacToeImage from "../../../../public/images/tictactoe.jpg";
-import * as blogifyImage from "../../../../public/images/blogify.jpg";
-import * as wikipediaImage from "../../../../public/images/wiki.jpg";
-import * as indecisionImage from "../../../../public/images/indecision.jpg";
-import * as twitchImage from "../../../../public/images/twitch.jpg";
-import * as expensifyImage from "../../../../public/images/expensify.jpg";
-import * as drumImage from "../../../../public/images/drum.jpg";
+import emailyImage from "../../../../public/images/emaily.jpg";
+import twitterImage from "../../../../public/images/clone.jpg";
+import chatterImage from "../../../../public/images/chatter.jpg";
+import simonImage from "../../../../public/images/simon.jpg";
+import pomodoroImage from "../../../../public/images/pomodoro.jpg";
+import ticTacToeImage from "../../../../public/images/tictactoe.jpg";
+import blogifyImage from "../../../../public/images/blogify.jpg";
+import wikipediaImage from "../../../../public/images/wiki.jpg";
+import indecisionImage from "../../../../public/images/indecision.jpg";
+import twitchImage from "../../../../public/images/twitch.jpg";
+import expensifyImage from "../../../../public/images/expensify.jpg";
+import drumImage from "../../../../public/images/drum.jpg";
 import GridState from "../interfaces/grid.i";
 
 /*

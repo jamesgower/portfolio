@@ -90,7 +90,7 @@ module.exports = (env) => {
       historyApiFallback: true,
       proxy: {
         "/api/*": {
-          target: "http://localhost:5000",
+          target: "http://[::1]:5000",
           secure: false,
           changeOrigin: true,
         },

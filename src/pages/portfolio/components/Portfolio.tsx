@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Headroom from "react-headroom";
 import { Container } from "reactstrap";
 import GridLayout from "./Grid";

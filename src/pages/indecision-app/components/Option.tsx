@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import OptionProps from "../interfaces/option.i";
 
 const Option: React.FC<OptionProps> = ({

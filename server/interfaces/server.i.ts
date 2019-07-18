@@ -1,6 +1,6 @@
-import { Response } from "express";
+import { Request } from "express";
 
-interface EmailRequest extends Response {
+interface EmailRequest extends Request {
   query: Query;
 }
 
@@ -10,8 +10,13 @@ interface Query {
   details: string;
 }
 
-interface SendResponse {
+interface SendFileResponse {
   sendFile: (file) => void;
 }
 
-export { EmailRequest, SendResponse };
+interface SendResponse {
+  success: boolean;
+  info?: object;
+}
+
+export { EmailRequest, SendResponse, SendFileResponse };

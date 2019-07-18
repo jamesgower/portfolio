@@ -1,15 +1,11 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import React from "react";
+import ReactDOM from "react-dom";
 import AppRouter from "./routes/Router";
 import LoadingPage from "./pages/_misc/components/LoadingPage";
 import "normalize.css/normalize.css";
 import "react-dates/lib/css/_datepicker.css";
 import "./stylesheets/styles.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-if (process.env.NODE_ENV === "development") {
-  require("dotenv").config();
-}
 
 declare global {
   interface Window {

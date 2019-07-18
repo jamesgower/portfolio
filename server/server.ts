@@ -1,45 +1,68 @@
-import * as express from "express";
-import { EmailRequest, SendResponse } from "./interfaces/server.i";
+import express, { Response, Request } from "express";
+import nodemailer from "nodemailer";
+import { google } from "googleapis";
 
 const path = require("path");
-const nodemailer = require("nodemailer");
+
+const { OAuth2 } = google.auth;
 
 const app = express();
 const port = process.env.PORT || 5000;
 
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 app.post(
   "/api/send_mail",
-  async (req: EmailRequest): Promise<void> => {
+  async (req: Request, res: Response): Promise<void> => {
     const { name, email, details } = req.query;
 
-    const transporter = nodemailer.createTransport({
+    const oauth2Client = new OAuth2(
+      process.env.GOOGLE_CLIENT_ID,
+      process.env.GOOGLE_CLIENT_SECRET,
+      process.env.NODE_ENV === "production"
+        ? "https://www.james-gower.dev"
+        : "http://localhost:5000",
+    );
+
+    oauth2Client.setCredentials({
+      refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
+    });
+
+    const tokens = await oauth2Client.refreshAccessToken();
+    const accessToken = tokens.credentials.access_token;
+
+    const transporter: nodemailer.Transporter = nodemailer.createTransport({
       service: "gmail",
-      secure: true,
       auth: {
-        user: process.env.googleUser,
-        pass: process.env.googlePW,
-      },
-      tls: {
-        rejectUnauthorized: false,
+        type: "OAuth2",
+        user: "jamesgower1994@gmail.com",
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
+        accessToken,
       },
     });
 
     const mailOptions = {
       from: `"${name}" <${email}>`,
-      to: "contact@james-gower.dev",
+      to: "jamesgower1994@gmail.com",
       subject: "!! Portfolio Message -- URGENT !!",
-      text: `${name} has sent you a message: \n
+      generateTextFromHTML: true,
+      html: `<b>${name} has sent you a message:</b>\n
         ${details}`,
     };
 
     transporter.sendMail(
       mailOptions,
-      (error, info): void => {
+      (error, info): express.Response => {
         if (error) {
           console.log(error);
-        } else {
-          console.log(`Email sent: ${info.response}`);
+          return res.send(false);
         }
+        console.log(`Email sent: ${info.response}`);
+        return res.send(true);
       },
     );
   },
@@ -52,7 +75,7 @@ if (process.env.NODE_ENV === "production") {
 
   app.get(
     "*",
-    (req, res: SendResponse): void => {
+    (req, res: Response): void => {
       res.sendFile(path.join(publicPath, "index.html"));
     },
   );

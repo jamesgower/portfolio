@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { TypedOptions } from "typed.js";
 
 const Typed = require("typed.js");
@@ -13,6 +13,9 @@ interface TypedProps {
 class TypedJSText extends React.Component<TypedProps, {}> {
   private nameRef = React.createRef<HTMLDivElement>();
   private skillsRef = React.createRef<HTMLDivElement>();
+  public nameTyped: TypedJSText;
+  public skillsTyped: TypedJSText;
+
   public componentDidMount(): void {
     const { strings, name } = this.props;
 
@@ -34,9 +37,6 @@ class TypedJSText extends React.Component<TypedProps, {}> {
     this.nameTyped = new Typed(this.nameRef.current, nameOptions);
     this.skillsTyped = new Typed(this.skillsRef.current, skillOptions);
   }
-
-  public nameTyped: TypedJSText;
-  public skillsTyped: TypedJSText;
 
   public render(): JSX.Element {
     return (
