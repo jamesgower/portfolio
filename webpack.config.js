@@ -18,6 +18,9 @@ module.exports = (env) => {
       filename: "bundle.min.js",
       publicPath: "/",
     },
+    node: {
+      fs: "empty",
+    },
     optimization: {
       minimizer: [new TerserPlugin({}), new OptimizeCSSAssetsPlugin({})],
       //   splitChunks: {
