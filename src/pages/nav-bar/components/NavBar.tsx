@@ -1,8 +1,8 @@
-import * as React from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { Collapse, Navbar, NavbarToggler, Nav } from "reactstrap";
 import { NavBarProps, NavBarState } from "../interfaces/navBar.i";
-import * as logo from "../../../../public/images/logo.png";
+import logo from "../../../../public/images/logo.png";
 
 class NavBar extends React.Component<NavBarProps, NavBarState> {
   public readonly state: NavBarState = {

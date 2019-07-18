@@ -10,8 +10,13 @@ interface Query {
   details: string;
 }
 
-interface SendResponse {
+interface SendFileResponse {
   sendFile: (file) => void;
 }
 
-export { EmailRequest, SendResponse };
+interface SendResponse {
+  success: boolean;
+  info?: object;
+}
+
+export { EmailRequest, SendResponse, SendFileResponse };

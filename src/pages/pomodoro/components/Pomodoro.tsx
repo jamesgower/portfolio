@@ -1,10 +1,10 @@
-import * as React from "react";
+import React from "react";
 import { Howl } from "howler";
 import { Row, Col } from "reactstrap";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import * as sound1 from "../../../../public/media/alarm.mp3";
-import * as sound2 from "../../../../public/media/alarm2.mp3";
+import sound1 from "../../../../public/media/alarm.mp3";
+import sound2 from "../../../../public/media/alarm2.mp3";
 import PomodoroState from "../interfaces/pomodoro.i";
 import HiddenNavBar from "../../nav-bar/components/HiddenNavBar";
 import Arrows from "./Arrows";

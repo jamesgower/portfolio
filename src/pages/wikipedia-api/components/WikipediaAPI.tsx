@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Container, Pagination, PaginationItem, PaginationLink } from "reactstrap";
 import HiddenNavBar from "../../nav-bar/components/HiddenNavBar";
 import Article from "./Article";

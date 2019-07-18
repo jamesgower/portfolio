@@ -1,38 +1,25 @@
 .background {
-    background: $off-white;
+  background: $off-white;
 }
+
 .content-container {
-    width: 80vw;
-    margin-bottom: 0;
-    margin-left: auto;
-    margin-right: auto;
-    background: white;
-    @media screen and (max-width: 576px) {
-        width: 100vw;
-    }
-}
+  width: 80vw;
+  margin-bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  background: white;
 
-.left-container {
-    width: 40vw;
-    float: left;
-    background: white;    
-    padding: 20px;
-}
-
-.carousel-container {
-    width: 100%;
-    display: block;
-    margin: 0 auto;
-    border: 4px solid black;
-    margin: 20px;
+  @media screen and (max-width: 576px) {
+    width: 100vw;
+  }
 }
 
 .legend {
-    width: 400px !important;
-    margin-left: 50% !important;
+  width: 400px !important;
+  margin-left: 50% !important;
 }
 
 .grid-container {
-    overflow: hidden !important;
-    padding: 30px;
+  overflow: hidden !important;
+  padding: 30px;
 }

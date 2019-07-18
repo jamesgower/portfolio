@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Howl, Howler } from "howler";
 
 const heater1 = new Howl({

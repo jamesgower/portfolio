@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { UserDataItemState, UserDataItemProps } from "../interfaces/userDataItem.i";
 
 const moment = require("moment");

@@ -1,26 +1,28 @@
-import React, { Component } from "react";
+import React from "react";
 import Headroom from "react-headroom";
 import axios from "axios";
-import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import { Form, FormGroup, Label, Input, Button, Container } from "reactstrap";
 import NavBar from "../../nav-bar/components/NavBar";
 import formBackground from "../../../../public/images/form-bg.jpg";
+import AboutMeState from "../aboutMe.i";
 
 /*
     TODO
     [ ] Confirm twitter account and add it to the link.
 */
 
-class AboutMe extends Component {
-  state = {
+class AboutMe extends React.Component<{}, AboutMeState> {
+  public readonly state: AboutMeState = {
     name: "",
     email: "",
     details: "",
-    emailResponse: false,
+    emailSend: false,
+    emailResponse: null,
   };
 
-  onSendEmail = async () => {
+  private onSendEmail = async (): Promise<void> => {
     const { name, email, details } = this.state;
-    console.log(name, email, details);
+    this.setState({ emailSend: true, emailResponse: false });
     if (name && email && details) {
       const res = await axios({
         method: "POST",
@@ -31,26 +33,37 @@ class AboutMe extends Component {
           details,
         },
       });
-      if (res) this.setState({ emailResponse: true });
+      if (res.data) {
+        this.setState({ emailResponse: true });
+        setTimeout((): void => {
+          this.setState({
+            emailResponse: null,
+            emailSend: false,
+            name: "",
+            email: "",
+            details: "",
+          });
+        }, 500);
+      }
     }
   };
 
-  render() {
-    const { emailResponse } = this.state;
+  public render(): JSX.Element {
+    const { emailResponse, emailSend } = this.state;
     return (
       <div className="background">
         <Headroom>
-          <NavBar />
+          <NavBar color="#000" />
         </Headroom>
-        <div className="content-container" style={{ height: "100%" }}>
+        <Container className="content-container">
           <div className="skills--container">
             <h1 className="contact--title">About Me</h1>
             <p className="contact--text">
-              Hi, I'm James Gower. I am a 24 year old Full-Stack developer from Tonbridge,
-              Kent. I prefer to implement applications using React and Node.JS, with
-              MongoDB for storing information, although I am a fast learning versatile
-              individual with knowledge of multiple frameworks and languages to achieve
-              top results for a variety of projects.
+              Hi, I&apos;m James Gower. I am a 24 year old Full-Stack developer from
+              Tonbridge, Kent. I prefer to implement applications using React and Node.JS,
+              with MongoDB for storing information, although I am a fast learning
+              versatile individual with knowledge of multiple frameworks and languages to
+              achieve top results for a variety of projects.
             </p>
             <div className="row">
               <div className="col-md-6">
@@ -81,20 +94,26 @@ class AboutMe extends Component {
               <div className="col-md-6">
                 <div className="contact--socialMediaContainer">
                   <div
-                    onClick={() => (location.href = "https://github.com/jamesgower")}
+                    onClick={(): string =>
+                      (location.href = "https://github.com/jamesgower")
+                    }
                     className="contact--socialContainer"
                     style={{ color: "#000" }}
+                    role="button"
+                    tabIndex={0}
                   >
                     <i className="fab fa-github contact--socialIcon" />
                     <p className="contact--socialText">Check out my GitHub history</p>
                   </div>
                   <div
-                    onClick={() =>
+                    onClick={(): string =>
                       (location.href =
                         "https://www.linkedin.com/in/james-gower-45a753153/")
                     }
                     className="contact--socialContainer"
                     style={{ color: "#0077B5" }}
+                    role="button"
+                    tabIndex={0}
                   >
                     <i className="fab fa-linkedin contact--socialIcon" />
                     <p className="contact--socialText">
@@ -102,9 +121,11 @@ class AboutMe extends Component {
                     </p>
                   </div>
                   <div
-                    onClick={() => (location.href = "https://www.twitter.com")}
+                    onClick={(): string => (location.href = "https://www.twitter.com")}
                     className="contact--socialContainer"
                     style={{ color: "#1B95E0" }}
+                    role="button"
+                    tabIndex={0}
                   >
                     <i className="fab fa-twitter contact--socialIcon" />
                     <p className="contact--socialText">
@@ -112,9 +133,13 @@ class AboutMe extends Component {
                     </p>
                   </div>
                   <div
-                    onClick={() => (location.href = "mailto:jgower.dev@gmail.com")}
+                    onClick={(): string =>
+                      (location.href = "mailto:jgower.dev@gmail.com")
+                    }
                     className="contact--socialContainer"
                     style={{ color: "#f74245" }}
+                    role="button"
+                    tabIndex={0}
                   >
                     <i className="far fa-envelope contact--socialIcon" />
                     <p className="contact--socialText">Send me an email</p>
@@ -123,7 +148,7 @@ class AboutMe extends Component {
               </div>
             </div>
             <p className="contact--text">
-              I'd love to hear from you, whether it be for a quote or a bit of extra
+              I&apos;d love to hear from you, whether it be for a quote or a bit of extra
               information of projects I have completed. Please complete the form below, or
               alternatively send me a message on one of the linked social media accounts.
               I will aim to reply as soon as possible!
@@ -138,7 +163,7 @@ class AboutMe extends Component {
                   <Input
                     type="text"
                     name="name"
-                    onChange={(e) => this.setState({ name: e.target.value })}
+                    onChange={(e): void => this.setState({ name: e.target.value })}
                     className="form--inputs"
                     placeholder="Please enter your full name"
                   />
@@ -151,7 +176,7 @@ class AboutMe extends Component {
                     type="email"
                     name="email"
                     className="form--inputs"
-                    onChange={(e) => this.setState({ email: e.target.value })}
+                    onChange={(e): void => this.setState({ email: e.target.value })}
                     placeholder="Please enter your email address"
                   />
                 </FormGroup>
@@ -163,7 +188,7 @@ class AboutMe extends Component {
                     type="textarea"
                     rows={6}
                     name="textField"
-                    onChange={(e) => this.setState({ details: e.target.value })}
+                    onChange={(e): void => this.setState({ details: e.target.value })}
                     className="form--inputs"
                     placeholder="Please enter any details you wish to discuss with me - the more descriptive, the better!"
                   />
@@ -178,12 +203,12 @@ class AboutMe extends Component {
                   }}
                   onClick={this.onSendEmail}
                 >
-                  {emailResponse ? "Sent!" : "Submit"}
+                  {!emailSend ? "Submit" : emailResponse ? "Sent!" : "Sending..."}
                 </Button>
               </Form>
             </div>
           </div>
-        </div>
+        </Container>
       </div>
     );
   }

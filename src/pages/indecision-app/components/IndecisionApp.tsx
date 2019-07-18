@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import AddOption from "./AddOption";
 import Action from "./Action";
 import Header from "./Header";
