@@ -14,6 +14,22 @@ $form-bg: url("../../public/images/form-bg.jpg");
   text-align: center;
 }
 
+.about__highlight {
+  font-weight: bold;
+}
+
+.about__certification-container {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+}
+
+.about__button {
+  margin: 14px auto;
+}
+
 .contact--text {
   font-size: 1.6em;
   text-align: justify;

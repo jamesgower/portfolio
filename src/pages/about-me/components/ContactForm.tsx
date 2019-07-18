@@ -2,7 +2,7 @@ import React, { Component, createRef } from "react";
 import axios from "axios";
 import { Form, FormGroup, Label, Input, Button, FormFeedback } from "reactstrap";
 import { isEmail } from "validator";
-import ContactFormState from "../interfaces/aboutMe.i";
+import ContactFormState from "../interfaces/contactForm.i";
 
 class ContactForm extends Component<{}, ContactFormState> {
   public readonly state: ContactFormState = {

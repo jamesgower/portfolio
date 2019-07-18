@@ -1,16 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import Headroom from "react-headroom";
+import { Link } from "react-router-dom";
 import { Container } from "reactstrap";
-import NavBar from "../../nav-bar/components/NavBar";
 import ContactForm from "./ContactForm";
+import NavBar from "../../nav-bar/components/NavBar";
+import Modal from "./Modal";
 
-/*
-    TODO
-    [ ] Confirm twitter account and add it to the link.
-    [ ] Add server and client side validation for 
-*/
-
-const AboutMe: React.SFC = (): JSX.Element => (
+const AboutMe: React.FC = (): JSX.Element => (
   <div className="background">
     <Headroom>
       <NavBar color="#000" />
@@ -19,37 +15,43 @@ const AboutMe: React.SFC = (): JSX.Element => (
       <div className="skills--container">
         <h1 className="contact--title">About Me</h1>
         <p className="contact--text">
-          Hi, I&apos;m James Gower. I am a 24 year old Full-Stack developer from
-          Tonbridge, Kent. I prefer to implement applications using React and Node.JS,
-          with MongoDB for storing information, although I am a fast learning versatile
-          individual with knowledge of multiple frameworks and languages to achieve top
-          results for a variety of projects.
+          Hi, I&apos;m James Gower. I am a 24 year old full-stack developer from
+          Tonbridge, Kent. I prefer to create applications using <b>MERN</b> stack -{" "}
+          <b>MongoDB</b>, <b>Express.JS</b>, <b>React</b> (preferably with{" "}
+          <b>TypeScript</b>, or alternatively <b>JavaScript</b>) and <b>Node.JS</b>);
+          however I am fast learning and eager to try out new frameworks and languages to
+          achieve an optimum solution for any project.
         </p>
         <div className="row">
-          <div className="col-md-6">
+          <article className="col-md-6">
             <h3 className="contact--subtitle">Education</h3>
             <p className="contact--text">
-              I have completed multiple courses to get where I am now, the latest being my
-              HNC in Computing course. While completing this course I learnt{" "}
-              <b>programming fundamentals</b> in various languages such as{" "}
-              <b>JavaScript</b> & <b>Java</b>, and <b>Object-Oriented programming</b>{" "}
-              principles.
+              I have completed multiple courses and achieved a variety of certifications
+              in my programming journey so far. I attended West Kent College to complete a{" "}
+              <b>Higher National Diploma in Computing</b>, and previous to that I
+              completed a <b>Level 3 Extended Diploma in ICT Practitioners</b>. During
+              this time I learnt <b>programming fundamentals</b> in various languages such
+              as JavaScript, PHP & Java, including <b>Object-Oriented programming</b>,{" "}
+              Graphical Design,
+              <b>Software Engineering</b>, Security, Data Analytics &{" "}
+              <b>Website Development</b>.
             </p>
             <p className="contact--text">
-              After successfully graduating from these courses, I decided to self-learn
-              the latest web development frameworks, such as <b>React</b> and{" "}
-              <b>Node.JS</b> via popular Udemy courses, alongside completing the majority
-              of the FreeCodeCamp certifications. After completing these courses, I
-              created multiple projects to showcase these skills, and feel confident in
-              being able to create <b>Full-Stack</b> applications using the <b>MERN</b>{" "}
-              stack (MongoDB, Express.JS, React & Node.JS).
+              After successfully graduating from these courses I decided to self-learn the
+              latest web development frameworks - such as <b>React</b> and <b>Node.JS</b>{" "}
+              via popular Udemy courses, alongside completing the majority of the
+              FreeCodeCamp certifications. After completing these courses I created
+              multiple projects to showcase these skills (which can be found{" "}
+              <Link to="/portfolio">here</Link>), and feel confident in my ability to
+              deploy Full-Stack applications.
             </p>
-            <p className="contact--text">
-              I am currently in the process of enrolling into a Computing & IT (Software)
-              bachelors degree, which will be completed part-time, and <b>outside</b> of
-              working hours - taking 4 years to complete starting in April 2019.
-            </p>
-          </div>
+            <div className="about__certification-container">
+              <p className="contact--text text-center">
+                To view all certifications, please click the button below!
+              </p>
+              <Modal />
+            </div>
+          </article>
           <div className="col-md-6">
             <div className="contact--socialMediaContainer">
               <div
