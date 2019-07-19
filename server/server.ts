@@ -9,6 +9,11 @@ const { OAuth2 } = google.auth;
 const app = express();
 const port = process.env.PORT || 5000;
 
+/**
+ * TODO
+ * [ ] Server side validation
+ */
+
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
@@ -57,12 +62,10 @@ app.post(
 
     transporter.sendMail(
       mailOptions,
-      (error, info): express.Response => {
+      (error): express.Response => {
         if (error) {
-          console.log(error);
           return res.send(false);
         }
-        console.log(`Email sent: ${info.response}`);
         return res.send(true);
       },
     );

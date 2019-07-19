@@ -4,6 +4,18 @@ import { Form, FormGroup, Label, Input, Button, FormFeedback } from "reactstrap"
 import { isEmail } from "validator";
 import ContactFormState from "../interfaces/contactForm.i";
 
+/**
+ * TODO
+ * [ ] Restyle Form
+ * [ ] Fix Modal
+ * [ ] Add Certifications
+ * [ ] Remove Twitter
+ * [ ] Sort out footer
+ * [ ] Outline on TicTacToe
+ * [ ] Reset all button on TicTacToe
+ * [ ] Simon Says
+ */
+
 class ContactForm extends Component<{}, ContactFormState> {
   public readonly state: ContactFormState = {
     name: "",
@@ -62,6 +74,7 @@ class ContactForm extends Component<{}, ContactFormState> {
           details,
         },
       });
+
       if (res.data) {
         this.setState({ emailResponse: true });
         setTimeout((): void => {
