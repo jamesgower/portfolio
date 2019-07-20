@@ -2,10 +2,14 @@ import React from "react";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import TypedJSText from "./TypedJSText";
-import meImg from "../../../../public/images/displayImg.jpg";
+import meImg from "../images/displayImg.jpg";
+import background from "../images/background.jpeg";
 
 const LandingPage: React.SFC = (): JSX.Element => (
-  <div className="landing__container">
+  <div
+    className="landing__container"
+    style={{ background: `url(${background}) no-repeat center center fixed` }}
+  >
     <div className="landing__image-container">
       <img src={meImg} alt="Me!" className="landing__image" />
     </div>

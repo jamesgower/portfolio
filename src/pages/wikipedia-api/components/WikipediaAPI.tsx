@@ -4,13 +4,7 @@ import HiddenNavBar from "../../nav-bar/components/HiddenNavBar";
 import Article from "./Article";
 import WikiState from "../interfaces/wikipediaAPI.i";
 import ArticleProps from "../interfaces/article.i";
-
-/**
- * TODO
- * [x] Change id references to refs
- * [ ] Add clickable navbar button to open NavBar component
- * [ ] Add pagination for first 5 pages of results (10 per page)
- */
+import background from "../images/background.png";
 
 class WikipediaAPI extends React.Component<object, WikiState> {
   private initialState = {
@@ -139,9 +133,12 @@ class WikipediaAPI extends React.Component<object, WikiState> {
   public render(): JSX.Element {
     const { searchQuery, searchResults, pageNum } = this.state;
     return (
-      <div className="wiki__container">
+      <div
+        className="wiki__container"
+        style={{ background: `url(${background}) no-repeat center center fixed` }}
+      >
         <div className="wiki__nav-container">
-          <HiddenNavBar color="#fff" />
+          <HiddenNavBar color="white" navBackground={background} />
         </div>
         <Container>
           <div className="wiki__box-container" ref={this.boxContainerRef}>

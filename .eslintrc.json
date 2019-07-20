@@ -58,6 +58,8 @@
     "no-restricted-globals": "off",
     "no-return-assign": "off",
     "func-names": "off",
-    "global-require": "off"
+    "global-require": "off",
+    "no-loop-func": "off",
+    "no-await-in-loop": "off"
   }
 }

@@ -9,6 +9,11 @@ const { OAuth2 } = google.auth;
 const app = express();
 const port = process.env.PORT || 5000;
 
+/**
+ * TODO
+ * [ ] Server side validation
+ */
+
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
@@ -46,22 +51,21 @@ app.post(
     });
 
     const mailOptions = {
-      from: `"${name}" <${email}>`,
+      from: `${name} <${email}>`,
       to: "jamesgower1994@gmail.com",
       subject: "!! Portfolio Message -- URGENT !!",
       generateTextFromHTML: true,
-      html: `<b>${name} has sent you a message:</b>\n
+      html: `<b>${name} has sent you a message:</b> <br />
+      ${name}'s email address: ${email} <br /> <br />
         ${details}`,
     };
 
     transporter.sendMail(
       mailOptions,
-      (error, info): express.Response => {
+      (error): express.Response => {
         if (error) {
-          console.log(error);
           return res.send(false);
         }
-        console.log(`Email sent: ${info.response}`);
         return res.send(true);
       },
     );

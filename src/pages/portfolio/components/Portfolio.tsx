@@ -7,7 +7,7 @@ import NavBar from "../../nav-bar/components/NavBar";
 const Portfolio: React.SFC = (): JSX.Element => (
   <div className="background">
     <Headroom>
-      <NavBar color="#000" />
+      <NavBar color="black" />
     </Headroom>
     <Container className="content-container">
       <div className="portfolio--container">

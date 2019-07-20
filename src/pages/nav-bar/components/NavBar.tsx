@@ -2,12 +2,18 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { Collapse, Navbar, NavbarToggler, Nav } from "reactstrap";
 import { NavBarProps, NavBarState } from "../interfaces/navBar.i";
-import logo from "../../../../public/images/logo.png";
+import logo from "../images/logo.png";
+
+/**
+ * TODO
+ * [ ] Fix X so it fits inline with navbar toggler
+ */
 
 class NavBar extends React.Component<NavBarProps, NavBarState> {
   public readonly state: NavBarState = {
     isOpen: false,
     hiddenNav: false,
+    collapsed: window.innerWidth <= 767,
   };
 
   private navBarRef = React.createRef<HTMLDivElement>();
@@ -30,9 +36,21 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
     this.skillsLink.current.style.color = color;
     this.aboutMeLink.current.style.color = color;
 
+    window.addEventListener(
+      "resize",
+      (): void => this.setState({ collapsed: window.innerWidth <= 767 }),
+    );
+
     if (closeNav) {
       this.closeBtnRef.current.style.color = color;
     }
+  }
+
+  public componentWillUnmount(): void {
+    window.removeEventListener(
+      "resize",
+      (): void => this.setState({ collapsed: window.innerWidth <= 767 }),
+    );
   }
 
   private onNavToggle = (): void => {
@@ -58,16 +76,44 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
   };
 
   public render(): JSX.Element {
-    const { isOpen, hiddenNav } = this.state;
+    const { isOpen, hiddenNav, collapsed } = this.state;
+    const { navBackground, color } = this.props;
     return (
       <>
-        <div className="nav__container" ref={this.navBarRef}>
-          <Navbar color="faded" light expand="md">
+        <div
+          className="nav__container"
+          ref={this.navBarRef}
+          style={{
+            borderBottom: collapsed ? `1px solid ${color}` : "",
+            borderRadius: collapsed ? "10px" : "",
+            background:
+              collapsed && isOpen ? `url(${navBackground}) no-repeat fixed center` : "",
+          }}
+        >
+          {hiddenNav && (
+            <i
+              onClick={this.onCloseButton}
+              role="button"
+              tabIndex={0}
+              className="fa fa-times animated pulse infinite nav__close-button"
+              ref={this.closeBtnRef}
+            />
+          )}
+          <Navbar
+            className={collapsed && isOpen ? "nav__collapsed" : ""}
+            color="faded"
+            dark={hiddenNav}
+            light={!hiddenNav}
+            expand="md"
+          >
             <NavLink to="/">
               <img src={logo} alt="JG Web Developer" className="nav__logo" />
             </NavLink>
             <hr className="nav__separator" />
-            <NavbarToggler onClick={this.onNavToggle} />
+            <NavbarToggler
+              className={`nav__toggle--${color}`}
+              onClick={this.onNavToggle}
+            />
             <Collapse isOpen={isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavLink
@@ -111,15 +157,6 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
             </Collapse>
           </Navbar>
         </div>
-        {hiddenNav && (
-          <i
-            onClick={this.onCloseButton}
-            role="button"
-            tabIndex={0}
-            className="fa fa-times animated pulse infinite nav__close-button"
-            ref={this.closeBtnRef}
-          />
-        )}
       </>
     );
   }

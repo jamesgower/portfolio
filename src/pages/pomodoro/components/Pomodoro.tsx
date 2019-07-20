@@ -3,16 +3,12 @@ import { Howl } from "howler";
 import { Row, Col } from "reactstrap";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import sound1 from "../../../../public/media/alarm.mp3";
-import sound2 from "../../../../public/media/alarm2.mp3";
+import sound1 from "../audio/alarm.mp3";
+import sound2 from "../audio/alarm2.mp3";
 import PomodoroState from "../interfaces/pomodoro.i";
 import HiddenNavBar from "../../nav-bar/components/HiddenNavBar";
 import Arrows from "./Arrows";
-
-/**
- * TODO
- * [ ] Make circle container & circle smaller on smaller screens
- */
+import background from "../images/background.jpg";
 
 class Pomodoro extends React.Component<{}, PomodoroState> {
   public readonly state: PomodoroState = {
@@ -31,6 +27,8 @@ class Pomodoro extends React.Component<{}, PomodoroState> {
     src: [sound2],
     volume: 0.5,
   });
+
+  public timer: number;
 
   public componentWillUnmount(): void {
     window.clearInterval(this.timer);
@@ -92,14 +90,15 @@ class Pomodoro extends React.Component<{}, PomodoroState> {
     return `${hours}${minutes} : ${seconds}`;
   };
 
-  public timer: number;
-
   public render(): JSX.Element {
     const { workTime, breakTime, timerSeconds, workTimerOn, time } = this.state;
     return (
-      <div className="pomodoro__background">
+      <div
+        className="pomodoro__background"
+        style={{ background: `url(${background}) no-repeat fixed center` }}
+      >
         <div className="pomodoro__nav-container">
-          <HiddenNavBar color="#FFF" />
+          <HiddenNavBar color="white" navBackground={background} />
         </div>
         <div className="pomodoro__container animated fadeIn">
           <div className="pomodoro__title">Pomodoro Clock</div>

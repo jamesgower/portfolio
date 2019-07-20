@@ -1,78 +1,69 @@
 import React from "react";
 import { Howl, Howler } from "howler";
+import DrumMachineState from "../interfaces/drumMachine.i";
 
-const heater1 = new Howl({
-  src: [require("../../../../public/media/drum/Heater-1.mp3")],
-});
-const heater2 = new Howl({
-  src: [require("../../../../public/media/drum/Heater-2.mp3")],
-});
-const heater3 = new Howl({
-  src: [require("../../../../public/media/drum/Heater-3.mp3")],
-});
-const heater4 = new Howl({
-  src: [require("../../../../public/media/drum/Heater-4_1.mp3")],
-});
-const heater5 = new Howl({
-  src: [require("../../../../public/media/drum/Heater-6.mp3")],
-});
-const heater6 = new Howl({
-  src: [require("../../../../public/media/drum/Dsc_Oh.mp3")],
-});
-const heater7 = new Howl({
-  src: [require("../../../../public/media/drum/Kick_n_Hat.mp3")],
-});
-const heater8 = new Howl({
-  src: [require("../../../../public/media/drum/RP4_KICK_1.mp3")],
-});
-const heater9 = new Howl({
-  src: [require("../../../../public/media/drum/Cev_H2.mp3")],
-});
+class DrumMachine extends React.Component<{}, DrumMachineState> {
+  public readonly state: DrumMachineState = {
+    kit: "heater",
+    power: true,
+    current: "Heater Kit",
+  };
 
-const piano1 = new Howl({
-  src: [require("../../../../public/media/drum/Chord_1.mp3")],
-});
-const piano2 = new Howl({
-  src: [require("../../../../public/media/drum/Chord_2.mp3")],
-});
-const piano3 = new Howl({
-  src: [require("../../../../public/media/drum/Chord_3.mp3")],
-});
-const piano4 = new Howl({
-  src: [require("../../../../public/media/drum/Give_us_a_light.mp3")],
-});
-const piano5 = new Howl({
-  src: [require("../../../../public/media/drum/Dry_Ohh.mp3")],
-});
-const piano6 = new Howl({
-  src: [require("../../../../public/media/drum/Bld_H1.mp3")],
-});
-const piano7 = new Howl({
-  src: [require("../../../../public/media/drum/punchy_kick_1.mp3")],
-});
-const piano8 = new Howl({
-  src: [require("../../../../public/media/drum/side_stick_1.mp3")],
-});
-const piano9 = new Howl({
-  src: [require("../../../../public/media/drum/Brk_Snr.mp3")],
-});
+  private heater1 = new Howl({
+    src: [require("../audio/Heater-1.mp3")],
+  });
+  private heater2 = new Howl({
+    src: [require("../audio/Heater-2.mp3")],
+  });
+  private heater3 = new Howl({
+    src: [require("../audio/Heater-3.mp3")],
+  });
+  private heater4 = new Howl({
+    src: [require("../audio/Heater-4_1.mp3")],
+  });
+  private heater5 = new Howl({
+    src: [require("../audio/Heater-6.mp3")],
+  });
+  private heater6 = new Howl({
+    src: [require("../audio/Dsc_Oh.mp3")],
+  });
+  private heater7 = new Howl({
+    src: [require("../audio/Kick_n_Hat.mp3")],
+  });
+  private heater8 = new Howl({
+    src: [require("../audio/RP4_KICK_1.mp3")],
+  });
+  private heater9 = new Howl({
+    src: [require("../audio/Cev_H2.mp3")],
+  });
 
-interface DrumMachineState {
-  power: boolean;
-  kit: string;
-  volume: number;
-  current: string;
-}
-
-const initialState: DrumMachineState = {
-  kit: "heater",
-  volume: 0.5,
-  power: true,
-  current: "Heater Kit",
-};
-
-class DrumMachine extends React.Component {
-  public readonly state = initialState;
+  private piano1 = new Howl({
+    src: [require("../audio/Chord_1.mp3")],
+  });
+  private piano2 = new Howl({
+    src: [require("../audio/Chord_2.mp3")],
+  });
+  private piano3 = new Howl({
+    src: [require("../audio/Chord_3.mp3")],
+  });
+  private piano4 = new Howl({
+    src: [require("../audio/Give_us_a_light.mp3")],
+  });
+  private piano5 = new Howl({
+    src: [require("../audio/Dry_Ohh.mp3")],
+  });
+  private piano6 = new Howl({
+    src: [require("../audio/Bld_H1.mp3")],
+  });
+  private piano7 = new Howl({
+    src: [require("../audio/punchy_kick_1.mp3")],
+  });
+  private piano8 = new Howl({
+    src: [require("../audio/side_stick_1.mp3")],
+  });
+  private piano9 = new Howl({
+    src: [require("../audio/Brk_Snr.mp3")],
+  });
 
   public componentDidMount(): void {
     document.addEventListener("keydown", this.onKeyDown);
@@ -169,7 +160,7 @@ class DrumMachine extends React.Component {
   private onSetVolume = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { power } = this.state;
     if (!power) return;
-    const volume: number = parseInt(e.target.value);
+    const volume: number = parseInt(e.target.value, 10);
     Howler.volume(volume / 100);
     document.getElementById("current").innerHTML = `Volume: ${volume}`;
     setTimeout((): void => {
@@ -182,34 +173,34 @@ class DrumMachine extends React.Component {
     if (!power) return;
     switch (key) {
       case "1":
-        kit === "heater" ? heater1.play() : piano1.play();
+        kit === "heater" ? this.heater1.play() : this.piano1.play();
         break;
       case "2":
-        kit === "heater" ? heater2.play() : piano2.play();
+        kit === "heater" ? this.heater2.play() : this.piano2.play();
         break;
       case "3":
-        kit === "heater" ? heater3.play() : piano3.play();
+        kit === "heater" ? this.heater3.play() : this.piano3.play();
         break;
       case "4":
-        kit === "heater" ? heater4.play() : piano4.play();
+        kit === "heater" ? this.heater4.play() : this.piano4.play();
         break;
       case "5":
-        kit === "heater" ? heater5.play() : piano5.play();
+        kit === "heater" ? this.heater5.play() : this.piano5.play();
         break;
       case "6":
-        kit === "heater" ? heater6.play() : piano6.play();
+        kit === "heater" ? this.heater6.play() : this.piano6.play();
         break;
       case "7":
-        kit === "heater" ? heater7.play() : piano7.play();
+        kit === "heater" ? this.heater7.play() : this.piano7.play();
         break;
       case "8":
-        kit === "heater" ? heater8.play() : piano8.play();
+        kit === "heater" ? this.heater8.play() : this.piano8.play();
         break;
       case "9":
-        kit === "heater" ? heater9.play() : piano9.play();
+        kit === "heater" ? this.heater9.play() : this.piano9.play();
         break;
       default:
-        return;
+        break;
     }
   };
 

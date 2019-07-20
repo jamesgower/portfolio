@@ -1,7 +1,7 @@
 import React from "react";
 import ArrowsProps from "../interfaces/arrows.i";
-import arrowLeft from "../../../../public/images/arrowLeft.png";
-import arrowRight from "../../../../public/images/arrowRight.png";
+import arrowLeft from "../images/arrowLeft.png";
+import arrowRight from "../images/arrowRight.png";
 
 const Arrows: React.FC<ArrowsProps> = ({
   onHandleArrowClick,

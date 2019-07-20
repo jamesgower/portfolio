@@ -25,7 +25,7 @@ const AppRouter: React.SFC = (): JSX.Element => (
   <Router history={history}>
     <Provider store={store}>
       <Switch>
-        <Route path="/" component={LandingPage} exact />
+        <Route path="/" component={SimonSays} exact />
         <Route path="/portfolio" exact component={Portfolio} />
         <Route path="/portfolio/pomodoro" component={Pomodoro} />
         <Route path="/portfolio/calculator" component={Calculator} />
