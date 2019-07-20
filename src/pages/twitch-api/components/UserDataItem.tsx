@@ -1,13 +1,9 @@
 import React from "react";
 import { UserDataItemState, UserDataItemProps } from "../interfaces/userDataItem.i";
+import notFoundImage from "../images/twitch-not-found.jpg";
 
 const moment = require("moment");
-const notFoundImage = require("../../../../public/images/twitch-not-found.jpg");
 
-/* 
-	TODO
-	[x] Fix flexbox for online and offline
-*/
 const initialState: UserDataItemState = {
   showComponent: true,
   usersToKeep: [],

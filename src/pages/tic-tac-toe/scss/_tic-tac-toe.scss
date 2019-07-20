@@ -5,7 +5,6 @@ $player-button: rgb(189, 146, 78);
 .tic-tac-toe__container {
   -moz-background-size: cover;
   -webkit-background-size: cover;
-  background: url("../../public/images/bg-ttt.jpg") no-repeat fixed center;
   background-size: cover;
   height: 100vh !important;
   position: fixed;
@@ -40,11 +39,13 @@ $player-button: rgb(189, 146, 78);
     -moz-transform: rotate(-360deg);
   }
 }
+
 @-webkit-keyframes spin {
   100% {
     -webkit-transform: rotate(-360deg);
   }
 }
+
 @keyframes spin {
   100% {
     -webkit-transform: rotate(-360deg);

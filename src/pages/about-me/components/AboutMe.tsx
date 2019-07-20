@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Headroom from "react-headroom";
 import { Link } from "react-router-dom";
 import { Container } from "reactstrap";
@@ -9,7 +9,7 @@ import Modal from "./Modal";
 const AboutMe: React.FC = (): JSX.Element => (
   <div className="background">
     <Headroom>
-      <NavBar color="#000" />
+      <NavBar color="black" />
     </Headroom>
     <Container className="content-container">
       <div className="skills--container">

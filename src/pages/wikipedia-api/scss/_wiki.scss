@@ -1,11 +1,9 @@
-$wiki-img: url("../../public/images/wikibg.png");
 $input-focus: #80abfc;
 $wiki-blue: #4569ac;
 
 .wiki__container {
   -moz-background-size: cover;
   -webkit-background-size: cover;
-  background: $wiki-img no-repeat center center fixed;
   background-size: cover;
   font-family: Franklin "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   height: 100%;
@@ -89,7 +87,7 @@ $wiki-blue: #4569ac;
 
 .wiki__text {
   color: $wiki-blue;
-  font-family: Franklin Gothic !important;
+  font-family: "Franklin Gothic", sans-serif !important;
   font-size: 18px;
   margin: 0 !important;
   text-align: center;

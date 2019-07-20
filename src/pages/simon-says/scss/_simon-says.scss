@@ -3,14 +3,9 @@ $red: rgb(165, 0, 0);
 $yellow: rgb(168, 168, 26);
 $blue: rgb(0, 0, 175);
 
-/*
-!CONTAINERS
-*/
-
-.simonBackground {
+.simon__background {
   margin-top: -1px;
   padding-top: 1px;
-  background: url("../../public/images/simon-bg.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -19,7 +14,7 @@ $blue: rgb(0, 0, 175);
   height: 100vh;
 }
 
-.simonSays {
+.simon__container {
   width: 400px;
   margin: 20vh auto;
 
@@ -28,11 +23,11 @@ $blue: rgb(0, 0, 175);
   }
 
   @media (max-width: $s-breakpoint) {
-    width: 200px;
+    width: 220px;
   }
 }
 
-.centerControls {
+.simon__center-controls {
   border-radius: 50%;
   height: 200px;
   width: 200px;
@@ -59,7 +54,7 @@ $blue: rgb(0, 0, 175);
   }
 }
 
-.simonContainer {
+.simon__text-container {
   width: 100%;
   text-align: center;
   margin-top: 20px;
@@ -74,7 +69,7 @@ $blue: rgb(0, 0, 175);
   }
 }
 
-.simonBtnContainer {
+.simon__button-container {
   width: 100%;
   display: flex;
   justify-content: space-evenly;
@@ -90,7 +85,7 @@ $blue: rgb(0, 0, 175);
   }
 }
 
-.onSwitchContainer {
+.simon__switch-container {
   width: 100%;
   display: flex;
   position: absolute;
@@ -108,15 +103,15 @@ $blue: rgb(0, 0, 175);
   }
 }
 
-/*
-!ON-OFF TOGGLE
-*/
-
-.switchSimon {
+.simon__switch {
   position: relative;
   display: inline-block;
   width: 40px;
   height: 24px;
+
+  &:focus {
+    outline: none;
+  }
 
   @media (max-width: $md-breakpoint) {
     width: 30px;
@@ -124,11 +119,11 @@ $blue: rgb(0, 0, 175);
   }
 }
 
-.switchSimon .onToggle {
+.simon__switch .simon__switch--toggle {
   display: none;
 }
 
-.sliderSimon {
+.simon__slider {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -138,6 +133,10 @@ $blue: rgb(0, 0, 175);
   background-color: #ccc;
   -webkit-transition: 0.4s;
   transition: 0.4s;
+
+  &:focus {
+    outline: none;
+  }
 
   &::before {
     position: absolute;
@@ -159,25 +158,21 @@ $blue: rgb(0, 0, 175);
   }
 }
 
-.onToggle:checked + .sliderSimon {
+.simon__switch--toggle:checked + .simon__slider {
   background-color: red;
 }
 
-.onToggle:focus + .sliderSimon {
+.simon__switch--toggle:focus + .simon__slider {
   box-shadow: 0 0 1px red;
 }
 
-.onToggle:checked + .sliderSimon::before {
+.simon__switch--toggle:checked + .simon__slider::before {
   -webkit-transform: translateX(15px);
   -ms-transform: translateX(15px);
   transform: translateX(15px);
 }
 
-/*
-!LIGHTS & Buttons
-*/
-
-.inactiveLight {
+.simon__light--inactive {
   border: 2px solid rgb(36, 36, 36);
   background: rgb(43, 0, 0);
   height: 10px;
@@ -195,8 +190,8 @@ $blue: rgb(0, 0, 175);
   }
 }
 
-.activeLight {
-  @extend .inactiveLight;
+.simon__light--active {
+  @extend .simon__light--inactive;
   background: red;
 
   @media (max-width: $s-breakpoint) {
@@ -204,7 +199,7 @@ $blue: rgb(0, 0, 175);
   }
 }
 
-.description {
+.simon__text {
   margin-top: 2px;
   text-align: center;
 
@@ -217,7 +212,7 @@ $blue: rgb(0, 0, 175);
   }
 }
 
-.simonBtns {
+%simon__buttons {
   border: 3px solid rgb(36, 36, 36);
   width: 25px;
   height: 25px;
@@ -230,6 +225,10 @@ $blue: rgb(0, 0, 175);
   -webkit-box-shadow: 0 3px 5px #000;
   margin-top: 5px;
 
+  &:focus {
+    outline: none;
+  }
+
   @media (max-width: $s-breakpoint) {
     height: 16px;
     width: 16px;
@@ -237,12 +236,12 @@ $blue: rgb(0, 0, 175);
   }
 }
 
-.startBtn {
-  @extend .simonBtns;
+.simon__start-button {
+  @extend %simon__buttons;
   background-color: red;
 }
 
-.startBtn:active {
+.simon__start-button:active {
   position: relative;
   top: 2px;
   color: red;
@@ -251,8 +250,8 @@ $blue: rgb(0, 0, 175);
   -webkit-box-shadow: none;
 }
 
-.startBtnPressed {
-  @extend .startBtn;
+.simon__start-button--pressed {
+  @extend .simon__start-button;
   position: relative;
   top: 2px;
   color: red;
@@ -261,12 +260,12 @@ $blue: rgb(0, 0, 175);
   -webkit-box-shadow: none;
 }
 
-.strictBtn {
-  @extend .simonBtns;
+.simon__strict-button {
+  @extend %simon__buttons;
   background-color: yellow;
 }
 
-.strictBtn:active {
+.simon__strict-button:active {
   position: relative;
   top: 2px;
   color: yellow;
@@ -275,8 +274,8 @@ $blue: rgb(0, 0, 175);
   -webkit-box-shadow: none;
 }
 
-.strictBtnPressed {
-  @extend .strictBtn;
+.simon__strict-button--pressed {
+  @extend .simon__strict-button;
   position: relative;
   top: 2px;
   color: yellow;
@@ -285,11 +284,7 @@ $blue: rgb(0, 0, 175);
   -webkit-box-shadow: none;
 }
 
-/*
-!SCORES
-*/
-
-.score {
+.simon__score {
   border: 3px solid rgb(36, 36, 36);
   background: rgb(68, 0, 0);
   color: rgb(114, 0, 0);
@@ -319,15 +314,12 @@ $blue: rgb(0, 0, 175);
   }
 }
 
-.activeScore {
-  @extend .score;
+.simon__score--active {
+  @extend .simon__score;
   color: red;
 }
 
-/*
-!TEXT
-*/
-.simonTitle {
+.simon__title {
   font-size: 40px;
   vertical-align: top;
   text-align: center;
@@ -342,7 +334,7 @@ $blue: rgb(0, 0, 175);
   }
 }
 
-.copyright {
+.simon__copyright {
   margin-top: 6px;
   font-size: 20px;
   display: inline-block;
@@ -358,11 +350,7 @@ $blue: rgb(0, 0, 175);
   }
 }
 
-.combination {
-  padding-top: 30px;
-}
-
-.toggleText {
+.simon__toggle-text {
   padding: 2px 4px 2px 4px;
   font-size: 12px;
 
@@ -377,13 +365,14 @@ $blue: rgb(0, 0, 175);
   }
 }
 
-/*
-!SIMON BUTTONS
-*/
-.circle {
+%circle {
   height: 200px;
   width: 200px;
   cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
 
   @media (max-width: $md-breakpoint) {
     width: 160px;
@@ -396,7 +385,8 @@ $blue: rgb(0, 0, 175);
   }
 }
 
-.green {
+.simon__green-button {
+  @extend %circle;
   float: left;
   border-top-left-radius: 100%;
   border-left: 8px solid black;
@@ -413,12 +403,13 @@ $blue: rgb(0, 0, 175);
   }
 }
 
-.flash-green {
-  @extend .green;
+.simon__flash-green-button {
+  @extend .simon__green-button;
   background: lighten($green, 20%);
 }
 
-.red {
+.simon__red-button {
+  @extend %circle;
   float: right;
   border-left: 4px solid black;
   border-bottom: 4px solid black;
@@ -435,12 +426,13 @@ $blue: rgb(0, 0, 175);
   }
 }
 
-.flash-red {
-  @extend .red;
+.simon__flash-red-button {
+  @extend .simon__red-button;
   background: lighten($red, 20%);
 }
 
-.yellow {
+.simon__yellow-button {
+  @extend %circle;
   float: left;
   border-top: 4px solid black;
   border-bottom: 8px solid black;
@@ -457,12 +449,13 @@ $blue: rgb(0, 0, 175);
   }
 }
 
-.flash-yellow {
-  @extend .yellow;
+.simon__flash-yellow-button {
+  @extend .simon__yellow-button;
   background: lighten($yellow, 20%);
 }
 
-.blue {
+.simon__blue-button {
+  @extend %circle;
   float: right;
   border-right: 8px solid black;
   border-bottom: 8px solid black;
@@ -479,7 +472,7 @@ $blue: rgb(0, 0, 175);
   }
 }
 
-.flash-blue {
-  @extend .blue;
+.simon__flash-blue-button {
+  @extend .simon__blue-button;
   background: lighten($blue, 20%);
 }

@@ -8,14 +8,13 @@
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
-  background: $form-bg no-repeat center;
 }
 
 .form--inputs {
   font-size: 18px !important;
   width: 100%;
   resize: vertical;
-  color: #fff !important;
+  color: $black !important;
 
   &::-ms-input-placeholder {
     /* Microsoft Edge */

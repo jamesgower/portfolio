@@ -5,14 +5,21 @@ import ChooseNames from "./ChooseNames";
 import ChooseOpponents from "./ChooseOpponents";
 import HiddenNavBar from "../../nav-bar/components/HiddenNavBar";
 import { SetupProps, AppState } from "../interfaces/components.i";
+import background from "../images/background.jpg";
 
 const Setup: React.SFC<SetupProps> = ({
   player: { noPlayers, readyToPlay },
 }): JSX.Element => {
   return (
     <>
-      <HiddenNavBar color="#000" />
-      <div className="tic-tac-toe__container">
+      <HiddenNavBar color="black" navBackground={background} />
+      <div
+        className="tic-tac-toe__container"
+        style={{
+          background: `url(${background}) no-repeat fixed center`,
+          backgroundSize: "cover",
+        }}
+      >
         {!readyToPlay ? (
           noPlayers === undefined ? (
             <ChooseOpponents />

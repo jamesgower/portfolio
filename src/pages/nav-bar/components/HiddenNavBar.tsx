@@ -34,10 +34,10 @@ class HiddenNavBar extends React.Component<HiddenNavProps, HiddenNavState> {
   };
 
   public render(): JSX.Element {
-    const { color } = this.props;
+    const { color, navBackground } = this.props;
     const { showNav } = this.state;
     return (
-      <div>
+      <div className="hidden-nav__container">
         <i
           className="fa fa-bars animated pulse infinite nav__burger"
           role="button"
@@ -46,9 +46,11 @@ class HiddenNavBar extends React.Component<HiddenNavProps, HiddenNavState> {
           onClick={this.onOpenNav}
         />
         {showNav && (
-          <div className="animated slideInDown">
-            <NavBar closeNav={this.onCloseNav} color={color} />
-          </div>
+          <NavBar
+            closeNav={this.onCloseNav}
+            color={color}
+            navBackground={navBackground}
+          />
         )}
       </div>
     );

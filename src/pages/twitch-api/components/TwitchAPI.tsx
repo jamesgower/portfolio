@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Input, Container } from "reactstrap";
 import UserDataItem from "./UserDataItem";
 import TwitchState, { OnlineUser, SavedUser, APICall } from "../interfaces/twitchAPI.i";
+import background from "../images/background.jpg";
 
 /*
 	TODO
@@ -269,7 +270,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
     } = this.state;
 
     return (
-      <div className="twitch__container">
+      <div className="twitch__container" style={{ background: `url(${background})` }}>
         <div className="twitch__header">
           <Container>
             <h1 className="text-center twitch__title">Twitch Streamers</h1>
