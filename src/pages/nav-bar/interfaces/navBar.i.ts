@@ -9,3 +9,8 @@ export interface NavBarState {
   hiddenNav: boolean;
   collapsed: boolean;
 }
+
+export interface NavContext {
+  color: string;
+  navBackground: string;
+}

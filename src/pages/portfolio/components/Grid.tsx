@@ -1,5 +1,7 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
+import Modal from "react-modal";
+import Calculator from "../../calculator/components/Calculator";
 import emailyImage from "../images/emaily.jpg";
 import twitterImage from "../images/clone.jpg";
 import chatterImage from "../images/chatter.jpg";
@@ -12,8 +14,9 @@ import indecisionImage from "../images/indecision.jpg";
 import twitchImage from "../images/twitch.jpg";
 import expensifyImage from "../images/expensify.jpg";
 import drumImage from "../images/drum.jpg";
+import calculatorImage from "../images/calculator.jpg";
+import portfolioImage from "../images/portfolio.jpg";
 import GridState from "../interfaces/grid.i";
-
 /*
 	TODO
 	[ ]	Add loading page
@@ -27,10 +30,22 @@ import GridState from "../interfaces/grid.i";
 export class Grid extends React.Component<{}, GridState> {
   public readonly state: GridState = {
     redirect: false,
-    data: "all",
+    isOpen: false,
   };
 
   public animations: number;
+
+  private customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      padding: "20px 40px",
+    },
+  };
 
   private tilesData = [
     {
@@ -57,7 +72,7 @@ export class Grid extends React.Component<{}, GridState> {
     {
       img: chatterImage,
       title: "Chatter (Chat App)",
-      subtitle: "Built with Socket.io, Axios, Express, Moment.js, Mustache, React & CSS",
+      subtitle: "Built with Socket.io, Axios, Express, Moment.js, React & SCSS",
       href: "https://github.com/jamesgower/chatter",
       featured: true,
       redirect: true,
@@ -67,7 +82,7 @@ export class Grid extends React.Component<{}, GridState> {
     {
       img: simonImage,
       title: "Simon Says",
-      subtitle: "Built with React, Redux, Webpack, React-Router",
+      subtitle: "Built with React, TypeScript, SCSS & Howler",
       href: "/portfolio/simon-says",
       color: "#57C139",
       class: "fas fa-trophy",
@@ -75,7 +90,7 @@ export class Grid extends React.Component<{}, GridState> {
     {
       img: pomodoroImage,
       title: "Pomodoro Clock",
-      subtitle: "Built with React, Pure JS, jQuery, Babel",
+      subtitle: "Built with React, TypeScript & SCSS",
       href: "/portfolio/pomodoro",
       color: "#303030",
       class: "far fa-clock",
@@ -83,10 +98,10 @@ export class Grid extends React.Component<{}, GridState> {
     {
       img: ticTacToeImage,
       title: "Tic-Tac-Toe with AI",
-      subtitle: "Built with React, SCSS, Pure JS, Babel",
+      subtitle: "Built with React, Redux, TypeScript & SCSS",
       featured: true,
       href: "/portfolio/tic-tac-toe",
-      color: "#c1b9a8",
+      color: "#999285",
       class: "fas fa-gamepad",
     },
     {
@@ -110,7 +125,7 @@ export class Grid extends React.Component<{}, GridState> {
     {
       img: indecisionImage,
       title: "Indecision App",
-      subtitle: "Built with React, SCSS & Local Storage",
+      subtitle: "Built with React, TypeScript SCSS & Local Storage",
       href: "/portfolio/indecision-app",
       color: "#8359CE",
       class: "fas fa-question",
@@ -120,7 +135,7 @@ export class Grid extends React.Component<{}, GridState> {
       title: "Twitch API",
       subtitle: "Built with React, TypeScript, Fetch API & Twitch API",
       href: "/portfolio/twitch",
-      color: "blueviolet",
+      color: "#7c30ff",
       class: "fab fa-twitch",
       featured: true,
     },
@@ -137,52 +152,30 @@ export class Grid extends React.Component<{}, GridState> {
     {
       img: drumImage,
       title: "Drum Machine",
-      subtitle: "Built with React, Vanilla JS, Howler & SCSS",
+      subtitle: "Built with React, TypeScript, Howler & SCSS",
       href: "/portfolio/drum-machine",
       color: "#c6c6c6",
       class: "fas fa-headphones",
     },
-  ];
-
-  private allData = this.tilesData.map(
-    (tile, i): JSX.Element => {
-      return (
-        <div
-          className={
-            tile.featured ? "gridTile col-md-7 col-6" : "gridTile col-md-5 col-6"
-          }
-          key={i}
-        >
-          <div
-            id={`tile${i}`}
-            style={{
-              background: tile.color,
-            }}
-            role="button"
-            tabIndex={0}
-            className="border"
-            onClick={
-              tile.redirect
-                ? (): void => {
-                    location.href = tile.href;
-                  }
-                : (): void => this.handleOnClick(tile.href)
-            }
-          >
-            <img src={tile.img} alt={tile.title} className="animated" />
-            <i
-              className={`${tile.class}`}
-              style={{
-                color: tile.color,
-              }}
-            />
-            <p className="tile--title">{tile.title}</p>
-            <p className="tile--subtitle">{tile.subtitle}</p>
-          </div>
-        </div>
-      );
+    {
+      img: calculatorImage,
+      title: "Calculator",
+      subtitle: "Built with ReactModal, TypeScript, SCSS & Math.JS",
+      color: "#00d397",
+      class: "fas fa-calculator",
+      click: (): void => this.setState({ isOpen: true }),
     },
-  );
+    {
+      img: portfolioImage,
+      title: "Personal Portfolio",
+      subtitle: "Built with React, TypeScript, Redux & Jest",
+      href: "https://github.com/jamesgower/portfolio",
+      redirect: true,
+      color: "#343746",
+      class: "fas fa-laptop-code",
+      featured: true,
+    },
+  ];
 
   public componentDidMount = (): void => {
     this.animations = window.setInterval((): void => {
@@ -217,22 +210,76 @@ export class Grid extends React.Component<{}, GridState> {
   };
 
   public render(): JSX.Element {
-    const { redirect, route, data } = this.state;
+    const { redirect, route } = this.state;
     if (redirect) {
       return <Redirect push to={route} />;
     }
-
+    const { isOpen } = this.state;
     return (
-      <div
-        id="grid"
-        className="container"
-        style={{
-          paddingBottom: "40px",
-          margin: "0 20px",
-        }}
-      >
-        <div className="row">{data === "all" && this.allData}</div>
-      </div>
+      <>
+        <Modal
+          isOpen={isOpen}
+          onRequestClose={(): void => this.setState({ isOpen: false })}
+          style={this.customStyles}
+          contentLabel="Calculator"
+        >
+          <Calculator />
+        </Modal>
+        <div
+          id="grid"
+          className="container"
+          style={{
+            paddingBottom: "40px",
+            margin: "0 20px",
+          }}
+        >
+          <div className="row">
+            {this.tilesData.map(
+              (tile, i): JSX.Element => {
+                return (
+                  <div
+                    className={
+                      tile.featured
+                        ? "gridTile col-md-7 col-6"
+                        : "gridTile col-md-5 col-6"
+                    }
+                    key={i}
+                  >
+                    <div
+                      id={`tile${i}`}
+                      style={{
+                        background: tile.color,
+                      }}
+                      role="button"
+                      tabIndex={0}
+                      className="border"
+                      onClick={
+                        tile.click
+                          ? tile.click
+                          : tile.redirect
+                          ? (): void => {
+                              location.href = tile.href;
+                            }
+                          : (): void => this.handleOnClick(tile.href)
+                      }
+                    >
+                      <img src={tile.img} alt={tile.title} className="animated" />
+                      <i
+                        className={`${tile.class}`}
+                        style={{
+                          color: tile.color,
+                        }}
+                      />
+                      <p className="tile--title">{tile.title}</p>
+                      <p className="tile--subtitle">{tile.subtitle}</p>
+                    </div>
+                  </div>
+                );
+              },
+            )}
+          </div>
+        </div>
+      </>
     );
   }
 }

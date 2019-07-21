@@ -1,6 +1,6 @@
 interface GridState {
   redirect: boolean;
-  data: string;
+  isOpen: boolean;
   route?: string;
 }
 

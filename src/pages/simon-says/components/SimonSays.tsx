@@ -193,8 +193,8 @@ class SimonSays extends Component<{}, SimonSaysState> {
 
   private getColour = (): string => {
     const { combination } = this.state;
-    const randomNum = Math.floor(Math.random() * 4);
-    let colour;
+    const randomNum: number = Math.floor(Math.random() * 4);
+    let colour: string;
     switch (randomNum) {
       case 0:
         colour = "green";
@@ -240,7 +240,7 @@ class SimonSays extends Component<{}, SimonSaysState> {
       turnNum: 0,
     });
     await this.wait(500);
-    await this.getColour();
+    this.getColour();
     await this.onFlashColours();
     return this.setState({
       userTurn: true,
