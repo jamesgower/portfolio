@@ -4,10 +4,7 @@
   margin: 30px auto;
   border-radius: 5px;
   padding: 20px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
+  border: 1px solid black;
 }
 
 .form--inputs {
@@ -18,7 +15,7 @@
 
   &::-ms-input-placeholder {
     /* Microsoft Edge */
-    color: $off-white !important;
+    color: $gray !important;
     font-style: italic !important;
     font-size: 14px;
     line-height: 20px !important;
@@ -26,7 +23,7 @@
 
   &::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: $off-white !important;
+    color: $gray !important;
     font-style: italic !important;
     opacity: 1; /* Firefox */
     font-size: 14px;
@@ -46,9 +43,11 @@
 .form--title {
   padding: 14px;
   text-align: center;
+  color: $black;
 }
 
 .form--labels {
   font-weight: 700;
   font-size: 1.8em !important;
+  color: $grey;
 }

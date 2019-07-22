@@ -1,5 +1,6 @@
-interface ModalState {
+interface ModalProps {
   isOpen: boolean;
+  setOpen: (state: boolean) => void;
 }
 
-export { ModalState as default };
+export { ModalProps as default };

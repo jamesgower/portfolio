@@ -20,11 +20,8 @@ import GridState from "../interfaces/grid.i";
 /*
 	TODO
 	[ ]	Add loading page
-	[ ] Make different components for Headroom Navbar and normal Navbar
-	[x] Restyle blogify and adjust image to suit
-	[ ] Add tags array to tiles object for sorting via tags.
-	[ ] Readme.md for all GitHub projects with relevant installation & usage info
-  [x] Add sounds for games - webpack 
+  [ ] Readme.md for all GitHub projects with relevant installation & usage info
+  [ ] Add imgBot back to compress images.
 */
 
 export class Grid extends React.Component<{}, GridState> {
