@@ -34,7 +34,8 @@ const initialState: TwitchState = {
 
 class TwitchAPI extends React.Component<{}, TwitchState> {
   public readonly state = initialState;
-  public clientID;
+  public clientID: string;
+  public clientSecret: string;
 
   public componentWillMount(): void {
     /**
