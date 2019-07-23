@@ -55,8 +55,10 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
     if (process.env.NODE_ENV !== "production") {
       const keys = require("../keys.ts");
       this.clientID = keys.clientID;
+      this.clientSecret = keys.authorization;
     } else {
       this.clientID = process.env.TWITCH_CLIENT_ID;
+      this.clientSecret = process.env.TWITCH_AUTHORIZATION;
     }
     /**
      * Get all available user data by looping through all of the users
