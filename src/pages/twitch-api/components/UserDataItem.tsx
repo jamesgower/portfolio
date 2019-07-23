@@ -1,6 +1,7 @@
 import React from "react";
 import { UserDataItemState, UserDataItemProps } from "../interfaces/userDataItem.i";
 import notFoundImage from "../images/twitch-not-found.jpg";
+import placeholder from "../images/placeholder.png";
 
 const moment = require("moment");
 
@@ -117,7 +118,7 @@ class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState>
                         ? image
                         : userData
                         ? userData.image
-                        : "/images/placeholder.png"
+                        : placeholder
                     }
                     className="user__image"
                   />

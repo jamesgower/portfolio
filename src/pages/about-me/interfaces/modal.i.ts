@@ -3,4 +3,10 @@ interface ModalProps {
   setOpen: (state: boolean) => void;
 }
 
-export { ModalProps as default };
+interface CarouselImage {
+  src: string;
+  altText: string;
+  caption: string;
+}
+
+export { ModalProps as default, CarouselImage };

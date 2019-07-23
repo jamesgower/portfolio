@@ -1,10 +1,15 @@
-.contact--title {
+.about__container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.about__title {
   @extend .skills--title;
   border-bottom: 3px solid rgb(0, 162, 255);
   margin-bottom: 30px;
 }
 
-.contact--subtitle {
+.about__subtitle {
   font-size: 2em;
   border-bottom: 2px solid red;
   padding: 8px;
@@ -28,13 +33,13 @@
   margin: 14px auto;
 }
 
-.contact--text {
+.about__text {
   font-size: 1.6em;
   text-align: justify;
   margin: 12px 0;
 }
 
-.contact--socialMediaContainer {
+.about__social-container {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -42,7 +47,7 @@
   margin-left: 60px;
 }
 
-.contact--socialContainer {
+.about__social-inner-container {
   display: flex;
   justify-content: middle;
   flex-direction: row;
@@ -57,7 +62,7 @@
   }
 }
 
-.contact--socialText {
+.about__social--text {
   font-size: 1.6em;
   vertical-align: middle;
   line-height: 2em;
@@ -65,7 +70,7 @@
   width: 100%;
 }
 
-.contact--socialIcon {
+.about__social--icon {
   font-size: 4em;
   margin-right: 30px;
 }

@@ -34,6 +34,7 @@ const initialState: TwitchState = {
 
 class TwitchAPI extends React.Component<{}, TwitchState> {
   public readonly state = initialState;
+  public clientID;
 
   public componentWillMount(): void {
     /**
@@ -41,6 +42,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
      * If any data exists, store it in the state. If there are any errors,
      * log it into the console.
      */
+
     try {
       const users = JSON.parse(localStorage.getItem("users"));
       if (users) this.setState({ users });
@@ -50,6 +52,12 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
   }
 
   public componentDidMount(): void {
+    if (process.env.NODE_ENV !== "production") {
+      const keys = require("../keys.ts");
+      this.clientID = keys.clientID;
+    } else {
+      this.clientID = process.env.TWITCH_CLIENT_ID;
+    }
     /**
      * Get all available user data by looping through all of the users
      * found in the state from componentWillMount using the getData function.
@@ -63,14 +71,11 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
      * to add a new streamer.
      */
     const input = document.getElementById("streamer-input");
-    input.addEventListener(
-      "keydown",
-      (e: KeyboardEvent): void => {
-        if (e.keyCode === 13) {
-          this.onNewStreamer();
-        }
-      },
-    );
+    input.addEventListener("keydown", (e: KeyboardEvent): void => {
+      if (e.keyCode === 13) {
+        this.onNewStreamer();
+      }
+    });
   }
 
   public componentWillUnmount(): void {
@@ -79,14 +84,11 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
      * memory leaks.
      */
     const input = document.getElementById("streamer-input");
-    input.removeEventListener(
-      "keydown",
-      (e: KeyboardEvent): void => {
-        if (e.keyCode === 13) {
-          this.onNewStreamer();
-        }
-      },
-    );
+    input.removeEventListener("keydown", (e: KeyboardEvent): void => {
+      if (e.keyCode === 13) {
+        this.onNewStreamer();
+      }
+    });
   }
 
   public onNewStreamer = (): void => {
@@ -178,54 +180,57 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
   };
 
   public getData = async (name: string): Promise<void> => {
-    const res = await fetch(`https://api.twitch.tv/kraken/streams/${name}`, {
-      headers: {
-        "Client-ID": process.env.TWITCH_CLIENT_ID,
-        Authorization: process.env.TWITCH_AUTHORIZATION,
-      },
-    });
-    const result: APICall = await res.json();
-    if (result.stream !== null) {
-      const { onlineUserData } = this.state;
-      const user: OnlineUser = {
-        name,
-        game: result.stream.game || "TEST",
-        status: result.stream.channel.status,
-        viewers: result.stream.viewers,
-        fps: result.stream.average_fps,
-        image: result.stream.channel.logo,
-        online: true,
-        preview: result.stream.preview.medium,
-        mature: result.stream.channel.mature,
-        link: `https://www.twitch.tv/${name}`,
-      };
+    try {
+      const res = await fetch(`https://api.twitch.tv/kraken/streams/${name}`, {
+        headers: {
+          "Client-ID": this.clientID,
+        },
+      });
+      const result: APICall = await res.json();
+      if (result.stream !== null) {
+        const { onlineUserData } = this.state;
+        const user: OnlineUser = {
+          name,
+          game: result.stream.game || "TEST",
+          status: result.stream.channel.status,
+          viewers: result.stream.viewers,
+          fps: result.stream.average_fps,
+          image: result.stream.channel.logo,
+          online: true,
+          preview: result.stream.preview.medium,
+          mature: result.stream.channel.mature,
+          link: `https://www.twitch.tv/${name}`,
+        };
 
-      const savedUser: SavedUser = {
-        name,
-        lastGame: result.stream.game,
-        image: result.stream.channel.logo,
-        lastSeen: result.stream.created_at,
-        link: `https://www.twitch.tv/${name}`,
-      };
+        const savedUser: SavedUser = {
+          name,
+          lastGame: result.stream.game,
+          image: result.stream.channel.logo,
+          lastSeen: result.stream.created_at,
+          link: `https://www.twitch.tv/${name}`,
+        };
 
-      onlineUserData.push(user);
-      if (localStorage.getItem(savedUser.name) === null) {
-        localStorage.setItem(savedUser.name, JSON.stringify(savedUser));
+        onlineUserData.push(user);
+        if (localStorage.getItem(savedUser.name) === null) {
+          localStorage.setItem(savedUser.name, JSON.stringify(savedUser));
+        }
+        this.setState({
+          onlineUserData,
+        });
+      } else {
+        const { offlineUserData } = this.state;
+        const user = {
+          name,
+          online: false,
+          link: `https://www.twitch.tv/${name}`,
+        };
+        offlineUserData.push(user);
+        this.setState({
+          offlineUserData,
+        });
       }
-      this.setState({
-        onlineUserData,
-      });
-    } else {
-      const { offlineUserData } = this.state;
-      const user = {
-        name,
-        online: false,
-        link: `https://www.twitch.tv/${name}`,
-      };
-      offlineUserData.push(user);
-      this.setState({
-        offlineUserData,
-      });
+    } catch (err) {
+      console.log(err);
     }
   };
 

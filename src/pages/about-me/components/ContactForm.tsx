@@ -123,7 +123,7 @@ class ContactForm extends Component<{}, ContactFormState> {
               }
               placeholder="Please enter your name"
             />
-            <FormFeedback invalid>Please input a valid name</FormFeedback>
+            <FormFeedback>Please input a valid name</FormFeedback>
           </FormGroup>
           <FormGroup>
             <Label for="email" className="form--labels">
