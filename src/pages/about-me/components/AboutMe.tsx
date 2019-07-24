@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Headroom from "react-headroom";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
@@ -53,7 +53,7 @@ const AboutMe: React.FC = (): JSX.Element => {
                 <p className="about__text text-center">
                   To view all certifications, please click the button below!
                 </p>
-                <Modal isOpen={isOpen} setOpen={setOpen} />
+                <Modal />
               </div>
             </Col>
             <Col lg={6}>
