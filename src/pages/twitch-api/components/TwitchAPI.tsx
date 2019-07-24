@@ -3,7 +3,6 @@ import { Button, Input, Container } from "reactstrap";
 import UserDataItem from "./UserDataItem";
 import TwitchState, { OnlineUser, SavedUser, APICall } from "../interfaces/twitchAPI.i";
 import background from "../images/background.jpg";
-
 /*
 	TODO
 	[x] Fix async problems
@@ -32,6 +31,8 @@ const initialState: TwitchState = {
   newStreamer: "",
 };
 
+require("dotenv").config();
+
 class TwitchAPI extends React.Component<{}, TwitchState> {
   public readonly state = initialState;
   public clientID: string;
@@ -45,7 +46,6 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
      */
 
     try {
-      console.log(process.env.TWITCH_CLIENT_ID);
       const users = JSON.parse(localStorage.getItem("users"));
       if (users) this.setState({ users });
     } catch (err) {
@@ -54,12 +54,8 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
   }
 
   public componentDidMount(): void {
-    if (process.env.NODE_ENV !== "production") {
-      const keys = require("../keys.ts");
-      this.clientID = keys.clientID;
-    } else {
-      this.clientID = process.env.TWITCH_CLIENT_ID;
-    }
+    this.clientID = process.env.TWITCH_CLIENT_ID;
+
     console.log(this.clientID);
     /**
      * Get all available user data by looping through all of the users

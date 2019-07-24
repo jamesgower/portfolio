@@ -14,9 +14,7 @@ const port = process.env.PORT || 5000;
  * [ ] Server side validation
  */
 
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
-}
+require("dotenv").config();
 
 app.post(
   "/api/send_mail",
