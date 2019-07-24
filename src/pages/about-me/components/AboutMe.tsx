@@ -7,8 +7,6 @@ import NavBar from "../../nav-bar/components/NavBar";
 import Modal from "./Modal";
 
 const AboutMe: React.FC = (): JSX.Element => {
-  const [isOpen, setOpen] = useState(false);
-
   return (
     <div className="background">
       <Headroom>
