@@ -31,7 +31,7 @@ const initialState: TwitchState = {
   newStreamer: "",
 };
 
-require("dotenv").config();
+require("dotenv").config("../../../.e");
 
 class TwitchAPI extends React.Component<{}, TwitchState> {
   public readonly state = initialState;
@@ -46,6 +46,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
      */
 
     try {
+      console.log(process.env.TWITCH_CLIENT_ID);
       const users = JSON.parse(localStorage.getItem("users"));
       if (users) this.setState({ users });
     } catch (err) {

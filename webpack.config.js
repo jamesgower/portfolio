@@ -93,8 +93,10 @@ module.exports = (env) => {
         favicon: "./public/images/favicon.png",
       }),
       new webpack.DefinePlugin({
-        TWITCH_CLIENT_ID: JSON.stringify(process.env.TWITCH_CLIENT_ID),
-        TWITCH_AUTHORIZATION: JSON.stringify(process.env.TWITCH_AUTHORIZATION),
+        "process.env": {
+          TWITCH_CLIENT_ID: JSON.stringify(process.env.TWITCH_CLIENT_ID),
+          TWITCH_AUTHORIZATION: JSON.stringify(process.env.TWITCH_AUTHORIZATION),
+        },
       }),
     ],
     devtool: isProduction ? "source-map" : "inline-source-map",
