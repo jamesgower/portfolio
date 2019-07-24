@@ -44,6 +44,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
      */
 
     try {
+      console.log(process.env.TWITCH_CLIENT_ID);
       const users = JSON.parse(localStorage.getItem("users"));
       if (users) this.setState({ users });
     } catch (err) {
