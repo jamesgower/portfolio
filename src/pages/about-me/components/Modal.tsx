@@ -8,7 +8,7 @@ import {
   CarouselCaption,
 } from "reactstrap";
 import Modal from "react-modal";
-import ModalProps, { CarouselImage } from "../interfaces/modal.i";
+import { CarouselImage } from "../interfaces/modal.i";
 import frontEndCert from "../images/front-end-cert.png";
 import jsAlgorithmCert from "../images/js-algorithms-cert.png";
 import dataCert from "../images/js-algorithms-data-structures-cert.jpg";
@@ -18,7 +18,7 @@ import nodeReactCert from "../images/node-react-course.jpg";
 import reactReduxCert from "../images/react-redux-cert.jpg";
 import responsiveCert from "../images/responsive-cert.png";
 
-const CertificationModal: React.FC<ModalProps> = (): JSX.Element => {
+const CertificationModal: React.FC = (): JSX.Element => {
   const items: CarouselImage[] = [
     {
       src: frontEndCert,
