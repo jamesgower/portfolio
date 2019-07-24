@@ -18,7 +18,7 @@ import nodeReactCert from "../images/node-react-course.jpg";
 import reactReduxCert from "../images/react-redux-cert.jpg";
 import responsiveCert from "../images/responsive-cert.png";
 
-const CertificationModal: React.FC<ModalProps> = ({ isOpen, setOpen }): JSX.Element => {
+const CertificationModal: React.FC<ModalProps> = (): JSX.Element => {
   const items: CarouselImage[] = [
     {
       src: frontEndCert,
@@ -93,6 +93,7 @@ const CertificationModal: React.FC<ModalProps> = ({ isOpen, setOpen }): JSX.Elem
     },
   };
 
+  const [isOpen, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAnimating, setAnimating] = useState(false);
   const [desktop, setDesktop] = useState(window.innerWidth > 768);
