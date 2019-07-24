@@ -77,17 +77,11 @@ if (process.env.NODE_ENV === "production") {
 
   app.use(express.static(publicPath));
 
-  app.get(
-    "*",
-    (req, res: Response): void => {
-      res.sendFile(path.join(publicPath, "index.html"));
-    },
-  );
+  app.get("*", (req, res: Response): void => {
+    res.sendFile(path.join(publicPath, "index.html"));
+  });
 }
 
-app.listen(
-  port,
-  (): void => {
-    console.log("Server is up at port", port);
-  },
-);
+app.listen(port, (): void => {
+  console.log("Server is up at port", port);
+});

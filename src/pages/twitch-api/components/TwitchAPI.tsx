@@ -34,7 +34,8 @@ const initialState: TwitchState = {
 
 class TwitchAPI extends React.Component<{}, TwitchState> {
   public readonly state = initialState;
-  public clientID;
+  public clientID: string;
+  public clientSecret: string;
 
   public componentWillMount(): void {
     /**
@@ -59,6 +60,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
     } else {
       this.clientID = process.env.TWITCH_CLIENT_ID;
     }
+    console.log(this.clientID);
     /**
      * Get all available user data by looping through all of the users
      * found in the state from componentWillMount using the getData function.
