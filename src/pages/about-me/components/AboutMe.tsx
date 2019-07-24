@@ -11,7 +11,9 @@ const AboutMe: React.FC = (): JSX.Element => {
 
   return (
     <div className="background">
-      <Headroom>{!isOpen && <NavBar color="black" />}</Headroom>
+      <Headroom>
+        <NavBar color="black" />
+      </Headroom>
 
       <Container className="content-container">
         <div className="about__container">
