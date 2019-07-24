@@ -22,7 +22,15 @@ module.exports = (env) => {
       fs: "empty",
     },
     optimization: {
-      minimizer: [new TerserPlugin({}), new OptimizeCSSAssetsPlugin({})],
+      minimizer: [
+        new TerserPlugin({
+          cache: true,
+          parallel: true,
+          sourceMap: true,
+          extractComments: true,
+        }),
+        new OptimizeCSSAssetsPlugin({}),
+      ],
       //   splitChunks: {
       //     cacheGroups: {
       //       styles: {
