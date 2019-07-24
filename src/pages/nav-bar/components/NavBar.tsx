@@ -36,10 +36,7 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
     this.skillsLink.current.style.color = color;
     this.aboutMeLink.current.style.color = color;
 
-    window.addEventListener(
-      "resize",
-      (): void => this.setState({ collapsed: window.innerWidth <= 767 }),
-    );
+    window.addEventListener("resize", this.onWindowResize);
 
     if (closeNav) {
       this.closeBtnRef.current.style.color = color;
@@ -47,11 +44,11 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
   }
 
   public componentWillUnmount(): void {
-    window.removeEventListener(
-      "resize",
-      (): void => this.setState({ collapsed: window.innerWidth <= 767 }),
-    );
+    window.removeEventListener("resize", this.onWindowResize);
   }
+
+  private onWindowResize = (): void =>
+    this.setState({ collapsed: window.innerWidth <= 767 });
 
   private onNavToggle = (): void => {
     const { isOpen } = this.state;

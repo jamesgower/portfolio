@@ -74,11 +74,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
      * to add a new streamer.
      */
     const input = document.getElementById("streamer-input");
-    input.addEventListener("keydown", (e: KeyboardEvent): void => {
-      if (e.keyCode === 13) {
-        this.onNewStreamer();
-      }
-    });
+    input.addEventListener("keydown", this.onInputEnterClick);
   }
 
   public componentWillUnmount(): void {
@@ -87,12 +83,14 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
      * memory leaks.
      */
     const input = document.getElementById("streamer-input");
-    input.removeEventListener("keydown", (e: KeyboardEvent): void => {
-      if (e.keyCode === 13) {
-        this.onNewStreamer();
-      }
-    });
+    input.removeEventListener("keydown", this.onInputEnterClick);
   }
+
+  private onInputEnterClick = (e: KeyboardEvent): void => {
+    if (e.keyCode === 13) {
+      this.onNewStreamer();
+    }
+  };
 
   public onNewStreamer = (): void => {
     const { newStreamer, users } = this.state;

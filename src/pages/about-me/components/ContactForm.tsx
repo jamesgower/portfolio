@@ -31,15 +31,18 @@ class ContactForm extends Component<{}, ContactFormState> {
   private formContainerRef = createRef<HTMLDivElement>();
 
   public componentDidMount(): void {
-    this.formContainerRef.current.addEventListener(
-      "keydown",
-      (e: KeyboardEvent): void => {
-        if (e.key === "Enter") {
-          this.validateDetails();
-        }
-      },
-    );
+    this.formContainerRef.current.addEventListener("keydown", this.onFormEnterPress);
   }
+
+  public componentWillUnmount(): void {
+    this.formContainerRef.current.removeEventListener("keydown", this.onFormEnterPress);
+  }
+
+  private onFormEnterPress = (e: KeyboardEvent): void => {
+    if (e.key === "Enter") {
+      this.validateDetails();
+    }
+  };
 
   private validateDetails = (): void => {
     const { name, email, details } = this.state;

@@ -70,7 +70,7 @@ class DrumMachine extends React.Component<{}, DrumMachineState> {
   }
 
   public componentWillUnmount(): void {
-    document.addEventListener("keydown", this.onKeyDown);
+    document.removeEventListener("keydown", this.onKeyDown);
   }
 
   private onFlashKey = (key: string): void => {
