@@ -1,3 +1,4 @@
+const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
@@ -90,6 +91,10 @@ module.exports = (env) => {
       new HtmlWebpackPlugin({
         template: "./public/index.html",
         favicon: "./public/images/favicon.png",
+      }),
+      new webpack.DefinePlugin({
+        TWITCH_CLIENT_ID: JSON.stringify(process.env.TWITCH_CLIENT_ID),
+        TWITCH_AUTHORIZATION: JSON.stringify(process.env.TWITCH_AUTHORIZATION),
       }),
     ],
     devtool: isProduction ? "source-map" : "inline-source-map",
