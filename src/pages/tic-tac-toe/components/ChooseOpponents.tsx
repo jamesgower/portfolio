@@ -16,7 +16,7 @@ const ChooseOpponents: React.SFC<ChooseOpponentsProps> = ({
   setNumPlayers,
 }): JSX.Element => {
   return (
-    <div className="opponents__container animated slideInDown">
+    <div className="opponents__container animated fadeIn">
       <h1 className="opponents__title">Welcome to Tic-Tac-Toe!</h1>
       <h3 className="opponents__subtitle">
         Would you like to try your luck against the computer,

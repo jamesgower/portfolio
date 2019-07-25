@@ -6,10 +6,10 @@ $player-button: rgb(189, 146, 78);
   -moz-background-size: cover;
   -webkit-background-size: cover;
   background-size: cover;
-  height: 100vh !important;
+  height: 100vh;
   position: fixed;
   top: 0;
-  width: 100vw !important;
+  width: 100vw;
   z-index: -2;
 }
 
@@ -17,9 +17,14 @@ $player-button: rgb(189, 146, 78);
   height: 400px;
   margin: 5px auto 0;
   width: 400px;
+
+  @media (max-width: $s-breakpoint) {
+    height: 300px;
+    width: 300px;
+  }
 }
 
-#ttt-back-button {
+#scores__back-button {
   cursor: pointer;
   font-size: 30px;
   height: 50px;
@@ -55,162 +60,4 @@ $player-button: rgb(189, 146, 78);
 
 .form-control {
   background: none !important;
-}
-
-// --- SCORES --- //
-.ttt__scores-container {
-  margin: 100px auto 0;
-  width: 460px;
-}
-
-#current-turn {
-  font-size: 20px;
-  margin: 40px auto 0;
-  text-align: center;
-  width: 400px;
-}
-
-.ttt__scores--player1 {
-  display: inline-flex;
-  font-size: 20px;
-  justify-content: space-between;
-  text-align: center;
-}
-
-.ttt__scores--player2 {
-  display: inline-flex;
-  float: right;
-  font-size: 20px;
-  justify-content: space-between;
-  text-align: center;
-}
-
-%score {
-  font-size: 30px;
-  line-height: 28px;
-  text-align: center;
-  vertical-align: center;
-  visibility: hidden;
-  width: 40px;
-}
-
-#p1score {
-  @extend %score;
-  color: $p1-green;
-}
-
-#p2score {
-  @extend %score;
-  color: $p2-red;
-}
-
-%ttt__score-animation {
-  -webkit-animation-duration: 1s;
-  -webkit-animation-play-state: running;
-  animation-duration: 1s;
-  animation-play-state: running;
-}
-
-.ttt__score-animation--p1 {
-  @extend %ttt__score-animation;
-  -webkit-animation-name: bigToSmallP1;
-  animation-name: bigToSmallP1;
-}
-
-.ttt__score-animation--p2 {
-  @extend %ttt__score-animation;
-  -webkit-animation-name: bigToSmallP2;
-  animation-name: bigToSmallP2;
-}
-
-@-webkit-keyframes bigToSmallP1 {
-  0% {
-    font-size: 30px;
-  }
-
-  25% {
-    font-size: 45px;
-  }
-
-  50% {
-    color: $p1-green;
-    font-size: 60px;
-  }
-
-  75% {
-    font-size: 45px;
-  }
-
-  100% {
-    font-size: 30px;
-  }
-}
-
-@keyframes bigToSmallP1 {
-  0% {
-    font-size: 30px;
-  }
-
-  25% {
-    font-size: 45px;
-  }
-
-  50% {
-    color: $p1-green;
-    font-size: 60px;
-  }
-
-  75% {
-    font-size: 45px;
-  }
-
-  100% {
-    font-size: 30px;
-  }
-}
-
-@-webkit-keyframes bigToSmallP2 {
-  0% {
-    font-size: 30px;
-  }
-
-  25% {
-    font-size: 45px;
-  }
-
-  50% {
-    color: $p2-red;
-    font-size: 60px;
-  }
-
-  75% {
-    font-size: 45px;
-  }
-
-  100% {
-    font-size: 30px;
-  }
-}
-
-@keyframes bigToSmallP2 {
-  0% {
-    font-size: 30px;
-  }
-
-  25% {
-    font-size: 45px;
-  }
-
-  50% {
-    color: $p2-red;
-    font-size: 60px;
-  }
-
-  75% {
-    font-size: 45px;
-  }
-
-  100% {
-    font-size: 30px;
-  }
 }

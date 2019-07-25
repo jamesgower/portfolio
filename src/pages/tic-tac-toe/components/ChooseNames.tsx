@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { Button, Input, Row, Col } from "reactstrap";
+import { Button, Input } from "reactstrap";
 import * as playerActions from "../actions/player.action";
 import { NameState, Player, NameProps } from "../interfaces/components.i";
 import ActionTypes, {
@@ -117,38 +117,37 @@ class ChooseNames extends React.Component<NameProps, NameState> {
           fontFamily: "Oswald",
         }}
       >
-        <div id="ttt-back-button" onClick={reset} role="button" tabIndex={0}>
+        <div id="scores__back-button" onClick={reset} role="button" tabIndex={0}>
           <i className="fa fa-undo" />
         </div>
-
-        {noPlayers === 1 ? (
-          <h2 className="names__player1-text">
-            Please input your name and choose the difficulty you wish to play on.
-          </h2>
-        ) : (
-          <h2 className="names__player2-text">
-            Please input your names. You can also change your counter by clicking on your
-            player name too.
-          </h2>
-        )}
-        <div className="names__player-label--one">
-          <p className="names__player-label-text">Player 1:</p>
-          <Input
-            className="names__player-input"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-              this.onPlayerNameChange(e, 1)
-            }
-            autoFocus
-            value={player1.name}
-          />
+        <div className="names__player-text-container">
+          {noPlayers === 1 ? (
+            <h2 className="names__player-text">
+              Please input your name and choose the difficulty you wish to play on.
+            </h2>
+          ) : (
+            <h2 className="names__player-text">
+              Please input your names. You can also change your counter by clicking on
+              your player name too.
+            </h2>
+          )}
         </div>
+        <div className="names__setup-names--container">
+          <div className="names__player-container">
+            <p className="names__player-label-text">Player 1:</p>
+            <Input
+              className="names__player-input"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
+                this.onPlayerNameChange(e, 1)
+              }
+              autoFocus
+              value={player1.name}
+            />
+          </div>
 
-        {noPlayers === 2 && (
-          <Row className="names__player-label--two">
-            <Col xs={{ size: 4, offset: 1 }}>
+          {noPlayers === 2 && (
+            <div className="names__player-container">
               <p className="names__player-label-text">Player 2:</p>
-            </Col>
-            <Col xs={5}>
               <Input
                 className="names__player-input"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
@@ -156,9 +155,9 @@ class ChooseNames extends React.Component<NameProps, NameState> {
                 }
                 value={player2.name}
               />
-            </Col>
-          </Row>
-        )}
+            </div>
+          )}
+        </div>
 
         {noPlayers === 1 && (
           <div>
@@ -212,10 +211,8 @@ class ChooseNames extends React.Component<NameProps, NameState> {
             tabIndex={0}
             className="names__counter-container"
           >
-            <p className="names__player-l">
-              {player1.name.length > 0 ? player1.name : "Player 1"}:
-            </p>
-            <div className="names__counter">{player1.counter}</div>
+            <p>{player1.name.length > 0 ? player1.name : "Player 1"}:</p>
+            <div className="names__counter--player1">{player1.counter}</div>
           </div>
           <div
             className="names__counter-container"
@@ -224,7 +221,7 @@ class ChooseNames extends React.Component<NameProps, NameState> {
             tabIndex={0}
           >
             <p>{player2.name.length > 0 ? player2.name : "Player 2"}:</p>
-            <div className="names__counter">{player2.counter}</div>
+            <div className="names__counter--player2">{player2.counter}</div>
           </div>
         </div>
         <div className="names__button-container">

@@ -23,6 +23,7 @@ import ActionTypes, {
 import * as playerActions from "../actions/player.action";
 import * as boardActions from "../actions/board.action";
 import Tile from "./Tile";
+import ScoreBoard from "./ScoreBoard";
 
 /**
  * TODO
@@ -46,9 +47,9 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
     gameFinished: false,
   };
 
-  private currentTurn = React.createRef<HTMLDivElement>();
-  private player1Score = React.createRef<HTMLDivElement>();
-  private player2Score = React.createRef<HTMLDivElement>();
+  private currentTurnRef = React.createRef<HTMLDivElement>();
+  private player1ScoreRef = React.createRef<HTMLDivElement>();
+  private player2ScoreRef = React.createRef<HTMLDivElement>();
 
   private winCombos = [
     [0, 1, 2],
@@ -65,17 +66,17 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
 
   public componentDidMount(): void {
     setTimeout((): void => {
-      const p1score = this.player1Score.current;
+      const p1score = this.player1ScoreRef.current;
       p1score.style.visibility = "visible";
       p1score.className = "animated fadeIn";
-      const p2score = this.player2Score.current;
+      const p2score = this.player2ScoreRef.current;
       p2score.style.visibility = "visible";
       p2score.className = "animated fadeIn";
     }, 1000);
   }
 
   public componentWillUpdate(nextProps, nextState): void {
-    this.currentTurn.current.className = "";
+    this.currentTurnRef.current.className = "";
     if (nextState.gameFinished) {
       nextState.gameFinished = false;
       setTimeout((): void => {
@@ -95,7 +96,7 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
   }
 
   public componentDidUpdate(): void {
-    const currentTurn = this.currentTurn.current;
+    const currentTurn = this.currentTurnRef.current;
     currentTurn.classList.add("animated", "fadeIn");
     setTimeout((): void => {
       currentTurn.className = "";
@@ -194,8 +195,8 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
     }
 
     gameWon.player === player1.counter
-      ? this.player1Score.current.classList.add("ttt__score-animation--p1")
-      : this.player2Score.current.classList.add("ttt__score-animation--p2");
+      ? this.player1ScoreRef.current.classList.add("scores__animation--p1")
+      : this.player2ScoreRef.current.classList.add("scores__animation--p2");
 
     gameWon.player === player1.counter ? playerOneScore() : playerTwoScore();
 
@@ -204,7 +205,7 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
       gameFinished: true,
     });
 
-    this.currentTurn.current.className = "";
+    this.currentTurnRef.current.className = "";
   };
 
   private onResetClick = (): void => {
@@ -304,8 +305,8 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
       this.setState({ disableClicks: false });
     }
 
-    this.player1Score.current.className = "";
-    this.player2Score.current.className = "";
+    this.player1ScoreRef.current.className = "";
+    this.player2ScoreRef.current.className = "";
   };
 
   private minimax = (counter): Move => {
@@ -382,25 +383,13 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
     } = this.props;
     return (
       <div style={styles}>
-        <div className="ttt__scores-container">
-          <div className="ttt__scores--player1 animated slideInLeft">
-            {player1.name || "Player 1"}:{" "}
-            <div id="p1score" ref={this.player1Score}>
-              {player1.score}
-            </div>
-          </div>
-          <div className="ttt__scores--player2 animated slideInRight">
-            {player2.name}:{" "}
-            <div id="p2score" ref={this.player2Score}>
-              {player2.score}
-            </div>
-          </div>
-        </div>
-        <div id="current-turn" ref={this.currentTurn}>
+        <ScoreBoard
+          player1ScoreRef={this.player1ScoreRef}
+          player2ScoreRef={this.player2ScoreRef}
+          onResetClick={this.onResetClick}
+        />
+        <div id="current-turn" ref={this.currentTurnRef}>
           {currentTurn}
-        </div>
-        <div id="ttt-back-button" role="button" tabIndex={0} onClick={this.onResetClick}>
-          <i className="fa fa-undo" />
         </div>
         <div className="tic-tac-toe__grid">
           {this.tileData.map(
@@ -411,7 +400,7 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
                 id={tile}
                 player={player}
                 board={board}
-                currentTurn={this.currentTurn}
+                currentTurn={this.currentTurnRef}
                 takeAITurn={this.takeAITurn}
                 disableClicks={disableClicks}
                 disableTileClicks={(): void => this.setState({ disableClicks: true })}

@@ -1,47 +1,78 @@
 .names__container {
-  height: 40vw;
-  margin: 16vh auto;
+  margin: 20vh auto;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: "Oswald", sans-serif;
   width: 440px;
 
   @media (max-width: $s-breakpoint) {
-    width: 100vw;
+    width: 80vw;
+    margin: 20vh 10vw 0;
   }
 }
 
 .names__player-input {
   border: 1px solid $black !important;
   font-size: 15px !important;
-  display: inline-block;
+  display: inline-block !important;
+  width: 200px !important;
 
   &:focus {
     box-shadow: 0 0 10px $player-button !important;
   }
 }
 
-.names__player-label--one {
-  display: flex;
-  justify-items: center;
-  flex-direction: row;
+.names__setup-names--container {
+  margin: 0 auto 20px;
 }
 
-.names__player-label--two {
-  margin: 9px auto 10px;
-  width: 100%;
+.names__player-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  margin: 10px auto 0;
+
+  @media (max-width: $s-breakpoint) {
+    justify-content: space-evenly;
+  }
 }
 
 .names__player-label-text {
   font-size: 18px;
   display: inline-block;
+  width: 80px;
 }
 
-.names__counter {
+%names__counter {
   cursor: pointer;
   margin: 0 auto;
   width: 50px;
+  padding-bottom: 4px;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    margin-bottom: -2px;
+  }
+}
+
+.names__counter--player1 {
+  @extend %names__counter;
+
+  &:hover {
+    border-bottom: 2px solid $p1-green;
+  }
+}
+
+.names__counter--player2 {
+  @extend %names__counter;
 
   &:hover {
     border-bottom: 2px solid $p2-red;
-    margin-bottom: -2px;
   }
 }
 
@@ -51,6 +82,7 @@
   font-size: 16px;
   text-align: center;
   width: 150px;
+  margin-bottom: 5px;
 }
 
 .names__counter-container--player1 {
@@ -63,16 +95,17 @@
   width: 300px;
 }
 
-.names__player1-text {
-  margin: 26px auto 0;
-  text-align: center;
-  width: 300px;
+.names__player-text-container {
+  margin: 10px auto;
 }
 
-.names__player2-text {
-  margin: 46px auto 0;
+.names__player-text {
   text-align: center;
-  width: 300px;
+  padding: 0 40px;
+
+  @media (max-width: $s-breakpoint) {
+    padding: 0;
+  }
 }
 
 .names__button-container {

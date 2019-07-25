@@ -1,0 +1,159 @@
+.scores__container {
+  margin: 0 auto;
+  width: 460px;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid red;
+}
+
+#current-turn {
+  font-size: 20px;
+  margin: 40px auto 0;
+  text-align: center;
+  width: 400px;
+}
+
+.scores__player1--container {
+  display: inline-flex;
+  font-size: 20px;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.scores__player2--container {
+  display: inline-flex;
+  float: right;
+  font-size: 20px;
+  justify-content: space-between;
+  text-align: center;
+}
+
+%score {
+  font-size: 30px;
+  line-height: 28px;
+  text-align: center;
+  vertical-align: center;
+  visibility: hidden;
+  width: 40px;
+}
+
+#p1score {
+  @extend %score;
+  color: $p1-green;
+}
+
+#p2score {
+  @extend %score;
+  color: $p2-red;
+}
+
+%ttt__score-animation {
+  -webkit-animation-duration: 1s;
+  -webkit-animation-play-state: running;
+  animation-duration: 1s;
+  animation-play-state: running;
+}
+
+.ttt__score-animation--p1 {
+  @extend %ttt__score-animation;
+  -webkit-animation-name: bigToSmallP1;
+  animation-name: bigToSmallP1;
+}
+
+.ttt__score-animation--p2 {
+  @extend %ttt__score-animation;
+  -webkit-animation-name: bigToSmallP2;
+  animation-name: bigToSmallP2;
+}
+
+@-webkit-keyframes bigToSmallP1 {
+  0% {
+    font-size: 30px;
+  }
+
+  25% {
+    font-size: 45px;
+  }
+
+  50% {
+    color: $p1-green;
+    font-size: 60px;
+  }
+
+  75% {
+    font-size: 45px;
+  }
+
+  100% {
+    font-size: 30px;
+  }
+}
+
+@keyframes bigToSmallP1 {
+  0% {
+    font-size: 30px;
+  }
+
+  25% {
+    font-size: 45px;
+  }
+
+  50% {
+    color: $p1-green;
+    font-size: 60px;
+  }
+
+  75% {
+    font-size: 45px;
+  }
+
+  100% {
+    font-size: 30px;
+  }
+}
+
+@-webkit-keyframes bigToSmallP2 {
+  0% {
+    font-size: 30px;
+  }
+
+  25% {
+    font-size: 45px;
+  }
+
+  50% {
+    color: $p2-red;
+    font-size: 60px;
+  }
+
+  75% {
+    font-size: 45px;
+  }
+
+  100% {
+    font-size: 30px;
+  }
+}
+
+@keyframes bigToSmallP2 {
+  0% {
+    font-size: 30px;
+  }
+
+  25% {
+    font-size: 45px;
+  }
+
+  50% {
+    color: $p2-red;
+    font-size: 60px;
+  }
+
+  75% {
+    font-size: 45px;
+  }
+
+  100% {
+    font-size: 30px;
+  }
+}

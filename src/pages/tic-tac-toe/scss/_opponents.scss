@@ -1,8 +1,11 @@
 .opponents__container {
-  height: 40vh;
   margin: 20vh auto;
   padding: 5px;
   width: 100%;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   font-family: "Oswald", sans-serif;
 }
 
