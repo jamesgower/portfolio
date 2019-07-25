@@ -2,12 +2,16 @@
   height: 40vw;
   margin: 16vh auto;
   width: 440px;
+
+  @media (max-width: $s-breakpoint) {
+    width: 100vw;
+  }
 }
 
 .names__player-input {
   border: 1px solid $black !important;
   font-size: 15px !important;
-  margin-bottom: 10px !important;
+  display: inline-block;
 
   &:focus {
     box-shadow: 0 0 10px $player-button !important;
@@ -15,8 +19,9 @@
 }
 
 .names__player-label--one {
-  margin: 14px auto 5px;
-  width: 100%;
+  display: flex;
+  justify-items: center;
+  flex-direction: row;
 }
 
 .names__player-label--two {
@@ -25,12 +30,8 @@
 }
 
 .names__player-label-text {
-  float: right;
   font-size: 18px;
-  line-height: 32px;
-  margin-right: -5px;
-  text-align: right;
-  width: 100%;
+  display: inline-block;
 }
 
 .names__counter {

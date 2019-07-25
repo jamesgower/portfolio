@@ -131,21 +131,17 @@ class ChooseNames extends React.Component<NameProps, NameState> {
             player name too.
           </h2>
         )}
-        <Row className="names__player-label--one">
-          <Col xs={{ size: 4, offset: 1 }}>
-            <p className="names__player-label-text">Player 1:</p>
-          </Col>
-          <Col xs={5}>
-            <Input
-              className="names__player-input"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-                this.onPlayerNameChange(e, 1)
-              }
-              autoFocus
-              value={player1.name}
-            />
-          </Col>
-        </Row>
+        <div className="names__player-label--one">
+          <p className="names__player-label-text">Player 1:</p>
+          <Input
+            className="names__player-input"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
+              this.onPlayerNameChange(e, 1)
+            }
+            autoFocus
+            value={player1.name}
+          />
+        </div>
 
         {noPlayers === 2 && (
           <Row className="names__player-label--two">
