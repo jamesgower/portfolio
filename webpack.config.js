@@ -7,6 +7,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = () => {
+  const isProduction = process.env.NODE_ENV === "production";
   return {
     entry: ["@babel/polyfill", "./src/app.tsx"],
     resolve: {
@@ -92,14 +93,13 @@ module.exports = () => {
       }),
       new webpack.DefinePlugin({
         "process.env": {
-          TWITCH_CLIENT_ID:
-            process.env.NODE_ENV === "production"
-              ? JSON.stringify(process.env.TWITCH_CLIENT_ID)
-              : JSON.stringify(require("./keys.ts").TWITCH_CLIENT_ID),
+          TWITCH_CLIENT_ID: isProduction
+            ? JSON.stringify(process.env.TWITCH_CLIENT_ID)
+            : JSON.stringify(require("./keys.ts").TWITCH_CLIENT_ID),
         },
       }),
     ],
-    devtool: process.env.NODE_ENV === "production" ? "source-map" : "inline-source-map",
+    devtool: isProduction ? "source-map" : "inline-source-map",
     devServer: {
       contentBase: path.join(__dirname, "public"),
       historyApiFallback: true,
