@@ -1,4 +1,4 @@
 node_modules/
 .env
 dist/
-src/pages/twitch-api/keys.ts
+keys.ts
