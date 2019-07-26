@@ -11,9 +11,18 @@ $player-button: rgb(189, 146, 78);
   top: 0;
   width: 100vw;
   z-index: -2;
+  font-family: "Oswald", sans-serif !important;
 }
 
-.tic-tac-toe__grid {
+.play__container {
+  margin: 15vh auto 0;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.play__grid {
   height: 400px;
   margin: 5px auto 0;
   width: 400px;
@@ -21,16 +30,19 @@ $player-button: rgb(189, 146, 78);
   @media (max-width: $s-breakpoint) {
     height: 300px;
     width: 300px;
+    margin: auto;
   }
 }
 
-#scores__back-button {
+.play__back-button {
   cursor: pointer;
   font-size: 30px;
-  height: 50px;
-  margin: 0 auto;
+  height: 30px;
   text-align: center;
-  width: 50px;
+  width: 30px;
+  position: absolute;
+  left: 50%;
+  margin-left: -15px;
 
   &:hover {
     -moz-animation: spin 1s linear infinite;

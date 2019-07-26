@@ -24,6 +24,7 @@ import * as playerActions from "../actions/player.action";
 import * as boardActions from "../actions/board.action";
 import Tile from "./Tile";
 import ScoreBoard from "./ScoreBoard";
+import { tilesData, winCombos } from "../data/tiles.data";
 
 /**
  * TODO
@@ -50,19 +51,6 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
   private currentTurnRef = React.createRef<HTMLDivElement>();
   private player1ScoreRef = React.createRef<HTMLDivElement>();
   private player2ScoreRef = React.createRef<HTMLDivElement>();
-
-  private winCombos = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [6, 4, 2],
-  ];
-
-  private tileData = ["0", "1", "2", "3", "4", "5", "6", "7", "8"];
 
   public componentDidMount(): void {
     setTimeout((): void => {
@@ -151,7 +139,7 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
       [],
     );
     let gameWon = null;
-    for (const [index, win] of this.winCombos.entries()) {
+    for (const [index, win] of winCombos.entries()) {
       if (win.every((elem: number): boolean => plays.indexOf(elem) > -1)) {
         gameWon = {
           index,
@@ -188,7 +176,7 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
       playerTwoScore,
     } = this.props;
 
-    for (const index of this.winCombos[gameWon.index]) {
+    for (const index of winCombos[gameWon.index]) {
       document.getElementById(index).style.backgroundColor =
         gameWon.player === player1.counter ? "green" : "red";
       document.getElementById(index).className = "tile__text animated tada";
@@ -206,27 +194,6 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
     });
 
     this.currentTurnRef.current.className = "";
-  };
-
-  private onResetClick = (): void => {
-    /**
-     * Reset the score and the board when the user clicks the back arrow to
-     * signify they want to reset.
-     */
-    const { resetBoard, resetScore } = this.props;
-    setTimeout((): void => {
-      this.setState({
-        disableClicks: false,
-      });
-      resetScore();
-      resetBoard();
-
-      for (let i = 0; i < 9; i++) {
-        const index = i.toString();
-        document.getElementById(index).style.background = "none";
-        document.getElementById(index).innerText = "";
-      }
-    }, 200);
   };
 
   private emptyTiles = (): number[] => {
@@ -371,28 +338,24 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
   };
 
   public render(): JSX.Element {
-    const styles = {
-      fontFamily: "Oswald",
-    };
-
     const { disableClicks } = this.state;
     const {
-      player: { player1, player2, currentTurn },
-      player,
       board,
+      player,
+      player: { currentTurn },
     } = this.props;
     return (
-      <div style={styles}>
+      <div className="play__container">
         <ScoreBoard
           player1ScoreRef={this.player1ScoreRef}
           player2ScoreRef={this.player2ScoreRef}
-          onResetClick={this.onResetClick}
+          enableTiles={(): void => this.setState({ disableClicks: false })}
         />
         <div id="current-turn" ref={this.currentTurnRef}>
           {currentTurn}
         </div>
-        <div className="tic-tac-toe__grid">
-          {this.tileData.map(
+        <div className="play__grid">
+          {tilesData.map(
             (tile): JSX.Element => (
               <Tile
                 takeTurn={this.takeTurn}

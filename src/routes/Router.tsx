@@ -1,7 +1,7 @@
 import React from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
-import createHistory from "history/createBrowserHistory";
+import { createBrowserHistory } from "history";
 import NotFoundPage from "../pages/_misc/components/NotFoundPage";
 import LandingPage from "../pages/landing-page/components/LandingPage";
 import Portfolio from "../pages/portfolio/components/Portfolio";
@@ -17,7 +17,7 @@ import DrumMachine from "../pages/drum-machine/components/DrumMachine";
 import AboutMe from "../pages/about-me/components/AboutMe";
 import configureStore from "../pages/tic-tac-toe/store/store";
 
-export const history = createHistory();
+export const history = createBrowserHistory();
 
 const store = configureStore();
 

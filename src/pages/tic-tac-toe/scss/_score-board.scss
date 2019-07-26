@@ -3,38 +3,51 @@
   width: 460px;
   display: flex;
   justify-content: space-between;
-  border: 1px solid red;
+
+  @media (max-width: $s-breakpoint) {
+    width: 70vw;
+    margin: 0 15vw;
+  }
+
+  @media (max-width: $xs-breakpoint) {
+    width: 90vw;
+    margin: 0 5vw;
+  }
 }
 
 #current-turn {
   font-size: 20px;
-  margin: 40px auto 0;
+  margin: 40px auto 20px;
   text-align: center;
-  width: 400px;
+  width: 200px;
+
+  @media (max-width: $xs-breakpoint) {
+    margin: 20px auto 10px;
+  }
 }
 
-.scores__player1--container {
+.scores__player--container {
   display: inline-flex;
   font-size: 20px;
-  justify-content: space-between;
-  text-align: center;
-}
+  justify-content: space-evenly;
 
-.scores__player2--container {
-  display: inline-flex;
-  float: right;
-  font-size: 20px;
-  justify-content: space-between;
-  text-align: center;
+  @media (max-width: $s-breakpoint) {
+    font-size: 18px;
+  }
 }
 
 %score {
   font-size: 30px;
   line-height: 28px;
   text-align: center;
-  vertical-align: center;
   visibility: hidden;
   width: 40px;
+
+  @media (max-width: $xs-breakpoint) {
+    font-size: 28px;
+    line-height: 26px;
+    width: 26px;
+  }
 }
 
 #p1score {

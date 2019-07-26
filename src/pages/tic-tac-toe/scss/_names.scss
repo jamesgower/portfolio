@@ -9,7 +9,22 @@
 
   @media (max-width: $s-breakpoint) {
     width: 80vw;
-    margin: 20vh 10vw 0;
+    margin: 25vh 10vw 0;
+  }
+}
+
+.names__back-button {
+  cursor: pointer;
+  font-size: 30px;
+  height: 30px;
+  margin: 10px auto;
+  text-align: center;
+  width: 30px;
+
+  &:hover {
+    -moz-animation: spin 1s linear infinite;
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
   }
 }
 
@@ -26,6 +41,9 @@
 
 .names__setup-names--container {
   margin: 0 auto 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .names__player-container {
@@ -77,17 +95,20 @@
 }
 
 .names__counter-container {
-  align-content: space-between;
-  display: inline-block;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
   font-size: 16px;
   text-align: center;
-  width: 150px;
+  width: 50%;
   margin-bottom: 5px;
 }
 
 .names__counter-container--player1 {
   margin: 0 auto -20px;
-  width: 300px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
 }
 
 .names__counter-container--player2 {
@@ -105,6 +126,7 @@
 
   @media (max-width: $s-breakpoint) {
     padding: 0;
+    font-size: 18px;
   }
 }
 
@@ -117,6 +139,10 @@
 
 .names__choose-difficulty {
   text-align: center;
+
+  @media (max-width: $s-breakpoint) {
+    font-size: 15px;
+  }
 }
 
 .names__difficulty-button {

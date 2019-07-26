@@ -1,20 +1,13 @@
 import React from "react";
-import { connect } from "react-redux";
-import { Dispatch } from "redux";
+import { useDispatch } from "react-redux";
 import { Button } from "reactstrap";
-import { setNumPlayers } from "../actions/player.action";
-import ActionTypes, {
-  SetNumPlayersAction,
-  OpponentDispatchProps,
-} from "../interfaces/actions.i";
+import { SetNumPlayersAction, SET_NUM_PLAYERS } from "../interfaces/actions.i";
 
-interface ChooseOpponentsProps {
-  setNumPlayers: Function;
-}
+const ChooseOpponents: React.SFC = (): JSX.Element => {
+  const dispatch = useDispatch();
+  const setNumPlayers = (numPlayers: number): SetNumPlayersAction =>
+    dispatch({ type: SET_NUM_PLAYERS, numPlayers });
 
-const ChooseOpponents: React.SFC<ChooseOpponentsProps> = ({
-  setNumPlayers,
-}): JSX.Element => {
   return (
     <div className="opponents__container animated fadeIn">
       <h1 className="opponents__title">Welcome to Tic-Tac-Toe!</h1>
@@ -33,7 +26,7 @@ const ChooseOpponents: React.SFC<ChooseOpponentsProps> = ({
           outline
           color="secondary"
           size="lg"
-          onClick={(): void => setNumPlayers(1)}
+          onClick={(): SetNumPlayersAction => setNumPlayers(1)}
         >
           1 Player
         </Button>
@@ -42,7 +35,7 @@ const ChooseOpponents: React.SFC<ChooseOpponentsProps> = ({
           outline
           color="secondary"
           size="lg"
-          onClick={(): void => setNumPlayers(2)}
+          onClick={(): SetNumPlayersAction => setNumPlayers(2)}
         >
           2 Player
         </Button>
@@ -51,11 +44,4 @@ const ChooseOpponents: React.SFC<ChooseOpponentsProps> = ({
   );
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>): OpponentDispatchProps => ({
-  setNumPlayers: (num: number): SetNumPlayersAction => dispatch(setNumPlayers(num)),
-});
-
-export default connect<{}, OpponentDispatchProps>(
-  null,
-  mapDispatchToProps,
-)(ChooseOpponents);
+export default ChooseOpponents;
