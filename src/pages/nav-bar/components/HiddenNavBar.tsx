@@ -2,6 +2,10 @@ import React from "react";
 import { HiddenNavState, HiddenNavProps } from "../interfaces/hiddenNavBar.i";
 import NavBar from "./NavBar";
 
+/**
+ * TODO
+ * [ ] Fix animation on sliding down
+ */
 class HiddenNavBar extends React.Component<HiddenNavProps, HiddenNavState> {
   public readonly state: HiddenNavState = {
     showNav: false,
@@ -46,11 +50,13 @@ class HiddenNavBar extends React.Component<HiddenNavProps, HiddenNavState> {
           onClick={this.onOpenNav}
         />
         {showNav && (
-          <NavBar
-            closeNav={this.onCloseNav}
-            color={color}
-            navBackground={navBackground}
-          />
+          <div className="animated slideInDown">
+            <NavBar
+              closeNav={this.onCloseNav}
+              color={color}
+              navBackground={navBackground}
+            />
+          </div>
         )}
       </div>
     );

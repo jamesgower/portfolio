@@ -35,8 +35,6 @@ require("dotenv").config();
 
 class TwitchAPI extends React.Component<{}, TwitchState> {
   public readonly state = initialState;
-  public clientID: string;
-  public clientSecret: string;
 
   public componentWillMount(): void {
     /**
@@ -54,9 +52,6 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
   }
 
   public componentDidMount(): void {
-    this.clientID = process.env.TWITCH_CLIENT_ID;
-
-    console.log(this.clientID);
     /**
      * Get all available user data by looping through all of the users
      * found in the state from componentWillMount using the getData function.
@@ -180,7 +175,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
     try {
       const res = await fetch(`https://api.twitch.tv/kraken/streams/${name}`, {
         headers: {
-          "Client-ID": this.clientID,
+          "Client-ID": process.env.TWITCH_CLIENT_ID,
         },
       });
       const result: APICall = await res.json();

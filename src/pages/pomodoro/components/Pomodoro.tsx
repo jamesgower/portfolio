@@ -97,9 +97,7 @@ class Pomodoro extends React.Component<{}, PomodoroState> {
         className="pomodoro__background"
         style={{ background: `url(${background}) no-repeat fixed center` }}
       >
-        <div className="pomodoro__nav-container">
-          <HiddenNavBar color="white" navBackground={background} />
-        </div>
+        <HiddenNavBar color="white" navBackground={background} />
         <div className="pomodoro__container animated fadeIn">
           <div className="pomodoro__title">Pomodoro Clock</div>
           <div className="pomodoro__subtitle">

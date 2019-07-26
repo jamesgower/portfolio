@@ -1,15 +1,16 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import PlayGame from "./PlayGame";
 import ChooseNames from "./ChooseNames";
 import ChooseOpponents from "./ChooseOpponents";
 import HiddenNavBar from "../../nav-bar/components/HiddenNavBar";
-import { SetupProps, AppState } from "../interfaces/components.i";
+import { AppState } from "../interfaces/components.i";
 import background from "../images/background.jpg";
 
-const Setup: React.SFC<SetupProps> = ({
-  player: { noPlayers, readyToPlay },
-}): JSX.Element => {
+const Setup: React.SFC = (): JSX.Element => {
+  const noPlayers = useSelector((state: AppState): number => state.player.noPlayers);
+  const readyToPlay = useSelector((state: AppState): boolean => state.player.readyToPlay);
+
   return (
     <>
       <HiddenNavBar color="black" navBackground={background} />
@@ -24,7 +25,7 @@ const Setup: React.SFC<SetupProps> = ({
           noPlayers === undefined ? (
             <ChooseOpponents />
           ) : (
-            <ChooseNames noPlayers={noPlayers} />
+            <ChooseNames />
           )
         ) : (
           <PlayGame />
@@ -34,6 +35,4 @@ const Setup: React.SFC<SetupProps> = ({
   );
 };
 
-const mapStateToProps = ({ player }): AppState => ({ player });
-
-export default connect<AppState>(mapStateToProps)(Setup);
+export default Setup;

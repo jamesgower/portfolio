@@ -1,7 +1,7 @@
 const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
@@ -83,7 +83,7 @@ module.exports = (env) => {
       ],
     },
     plugins: [
-      new CleanWebpackPlugin(["dist"]),
+      new CleanWebpackPlugin(),
       new MiniCssExtractPlugin({
         filename: "[name].css",
         chunkFilename: "[id].css",
@@ -93,8 +93,11 @@ module.exports = (env) => {
         favicon: "./public/images/favicon.png",
       }),
       new webpack.DefinePlugin({
-        TWITCH_CLIENT_ID: JSON.stringify(process.env.TWITCH_CLIENT_ID),
-        TWITCH_AUTHORIZATION: JSON.stringify(process.env.TWITCH_AUTHORIZATION),
+        "process.env": {
+          TWITCH_CLIENT_ID: isProduction
+            ? JSON.stringify(process.env.TWITCH_CLIENT_ID)
+            : JSON.stringify(require("./keys.ts").TWITCH_CLIENT_ID),
+        },
       }),
     ],
     devtool: isProduction ? "source-map" : "inline-source-map",

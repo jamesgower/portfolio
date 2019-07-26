@@ -33,7 +33,7 @@
   },
   "plugins": ["react", "react-redux", "@typescript-eslint", "prettier"],
   "rules": {
-    "quotes": ["warn", "double"],
+    "quotes": "off",
     "@typescript-eslint/no-var-requires": "off",
     "no-console": "off",
     "react/jsx-one-expression-per-line": "off",

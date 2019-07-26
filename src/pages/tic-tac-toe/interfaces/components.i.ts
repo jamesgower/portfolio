@@ -17,22 +17,6 @@ export interface BoardState {
   tiles: number[];
 }
 
-export interface SetupProps {
-  player: PlayerState;
-}
-
-export interface NameState {
-  player1: Player;
-  player2: Player;
-  difficulty: number;
-}
-
-export interface NameProps {
-  reset?: () => void;
-  setupPlayers?: (player1, player2, difficulty) => void;
-  noPlayers: number;
-}
-
 export interface PlayProps {
   player?: PlayerState;
   board?: BoardState;
@@ -58,8 +42,6 @@ export interface TileProps {
   id: string;
   disableClicks: boolean;
   disableTileClicks: () => void;
-  player: PlayerState;
-  board: BoardState;
   currentTurn: React.RefObject<HTMLDivElement>;
 }
 
@@ -77,4 +59,10 @@ export interface GameWon {
 export interface Move {
   index?: number;
   score?: number;
+}
+
+export interface ScoreBoardProps {
+  player1ScoreRef: React.RefObject<HTMLDivElement>;
+  player2ScoreRef: React.RefObject<HTMLDivElement>;
+  enableTiles: () => void;
 }
