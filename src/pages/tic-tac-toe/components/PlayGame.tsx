@@ -338,12 +338,11 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
   };
 
   public render(): JSX.Element {
-    const { disableClicks } = this.state;
     const {
-      board,
-      player,
       player: { currentTurn },
     } = this.props;
+    const { disableClicks } = this.state;
+
     return (
       <div className="play__container">
         <ScoreBoard
@@ -361,8 +360,6 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
                 takeTurn={this.takeTurn}
                 key={tile}
                 id={tile}
-                player={player}
-                board={board}
                 currentTurn={this.currentTurnRef}
                 takeAITurn={this.takeAITurn}
                 disableClicks={disableClicks}

@@ -88,16 +88,11 @@ const ChooseNames: React.SFC = (): JSX.Element => {
         tabIndex={0}
       />
       <div className="names__player-text-container">
-        {noPlayers === 1 ? (
-          <h2 className="names__player-text">
-            Please input your name and choose the difficulty you wish to play on.
-          </h2>
-        ) : (
-          <h2 className="names__player-text">
-            Please input your names. You can also change your counter by clicking on your
-            player name too.
-          </h2>
-        )}
+        <h2 className="names__player-text">
+          {noPlayers === 1
+            ? 'Please select a difficulty and click "Play Game" to begin, and change your name if you wish to.'
+            : 'Click "Play Game" to begin, or change your names and counters if you wish to.'}
+        </h2>
       </div>
       <div className="names__setup-names--container">
         <div className="names__player-container">
@@ -165,13 +160,7 @@ const ChooseNames: React.SFC = (): JSX.Element => {
           </div>
         </div>
       )}
-      <div
-        className={
-          noPlayers === 1
-            ? "names__counter-container--player1"
-            : "names__counter-container--player2"
-        }
-      >
+      <div className="names__counter-container--player">
         <div
           onClick={onChangeCounter}
           role="button"

@@ -50,11 +50,13 @@ class HiddenNavBar extends React.Component<HiddenNavProps, HiddenNavState> {
           onClick={this.onOpenNav}
         />
         {showNav && (
-          <NavBar
-            closeNav={this.onCloseNav}
-            color={color}
-            navBackground={navBackground}
-          />
+          <div className="animated slideInDown">
+            <NavBar
+              closeNav={this.onCloseNav}
+              color={color}
+              navBackground={navBackground}
+            />
+          </div>
         )}
       </div>
     );

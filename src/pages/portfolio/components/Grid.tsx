@@ -22,6 +22,8 @@ import GridState from "../interfaces/grid.i";
 	[ ]	Add loading page
   [ ] Readme.md for all GitHub projects with relevant installation & usage info
   [ ] Add imgBot back to compress images.
+  [ ] Finish styling all components for mobile
+  [ ] Add HiddenNavBar to Twitch component
 */
 
 export class Grid extends React.Component<{}, GridState> {
@@ -95,7 +97,7 @@ export class Grid extends React.Component<{}, GridState> {
     {
       img: ticTacToeImage,
       title: "Tic-Tac-Toe with AI",
-      subtitle: "Built with React, Redux, TypeScript & SCSS",
+      subtitle: "Built with React, Redux (with Hooks!), TypeScript & SCSS",
       featured: true,
       href: "/portfolio/tic-tac-toe",
       color: "#999285",

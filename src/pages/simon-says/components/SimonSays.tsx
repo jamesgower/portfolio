@@ -261,11 +261,9 @@ class SimonSays extends Component<{}, SimonSaysState> {
   };
 
   private wait = (sec: number): Promise<void> =>
-    new Promise(
-      (resolve): void => {
-        setTimeout(resolve, sec);
-      },
-    );
+    new Promise((resolve): void => {
+      setTimeout(resolve, sec);
+    });
 
   public render(): JSX.Element {
     const { switchOn, userTurn, playingGame, currentStreak, strictMode } = this.state;

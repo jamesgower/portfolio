@@ -43,6 +43,7 @@
   margin: 0 auto 20px;
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
 }
 
@@ -50,7 +51,7 @@
   display: flex;
   justify-content: center;
   flex-direction: row;
-  margin: 10px auto 0;
+  margin: 16px auto 8px;
 
   @media (max-width: $s-breakpoint) {
     justify-content: space-evenly;
@@ -104,7 +105,7 @@
   margin-bottom: 5px;
 }
 
-.names__counter-container--player1 {
+.names__counter-container--player {
   margin: 0 auto -20px;
   width: 100%;
   display: flex;

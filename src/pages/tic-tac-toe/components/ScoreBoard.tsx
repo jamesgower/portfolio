@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { ScoreBoardProps } from "../interfaces/scoreboard.i";
-import { AppState, Player } from "../interfaces/components.i";
+import { AppState, ScoreBoardProps, PlayerState } from "../interfaces/components.i";
 import {
   ResetScoreAction,
   RESET_SCORE,
@@ -14,8 +13,9 @@ const ScoreBoard: React.SFC<ScoreBoardProps> = ({
   player2ScoreRef,
   enableTiles,
 }): JSX.Element => {
-  const player1 = useSelector((state: AppState): Player => state.player.player1);
-  const player2 = useSelector((state: AppState): Player => state.player.player2);
+  const { player1, player2 } = useSelector(
+    (state: AppState): PlayerState => state.player,
+  );
 
   const dispatch = useDispatch();
   const resetScore = (): ResetScoreAction => dispatch({ type: RESET_SCORE });
