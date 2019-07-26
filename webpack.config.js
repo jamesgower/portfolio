@@ -6,9 +6,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
-module.exports = (env) => {
-  const isProduction = env === "production";
-
+module.exports = () => {
+  const isProduction = process.env.NODE_ENV === "production";
   return {
     entry: ["@babel/polyfill", "./src/app.tsx"],
     resolve: {
