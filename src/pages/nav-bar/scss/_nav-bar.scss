@@ -42,6 +42,10 @@ $about-me-active: rgba(0, 162, 255, 0.6);
   border: 1px solid;
 }
 
+.navbar-toggler {
+  margin-top: 8px !important;
+}
+
 .nav__toggle--black {
   @extend %nav__toggle;
   border-color: black !important;

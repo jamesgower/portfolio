@@ -9,6 +9,7 @@
   top: 30px;
   width: 40px;
   z-index: 3;
+  text-align: center;
 
   &:focus {
     outline: none;
@@ -18,4 +19,6 @@
 .hidden-nav__container {
   height: 70px;
   width: 100%;
+  position: relative;
+  z-index: 5;
 }
