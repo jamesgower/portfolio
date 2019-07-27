@@ -1,8 +1,15 @@
 .names__container {
   margin: 20vh auto;
   height: 50vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   font-family: "Oswald", sans-serif;
   width: 440px;
@@ -22,7 +29,6 @@
   width: 30px;
 
   &:hover {
-    -moz-animation: spin 1s linear infinite;
     -webkit-animation: spin 1s linear infinite;
     animation: spin 1s linear infinite;
   }
@@ -35,6 +41,7 @@
   width: 200px !important;
 
   &:focus {
+    -webkit-box-shadow: 0 0 10px $player-button !important;
     box-shadow: 0 0 10px $player-button !important;
   }
 }
@@ -42,18 +49,34 @@
 .names__setup-names--container {
   margin: 0 auto 20px;
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
   justify-content: space-evenly;
 }
 
 .names__player-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
   flex-direction: row;
   margin: 16px auto 8px;
 
   @media (max-width: $s-breakpoint) {
+    -webkit-box-pack: space-evenly;
+    -ms-flex-pack: space-evenly;
     justify-content: space-evenly;
   }
 }
@@ -96,8 +119,15 @@
 }
 
 .names__counter-container {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
   font-size: 16px;
   text-align: center;
@@ -108,7 +138,10 @@
 .names__counter-container--player {
   margin: 0 auto -20px;
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-pack: distribute;
   justify-content: space-around;
 }
 
@@ -132,7 +165,11 @@
 }
 
 .names__button-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
   margin: 20px auto;
   width: 220px;

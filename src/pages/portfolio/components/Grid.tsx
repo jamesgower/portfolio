@@ -180,7 +180,7 @@ export class Grid extends React.Component<{}, GridState> {
     this.animations = window.setInterval((): void => {
       this.randomAnimation();
     }, 8000);
-    document.getElementById("grid").className = "animated fadeIn";
+    document.getElementById("grid").classList.add("animated", "fadeIn");
   };
 
   public componentWillUnmount = (): void => {
@@ -224,14 +224,7 @@ export class Grid extends React.Component<{}, GridState> {
         >
           <Calculator />
         </Modal>
-        <div
-          id="grid"
-          className="container"
-          style={{
-            paddingBottom: "40px",
-            margin: "0 20px",
-          }}
-        >
+        <div id="grid" className="grid__container">
           <div className="row">
             {this.tilesData.map(
               (tile, i): JSX.Element => {
@@ -239,8 +232,8 @@ export class Grid extends React.Component<{}, GridState> {
                   <div
                     className={
                       tile.featured
-                        ? "gridTile col-md-7 col-6"
-                        : "gridTile col-md-5 col-6"
+                        ? "grid__tile col-md-7 col-6"
+                        : "grid__tile col-md-5 col-6"
                     }
                     key={i}
                   >
@@ -251,7 +244,7 @@ export class Grid extends React.Component<{}, GridState> {
                       }}
                       role="button"
                       tabIndex={0}
-                      className="border"
+                      className="grid__border"
                       onClick={
                         tile.click
                           ? tile.click
@@ -269,8 +262,8 @@ export class Grid extends React.Component<{}, GridState> {
                           color: tile.color,
                         }}
                       />
-                      <p className="tile--title">{tile.title}</p>
-                      <p className="tile--subtitle">{tile.subtitle}</p>
+                      <p className="grid__tile--title">{tile.title}</p>
+                      <p className="grid__tile--subtitle">{tile.subtitle}</p>
                     </div>
                   </div>
                 );

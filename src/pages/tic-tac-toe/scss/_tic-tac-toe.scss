@@ -3,8 +3,6 @@ $p2-red: #f00;
 $player-button: rgb(189, 146, 78);
 
 .tic-tac-toe__container {
-  -moz-background-size: cover;
-  -webkit-background-size: cover;
   background-size: cover;
   height: 100vh;
   position: fixed;
@@ -17,8 +15,15 @@ $player-button: rgb(189, 146, 78);
 .play__container {
   margin: 15vh auto 0;
   height: 70vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
   justify-content: space-evenly;
 }
 
@@ -45,15 +50,8 @@ $player-button: rgb(189, 146, 78);
   margin-left: -15px;
 
   &:hover {
-    -moz-animation: spin 1s linear infinite;
     -webkit-animation: spin 1s linear infinite;
     animation: spin 1s linear infinite;
-  }
-}
-
-@-moz-keyframes spin {
-  100% {
-    -moz-transform: rotate(-360deg);
   }
 }
 

@@ -166,6 +166,7 @@ class SimonSays extends Component<{}, SimonSaysState> {
   };
 
   private onStartGame = async (): Promise<void> => {
+    clearTimeout(this.failTimer);
     this.setState({ userTurn: true, playingGame: true });
     this.getColour();
     await this.wait(500);
@@ -248,6 +249,7 @@ class SimonSays extends Component<{}, SimonSaysState> {
   };
 
   private onResetGame = (): void => {
+    console.log("reset");
     clearTimeout(this.failTimer);
     this.setState({
       currentStreak: 0,
@@ -325,15 +327,7 @@ class SimonSays extends Component<{}, SimonSaysState> {
                     className={
                       playingGame ? "simon__start-button--pressed" : "simon__start-button"
                     }
-                    onClick={
-                      !playingGame
-                        ? switchOn
-                          ? this.onStartGame
-                          : undefined
-                        : switchOn && playingGame
-                        ? this.onResetGame
-                        : undefined
-                    }
+                    onClick={switchOn && !playingGame ? this.onStartGame : undefined}
                     role="button"
                     tabIndex={0}
                   />

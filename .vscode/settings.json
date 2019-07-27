@@ -128,16 +128,7 @@
   "editor.suggestSelection": "first",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "python.jediEnabled": false,
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "emmet.triggerExpansionOnTab": true,
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "auto-close-tag.activationOnLanguage": [
     "xml",
     "php",
@@ -162,13 +153,7 @@
   "files.associations": {
     "*.js": "javascriptreact"
   },
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "sync.gist": "c65152220a517b8267efe700abbdd1bd",
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "prettier.proseWrap": "never",
   "editor.fontSize": 12,
   "terminal.integrated.fontSize": 12,
@@ -178,9 +163,6 @@
     "editor.defaultFormatter": "yzhang.markdown-all-in-one"
   },
   "window.zoomLevel": 0,
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "terminal.integrated.rendererType": "dom",
   "eslint.alwaysShowStatus": true,
   "eslint.validate": [
@@ -217,5 +199,6 @@
     "tab.activeBorder": "#98C379",
     "tab.activeModifiedBorder": "#61afef",
     "tab.inactiveModifiedBorder": "#d55fde"
-  }
+  },
+  "eslint.autoFixOnSave": true
 }
