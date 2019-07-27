@@ -83,7 +83,7 @@ export class Grid extends React.Component<{}, GridState> {
       title: "Simon Says",
       subtitle: "Built with React, TypeScript, SCSS & Howler",
       href: "/portfolio/simon-says",
-      color: "#57C139",
+      color: "#1970a6",
       class: "fas fa-trophy",
     },
     {

@@ -102,7 +102,6 @@ const ChooseNames: React.SFC = (): JSX.Element => {
             onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
               onPlayerNameChange(e, 1)
             }
-            autoFocus
             value={player1.name}
           />
         </div>

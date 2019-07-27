@@ -8,10 +8,13 @@ $about-me-hover: rgb(0, 162, 255);
 $about-me-active: rgba(0, 162, 255, 0.6);
 
 .nav__container {
-  margin: 0 auto;
   width: 100vw;
   padding: 0 15vw;
   z-index: 3;
+
+  @media (max-width: 767px) {
+    padding: 0 40px;
+  }
 }
 
 %nav__link {
@@ -23,10 +26,13 @@ $about-me-active: rgba(0, 162, 255, 0.6);
   &:hover {
     text-decoration: none;
   }
+
+  @media (max-width: 767px) {
+    padding: 8px;
+  }
 }
 
 .nav__collapsed {
-  width: 100%;
   z-index: 4;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -45,13 +51,17 @@ $about-me-active: rgba(0, 162, 255, 0.6);
 
 .navbar-toggler {
   margin-top: 8px !important;
+
+  @media (max-width: 767px) {
+    margin-top: 0 !important;
+  }
 }
 
 .nav__toggle--black {
   @extend %nav__toggle;
   border-color: black !important;
 
-  > .navbar-toggler-icon {
+  .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.7)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
   }
 }
@@ -60,7 +70,7 @@ $about-me-active: rgba(0, 162, 255, 0.6);
   @extend %nav__toggle;
   border-color: white !important;
 
-  > .navbar-toggler-icon {
+  .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.7)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
   }
 }
@@ -71,10 +81,18 @@ $about-me-active: rgba(0, 162, 255, 0.6);
   text-align: center;
   text-decoration: none;
   margin: 0;
+
+  @media (max-width: 767px) {
+    font-size: 14px;
+  }
 }
 
 %nav__active {
   padding-bottom: 16px;
+
+  @media (max-width: 767px) {
+    padding-bottom: 10px;
+  }
 }
 
 .nav__home {
@@ -131,6 +149,11 @@ $about-me-active: rgba(0, 162, 255, 0.6);
 
 .nav__logo {
   height: 74px;
+
+  @media (max-width: 767px) {
+    height: 52px;
+    padding: 5px 0;
+  }
 }
 
 .nav__separator {
@@ -152,7 +175,13 @@ $about-me-active: rgba(0, 162, 255, 0.6);
 
 .nav__close-button {
   position: absolute;
-  right: 30px;
   top: 30px;
+  right: 30px;
   font-size: 30px;
+
+  @media (max-width: 767px) {
+    font-size: 20px;
+    right: 20px;
+    top: 22px;
+  }
 }

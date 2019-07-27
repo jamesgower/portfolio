@@ -180,11 +180,12 @@ class SimonSays extends Component<{}, SimonSaysState> {
 
   private onFlashColours = async (): Promise<void> => {
     const { combination } = this.state;
+    console.log(combination);
+
     for (const colour in combination) {
       if ({}.hasOwnProperty.call(combination, colour)) {
         const { switchOn, speed } = this.state;
         if (!switchOn) return this.onResetGame();
-        console.log(combination[colour]);
         await this.wait(speed);
         await this.onFlashColour(combination[colour]);
       }
@@ -249,7 +250,6 @@ class SimonSays extends Component<{}, SimonSaysState> {
   };
 
   private onResetGame = (): void => {
-    console.log("reset");
     clearTimeout(this.failTimer);
     this.setState({
       currentStreak: 0,
@@ -274,7 +274,7 @@ class SimonSays extends Component<{}, SimonSaysState> {
         className="simon__background"
         style={{ background: `url(${background}) no-repeat center center fixed` }}
       >
-        <HiddenNavBar color="black" navBackground={background} />
+        <HiddenNavBar color="white" navBackground={background} />
         <Container>
           <div className="simon__container">
             <div
