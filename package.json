@@ -5,12 +5,12 @@
   "author": "James Gower",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node server/server.ts --node-args=\"--max-old-space-size=6144\"",
+    "start": "ts-node server/server.ts",
     "build": "webpack -p --mode production",
     "client": "webpack-dev-server --mode development --devtool inline-source-map --open --hot",
     "dev": "concurrently \"npm run client\" \"npm run start\"",
     "test": "cross-env NODE_ENV=test jest --config=jest.config.json --watchAll",
-    "heroku-postbuild": "webpack -p"
+    "heroku-postbuild": "webpack -p --mode production"
   },
   "engines": {
     "node": "12.0.0"
