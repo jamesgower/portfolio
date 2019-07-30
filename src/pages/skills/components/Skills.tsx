@@ -4,7 +4,7 @@ import { Container, Row, Col } from "reactstrap";
 import NavBar from "../../nav-bar/components/NavBar";
 
 const Skills: React.SFC = (): JSX.Element => (
-  <div className="background">
+  <div className="content-background">
     <Headroom>
       <NavBar color="black" />
     </Headroom>
@@ -21,29 +21,26 @@ const Skills: React.SFC = (): JSX.Element => (
         </p>
         <Row>
           <Col md={6}>
-            <h3 className="skills--frontEndHeader">
-              <i className="fas fa-pen-fancy skills__icon" />
-              Front-End
-            </h3>
+            <h3 className="skills--frontEndHeader">Front-End</h3>
             <p className="skills--text">
               I prefer to build applications using the <b>React</b> framework alongside{" "}
               <b>TypeScript</b> or occasionally JavaScript.
             </p>
             <p className="skills--text">
-              All of the projects is transpiled to ES5 JavaScript by using <b>Babel</b>,
-              so it can be run in all browsers, including older versions of Internet
-              Explorer.
+              All of the projects use <b>Babel</b> to transpile TypeScript/ES6 JavaScript
+              to ES5 JavaScript, so it can be run in all browsers, including older
+              versions of Internet Explorer.
             </p>
             <p className="skills--text">
-              All projects are styled using the CSS preprocessors <b>SASS/SCSS</b>,
-              alongside responsive CSS frameworks, such as <b>Bootstrap</b> or{" "}
-              <b>Reactstrap</b>. I also tend to write mobile-first CSS, which is a
-              must-have design concept in our mobile driven generation.
+              All projects are styled using the CSS pre-processors <b>SASS</b>, alongside
+              responsive CSS frameworks, such as <b>Bootstrap</b> or <b>Reactstrap</b>. I
+              also tend to write mobile-first CSS, which is a must-have design concept in
+              our mobile driven generation.
             </p>
             <p className="skills--text">
               All of the projects is bundled using <b>Webpack 4</b>, with additional
               plugins used for cleaning, optimising, configuring and transpiling the
-              project.
+              projects assets.
             </p>
           </Col>
           <Col md={6}>

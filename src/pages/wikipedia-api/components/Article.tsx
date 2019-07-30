@@ -1,5 +1,5 @@
 import React from "react";
-import ArticleProps from "../interfaces/article.i";
+import { ArticleProps } from "../interfaces/article.i";
 
 export default class Article extends React.Component<ArticleProps, {}> {
   private extractRef = React.createRef<HTMLDivElement>();
@@ -17,7 +17,13 @@ export default class Article extends React.Component<ArticleProps, {}> {
         role="button"
         tabIndex={0}
         className="article__container animated fadeInLeft"
-        onClick={(): Window => window.open(link, "_blank")}
+        onClick={
+          link
+            ? (): Window => {
+                return window.open(link, "_blank", "noopener noreferrer");
+              }
+            : undefined
+        }
       >
         <h1 className="article__title">{title}</h1>
         <div className="article__extract" ref={this.extractRef} />

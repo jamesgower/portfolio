@@ -2,15 +2,9 @@ $input-focus: #80abfc;
 $wiki-blue: #4569ac;
 
 .wiki__container {
-  -moz-background-size: cover;
-  -webkit-background-size: cover;
-  background-size: cover;
   font-family: Franklin "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   height: 100%;
-  margin-bottom: -1px;
   min-height: 100vh;
-  padding-bottom: 1px;
-  top: 0;
   width: 100%;
   z-index: -1;
 }
@@ -25,6 +19,14 @@ $wiki-blue: #4569ac;
   transition: margin-top 1s;
 }
 
+.wiki__container-animation--small {
+  @extend %wiki__box-container;
+  margin-top: 0px !important;
+  height: 50px;
+  border: 2px solid black !important;
+  transition: margin-top 1s, height 1s;
+}
+
 .wiki__box-container,
 %wiki__box-container {
   background-color: $white;
@@ -36,6 +38,11 @@ $wiki-blue: #4569ac;
   margin: 30vh auto 0;
   padding: 16px;
   width: 60%;
+
+  @media (max-width: $s-breakpoint) {
+    width: calc(100% - 20px);
+    margin: 20vh auto 0;
+  }
 }
 
 .wiki__search-input {
@@ -44,7 +51,7 @@ $wiki-blue: #4569ac;
   color: $wiki-blue;
   font-size: 14px;
   height: 40px;
-  margin: 10px;
+  margin: 12px 10px 10px;
   padding: 6px 4px;
   text-align: center;
   width: 100%;
@@ -52,6 +59,13 @@ $wiki-blue: #4569ac;
   &:focus {
     box-shadow: 0 0 8px $input-focus;
     outline: none;
+  }
+
+  @media (max-width: $xs-breakpoint) {
+    border: 2px solid $wiki-blue;
+    border-radius: 14px;
+    font-size: 12px;
+    height: 28px;
   }
 }
 
@@ -63,6 +77,12 @@ $wiki-blue: #4569ac;
   position: absolute;
   right: 20px;
   top: 23px;
+
+  @media (max-width: $xs-breakpoint) {
+    font-size: 16px;
+    top: 17px;
+    right: 16px;
+  }
 }
 
 .wiki__search-container {
@@ -72,6 +92,11 @@ $wiki-blue: #4569ac;
   margin: 0 auto;
   position: relative;
   width: 300px;
+
+  @media (max-width: $xs-breakpoint) {
+    width: 100%;
+    height: 50px;
+  }
 }
 
 .wiki__search-btn {
@@ -82,7 +107,18 @@ $wiki-blue: #4569ac;
   position: absolute;
   top: 0;
   width: 60px;
-  z-index: 100;
+  z-index: 2;
+
+  @media (max-width: $xs-breakpoint) {
+    height: 40px;
+    margin: 5px 5px 5px -20px;
+    width: 40px;
+  }
+}
+
+.wiki__search-btn--small {
+  @extend .wiki__search-btn;
+  position: relative;
 }
 
 .wiki__text {
@@ -91,6 +127,10 @@ $wiki-blue: #4569ac;
   font-size: 18px;
   margin: 0 !important;
   text-align: center;
+
+  @media (max-width: $s-breakpoint) {
+    font-size: 13px;
+  }
 }
 
 .wiki__text > a {
@@ -105,6 +145,10 @@ $wiki-blue: #4569ac;
 .wiki__search-results-container {
   margin: 0 auto 40px;
   width: 80%;
+
+  @media (max-width: $xs-breakpoint) {
+    width: 100%;
+  }
 }
 
 .wiki__pagination-container {

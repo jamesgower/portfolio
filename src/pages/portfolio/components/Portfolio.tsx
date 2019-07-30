@@ -5,7 +5,7 @@ import GridLayout from "./Grid";
 import NavBar from "../../nav-bar/components/NavBar";
 
 const Portfolio: React.SFC = (): JSX.Element => (
-  <div className="background">
+  <div className="content-background">
     <Headroom>
       <NavBar color="black" />
     </Headroom>

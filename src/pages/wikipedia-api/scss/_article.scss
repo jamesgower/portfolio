@@ -24,8 +24,16 @@ $border-yellow: #ff0;
   color: $wiki-blue;
   font-size: 20px;
   font-weight: bolder;
+
+  @media (max-width: $xs-breakpoint) {
+    font-size: 16px;
+  }
 }
 
 .article__extract {
   font-size: 14px;
+
+  @media (max-width: $xs-breakpoint) {
+    font-size: 12px;
+  }
 }

@@ -1,10 +1,11 @@
 import React from "react";
-import { Container, Pagination, PaginationItem, PaginationLink } from "reactstrap";
+import { Container } from "reactstrap";
 import HiddenNavBar from "../../nav-bar/components/HiddenNavBar";
 import Article from "./Article";
-import WikiState from "../interfaces/wikipediaAPI.i";
-import ArticleProps from "../interfaces/article.i";
+import { WikiState } from "../interfaces/wikipediaAPI.i";
+import { ArticleProps } from "../interfaces/article.i";
 import background from "../images/background.png";
+import PageControl from "./PageControl";
 
 class WikipediaAPI extends React.Component<object, WikiState> {
   private initialState = {
@@ -13,6 +14,8 @@ class WikipediaAPI extends React.Component<object, WikiState> {
     searchResults: null,
     pageNum: 1,
     closeNav: false,
+    noArticleFound: false,
+    desktop: window.innerWidth > 740,
   };
 
   private pageRanges: object = {
@@ -29,18 +32,29 @@ class WikipediaAPI extends React.Component<object, WikiState> {
   private searchInputRef = React.createRef<HTMLInputElement>();
   private searchBtnRef = React.createRef<HTMLImageElement>();
   private cancelBtnRef = React.createRef<HTMLElement>();
+  private wikiRandomRef = React.createRef<HTMLDivElement>();
+  private wikiTextRef = React.createRef<HTMLDivElement>();
+  private searchContainerRef = React.createRef<HTMLDivElement>();
 
   public componentDidMount(): void {
     this.searchBtnRef.current.addEventListener("click", this.onSearchClick);
     this.cancelBtnRef.current.addEventListener("click", this.onCancelClick);
     this.searchInputRef.current.addEventListener("keydown", this.onEnterPress);
+    window.addEventListener("resize", this.handleWindowDimension);
   }
 
   public componentWillUnmount(): void {
     this.searchBtnRef.current.removeEventListener("click", this.onSearchClick);
     this.cancelBtnRef.current.removeEventListener("click", this.onCancelClick);
     this.searchInputRef.current.removeEventListener("keydown", this.onEnterPress);
+    window.addEventListener("resize", this.handleWindowDimension);
   }
+
+  private handleWindowDimension = (): void => {
+    if (window.innerWidth > 740) {
+      this.setState({ desktop: true });
+    }
+  };
 
   private onSearchClick = (): void => {
     const searchBtn = this.searchBtnRef.current;
@@ -53,8 +67,7 @@ class WikipediaAPI extends React.Component<object, WikiState> {
       searchBtn.classList.add("hidden");
     }, 400);
     setTimeout((): void => {
-      cancelBtn.className =
-        "wiki__search-clear-btn fa fa-times-circle animated fadeIn delay-1s";
+      cancelBtn.className = "wiki__search-clear-btn fa fa-times-circle animated fadeIn";
     }, 1000);
   };
 
@@ -76,8 +89,15 @@ class WikipediaAPI extends React.Component<object, WikiState> {
   };
 
   private onEnterPress = (e: KeyboardEvent): void => {
+    const { desktop } = this.state;
     if (e.keyCode === 13) {
-      this.handleSearch();
+      if (!desktop) {
+        this.wikiRandomRef.current.classList.add("animated", "fadeOut");
+        this.wikiTextRef.current.classList.add("animated", "fadeOut");
+      }
+      setTimeout((): void => {
+        this.handleSearch();
+      }, 500);
     }
   };
 
@@ -86,7 +106,7 @@ class WikipediaAPI extends React.Component<object, WikiState> {
   };
 
   private handleSearch = async (): Promise<void> => {
-    const { searchQuery } = this.state;
+    const { searchQuery, noArticleFound, desktop } = this.state;
     try {
       const res = await fetch(
         `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&list=search&utf8=1&srsearch=${searchQuery}&srlimit=50&origin=*`,
@@ -97,10 +117,22 @@ class WikipediaAPI extends React.Component<object, WikiState> {
       const { query } = await res.json();
       const searchFormatted = searchQuery.replace(" ", "%20");
       if (query.searchinfo.totalhits === 0) {
-        this.setState({ searchResults: null, searchQuery: "" });
+        this.setState({
+          searchResults: null,
+          searchQuery: "",
+          noArticleFound: true,
+        });
       }
       const box = this.boxContainerRef.current;
-      box.className = "wiki__container-animation";
+      if (desktop) {
+        box.className = "wiki__container-animation";
+      } else {
+        box.className = "wiki__container-animation--small";
+        this.searchContainerRef.current.style.marginTop = "42px";
+      }
+
+      this.onCancelClick();
+      if (noArticleFound) return;
       const searchResults: ArticleProps[] = [];
       query.search.forEach(
         async (result): Promise<void> => {
@@ -122,7 +154,7 @@ class WikipediaAPI extends React.Component<object, WikiState> {
         },
       );
       setTimeout((): void => {
-        this.setState({ searchQuery: "", searchResults });
+        this.setState({ searchQuery: "", searchResults, noArticleFound: false });
       }, 500);
     } catch (err) {
       throw new Error(`Something went wrong!: \n
@@ -131,7 +163,7 @@ class WikipediaAPI extends React.Component<object, WikiState> {
   };
 
   public render(): JSX.Element {
-    const { searchQuery, searchResults, pageNum } = this.state;
+    const { searchQuery, searchResults, pageNum, noArticleFound } = this.state;
     return (
       <div
         className="wiki__container"
@@ -142,12 +174,16 @@ class WikipediaAPI extends React.Component<object, WikiState> {
         </div>
         <Container>
           <div className="wiki__box-container" ref={this.boxContainerRef}>
-            <p className="wiki__text">
-              <a href="https://en.wikipedia.org/wiki/Special:Random">
+            <div className="wiki__text" ref={this.wikiRandomRef}>
+              <a
+                href="https://en.wikipedia.org/wiki/Special:Random"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
                 Click <b>here</b> for a random article
               </a>
-            </p>
-            <div className="wiki__search-container">
+            </div>
+            <div className="wiki__search-container" ref={this.searchContainerRef}>
               <input
                 className="wiki__search-input hidden"
                 ref={this.searchInputRef}
@@ -167,12 +203,20 @@ class WikipediaAPI extends React.Component<object, WikiState> {
                 ref={this.cancelBtnRef}
               />
             </div>
-            <p className="wiki__text">
+            <div className="wiki__text" ref={this.wikiTextRef}>
               Or click the search button to search for a particular article.
               <br />
               Press &apos;Enter&apos; to begin search.
-            </p>
+            </div>
           </div>
+
+          {noArticleFound && (
+            <Article
+              pageid={0}
+              title="No Results"
+              extract="No search results found, Please search for another article."
+            />
+          )}
           {searchResults !== null && (
             <div className="wiki__search-results-container">
               {searchResults
@@ -182,65 +226,10 @@ class WikipediaAPI extends React.Component<object, WikiState> {
                     <Article key={result.pageid} {...result} />
                   ),
                 )}
-              <div className="wiki__pagination-container">
-                <Pagination size="lg" aria-label="Article Page Navigation">
-                  <PaginationItem>
-                    <PaginationLink
-                      first
-                      onClick={(): void => this.setState({ pageNum: 1 })}
-                    />
-                  </PaginationItem>
-                  <PaginationItem disabled={pageNum <= 1}>
-                    <PaginationLink
-                      previous
-                      onClick={(): void => {
-                        const newPage: number = pageNum - 1;
-                        this.setState({ pageNum: newPage });
-                      }}
-                    />
-                  </PaginationItem>
-                  <PaginationItem active={pageNum === 1}>
-                    <PaginationLink onClick={(): void => this.setState({ pageNum: 1 })}>
-                      1
-                    </PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem active={pageNum === 2}>
-                    <PaginationLink onClick={(): void => this.setState({ pageNum: 2 })}>
-                      2
-                    </PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem active={pageNum === 3}>
-                    <PaginationLink onClick={(): void => this.setState({ pageNum: 3 })}>
-                      3
-                    </PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem active={pageNum === 4}>
-                    <PaginationLink onClick={(): void => this.setState({ pageNum: 4 })}>
-                      4
-                    </PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem active={pageNum === 5}>
-                    <PaginationLink onClick={(): void => this.setState({ pageNum: 5 })}>
-                      5
-                    </PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem disabled={pageNum >= 5}>
-                    <PaginationLink
-                      next
-                      onClick={(): void => {
-                        const newPage = pageNum + 1;
-                        this.setState({ pageNum: newPage });
-                      }}
-                    />
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink
-                      last
-                      onClick={(): void => this.setState({ pageNum: 5 })}
-                    />
-                  </PaginationItem>
-                </Pagination>
-              </div>
+              <PageControl
+                pageNum={pageNum}
+                setPageNum={(pageNum: number): void => this.setState({ pageNum })}
+              />
             </div>
           )}
         </Container>

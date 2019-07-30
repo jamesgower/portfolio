@@ -35,16 +35,12 @@
 }
 
 .skills--frontEndHeader {
-  font-size: 2.6rem;
   padding: 10px;
   text-align: center;
-  border-bottom: 3px solid red;
+  border-bottom: 2px solid red;
   display: block;
   margin: 0 auto;
-
-  @media screen and (min-width: 280px) {
-    font-size: 2.2rem;
-  }
+  font-size: 2.2rem;
 
   @media screen and (min-width: 880px) {
     font-size: 2.4rem;
@@ -57,17 +53,17 @@
 
 .skills--backEndHeader {
   @extend .skills--frontEndHeader;
-  border-bottom: 3px solid #007bff;
+  border-bottom: 2px solid #007bff;
 }
 
 .skills--designHeader {
   @extend .skills--frontEndHeader;
-  border-bottom: 3px solid #509200;
+  border-bottom: 2px solid #509200;
 }
 
 .skills--toolsHeader {
   @extend .skills--frontEndHeader;
-  border-bottom: 3px solid #12b894;
+  border-bottom: 2px solid #12b894;
 }
 
 .skills--text {
@@ -75,7 +71,7 @@
   text-align: justify;
 
   @media screen and (min-width: 280px) {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 
   @media screen and (min-width: 580px) {

@@ -1,11 +1,13 @@
 import React from "react";
 import { Howl, Howler } from "howler";
+import HiddenNavBar from "../../nav-bar/components/HiddenNavBar";
 import DrumMachineState from "../interfaces/drumMachine.i";
+import background from "../images/background.jpeg";
 
 class DrumMachine extends React.Component<{}, DrumMachineState> {
   public readonly state: DrumMachineState = {
     kit: "heater",
-    power: true,
+    power: false,
     current: "Heater Kit",
   };
 
@@ -65,6 +67,8 @@ class DrumMachine extends React.Component<{}, DrumMachineState> {
     src: [require("../audio/Brk_Snr.mp3")],
   });
 
+  private textFlash: number;
+
   public componentDidMount(): void {
     document.addEventListener("keydown", this.onKeyDown);
   }
@@ -116,7 +120,8 @@ class DrumMachine extends React.Component<{}, DrumMachineState> {
     setTimeout((): void => {
       tile.classList.remove("drum__flash");
     }, 100);
-    setTimeout((): void => {
+    clearTimeout(this.textFlash);
+    this.textFlash = window.setTimeout((): void => {
       document.getElementById("current").innerHTML = "";
     }, 1000);
   };
@@ -163,7 +168,8 @@ class DrumMachine extends React.Component<{}, DrumMachineState> {
     const volume: number = parseInt(e.target.value, 10);
     Howler.volume(volume / 100);
     document.getElementById("current").innerHTML = `Volume: ${volume}`;
-    setTimeout((): void => {
+    clearTimeout(this.textFlash);
+    this.textFlash = window.setTimeout((): void => {
       document.getElementById("current").innerHTML = "";
     }, 1000);
   };
@@ -207,112 +213,120 @@ class DrumMachine extends React.Component<{}, DrumMachineState> {
   public render(): JSX.Element {
     const { current } = this.state;
     return (
-      <div className="drum__container">
-        <div className="drum__machine">
-          <div>
-            <div className="drum__row">
-              <div
-                className="drum__button"
-                role="button"
-                tabIndex={0}
-                id="1"
-                onClick={(): void => this.onFlashKey("1")}
-              >
-                Q
-              </div>
-              <div
-                className="drum__button"
-                role="button"
-                tabIndex={0}
-                id="2"
-                onClick={(): void => this.onFlashKey("2")}
-              >
-                W
-              </div>
-              <div
-                className="drum__button"
-                role="button"
-                tabIndex={0}
-                id="3"
-                onClick={(): void => this.onFlashKey("3")}
-              >
-                E
-              </div>
-            </div>
-            <div className="drum__row">
-              <div
-                className="drum__button"
-                role="button"
-                tabIndex={0}
-                id="4"
-                onClick={(): void => this.onFlashKey("4")}
-              >
-                A
-              </div>
-              <div
-                className="drum__button"
-                role="button"
-                tabIndex={0}
-                id="5"
-                onClick={(): void => this.onFlashKey("5")}
-              >
-                S
-              </div>
-              <div
-                className="drum__button"
-                role="button"
-                tabIndex={0}
-                id="6"
-                onClick={(): void => this.onFlashKey("6")}
-              >
-                D
-              </div>
-            </div>
-            <div className="drum__row">
-              <div
-                className="drum__button"
-                role="button"
-                tabIndex={0}
-                id="7"
-                onClick={(): void => this.onFlashKey("7")}
-              >
-                Z
-              </div>
-              <div
-                className="drum__button"
-                role="button"
-                tabIndex={0}
-                id="8"
-                onClick={(): void => this.onFlashKey("8")}
-              >
-                X
-              </div>
-              <div
-                className="drum__button"
-                role="button"
-                tabIndex={0}
-                id="9"
-                onClick={(): void => this.onFlashKey("9")}
-              >
-                C
-              </div>
-            </div>
+      <div
+        className="drum__background"
+        style={{ background: `url(${background}) no-repeat center center fixed` }}
+      >
+        <HiddenNavBar color="white" navBackground={background} />
+        <div className="drum__container">
+          <div className="drum__info">
+            <h3 className="drum__title">Drum Machine</h3>
+            <p className="drum__text">
+              Turn on the drum machine and use the keyboard or press the buttons to make
+              some music!
+            </p>
+            <p className="drum__text">
+              You can change the volume with the slider, or change the kit to a
+              &quot;Heater&quot; kit or &quot;Smooth Piano&quot; kit with the toggle.
+            </p>
           </div>
-          <div className="drum__display">
-            <div>
+          <div className="drum__machine">
+            <div className="drum__button-container">
+              <div className="drum__row">
+                <div
+                  className="drum__button"
+                  role="button"
+                  tabIndex={0}
+                  id="1"
+                  onClick={(): void => this.onFlashKey("1")}
+                >
+                  Q
+                </div>
+                <div
+                  className="drum__button"
+                  role="button"
+                  tabIndex={0}
+                  id="2"
+                  onClick={(): void => this.onFlashKey("2")}
+                >
+                  W
+                </div>
+                <div
+                  className="drum__button"
+                  role="button"
+                  tabIndex={0}
+                  id="3"
+                  onClick={(): void => this.onFlashKey("3")}
+                >
+                  E
+                </div>
+              </div>
+              <div className="drum__row">
+                <div
+                  className="drum__button"
+                  role="button"
+                  tabIndex={0}
+                  id="4"
+                  onClick={(): void => this.onFlashKey("4")}
+                >
+                  A
+                </div>
+                <div
+                  className="drum__button"
+                  role="button"
+                  tabIndex={0}
+                  id="5"
+                  onClick={(): void => this.onFlashKey("5")}
+                >
+                  S
+                </div>
+                <div
+                  className="drum__button"
+                  role="button"
+                  tabIndex={0}
+                  id="6"
+                  onClick={(): void => this.onFlashKey("6")}
+                >
+                  D
+                </div>
+              </div>
+              <div className="drum__row">
+                <div
+                  className="drum__button"
+                  role="button"
+                  tabIndex={0}
+                  id="7"
+                  onClick={(): void => this.onFlashKey("7")}
+                >
+                  Z
+                </div>
+                <div
+                  className="drum__button"
+                  role="button"
+                  tabIndex={0}
+                  id="8"
+                  onClick={(): void => this.onFlashKey("8")}
+                >
+                  X
+                </div>
+                <div
+                  className="drum__button"
+                  role="button"
+                  tabIndex={0}
+                  id="9"
+                  onClick={(): void => this.onFlashKey("9")}
+                >
+                  C
+                </div>
+              </div>
+            </div>
+            <div className="drum__controls-container">
               <div className="drum__slider-container">
                 <p className="drum__label">Power</p>
-                <label
-                  htmlFor="power"
-                  className="drum__switch"
-                  style={{
-                    marginBottom: "20px",
-                  }}
-                >
+                <label htmlFor="power" className="drum__switch">
                   <input
                     id="power"
                     type="checkbox"
-                    defaultChecked
                     onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
                       this.setState({ power: e.target.checked })
                     }
@@ -320,34 +334,34 @@ class DrumMachine extends React.Component<{}, DrumMachineState> {
                   <span className="drum__slider" />
                 </label>
               </div>
-            </div>
-            <h4 id="current" className="drum__current">
-              {current}
-            </h4>
-            <input
-              className="drum__volume"
-              type="range"
-              min="0"
-              max="100"
-              step="1"
-              onChange={this.onSetVolume}
-            />
-            <div className="drum__slider-container">
-              <p className="drum__label">Kit</p>
-              <label htmlFor="soundBoard" className="drum__switch">
-                <input
-                  id="soundBoard"
-                  type="checkbox"
-                  defaultChecked
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                    this.setState({
-                      kit: e.target.checked ? "heater" : "piano",
-                      current: e.target.checked ? "Heater Kit" : "Smooth Piano Kit",
-                    });
-                  }}
-                />
-                <span className="drum__slider" />
-              </label>
+              <h4 id="current" className="drum__current">
+                {current}
+              </h4>
+              <input
+                className="drum__volume"
+                type="range"
+                min="0"
+                max="100"
+                step="1"
+                onChange={this.onSetVolume}
+              />
+              <div className="drum__slider-container">
+                <p className="drum__label">Kit</p>
+                <label htmlFor="soundBoard" className="drum__switch">
+                  <input
+                    id="soundBoard"
+                    type="checkbox"
+                    defaultChecked
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
+                      this.setState({
+                        kit: e.target.checked ? "heater" : "piano",
+                        current: e.target.checked ? "Heater Kit" : "Smooth Piano Kit",
+                      });
+                    }}
+                  />
+                  <span className="drum__slider" />
+                </label>
+              </div>
             </div>
           </div>
         </div>

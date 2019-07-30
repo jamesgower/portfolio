@@ -1,9 +1,5 @@
 import React from "react";
-import { TypedOptions } from "typed.js";
-
-const Typed = require("typed.js");
-
-const { TypedOptions } = Typed;
+import Typed, { TypedOptions } from "typed.js";
 
 interface TypedProps {
   strings: string[];
@@ -11,10 +7,8 @@ interface TypedProps {
 }
 
 class TypedJSText extends React.Component<TypedProps, {}> {
-  private nameRef = React.createRef<HTMLDivElement>();
-  private skillsRef = React.createRef<HTMLDivElement>();
-  public nameTyped: TypedJSText;
-  public skillsTyped: TypedJSText;
+  public nameTyped: Typed;
+  public skillsTyped: Typed;
 
   public componentDidMount(): void {
     const { strings, name } = this.props;
@@ -34,15 +28,20 @@ class TypedJSText extends React.Component<TypedProps, {}> {
       showCursor: false,
     };
 
-    this.nameTyped = new Typed(this.nameRef.current, nameOptions);
-    this.skillsTyped = new Typed(this.skillsRef.current, skillOptions);
+    this.nameTyped = new Typed("#name-typed", nameOptions);
+    this.skillsTyped = new Typed("#skills-typed", skillOptions);
+  }
+
+  public componentWillUnmount(): void {
+    this.nameTyped.destroy();
+    this.skillsTyped.destroy();
   }
 
   public render(): JSX.Element {
     return (
       <div className="typed__container">
-        <div ref={this.nameRef} className="typed__text" />
-        <div ref={this.skillsRef} className="typed__text" />
+        <div id="name-typed" className="typed__text" />
+        <div id="skills-typed" className="typed__text" />
       </div>
     );
   }

@@ -8,7 +8,7 @@ import Modal from "./Modal";
 
 const AboutMe: React.FC = (): JSX.Element => {
   return (
-    <div className="background">
+    <div className="content-background">
       <Headroom>
         <NavBar color="black" />
       </Headroom>
