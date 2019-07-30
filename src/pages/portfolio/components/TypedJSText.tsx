@@ -28,8 +28,10 @@ class TypedJSText extends React.Component<TypedProps, {}> {
       showCursor: false,
     };
 
-    this.nameTyped = new Typed("#name-typed", nameOptions);
-    this.skillsTyped = new Typed("#skills-typed", skillOptions);
+    setTimeout((): void => {
+      this.nameTyped = new Typed("#name-typed", nameOptions);
+      this.skillsTyped = new Typed("#skills-typed", skillOptions);
+    }, 1000);
   }
 
   public componentWillUnmount(): void {
@@ -40,7 +42,7 @@ class TypedJSText extends React.Component<TypedProps, {}> {
   public render(): JSX.Element {
     return (
       <div className="typed__container">
-        <div id="name-typed" className="typed__text" />
+        <div id="name-typed" className="typed__text animated slideInLeft delay-2s" />
         <div id="skills-typed" className="typed__text" />
       </div>
     );

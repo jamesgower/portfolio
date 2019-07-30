@@ -2,10 +2,6 @@ import React from "react";
 import { HiddenNavState, HiddenNavProps } from "../interfaces/hiddenNavBar.i";
 import NavBar from "./NavBar";
 
-/**
- * TODO
- * [ ] Fix animation on sliding down
- */
 class HiddenNavBar extends React.Component<HiddenNavProps, HiddenNavState> {
   public readonly state: HiddenNavState = {
     showNav: false,

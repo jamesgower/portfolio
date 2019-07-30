@@ -1,6 +1,8 @@
 @import "./base/settings";
 @import "./base/base";
 @import "./../pages/_misc/scss/loader";
+@import "./../pages/portfolio/scss/landing-page";
+@import "./../pages/portfolio/scss/typed";
 @import "./../pages/portfolio/scss/portfolio";
 @import "./../pages/portfolio/scss/grid";
 @import "./../pages/calculator/scss/calculator";
@@ -30,6 +32,4 @@
 @import "./../pages/nav-bar/scss/hidden-nav-bar";
 @import "./../pages/pomodoro/scss/pomodoro";
 @import "./../pages/pomodoro/scss/arrows";
-@import "./../pages/landing-page/scss/landing-page";
-@import "./../pages/landing-page/scss/typed";
 @import "./../pages/_misc/scss/not-found";

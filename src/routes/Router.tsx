@@ -3,7 +3,7 @@ import { Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import { createBrowserHistory } from "history";
 import NotFoundPage from "../pages/_misc/components/NotFoundPage";
-import LandingPage from "../pages/landing-page/components/LandingPage";
+import LandingPage from "../pages/portfolio/components/LandingPage";
 import Portfolio from "../pages/portfolio/components/Portfolio";
 import Pomodoro from "../pages/pomodoro/components/Pomodoro";
 import PlayTicTacToe from "../pages/tic-tac-toe/components/Setup";
@@ -25,8 +25,7 @@ const AppRouter: React.SFC = (): JSX.Element => (
   <Router history={history}>
     <Provider store={store}>
       <Switch>
-        <Route path="/" component={LandingPage} exact />
-        <Route path="/portfolio" exact component={Portfolio} />
+        <Route path="/" component={Portfolio} exact />
         <Route path="/portfolio/pomodoro" component={Pomodoro} />
         <Route path="/portfolio/calculator" component={Calculator} />
         <Route path="/portfolio/wikipedia" component={WikipediaAPI} />
