@@ -26,9 +26,6 @@ module.exports = () => {
       moduleIds: "hashed",
       minimizer: [
         new TerserPlugin({
-          cache: true,
-          parallel: true,
-          sourceMap: true,
           extractComments: true,
         }),
         new OptimizeCSSAssetsPlugin({}),
@@ -47,10 +44,6 @@ module.exports = () => {
     },
     module: {
       rules: [
-        // {
-        //   test: /\.tsx?$/,
-        //   loader: "awesome-typescript-loader",
-        // },
         {
           test: /\.tsx?$/,
           loader: "babel-loader",
