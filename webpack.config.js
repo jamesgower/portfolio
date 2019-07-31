@@ -5,7 +5,6 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
 module.exports = () => {
   const isProduction = process.env.NODE_ENV === "production";
@@ -93,7 +92,6 @@ module.exports = () => {
             : JSON.stringify(require("./keys.ts").TWITCH_CLIENT_ID),
         },
       }),
-      new BundleAnalyzerPlugin(),
     ],
     devtool: isProduction ? "source-map" : "inline-source-map",
     devServer: {
