@@ -1,10 +1,10 @@
 import React, { Component, MouseEvent } from "react";
-import math from "mathjs";
+import { evaluate } from "mathjs";
 import CalculatorState from "../interfaces/calculator.i";
 /* 
 	TODO
 	[x] Complete calculator
-	[ ] Put calculator component in react modal on click from portfolio 
+	[x] Put calculator component in react modal on click from portfolio 
 	[x] add CE functionality
 */
 class Calculator extends Component<{}, CalculatorState> {
@@ -86,7 +86,7 @@ class Calculator extends Component<{}, CalculatorState> {
     const { equation, currentNumArray, previousNums } = this.state;
     if (equation !== undefined) {
       equation.push(currentNumArray.join(""));
-      const answer = math.eval(equation.join(""));
+      const answer = evaluate(equation.join(""));
       previousNums.push(answer);
       const { length } = answer.toString().split("");
       if (length > 6 && length < 10) {

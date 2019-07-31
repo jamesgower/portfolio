@@ -1,6 +1,6 @@
 {
   // @sync-ignore
-  "terminal.integrated.shell.windows": "D:\\Program Files\\Git\\bin\\bash.exe",
+  "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
 
   "workbench.iconTheme": "material-icon-theme",
   "editor.fontFamily": "Fira Code",

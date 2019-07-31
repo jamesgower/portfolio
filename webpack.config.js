@@ -3,60 +3,59 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
 module.exports = () => {
   const isProduction = process.env.NODE_ENV === "production";
   return {
-    entry: ["@babel/polyfill", "./src/app.tsx"],
+    entry: ["./src/app.tsx"],
     resolve: {
       extensions: [".ts", ".tsx", ".js", ".jsx"],
     },
     output: {
       path: path.join(__dirname, "dist"),
-      filename: "bundle.min.js",
+      filename: "[name].bundle.js",
       publicPath: "/",
     },
     node: {
       fs: "empty",
     },
     optimization: {
+      moduleIds: "hashed",
       minimizer: [
-        new TerserPlugin({
-          cache: true,
-          parallel: true,
-          sourceMap: true,
+        new UglifyJsPlugin({
           extractComments: true,
         }),
         new OptimizeCSSAssetsPlugin({}),
       ],
-      //   splitChunks: {
-      //     cacheGroups: {
-      //       styles: {
-      //         name: "styles",
-      //         test: /\.css$/,
-      //         chunks: "all",
-      //         enforce: true,
-      //       },
-      //     },
-      //   },
+      runtimeChunk: "single",
+      splitChunks: {
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: "vendors",
+            chunks: "all",
+          },
+        },
+        chunks: "all",
+      },
     },
     module: {
       rules: [
+        // {
+        //   test: /\.tsx?$/,
+        //   loader: "awesome-typescript-loader",
+        // },
         {
           test: /\.tsx?$/,
-          loader: "awesome-typescript-loader",
+          loader: "babel-loader",
         },
         {
           test: /\.js$/,
-          exclude: /node_modules/,
-          use: {
-            loader: "babel-loader",
-            options: {
-              presets: ["@babel/preset-env", "@babel/preset-react"],
-            },
-          },
+          use: ["source-map-loader"],
+          enforce: "pre",
         },
         {
           test: /\.(sa|sc|c)ss$/,
@@ -98,6 +97,7 @@ module.exports = () => {
             : JSON.stringify(require("./keys.ts").TWITCH_CLIENT_ID),
         },
       }),
+      new BundleAnalyzerPlugin(),
     ],
     devtool: isProduction ? "source-map" : "inline-source-map",
     devServer: {
