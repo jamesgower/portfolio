@@ -3,7 +3,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
@@ -25,7 +25,10 @@ module.exports = () => {
     optimization: {
       moduleIds: "hashed",
       minimizer: [
-        new UglifyJsPlugin({
+        new TerserPlugin({
+          cache: true,
+          parallel: true,
+          sourceMap: true,
           extractComments: true,
         }),
         new OptimizeCSSAssetsPlugin({}),
