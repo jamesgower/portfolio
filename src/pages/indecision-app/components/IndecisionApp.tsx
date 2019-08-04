@@ -83,7 +83,7 @@ export default class IndecisionApp extends React.Component<{}, IndecisionState> 
     return (
       <div className="indecision-app">
         <Header />
-        <div className="container">
+        <div className="indecision__container">
           <Action hasOptions={options.length > 0} handlePick={this.handlePick} />
           <div className="widget">
             <Options
