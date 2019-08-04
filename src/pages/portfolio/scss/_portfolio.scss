@@ -11,14 +11,6 @@ $main-blue: rgb(36, 9, 156);
   box-shadow: none !important;
 }
 
-.headroom {
-  width: 100%;
-  background: $off-white;
-  border-bottom: 1px solid lightgray !important;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-}
-
 .portfolio__container {
   width: 80%;
   margin: 0 auto 30px;
@@ -32,9 +24,9 @@ $main-blue: rgb(36, 9, 156);
 .portfolio__title {
   text-align: center;
   margin: 0 auto 20px;
-  padding: 8px;
   font-weight: bold;
   color: $main-blue;
+  padding: 40px 20px 20px;
 
   @media (max-width: $xs-breakpoint) {
     font-size: 20px;

@@ -6,7 +6,7 @@ import AppRouter from "./routes/Router";
 import LoadingPage from "./pages/_misc/components/LoadingPage";
 import "normalize.css/normalize.css";
 import "react-dates/lib/css/_datepicker.css";
-import "./stylesheets/styles.scss";
+import "./scss/styles.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 declare global {

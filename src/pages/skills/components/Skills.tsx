@@ -1,13 +1,10 @@
 import React from "react";
-import Headroom from "react-headroom";
 import { Container, Row, Col } from "reactstrap";
 import NavBar from "../../nav-bar/components/NavBar";
 
 const Skills: React.SFC = (): JSX.Element => (
   <div className="content-background">
-    <Headroom>
-      <NavBar color="black" />
-    </Headroom>
+    <NavBar color="black" />
     <Container className="content-container" style={{ paddingBottom: "20px" }}>
       <h1 className="skills--title" style={{ marginBottom: "24px" }}>
         Skills

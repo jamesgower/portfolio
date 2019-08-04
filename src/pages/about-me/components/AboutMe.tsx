@@ -1,5 +1,4 @@
 import React from "react";
-import Headroom from "react-headroom";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
 import ContactForm from "./ContactForm";
@@ -9,9 +8,7 @@ import Modal from "./Modal";
 const AboutMe: React.FC = (): JSX.Element => {
   return (
     <div className="content-background">
-      <Headroom>
-        <NavBar color="black" />
-      </Headroom>
+      <NavBar color="black" />
 
       <Container className="content-container">
         <div className="about__container">

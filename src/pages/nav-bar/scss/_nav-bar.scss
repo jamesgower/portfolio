@@ -11,16 +11,23 @@ $about-me-active: rgba(0, 162, 255, 0.6);
   width: 100vw;
   padding: 0 15vw;
   z-index: 3;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 
   @media (max-width: 767px) {
     padding: 0 40px;
   }
 }
 
+.headroom {
+  background: #ebecf0;
+}
+
 %nav__link {
+  cursor: pointer;
   border-bottom: 3px solid transparent;
   margin: 0 6px;
-  padding: 12px;
+  padding: 8px;
   z-index: 3;
 
   &:hover {
@@ -29,6 +36,15 @@ $about-me-active: rgba(0, 162, 255, 0.6);
 
   @media (max-width: 767px) {
     padding: 8px;
+  }
+
+  font-family: "Oswald", sans-serif;
+  font-size: $font-size-medium;
+  text-align: center;
+  text-decoration: none;
+
+  @media (max-width: 767px) {
+    font-size: 14px;
   }
 }
 
@@ -74,21 +90,8 @@ $about-me-active: rgba(0, 162, 255, 0.6);
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.7)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
   }
 }
-
-.nav__link-text {
-  font-family: "Oswald", sans-serif;
-  font-size: $font-size-medium;
-  text-align: center;
-  text-decoration: none;
-  margin: 0;
-
-  @media (max-width: 767px) {
-    font-size: 14px;
-  }
-}
-
 %nav__active {
-  padding-bottom: 16px;
+  @extend %nav__link;
 
   @media (max-width: 767px) {
     padding-bottom: 10px;
@@ -119,6 +122,9 @@ $about-me-active: rgba(0, 162, 255, 0.6);
 .nav__portfolio--active {
   @extend %nav__active;
   border-bottom: 3px solid $portfolio-active;
+  &:hover {
+    border-bottom: 3px solid $portfolio-hover;
+  }
 }
 
 .nav__skills {
@@ -158,10 +164,11 @@ $about-me-active: rgba(0, 162, 255, 0.6);
 
 .nav__separator {
   -webkit-margin-before: 26px;
-  border-bottom: 3px solid lightgray;
-  position: fixed;
-  right: 15vw;
-  width: 61vw;
+  height: 3px;
+  background: lightgray;
+  position: absolute;
+  right: 0;
+  left: 20%;
   z-index: 3;
 
   @media (max-width: $md-breakpoint) {

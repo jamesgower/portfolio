@@ -4,8 +4,9 @@ import scrollToElement from "scroll-to-element";
 import TypedJSText from "./TypedJSText";
 import meImg from "../images/displayImg.jpg";
 import background from "../images/background.jpeg";
+import { LandingPageProps } from "../interfaces/landing.i";
 
-const LandingPage: React.SFC = (): JSX.Element => (
+const LandingPage: React.SFC<LandingPageProps> = ({ setActive }): JSX.Element => (
   <div
     className="landing__container"
     style={{ background: `url(${background}) no-repeat center center` }}
@@ -26,9 +27,11 @@ const LandingPage: React.SFC = (): JSX.Element => (
     <Button
       outline
       size="lg"
-      color="secondary"
       className="landing__open-button animated slideInRight"
-      onClick={(): void => scrollToElement("#current-work")}
+      onClick={(): void => {
+        scrollToElement("#portfolio-nav");
+        setActive();
+      }}
     >
       Open Portfolio
     </Button>

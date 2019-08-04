@@ -6,10 +6,11 @@
     "commonjs": true
   },
   "extends": [
-    "plugin:react-redux/recommended",
     "eslint:recommended",
+    "plugin:react-redux/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
+    "airbnb",
     "airbnb-typescript",
     "prettier/@typescript-eslint",
     "prettier/babel",

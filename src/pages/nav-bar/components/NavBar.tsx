@@ -1,4 +1,5 @@
 import React from "react";
+import scrollToElement from "scroll-to-element";
 import { NavLink } from "react-router-dom";
 import { Collapse, Navbar, NavbarToggler, Nav } from "reactstrap";
 import { NavBarProps, NavBarState } from "../interfaces/navBar.i";
@@ -7,6 +8,7 @@ import logo from "../images/logo.png";
 /**
  * TODO
  * [ ] Fix X so it fits inline with navbar toggler
+ * [ ] Change classes so it puts the hex color in rather than __black/__white
  */
 
 class NavBar extends React.Component<NavBarProps, NavBarState> {
@@ -74,7 +76,7 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
 
   public render(): JSX.Element {
     const { isOpen, hiddenNav, collapsed } = this.state;
-    const { navBackground, color } = this.props;
+    const { navBackground, color, active } = this.props;
     return (
       <>
         <div
@@ -106,32 +108,35 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
             <NavLink to="/">
               <img src={logo} alt="JG Web Developer" className="nav__logo" />
             </NavLink>
-            <hr className="nav__separator" />
+            <div className="nav__separator" />
             <NavbarToggler
               className={`nav__toggle--${color}`}
               onClick={this.onNavToggle}
             />
             <Collapse isOpen={isOpen} navbar>
               <Nav className="ml-auto" navbar>
-                <NavLink
-                  className="nav__home"
-                  exact
-                  to="/"
-                  activeClassName="nav__home--active"
+                <div
+                  className={active === "home" ? "nav__home--active" : "nav__home"}
+                  role="button"
+                  tabIndex={0}
+                  ref={this.homeLink}
+                  onClick={(): void => scrollToElement(".landing__container")}
                 >
-                  <p ref={this.homeLink} className="nav__link-text">
-                    Home
-                  </p>
-                </NavLink>
-                <NavLink
-                  className="nav__portfolio"
-                  to="/portfolio"
-                  activeClassName="nav__portfolio--active"
+                  Home
+                </div>
+                <div
+                  className={
+                    active === "portfolio" ? "nav__portfolio--active" : "nav__portfolio"
+                  }
+                  role="button"
+                  tabIndex={0}
+                  ref={this.portfolioLink}
+                  onClick={(): void => scrollToElement(".content-container")}
                 >
                   <p ref={this.portfolioLink} className="nav__link-text">
                     Portfolio
                   </p>
-                </NavLink>
+                </div>
                 <NavLink
                   className="nav__skills"
                   to="/skills"

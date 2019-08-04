@@ -2,6 +2,7 @@ export interface NavBarProps {
   closeNav?: () => void;
   color: string;
   navBackground?: string;
+  active: string;
 }
 
 export interface NavBarState {
