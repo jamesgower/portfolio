@@ -7,6 +7,19 @@
   background: #ebecf0;
 }
 
+.form__text-container {
+  margin: 0 auto;
+  width: 60%;
+
+  @media screen and (max-width: $s-breakpoint) {
+    width: 75%;
+  }
+
+  @media screen and (max-width: $xs-breakpoint) {
+    width: 90%;
+  }
+}
+
 .form--inputs {
   font-size: 18px !important;
   width: 100%;

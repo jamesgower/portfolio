@@ -98,7 +98,7 @@ class ContactForm extends Component<{}, FormState> {
     } = this.state;
     return (
       <>
-        <div className="about__text-container" id="contact-form">
+        <div className="form__text-container" id="contact-form">
           <h1 className="about__title">CONTACT ME</h1>
           <p className="about__text">
             I&apos;d love to hear from you, whether it be for a quote or a bit of extra
