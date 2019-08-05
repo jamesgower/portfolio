@@ -210,13 +210,10 @@ $blue: rgb(0, 0, 175);
   margin-top: 2px;
   font-family: "Oswald", sans-serif;
   text-align: center;
-
-  @media (max-width: $md-breakpoint) {
-    font-size: 10px;
-  }
+  font-size: 10px;
 
   @media (max-width: $s-breakpoint) {
-    font-size: 7px;
+    font-size: 8px;
   }
 }
 

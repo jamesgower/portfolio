@@ -167,7 +167,7 @@ class ContactForm extends Component<{}, FormState> {
               size="lg"
               style={{
                 margin: "0 auto",
-                fontSize: "1.7em",
+                fontSize: "18px",
                 display: "block",
               }}
               onClick={this.validateDetails}
