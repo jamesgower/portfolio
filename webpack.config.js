@@ -14,8 +14,8 @@ module.exports = () => {
       extensions: [".ts", ".tsx", ".js", ".jsx"],
     },
     output: {
-      path: path.join(__dirname, "dist"),
-      filename: "[name].bundle.js",
+      filename: "[name].[contenthash].js",
+      path: path.resolve(__dirname, "dist"),
       publicPath: "/",
     },
     node: {
@@ -58,19 +58,19 @@ module.exports = () => {
       ],
     },
     optimization: {
-      moduleIds: "hashed",
       minimizer: [
         new TerserPlugin({
           extractComments: true,
         }),
         new OptimizeCSSAssetsPlugin({}),
       ],
+      moduleIds: "hashed",
       runtimeChunk: "single",
       splitChunks: {
         cacheGroups: {
           vendor: {
             test: /[\\/]node_modules[\\/]/,
-            name: "[name].vendors",
+            name: "vendors",
             chunks: "all",
           },
         },
