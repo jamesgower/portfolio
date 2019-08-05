@@ -4,7 +4,7 @@
   margin: 30px auto;
   border-radius: 5px;
   padding: 20px;
-  border: 1px solid black;
+  background: #ebecf0;
 }
 
 .form--inputs {
@@ -15,7 +15,7 @@
 
   &::-ms-input-placeholder {
     /* Microsoft Edge */
-    color: $gray !important;
+    color: rgb(173, 173, 173) !important;
     font-style: italic !important;
     font-size: 14px;
     line-height: 20px !important;
@@ -23,7 +23,7 @@
 
   &::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: $gray !important;
+    color: rgb(173, 173, 173) !important;
     font-style: italic !important;
     opacity: 1; /* Firefox */
     font-size: 14px;
@@ -48,6 +48,6 @@
 
 .form--labels {
   font-weight: 700;
-  font-size: 1.8em !important;
+  font-size: 16px !important;
   color: $grey;
 }

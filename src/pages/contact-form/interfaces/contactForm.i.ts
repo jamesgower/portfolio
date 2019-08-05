@@ -1,4 +1,4 @@
-interface AboutMeState {
+export interface FormState {
   name: string;
   email: string;
   details: string;
@@ -8,5 +8,3 @@ interface AboutMeState {
   emailError: boolean;
   detailsError: boolean;
 }
-
-export { AboutMeState as default };

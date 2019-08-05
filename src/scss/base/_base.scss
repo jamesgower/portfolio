@@ -25,17 +25,12 @@ button {
   font-weight: bold;
 }
 
-.content-background {
-  background: $off-white; // ?
-}
-
 .content-container {
   width: 80vw;
-  margin-bottom: 0;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   background: white;
   height: 100%;
+  padding-bottom: 40px;
 
   @media screen and (max-width: 576px) {
     width: 100vw;

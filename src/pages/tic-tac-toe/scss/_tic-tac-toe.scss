@@ -15,8 +15,8 @@ $player-button: rgb(189, 146, 78);
 .play__container {
   margin: 15vh auto 0;
   height: 70vh;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  -webkit-display: -webkit-box;
+  -ms-display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;

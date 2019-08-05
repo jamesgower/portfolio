@@ -1,66 +1,78 @@
 import React, { useEffect, useState } from "react";
 import Headroom from "react-headroom";
-import GridLayout from "./Grid";
+import { Container } from "reactstrap";
+import scrollToElement from "scroll-to-element";
+import ContactForm from "../../contact-form/components/ContactForm";
+import AboutMe from "../../about-me/components/AboutMe";
+import Projects from "./Projects";
 import NavBar from "../../nav-bar/components/NavBar";
-import LandingPage from "./LandingPage";
+import LandingPage from "../../landing-page/components/LandingPage";
+import background from "../images/background.jpeg";
 
 const Portfolio: React.SFC = (): JSX.Element => {
   const [showNav, setShowNav] = useState(false);
   const [activePosition, setActivePosition] = useState("home");
 
-  const handleResize = (): void => {
-    const nav = document.getElementById("content");
-    if (window.scrollY > nav.offsetTop + nav.offsetHeight) {
-      setShowNav(true);
-      setActivePosition("portfolio");
-    } else {
+  useEffect((): void => {
+    const { hash } = window.location;
+    if (hash) {
+      scrollToElement(hash);
+      history.replaceState(null, null, " ");
+    }
+  }, []);
+
+  const onScroll = (): void => {
+    const home = document.getElementById("landing-page");
+    const about = document.getElementById("about-me");
+    const work = document.getElementById("current-work");
+    const contact = document.getElementById("contact-form");
+
+    if (home.getBoundingClientRect().bottom >= 0) {
       setShowNav(false);
+      setActivePosition("home");
+    }
+    if (about.getBoundingClientRect().top <= 0) {
+      setShowNav(true);
+      setActivePosition("about");
+    }
+    if (work.getBoundingClientRect().top <= 0) {
+      setActivePosition("portfolio");
+    }
+    if (contact.getBoundingClientRect().top <= 0) {
+      setActivePosition("contact");
     }
   };
 
   useEffect((): (() => void) => {
-    window.addEventListener("scroll", handleResize);
+    window.addEventListener("scroll", onScroll);
     return (): void => {
-      window.removeEventListener("scroll", handleResize);
+      window.removeEventListener("scroll", onScroll);
     };
   });
 
   return (
-    <div className="portfolio__main-container">
-      <LandingPage setActive={(): void => setActivePosition("portfolio")} />
-      <div id="content" />
+    <div
+      className="portfolio__main-container"
+      style={{
+        background: `url(${background}) no-repeat center center fixed`,
+      }}
+    >
+      <LandingPage setActive={(): void => setActivePosition("about")} />
       {showNav ? (
         <Headroom>
-          <NavBar color="black" active={activePosition} />
+          <NavBar home color="black" active={activePosition} />
         </Headroom>
       ) : (
         <div className="headroom" id="portfolio-nav">
-          <NavBar color="black" active={activePosition} />
+          <NavBar home color="black" active={activePosition} />
         </div>
       )}
-      <div className="content-background">
-        <div className="container content-container">
-          <div className="portfolio__container" id="current-work">
-            <h1 className="portfolio__title">MY WORK</h1>
-            <p className="portfolio__text">
-              Here are a few examples of the projects that I have created during my
-              Software Development journey. Most of the front-end of these projects are
-              normally built using <b>React</b> with <b>TypeScript</b> and occasionally{" "}
-              <b>JavaScript</b>, whilst the back-end is normally built using{" "}
-              <b>Node.JS</b>, alongside a database such as <b>MongoDB</b> or{" "}
-              <b>FireBase</b>.
-            </p>
-            <p className="portfolio__text">
-              Hover over each of the tiles to see which technologies were used for the
-              project, and optionally click the &quot;View Source&quot; button to view the
-              source code on GitHub. Click on the tile to open the project - larger
-              projects are hosted on Heroku&apos;s free plan, so may take a few moments to
-              load.
-            </p>
-          </div>
-          <GridLayout />
-        </div>
-      </div>
+
+      <Container className="content-container">
+        <AboutMe />
+        <Projects />
+        <ContactForm />
+      </Container>
     </div>
   );
 };

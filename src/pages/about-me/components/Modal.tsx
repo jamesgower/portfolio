@@ -21,21 +21,6 @@ import responsiveCert from "../images/responsive-cert.png";
 const CertificationModal: React.FC = (): JSX.Element => {
   const items: CarouselImage[] = [
     {
-      src: frontEndCert,
-      altText: "FreeCodeCamp Front-End Libraries Certificate",
-      caption: "FreeCodeCamp Certification for Front-End Libraries (React, Redux, SASS)",
-    },
-    {
-      src: jsAlgorithmCert,
-      altText: "FreeCodeCamp JavaScript Algorithms Certificate",
-      caption: "FreeCodeCamp Certification for JavaScript Algorithms",
-    },
-    {
-      src: responsiveCert,
-      altText: "FreeCodeCamp Responsive Web Design Certificate",
-      caption: "FreeCodeCamp Certification for Responsive Web Design",
-    },
-    {
       src: nodeCert,
       altText: "The Complete Node.JS Developer Course Certificate",
       caption: "Andrew Mead's Complete Node.JS Developer Course Certification",
@@ -62,6 +47,21 @@ const CertificationModal: React.FC = (): JSX.Element => {
       altText: "The Complete React Web Developer Course Certificate",
       caption:
         "Andrew Mead's Complete React Web Developer Course (with Redux) Certification",
+    },
+    {
+      src: frontEndCert,
+      altText: "FreeCodeCamp Front-End Libraries Certificate",
+      caption: "FreeCodeCamp Certification for Front-End Libraries (React, Redux, SASS)",
+    },
+    {
+      src: jsAlgorithmCert,
+      altText: "FreeCodeCamp JavaScript Algorithms Certificate",
+      caption: "FreeCodeCamp Certification for JavaScript Algorithms",
+    },
+    {
+      src: responsiveCert,
+      altText: "FreeCodeCamp Responsive Web Design Certificate",
+      caption: "FreeCodeCamp Certification for Responsive Web Design",
     },
   ];
 

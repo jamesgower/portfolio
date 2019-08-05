@@ -1,6 +1,6 @@
 import React from "react";
 import scrollToElement from "scroll-to-element";
-import { NavLink } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import { Collapse, Navbar, NavbarToggler, Nav } from "reactstrap";
 import { NavBarProps, NavBarState } from "../interfaces/navBar.i";
 import logo from "../images/logo.png";
@@ -20,10 +20,10 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
 
   private navBarRef = React.createRef<HTMLDivElement>();
   private closeBtnRef = React.createRef<HTMLImageElement>();
-  private homeLink = React.createRef<HTMLParagraphElement>();
-  private portfolioLink = React.createRef<HTMLParagraphElement>();
-  private skillsLink = React.createRef<HTMLParagraphElement>();
-  private aboutMeLink = React.createRef<HTMLParagraphElement>();
+  private homeLink = React.createRef<HTMLDivElement>();
+  private portfolioLink = React.createRef<HTMLDivElement>();
+  private contactLink = React.createRef<HTMLDivElement>();
+  private aboutMeLink = React.createRef<HTMLDivElement>();
 
   public componentWillMount(): void {
     const { closeNav } = this.props;
@@ -35,7 +35,7 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
 
     this.homeLink.current.style.color = color;
     this.portfolioLink.current.style.color = color;
-    this.skillsLink.current.style.color = color;
+    this.contactLink.current.style.color = color;
     this.aboutMeLink.current.style.color = color;
 
     window.addEventListener("resize", this.onWindowResize);
@@ -76,7 +76,7 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
 
   public render(): JSX.Element {
     const { isOpen, hiddenNav, collapsed } = this.state;
-    const { navBackground, color, active } = this.props;
+    const { navBackground, color, active, history, home } = this.props;
     return (
       <>
         <div
@@ -117,44 +117,58 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
               <Nav className="ml-auto" navbar>
                 <div
                   className={active === "home" ? "nav__home--active" : "nav__home"}
+                  ref={this.homeLink}
                   role="button"
                   tabIndex={0}
-                  ref={this.homeLink}
-                  onClick={(): void => scrollToElement(".landing__container")}
+                  onClick={(): void => {
+                    home ? scrollToElement(".landing__container") : history.push("/");
+                  }}
                 >
                   Home
                 </div>
                 <div
                   className={
-                    active === "portfolio" ? "nav__portfolio--active" : "nav__portfolio"
+                    active === "about" ? "nav__about-me--active" : "nav__about-me"
                   }
+                  ref={this.aboutMeLink}
                   role="button"
                   tabIndex={0}
-                  ref={this.portfolioLink}
-                  onClick={(): void => scrollToElement(".content-container")}
+                  onClick={(): void => {
+                    home ? scrollToElement("#about-me") : history.push("/#about-me");
+                  }}
                 >
-                  <p ref={this.portfolioLink} className="nav__link-text">
-                    Portfolio
-                  </p>
+                  About Me
                 </div>
-                <NavLink
-                  className="nav__skills"
-                  to="/skills"
-                  activeClassName="nav__skills--active"
+                <div
+                  className={
+                    active === "portfolio" ? "nav__portfolio--active" : "nav__portfolio"
+                  }
+                  ref={this.portfolioLink}
+                  role="button"
+                  tabIndex={0}
+                  onClick={(): void => {
+                    home
+                      ? scrollToElement("#current-work")
+                      : history.push("/#current-work");
+                  }}
                 >
-                  <p ref={this.skillsLink} className="nav__link-text">
-                    Skills
-                  </p>
-                </NavLink>
-                <NavLink
-                  className="nav__about-me"
-                  to="/contact-me"
-                  activeClassName="nav__about-me--active"
+                  Portfolio
+                </div>
+                <div
+                  className={
+                    active === "contact" ? "nav__contact--active" : "nav__contact"
+                  }
+                  ref={this.contactLink}
+                  role="button"
+                  tabIndex={0}
+                  onClick={(): void => {
+                    home
+                      ? scrollToElement("#contact-form")
+                      : history.push("/#contact-form");
+                  }}
                 >
-                  <p ref={this.aboutMeLink} className="nav__link-text">
-                    About Me
-                  </p>
-                </NavLink>
+                  Contact Me
+                </div>
               </Nav>
             </Collapse>
           </Navbar>
@@ -164,4 +178,4 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
   }
 }
 
-export default NavBar;
+export default withRouter(NavBar);

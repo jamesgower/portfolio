@@ -8,7 +8,7 @@ $about-me-hover: rgb(0, 162, 255);
 $about-me-active: rgba(0, 162, 255, 0.6);
 
 .nav__container {
-  width: 100vw;
+  width: 100%;
   padding: 0 15vw;
   z-index: 3;
   border-bottom-left-radius: 10px;
@@ -27,7 +27,7 @@ $about-me-active: rgba(0, 162, 255, 0.6);
   cursor: pointer;
   border-bottom: 3px solid transparent;
   margin: 0 6px;
-  padding: 8px;
+  padding: 14px;
   z-index: 3;
 
   &:hover {
@@ -109,6 +109,9 @@ $about-me-active: rgba(0, 162, 255, 0.6);
 .nav__home--active {
   @extend %nav__active;
   border-bottom: 3px solid $home-active;
+  &:hover {
+    border-bottom: 3px solid $home-hover;
+  }
 }
 
 .nav__portfolio {
@@ -127,7 +130,7 @@ $about-me-active: rgba(0, 162, 255, 0.6);
   }
 }
 
-.nav__skills {
+.nav__contact {
   @extend %nav__link;
 
   &:hover {
@@ -135,9 +138,12 @@ $about-me-active: rgba(0, 162, 255, 0.6);
   }
 }
 
-.nav__skills--active {
+.nav__contact--active {
   @extend %nav__active;
   border-bottom: 3px solid $skills-active;
+  &:hover {
+    border-bottom: 3px solid $skills-hover;
+  }
 }
 
 .nav__about-me {
@@ -151,6 +157,9 @@ $about-me-active: rgba(0, 162, 255, 0.6);
 .nav__about-me--active {
   @extend %nav__active;
   border-bottom: 3px solid $about-me-active;
+  &:hover {
+    border-bottom: 3px solid $about-me-hover;
+  }
 }
 
 .nav__logo {
@@ -163,20 +172,16 @@ $about-me-active: rgba(0, 162, 255, 0.6);
 }
 
 .nav__separator {
-  -webkit-margin-before: 26px;
   height: 3px;
   background: lightgray;
   position: absolute;
   right: 0;
   left: 20%;
   z-index: 3;
-
-  @media (max-width: $md-breakpoint) {
-    width: 55vw;
-  }
+  top: 68px;
 
   @media (max-width: 767px) {
-    border: 0;
+    height: 0;
   }
 }
 

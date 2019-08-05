@@ -3,6 +3,7 @@ export interface NavBarProps {
   color: string;
   navBackground?: string;
   active: string;
+  home?: boolean;
 }
 
 export interface NavBarState {
