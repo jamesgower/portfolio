@@ -21,36 +21,18 @@ module.exports = () => {
     node: {
       fs: "empty",
     },
-    optimization: {
-      moduleIds: "hashed",
-      minimizer: [
-        new TerserPlugin({
-          extractComments: true,
-        }),
-        new OptimizeCSSAssetsPlugin({}),
-      ],
-      runtimeChunk: "single",
-      splitChunks: {
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: "vendors",
-            chunks: "all",
-          },
-        },
-        chunks: "all",
-      },
-    },
     module: {
       rules: [
         {
-          test: /\.tsx?$/,
+          test: /\.(t|j)sx?$/,
           loader: "babel-loader",
+          exclude: /node_modules/,
         },
         {
+          enforce: "pre",
           test: /\.js$/,
           use: ["source-map-loader"],
-          enforce: "pre",
+          exclude: /node_modules/,
         },
         {
           test: /\.(sa|sc|c)ss$/,
@@ -74,6 +56,26 @@ module.exports = () => {
           loader: "file-loader?name=[path][hash].[ext]",
         },
       ],
+    },
+    optimization: {
+      moduleIds: "hashed",
+      minimizer: [
+        new TerserPlugin({
+          extractComments: true,
+        }),
+        new OptimizeCSSAssetsPlugin({}),
+      ],
+      runtimeChunk: "single",
+      splitChunks: {
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: "[name].vendors",
+            chunks: "all",
+          },
+        },
+        chunks: "all",
+      },
     },
     plugins: [
       new CleanWebpackPlugin(),

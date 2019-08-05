@@ -1,5 +1,5 @@
 import React, { Component, MouseEvent } from "react";
-import { evaluate } from "mathjs";
+import { evaluate } from "mathjs/dist/math.min";
 import CalculatorState from "../interfaces/calculator.i";
 /* 
 	TODO

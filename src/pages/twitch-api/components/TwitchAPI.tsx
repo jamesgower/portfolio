@@ -31,8 +31,6 @@ const initialState: TwitchState = {
   newStreamer: "",
 };
 
-require("dotenv").config("../../../.e");
-
 class TwitchAPI extends React.Component<{}, TwitchState> {
   public readonly state = initialState;
 

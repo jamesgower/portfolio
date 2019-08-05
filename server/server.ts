@@ -14,8 +14,6 @@ const port = process.env.PORT || 5000;
  * [ ] Server side validation
  */
 
-require("dotenv").config();
-
 app.post(
   "/api/send_mail",
   async (req: Request, res: Response): Promise<void> => {
