@@ -18,6 +18,11 @@ import nodeReactCert from "../images/node-react-course.jpg";
 import reactReduxCert from "../images/react-redux-cert.jpg";
 import responsiveCert from "../images/responsive-cert.png";
 
+/**
+ * TODO
+ * [ ] Change arrow colours
+ */
+
 const CertificationModal: React.FC = (): JSX.Element => {
   const items: CarouselImage[] = [
     {

@@ -6,7 +6,6 @@ import NotFoundPage from "../pages/_misc/components/NotFoundPage";
 import Portfolio from "../pages/portfolio/components/Portfolio";
 import Pomodoro from "../pages/pomodoro/components/Pomodoro";
 import PlayTicTacToe from "../pages/tic-tac-toe/components/Setup";
-import Calculator from "../pages/calculator/components/Calculator";
 import WikipediaAPI from "../pages/wikipedia-api/components/WikipediaAPI";
 import IndecisionApp from "../pages/indecision-app/components/IndecisionApp";
 import TwitchAPI from "../pages/twitch-api/components/TwitchAPI";
@@ -23,7 +22,6 @@ const AppRouter: React.SFC = (): JSX.Element => (
       <Switch>
         <Route path="/" component={Portfolio} exact />
         <Route path="/pomodoro" component={Pomodoro} />
-        <Route path="/calculator" component={Calculator} />
         <Route path="/wikipedia" component={WikipediaAPI} />
         <Route path="/indecision-app" component={IndecisionApp} />
         <Route path="/twitch" component={TwitchAPI} />

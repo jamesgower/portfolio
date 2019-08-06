@@ -79,30 +79,32 @@
 }
 
 .about__social--text {
-  vertical-align: middle;
-  line-height: 2em;
   text-align: center;
   width: 100%;
-  @media screen and (min-width: 280px) {
+  margin-bottom: 0;
+  font-size: 14px;
+
+  @media screen and (max-width: $xs-breakpoint) {
     font-size: 13px;
-  }
-
-  @media screen and (min-width: 580px) {
-    font-size: 14px;
-  }
-
-  @media screen and (min-width: 880px) {
-    font-size: 15px;
-  }
-
-  @media screen and (min-width: 1080px) {
-    font-size: 14px;
   }
 }
 
 .about__social--icon {
   font-size: 50px;
   margin: 0 10px;
-  justify-content: center;
+  align-items: center;
   text-align: center;
+  height: 100%;
+  vertical-align: middle;
+  display: flex;
+
+  @media screen and (max-width: $md-breakpoint) {
+    font-size: 40px;
+  }
+  @media screen and (max-width: $s-breakpoint) {
+    font-size: 32px;
+  }
+  // @media screen and (max-width: $xs-breakpoint) {
+  //   font-size: 24px;
+  // }
 }

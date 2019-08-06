@@ -5,15 +5,8 @@ import ReactDOM from "react-dom";
 import AppRouter from "./routes/Router";
 import LoadingPage from "./pages/_misc/components/LoadingPage";
 import "normalize.css/normalize.css";
-import "react-dates/lib/css/_datepicker.css";
 import "./scss/styles.scss";
-import "bootstrap/dist/css/bootstrap.min.css";
-
-declare global {
-  interface Window {
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any;
-  }
-}
+import "bootstrap-css-only/css/bootstrap.min.css";
 
 let hasRendered = false;
 

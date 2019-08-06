@@ -14,7 +14,7 @@ module.exports = () => {
       extensions: [".ts", ".tsx", ".js", ".jsx"],
     },
     output: {
-      filename: "[name].[contenthash].js",
+      filename: "[name].[hash].js",
       path: path.resolve(__dirname, "dist"),
       publicPath: "/",
     },
@@ -68,10 +68,21 @@ module.exports = () => {
       runtimeChunk: "single",
       splitChunks: {
         cacheGroups: {
-          vendor: {
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true,
+          },
+          commons: {
             test: /[\\/]node_modules[\\/]/,
-            name: "vendors",
-            chunks: "all",
+            name(module, chunks, cacheGroupKey) {
+              const moduleFileName = module
+                .identifier()
+                .split("\\")
+                .reduceRight((item) => item);
+              const allChunksNames = chunks.map((item) => item.name).join("~");
+              return `${cacheGroupKey}-${allChunksNames}-${moduleFileName}`;
+            },
           },
         },
         chunks: "all",
