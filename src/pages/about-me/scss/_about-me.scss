@@ -90,21 +90,19 @@
 }
 
 .about__social--icon {
-  font-size: 50px;
-  margin: 0 10px;
+  font-size: 48px;
   align-items: center;
-  text-align: center;
+  justify-content: center;
   height: 100%;
-  vertical-align: middle;
-  display: flex;
-
+  text-align: center;
+  display: flex !important;
+  width: 70px;
   @media screen and (max-width: $md-breakpoint) {
     font-size: 40px;
+    width: 50px;
   }
   @media screen and (max-width: $s-breakpoint) {
     font-size: 32px;
+    width: 40px;
   }
-  // @media screen and (max-width: $xs-breakpoint) {
-  //   font-size: 24px;
-  // }
 }

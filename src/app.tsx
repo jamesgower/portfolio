@@ -7,6 +7,7 @@ import LoadingPage from "./pages/_misc/components/LoadingPage";
 import "normalize.css/normalize.css";
 import "./scss/styles.scss";
 import "bootstrap-css-only/css/bootstrap.min.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 let hasRendered = false;
 

@@ -67,3 +67,11 @@
   font-size: 16px !important;
   color: $grey;
 }
+
+.form__error-text {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 14px;
+  text-align: center;
+  color: #dc3545;
+}

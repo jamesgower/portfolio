@@ -8,6 +8,9 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = () => {
   const isProduction = process.env.NODE_ENV === "production";
+
+  if (!isProduction) require("dotenv").config();
+
   return {
     entry: ["./src/app.tsx"],
     resolve: {
@@ -55,6 +58,18 @@ module.exports = () => {
           test: /\.(mp3|wav|mpe?g)$/,
           loader: "file-loader?name=[path][hash].[ext]",
         },
+        {
+          test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+          use: [
+            {
+              loader: "file-loader",
+              options: {
+                name: "[name].[ext]",
+                outputPath: "fonts/",
+              },
+            },
+          ],
+        },
       ],
     },
     optimization: {
@@ -100,9 +115,7 @@ module.exports = () => {
       }),
       new webpack.DefinePlugin({
         "process.env": {
-          TWITCH_CLIENT_ID: isProduction
-            ? JSON.stringify(process.env.TWITCH_CLIENT_ID)
-            : JSON.stringify(require("./keys.ts").TWITCH_CLIENT_ID),
+          TWITCH_CLIENT_ID: JSON.stringify(process.env.TWITCH_CLIENT_ID),
         },
       }),
     ],

@@ -14,6 +14,7 @@ class ContactForm extends Component<{}, FormState> {
     nameError: false,
     emailError: false,
     detailsError: false,
+    sentError: false,
   };
 
   private formContainerRef = createRef<HTMLDivElement>();
@@ -55,7 +56,8 @@ class ContactForm extends Component<{}, FormState> {
     const { name, email, details } = this.state;
 
     this.setState({ emailSend: true, emailResponse: false });
-    if (name && email && details) {
+
+    try {
       const res = await axios({
         method: "POST",
         url: "/api/send_mail",
@@ -82,6 +84,11 @@ class ContactForm extends Component<{}, FormState> {
           });
         }, 1000);
       }
+    } catch (err) {
+      this.setState({ sentError: true });
+      setTimeout((): void => {
+        this.setState({ sentError: false, emailSend: false, emailResponse: null });
+      }, 4000);
     }
   };
 
@@ -95,6 +102,7 @@ class ContactForm extends Component<{}, FormState> {
       name,
       email,
       details,
+      sentError,
     } = this.state;
     return (
       <>
@@ -162,18 +170,31 @@ class ContactForm extends Component<{}, FormState> {
               />
               <FormFeedback>Please enter some details</FormFeedback>
             </FormGroup>
+            {sentError && (
+              <p className="form__error-text">
+                Could not connect to server, please try again.
+              </p>
+            )}
             <Button
-              color="primary"
+              color={sentError ? "danger" : "primary"}
               size="lg"
               style={{
-                margin: "0 auto",
+                margin: "10px auto 0",
                 fontSize: "18px",
                 display: "block",
               }}
               onClick={this.validateDetails}
             >
-              {emailResponse === false && <i className="fa fa-spinner fa-spin" />}
-              {!emailSend ? "Submit" : emailResponse ? "Sent!" : "  Sending..."}
+              {emailResponse === false && !sentError && (
+                <i className="fas fa-spinner fa-spin" />
+              )}
+              {sentError
+                ? "Error!"
+                : !emailSend
+                ? "Submit"
+                : emailResponse
+                ? "Sent!"
+                : "  Sending..."}
             </Button>
           </Form>
         </div>

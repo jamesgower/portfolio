@@ -26,20 +26,10 @@ import Tile from "./Tile";
 import ScoreBoard from "./ScoreBoard";
 import { tilesData, winCombos } from "../data/tiles.data";
 
-/**
- * TODO
- * [x] Fix onTileClick
- * [x] Refactor
- * [x] Fix reset after result
- * [x] Create tile component instead of div ??
- * [x] Fix correct names for next player when outcome is achieved.
- * [x] Set medium difficulty to be 50/50 chance of minimax
- * [x] Set easy difficulty to be random
- * [x] Fix bug when draw is achieved on last move
- * [ ] Investigate why sometimes not all animations trigger
- * [ ] Change addMove to be changing the array in state rather than  always sending a new one
- * [x] Refactor class names to fit scss naming conventions
- * [ ] Remove id's and replace with refs where possible.
+/*
+  TODO
+  [ ] Investigate why sometimes not all animations trigger
+  [ ] Change addMove to be changing the array in state rather than  always sending a new one
  */
 
 class PlayGame extends React.Component<PlayProps, PlayState> {

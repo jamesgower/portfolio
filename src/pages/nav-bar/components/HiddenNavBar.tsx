@@ -10,7 +10,7 @@ class HiddenNavBar extends React.Component<HiddenNavProps, HiddenNavState> {
 
   public componentDidMount(): void {
     const { color } = this.props;
-    if (color) this.navBurgerRef.current.style.color = color;
+    this.navBurgerRef.current.style.color = color;
   }
 
   private onOpenNav = (): void => {

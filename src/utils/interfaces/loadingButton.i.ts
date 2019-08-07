@@ -1,5 +1,6 @@
 export interface LoadingButtonProps {
-  children: JSX.Element | JSX.Element[];
+  children: string;
   awaitingResponse: boolean;
   color?: string;
+  onClick: () => void;
 }

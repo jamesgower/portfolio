@@ -7,12 +7,9 @@ import GridState from "../interfaces/grid.i";
 import tilesData from "../data/tiles.data";
 
 /*
-	TODO
-	[ ]	Add loading page
+  TODO
   [ ] Readme.md for all GitHub projects with relevant installation & usage info
-  [ ] Add imgBot back to compress images.
   [ ] Finish styling all components for mobile
-  [ ] Add HiddenNavBar to Twitch component
   [ ] Look at touch events ?? TEST CURRENT FIRST
 */
 

@@ -274,7 +274,7 @@ class SimonSays extends Component<{}, SimonSaysState> {
         className="simon__background"
         style={{ background: `url(${background}) no-repeat center center fixed` }}
       >
-        <HiddenNavBar color="white" navBackground={background} />
+        <HiddenNavBar color="#fff" navBackground={background} />
         <Container>
           <div className="simon__container">
             <div

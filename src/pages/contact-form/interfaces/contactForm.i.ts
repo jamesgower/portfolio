@@ -7,4 +7,5 @@ export interface FormState {
   nameError: boolean;
   emailError: boolean;
   detailsError: boolean;
+  sentError: boolean;
 }

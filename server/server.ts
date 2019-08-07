@@ -1,3 +1,4 @@
+import { isEmail } from "validator";
 import express, { Response, Request } from "express";
 import nodemailer from "nodemailer";
 import { google } from "googleapis";
@@ -9,15 +10,29 @@ const { OAuth2 } = google.auth;
 const app = express();
 const port = process.env.PORT || 5000;
 
-/**
- * TODO
- * [ ] Server side validation
- */
+/*
+  TODO
+  [ ] Server side validation
+  [ ] Add fail text to form 
+*/
+
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
 
 app.post(
   "/api/send_mail",
-  async (req: Request, res: Response): Promise<void> => {
+  async (req: Request, res: Response): Promise<Response> => {
     const { name, email, details } = req.query;
+    if (
+      name.length === 0 ||
+      email.length === 0 ||
+      details.length === 0 ||
+      !isEmail(email) ||
+      details.length > 10000
+    ) {
+      return res.status(400).send(false);
+    }
 
     const oauth2Client = new OAuth2(
       process.env.GOOGLE_CLIENT_ID,
@@ -31,8 +46,8 @@ app.post(
       refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
     });
 
-    const tokens = await oauth2Client.refreshAccessToken();
-    const accessToken = tokens.credentials.access_token;
+    const getToken = await oauth2Client.getAccessToken();
+    const accessToken = getToken.token;
 
     const transporter: nodemailer.Transporter = nodemailer.createTransport({
       service: "gmail",
@@ -56,15 +71,17 @@ app.post(
         ${details}`,
     };
 
-    transporter.sendMail(
-      mailOptions,
-      (error): express.Response => {
-        if (error) {
-          return res.send(false);
-        }
-        return res.send(true);
-      },
-    );
+    transporter.sendMail(mailOptions, (error): void => {
+      if (error) {
+        res.status(404).json({
+          success: false,
+          error,
+        });
+      }
+    });
+    return res.status(200).json({
+      success: true,
+    });
   },
 );
 

@@ -55,41 +55,23 @@ $about-me-active: rgba(0, 162, 255, 0.6);
 }
 
 .nav__toggle {
+  border: 1px solid;
+  margin-top: 8px !important;
   z-index: 3 !important;
-}
 
-%nav__toggle {
   &:focus {
     outline: none;
   }
-  border: 1px solid;
-}
-
-.navbar-toggler {
-  margin-top: 8px !important;
 
   @media (max-width: 767px) {
     margin-top: 0 !important;
   }
-}
-
-.nav__toggle--black {
-  @extend %nav__toggle;
-  border-color: black !important;
 
   .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.7)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
   }
 }
 
-.nav__toggle--white {
-  @extend %nav__toggle;
-  border-color: white !important;
-
-  .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.7)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
-  }
-}
 %nav__active {
   @extend %nav__link;
 

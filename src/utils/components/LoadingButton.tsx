@@ -67,7 +67,6 @@ const LoadingButton: React.FC<LoadingButtonProps> = ({
       ) : (
         <animated.div style={fadeInProps}>{children}</animated.div>
       )}
-      {children}
     </button>
   );
 };

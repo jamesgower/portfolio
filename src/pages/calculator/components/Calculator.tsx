@@ -1,12 +1,7 @@
 import React, { Component, MouseEvent } from "react";
 import { evaluate } from "mathjs/dist/math.min";
 import CalculatorState from "../interfaces/calculator.i";
-/* 
-	TODO
-	[x] Complete calculator
-	[x] Put calculator component in react modal on click from portfolio 
-	[x] add CE functionality
-*/
+
 class Calculator extends Component<{}, CalculatorState> {
   public readonly state: CalculatorState = {
     answer: undefined,

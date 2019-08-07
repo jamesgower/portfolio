@@ -5,12 +5,6 @@ import { Collapse, Navbar, NavbarToggler, Nav } from "reactstrap";
 import { NavBarProps, NavBarState } from "../interfaces/navBar.i";
 import logo from "../images/logo.png";
 
-/**
- * TODO
- * [ ] Fix X so it fits inline with navbar toggler
- * [ ] Change classes so it puts the hex color in rather than __black/__white
- */
-
 class NavBar extends React.Component<NavBarProps, NavBarState> {
   public readonly state: NavBarState = {
     isOpen: false,
@@ -32,7 +26,6 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
 
   public componentDidMount(): void {
     const { color, closeNav } = this.props;
-
     this.homeLink.current.style.color = color;
     this.portfolioLink.current.style.color = color;
     this.contactLink.current.style.color = color;
@@ -121,7 +114,7 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
                   role="button"
                   tabIndex={0}
                   onClick={(): void => {
-                    home ? scrollToElement(".landing__container") : history.push("/");
+                    home ? scrollToElement("#landing-page") : history.push("/");
                   }}
                 >
                   Home

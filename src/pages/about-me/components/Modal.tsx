@@ -18,11 +18,6 @@ import nodeReactCert from "../images/node-react-course.jpg";
 import reactReduxCert from "../images/react-redux-cert.jpg";
 import responsiveCert from "../images/responsive-cert.png";
 
-/**
- * TODO
- * [ ] Change arrow colours
- */
-
 const CertificationModal: React.FC = (): JSX.Element => {
   const items: CarouselImage[] = [
     {
@@ -158,16 +153,16 @@ const CertificationModal: React.FC = (): JSX.Element => {
         contentLabel="Certification Modal"
       >
         <Carousel activeIndex={activeIndex} next={next} previous={previous}>
+          <CarouselControl
+            direction="prev"
+            directionText="Previous"
+            onClickHandler={previous}
+          />
           {slides}
           <CarouselIndicators
             items={items}
             activeIndex={activeIndex}
             onClickHandler={goToIndex}
-          />
-          <CarouselControl
-            direction="prev"
-            directionText="Previous"
-            onClickHandler={previous}
           />
           <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
         </Carousel>

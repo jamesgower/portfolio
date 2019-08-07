@@ -4,14 +4,8 @@ import UserDataItem from "./UserDataItem";
 import TwitchState, { OnlineUser, SavedUser, APICall } from "../interfaces/twitchAPI.i";
 import background from "../images/background.jpg";
 /*
-	TODO
-	[x] Fix async problems
-	[ ] Look at smoother animations !! Look at onTransitionEnd
-	[x] Add streamer on enter click
-	[x] Look to change passing all state to UserDataItem
-	[x] Fix cross to be in top right
-	[x] Fix animations when clicking online button
-	[x] Fix text size for mature filter & make switch smaller with it
+  TODO
+	[ ] Look at smoother animations - Look at onTransitionEnd
 */
 
 const initialState: TwitchState = {
