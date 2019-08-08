@@ -3,10 +3,7 @@ import { Button, Input, Container } from "reactstrap";
 import UserDataItem from "./UserDataItem";
 import TwitchState, { OnlineUser, SavedUser, APICall } from "../interfaces/twitchAPI.i";
 import background from "../images/background.jpg";
-/*
-  TODO
-	[ ] Look at smoother animations - Look at onTransitionEnd
-*/
+import HiddenNavBar from "../../nav-bar/components/HiddenNavBar";
 
 const initialState: TwitchState = {
   users: [
@@ -262,6 +259,7 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
     return (
       <div className="twitch__container" style={{ background: `url(${background})` }}>
         <div className="twitch__header">
+          <HiddenNavBar color="rgb(163, 65, 255)" navColor="#20222b" />
           <Container>
             <h1 className="text-center twitch__title">Twitch Streamers</h1>
             <p className="twitch__header-text">

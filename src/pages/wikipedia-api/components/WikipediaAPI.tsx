@@ -128,7 +128,7 @@ class WikipediaAPI extends React.Component<object, WikiState> {
         box.className = "wiki__container-animation";
       } else {
         box.className = "wiki__container-animation--small";
-        this.searchContainerRef.current.style.marginTop = "42px";
+        this.searchContainerRef.current.style.marginTop = "40px";
       }
 
       this.onCancelClick();

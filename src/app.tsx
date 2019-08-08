@@ -1,9 +1,8 @@
 import "core-js/stable";
 import "regenerator-runtime/runtime";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import AppRouter from "./routes/Router";
-import LoadingPage from "./pages/_misc/components/LoadingPage";
 import "normalize.css/normalize.css";
 import "./scss/styles.scss";
 import "bootstrap-css-only/css/bootstrap.min.css";
@@ -11,15 +10,20 @@ import "@fortawesome/fontawesome-free/css/brands.min.css";
 import "@fortawesome/fontawesome-free/css/fontawesome.min.css";
 import "@fortawesome/fontawesome-free/css/solid.min.css";
 import "@fortawesome/fontawesome-free/css/regular.min.css";
+import withLoading from "./utils/components/withLoading";
 
-let hasRendered = false;
+const App = (): JSX.Element => {
+  const [isLoading, setLoading] = useState(true);
+  const RouterWithLoading = withLoading(AppRouter);
 
-const renderApp = (): void => {
-  if (!hasRendered) {
-    ReactDOM.render(<AppRouter />, document.getElementById("app"));
-    hasRendered = true;
-  }
+  useEffect((): void => {
+    if (isLoading) {
+      setTimeout((): void => {
+        setLoading(false);
+      }, 300);
+    }
+  });
+  return <RouterWithLoading loading={isLoading} />;
 };
 
-ReactDOM.render(<LoadingPage />, document.getElementById("app"));
-renderApp();
+ReactDOM.render(<App />, document.getElementById("app"));

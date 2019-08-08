@@ -4,7 +4,8 @@ interface HiddenNavState {
 
 interface HiddenNavProps {
   color: string;
-  navBackground: string;
+  navBackground?: string;
+  navColor?: string;
 }
 
 export { HiddenNavState, HiddenNavProps };

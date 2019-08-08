@@ -69,7 +69,7 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
 
   public render(): JSX.Element {
     const { isOpen, hiddenNav, collapsed } = this.state;
-    const { navBackground, color, active, history, home } = this.props;
+    const { navBackground, color, active, history, home, navColor } = this.props;
     return (
       <>
         <div
@@ -79,7 +79,11 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
             borderBottom: collapsed ? `1px solid ${color}` : "",
             borderRadius: collapsed ? "10px" : "",
             background:
-              collapsed && isOpen ? `url(${navBackground}) no-repeat fixed center` : "",
+              collapsed && isOpen && navBackground
+                ? `url(${navBackground}) no-repeat fixed center`
+                : collapsed && isOpen && navColor
+                ? navColor
+                : "",
           }}
         >
           {hiddenNav && (
