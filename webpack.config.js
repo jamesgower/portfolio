@@ -120,7 +120,7 @@ module.exports = () => {
           TWITCH_CLIENT_ID: JSON.stringify(process.env.TWITCH_CLIENT_ID),
         },
       }),
-      !isProduction && new WebpackBundleAnalyzer(),
+      !isProduction ? new WebpackBundleAnalyzer() : null,
     ],
     devtool: isProduction ? "source-map" : "inline-source-map",
     devServer: {
