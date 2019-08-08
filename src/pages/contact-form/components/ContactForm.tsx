@@ -44,7 +44,7 @@ class ContactForm extends Component<{}, FormState> {
       this.setState({ emailError: true });
       validated = false;
     }
-    if (details.length <= 4) {
+    if (details.length === 0) {
       this.setState({ detailsError: true });
       validated = false;
     }
