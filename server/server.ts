@@ -10,12 +10,6 @@ const { OAuth2 } = google.auth;
 const app = express();
 const port = process.env.PORT || 5000;
 
-/*
-  TODO
-  [ ] Server side validation
-  [ ] Add fail text to form 
-*/
-
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }

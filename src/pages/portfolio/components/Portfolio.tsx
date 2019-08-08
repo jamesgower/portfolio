@@ -13,6 +13,10 @@ const Portfolio: React.SFC = (): JSX.Element => {
   const [showNav, setShowNav] = useState(false);
   const [activePosition, setActivePosition] = useState("home");
 
+  // useEffect(() => {
+  //   if (!loading) setLoading(false);
+  // });
+
   useEffect((): void => {
     const { hash } = window.location;
     if (hash) {

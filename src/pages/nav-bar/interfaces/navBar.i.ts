@@ -7,6 +7,7 @@ export interface NavBarProps {
   active: string;
   home?: boolean;
   history: History;
+  navColor?: string;
 }
 
 export interface NavBarState {

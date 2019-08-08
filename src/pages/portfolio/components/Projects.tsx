@@ -9,7 +9,6 @@ import tilesData from "../data/tiles.data";
 /*
   TODO
   [ ] Readme.md for all GitHub projects with relevant installation & usage info
-  [ ] Finish styling all components for mobile
   [ ] Look at touch events ?? TEST CURRENT FIRST
 */
 

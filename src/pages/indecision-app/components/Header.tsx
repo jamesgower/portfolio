@@ -11,7 +11,7 @@ const Header: React.FC = (): JSX.Element => {
   };
 
   return redirect ? (
-    <Redirect push to="/portfolio" />
+    <Redirect push to="/#current-work" />
   ) : (
     <div className="header">
       <div className="container">

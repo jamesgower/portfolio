@@ -8,8 +8,9 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = () => {
   const isProduction = process.env.NODE_ENV === "production";
-
-  if (!isProduction) require("dotenv").config();
+  const WebpackBundleAnalyzer =
+    !isProduction && require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+  !isProduction && require("dotenv").config();
 
   return {
     entry: ["./src/app.tsx"],
@@ -98,6 +99,7 @@ module.exports = () => {
               const allChunksNames = chunks.map((item) => item.name).join("~");
               return `${cacheGroupKey}-${allChunksNames}-${moduleFileName}`;
             },
+            priority: -10,
           },
         },
         chunks: "all",
@@ -118,6 +120,7 @@ module.exports = () => {
           TWITCH_CLIENT_ID: JSON.stringify(process.env.TWITCH_CLIENT_ID),
         },
       }),
+      !isProduction && new WebpackBundleAnalyzer(),
     ],
     devtool: isProduction ? "source-map" : "inline-source-map",
     devServer: {

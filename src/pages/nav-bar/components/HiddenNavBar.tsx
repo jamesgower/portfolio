@@ -34,7 +34,7 @@ class HiddenNavBar extends React.Component<HiddenNavProps, HiddenNavState> {
   };
 
   public render(): JSX.Element {
-    const { color, navBackground } = this.props;
+    const { color, navBackground, navColor } = this.props;
     const { showNav } = this.state;
     return (
       <div className="hidden-nav__container">
@@ -51,6 +51,7 @@ class HiddenNavBar extends React.Component<HiddenNavProps, HiddenNavState> {
               closeNav={this.onCloseNav}
               color={color}
               navBackground={navBackground}
+              navColor={navColor}
             />
           </div>
         )}
