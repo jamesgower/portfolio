@@ -8,7 +8,7 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = () => {
   const isProduction = process.env.NODE_ENV === "production";
-  const WebpackBundleAnalyzer = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+  // const WebpackBundleAnalyzer = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
   !isProduction && require("dotenv").config();
 
   return {
@@ -119,7 +119,6 @@ module.exports = () => {
           TWITCH_CLIENT_ID: JSON.stringify(process.env.TWITCH_CLIENT_ID),
         },
       }),
-      !isProduction && new WebpackBundleAnalyzer(),
     ],
     devtool: isProduction ? "source-map" : "inline-source-map",
     devServer: {
