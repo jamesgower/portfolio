@@ -5,6 +5,12 @@ import { Collapse, Navbar, NavbarToggler, Nav } from "reactstrap";
 import { NavBarProps, NavBarState } from "../interfaces/navBar.i";
 import logo from "../images/logo.png";
 
+/*
+  TODO
+  [ ] Nav toggler color set from navColor
+  [x] Remove focused outline on Nav
+*/
+
 class NavBar extends React.Component<NavBarProps, NavBarState> {
   public readonly state: NavBarState = {
     isOpen: false,

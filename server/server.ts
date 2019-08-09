@@ -7,7 +7,7 @@ const path = require("path");
 
 const { OAuth2 } = google.auth;
 
-const app = express();
+export const app = express();
 const port = process.env.PORT || 5000;
 
 if (process.env.NODE_ENV !== "production") {

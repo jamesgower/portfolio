@@ -5,6 +5,7 @@
   flex-direction: column;
   justify-content: center;
   justify-items: center;
+  font-size: 30px;
 }
 
 .typed__text {
@@ -15,4 +16,13 @@
   font-family: Oswald, sans-serif;
   font-size: 28px;
   height: 60px;
+
+  @media (max-width: $s-breakpoint) {
+    height: 40px;
+    font-size: 24px;
+  }
+
+  @media (max-width: $xs-breakpoint) {
+    font-size: 20px;
+  }
 }

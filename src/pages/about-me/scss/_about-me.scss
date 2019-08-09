@@ -2,6 +2,10 @@
   font-family: "Roboto", sans-serif;
   width: 80%;
   margin: 0 auto;
+
+  @media (max-width: $xs-breakpoint) {
+    width: 100%;
+  }
 }
 
 .about__title {
@@ -10,6 +14,16 @@
   font-weight: bold;
   color: #24099c;
   padding: 40px 20px 20px;
+
+  @media (max-width: $s-breakpoint) {
+    padding: 30px 15px 15px;
+    margin: 0 auto 15px;
+  }
+
+  @media (max-width: $xs-breakpoint) {
+    padding: 20px 10px 10px;
+    margin: 0 auto 10px;
+  }
 }
 
 .about__subtitle {
@@ -18,6 +32,16 @@
   font-weight: bold;
   color: #f00;
   font-size: 22px;
+
+  @media (max-width: $s-breakpoint) {
+    font-size: 20px;
+    margin: 0;
+  }
+
+  @media (max-width: $xs-breakpoint) {
+    font-size: 18px;
+    margin: 0;
+  }
 }
 
 .about__certification-container {

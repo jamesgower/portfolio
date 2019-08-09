@@ -1,9 +1,8 @@
 import React from "react";
+import day from "dayjs";
 import { UserDataItemState, UserDataItemProps } from "../interfaces/userDataItem.i";
 import notFoundImage from "../images/twitch-not-found.jpg";
 import placeholder from "../images/placeholder.png";
-
-const moment = require("moment");
 
 const initialState: UserDataItemState = {
   showComponent: true,
@@ -98,7 +97,7 @@ class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState>
           </p>
           <p className="user__text">
             <span className="user__boldText">Last Streamed: </span>
-            {moment(userData.lastSeen).format("Do MMMM @ hh:mmA")}
+            {day(userData.lastSeen).format("Do MMMM @ hh:mmA")}
           </p>
         </>
       );

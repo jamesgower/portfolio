@@ -73,7 +73,7 @@ export class Grid extends React.Component<{}, GridState> {
     return (
       <>
         <div className="projects__container" id="current-work">
-          <h1 className="projects__title">PROJECTS</h1>
+          <h1 className="about__title">PROJECTS</h1>
           <p className="projects__text">
             Here are a few examples of the projects that I have created during my Software
             Development journey. Most of the front-end of these projects are normally
