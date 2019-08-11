@@ -16,6 +16,21 @@ const App = (): JSX.Element => {
   const [isLoading, setLoading] = useState(true);
   const RouterWithLoading = withLoading(AppRouter);
 
+  const handleFirstTab = (e): void => {
+    if (e.keyCode === 9) {
+      // the "I am a keyboard user" key
+      document.body.classList.add("user-is-tabbing");
+      window.removeEventListener("keydown", handleFirstTab);
+    }
+  };
+
+  useEffect((): (() => void) => {
+    window.addEventListener("keydown", handleFirstTab);
+    return (): void => {
+      window.addEventListener("keydown", handleFirstTab);
+    };
+  }, []);
+
   useEffect((): void => {
     if (isLoading) {
       setTimeout((): void => {

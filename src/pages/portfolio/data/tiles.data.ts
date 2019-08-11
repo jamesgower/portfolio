@@ -42,7 +42,7 @@ export default [
     img: chatterImage,
     title: "Chatter (Chat App)",
     subtitle: "Built with Socket.io, Axios, Express, Moment.js, React & SCSS",
-    href: "https://github.com/jamesgower/chatter",
+    href: "/chatter",
     featured: true,
     redirect: true,
     color: "#2E5D82",

@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useState, useEffect } from "react";
+import React from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import { createBrowserHistory } from "history";
@@ -11,6 +11,7 @@ import IndecisionApp from "../pages/indecision-app/components/IndecisionApp";
 import TwitchAPI from "../pages/twitch-api/components/TwitchAPI";
 import SimonSays from "../pages/simon-says/components/SimonSays";
 import DrumMachine from "../pages/drum-machine/components/DrumMachine";
+import Chatter from "../pages/chatter/components/Landing";
 import configureStore from "../pages/tic-tac-toe/store/store";
 
 const history = createBrowserHistory();
@@ -29,6 +30,7 @@ const AppRouter: React.SFC = (): JSX.Element => {
           <Route path="/simon-says" component={SimonSays} />
           <Route path="/drum-machine" component={DrumMachine} />
           <Route path="/tic-tac-toe" component={TicTacToe} />
+          <Route path="/chatter" exact component={Chatter} />
           <Route component={NotFoundPage} />
         </Switch>
       </Router>
