@@ -50,7 +50,7 @@ app.post(
       process.env.GOOGLE_CLIENT_ID,
       process.env.GOOGLE_CLIENT_SECRET,
       process.env.NODE_ENV === "production"
-        ? "https://guarded-sierra-80149.herokuapp.com"
+        ? "https://www.james-gower.dev"
         : "http://localhost:5000",
     );
 
