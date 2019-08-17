@@ -10,7 +10,15 @@ const path = require("path");
 const { OAuth2 } = google.auth;
 
 app.use(cors());
-app.use(cors({ credentials: true, origin: "http://localhost:8080" })); // FIXME
+app.use(
+  cors({
+    credentials: true,
+    origin:
+      process.env.NODE_ENV === "production "
+        ? "https://www.james-gower.dev"
+        : "http://localhost:8080",
+  }),
+);
 
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
