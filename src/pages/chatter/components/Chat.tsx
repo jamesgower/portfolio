@@ -28,7 +28,7 @@ class Chat extends Component<ChatProps, {}> {
   public componentWillMount(): void {
     const endpoint =
       process.env.NODE_ENV === "production"
-        ? "https://www.guarded-sierra-80149.herokuapp.com"
+        ? "https://guarded-sierra-80149.herokuapp.com"
         : "http://localhost:5000";
 
     const {
