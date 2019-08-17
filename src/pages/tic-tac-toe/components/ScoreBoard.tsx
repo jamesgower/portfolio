@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { AppState, ScoreBoardProps, PlayerState } from "../interfaces/components.i";
+import { ScoreBoardProps, PlayerState } from "../interfaces/components.i";
+import { AppState } from "../../../store/store";
 import {
   ResetScoreAction,
   RESET_SCORE,
@@ -14,7 +15,7 @@ const ScoreBoard: React.SFC<ScoreBoardProps> = ({
   enableTiles,
 }): JSX.Element => {
   const { player1, player2 } = useSelector(
-    (state: AppState): PlayerState => state.player,
+    ({ tictactoe }: AppState): PlayerState => tictactoe.player,
   );
 
   const dispatch = useDispatch();

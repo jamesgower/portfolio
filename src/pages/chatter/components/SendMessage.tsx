@@ -1,7 +1,11 @@
 import React, { useState, ChangeEvent } from "react";
+import { useSelector } from "react-redux";
+import { Socket } from "socket.io";
+import { AppState } from "../../../store/store";
 
-const SendMessage = ({ socket }): JSX.Element => {
+const SendMessage = (): JSX.Element => {
   const [text, setText] = useState("");
+  const socket = useSelector((state: AppState): Socket => state.chatter.room.socket);
 
   const onTextSubmit = (e): void => {
     e.preventDefault();

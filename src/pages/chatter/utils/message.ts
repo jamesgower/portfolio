@@ -1,5 +1,5 @@
 import day from "dayjs";
-import { Message } from "../interfaces/message.i";
+import { Message } from "../interfaces/components.i";
 
 export const generateMessage = (sender: string, text: string): Message => {
   return {

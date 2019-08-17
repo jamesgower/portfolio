@@ -1,6 +1,6 @@
-export interface AppState {
-  player?: PlayerState;
-  board?: BoardState;
+export interface TicTacToeState {
+  player: PlayerState;
+  board: BoardState;
 }
 
 export interface PlayerState {

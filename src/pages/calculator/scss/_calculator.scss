@@ -1,10 +1,7 @@
 #calculator {
   height: 450px;
   width: 300px;
-  margin-top: 5%;
-  margin-bottom: 5%;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 5% auto;
   background-color: #dfd8d0;
   border: 2px solid #908b85;
   border-radius: 20px;
@@ -77,6 +74,14 @@
   box-shadow: 0px 3px 0px 0px #222121, inset -1px -3px 10px 1px #515151;
 }
 
+.calcBtn,
+.calcBtn:hover,
+.calcBtn:active,
+.calcBtn:visited {
+  text-decoration: none !important;
+  outline: none !important;
+}
+
 .calcBtn--disabled {
   color: #fff;
   font-weight: 600;
@@ -142,12 +147,4 @@
   color: white;
   background-color: #2f6800;
   box-shadow: 0px 3px 0px 0px #004409;
-}
-
-.calcBtn,
-.calcBtn:hover,
-.calcBtn:active,
-.calcBtn:visited {
-  text-decoration: none !important;
-  outline: none !important;
 }

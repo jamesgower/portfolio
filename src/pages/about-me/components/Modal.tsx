@@ -17,6 +17,7 @@ import nodeCert from "../images/node-cert.jpg";
 import nodeReactCert from "../images/node-react-course.jpg";
 import reactReduxCert from "../images/react-redux-cert.jpg";
 import responsiveCert from "../images/responsive-cert.png";
+import { useScreenWidth } from "../../../hooks/useScreenWidth";
 
 const CertificationModal: React.FC = (): JSX.Element => {
   const items: CarouselImage[] = [
@@ -96,21 +97,21 @@ const CertificationModal: React.FC = (): JSX.Element => {
   const [isOpen, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAnimating, setAnimating] = useState(false);
-  const [desktop, setDesktop] = useState(window.innerWidth > 768);
+  const desktop = useScreenWidth(768);
 
-  const checkWindowWidth = (): void => {
-    if (window.innerWidth > 767) {
-      return setDesktop(true);
-    }
-    return setDesktop(false);
-  };
+  // const checkWindowWidth = (): void => {
+  //   if (window.innerWidth > 767) {
+  //     return setDesktop(true);
+  //   }
+  //   return setDesktop(false);
+  // };
 
-  useEffect((): (() => void) => {
-    window.addEventListener("resize", checkWindowWidth);
-    return (): void => {
-      window.removeEventListener("resize", checkWindowWidth);
-    };
-  }, []);
+  // useEffect((): (() => void) => {
+  //   window.addEventListener("resize", checkWindowWidth);
+  //   return (): void => {
+  //     window.removeEventListener("resize", checkWindowWidth);
+  //   };
+  // }, []);
 
   const onExiting = (): void => setAnimating(true);
 

@@ -4,12 +4,14 @@ import PlayGame from "./PlayGame";
 import ChooseNames from "./ChooseNames";
 import ChooseOpponents from "./ChooseOpponents";
 import HiddenNavBar from "../../nav-bar/components/HiddenNavBar";
-import { AppState } from "../interfaces/components.i";
+import { PlayerState } from "../interfaces/components.i";
 import background from "../images/background.jpg";
+import { AppState } from "../../../store/store";
 
 const Setup: React.SFC = (): JSX.Element => {
-  const noPlayers = useSelector((state: AppState): number => state.player.noPlayers);
-  const readyToPlay = useSelector((state: AppState): boolean => state.player.readyToPlay);
+  const { noPlayers, readyToPlay } = useSelector(
+    ({ tictactoe }: AppState): PlayerState => tictactoe.player,
+  );
 
   return (
     <>

@@ -1,7 +1,3 @@
-$p1-green: #008000;
-$p2-red: #f00;
-$player-button: rgb(189, 146, 78);
-
 .tic-tac-toe__container {
   background-size: cover;
   height: 100vh;
@@ -66,8 +62,4 @@ $player-button: rgb(189, 146, 78);
     -webkit-transform: rotate(-360deg);
     transform: rotate(-360deg);
   }
-}
-
-.form-control {
-  background: none !important;
 }

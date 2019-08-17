@@ -2,17 +2,28 @@
 $dark-grey: #333;
 $grey: #666;
 $blue: #1c88bf;
+$white: #fff;
+$black: #000;
+$gray: #ccc;
 $dark-blue: #364051;
 $off-white: #ebe9e9;
+
+// Indecision Colors
 $off-black-indecision: #20222b;
 $off-white-indecision: #a5afd7;
 $blue-indecision: #3c4251;
 $light-blue-indecision: #464b5e;
 $dark-blue-indecision: #333745;
 $purple-indecision: #8357cd;
-$white: #fff;
-$black: #000;
-$gray: #ccc;
+
+//Tic-Tac-Toe Colors
+$p1-green: #008000;
+$p2-red: #f00;
+$player-button: rgb(189, 146, 78);
+
+//Wiki Colors
+$input-focus: #80abfc;
+$wiki-blue: #4569ac;
 
 //Font Sizes
 $font-size-large: 2rem;

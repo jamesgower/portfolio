@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Input } from "reactstrap";
-import { Player, AppState } from "../interfaces/components.i";
+import { Player } from "../interfaces/components.i";
+import { AppState } from "../../../store/store";
 import {
   ResetAction,
   RESET,
@@ -13,7 +14,9 @@ const ChooseNames: React.SFC = (): JSX.Element => {
   const [player1, setPlayer1] = useState({ name: "", counter: "X" });
   const [player2, setPlayer2] = useState({ name: "", counter: "O" });
   const [difficulty, setDifficulty] = useState(2);
-  const noPlayers = useSelector((state: AppState): number => state.player.noPlayers);
+  const noPlayers = useSelector(
+    ({ tictactoe }: AppState): number => tictactoe.player.noPlayers,
+  );
   const dispatch = useDispatch();
 
   const reset = (): ResetAction => dispatch({ type: RESET });

@@ -1,9 +1,7 @@
-.message__container {
-}
-
 .message__title {
   display: flex;
   margin-bottom: 5px;
+  justify-content: space-between;
 }
 
 .message__title h4 {
@@ -17,6 +15,11 @@
   color: #999;
 }
 
+.message__timestamp {
+  float: right;
+  font-weight: bold;
+}
+
 .message {
   position: relative;
   background: #0eff0293;
@@ -26,7 +29,7 @@
   float: left;
   clear: both;
   min-width: 200px;
-  max-width: 500px;
+  max-width: 70%;
   margin: 12px 0 32px 12px;
 }
 
@@ -52,10 +55,9 @@
   background: #00aeffa6;
   border-radius: 0.4em;
   padding: 10px;
-  margin-bottom: 32px;
   min-width: 200px;
-  max-width: 500px;
-  margin: 12px 12px 32px 12px;
+  max-width: 70%;
+  margin: 12px 12px 32px;
 }
 
 .message-sent:after {
@@ -80,9 +82,8 @@
   background: #ff04047c;
   border-radius: 0.4em;
   padding: 10px;
-  margin-bottom: 32px;
   min-width: 200px;
-  max-width: 600px;
+  max-width: 70%;
   margin: 12px 12px 32px 12px;
 }
 

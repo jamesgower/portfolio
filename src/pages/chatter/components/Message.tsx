@@ -1,6 +1,6 @@
 import React from "react";
 import day from "dayjs";
-import { MessageProps } from "../interfaces/message.i";
+import { MessageProps } from "../interfaces/components.i";
 
 const Message: React.FC<MessageProps> = ({
   type,
@@ -16,7 +16,7 @@ const Message: React.FC<MessageProps> = ({
       <div className="message__title">
         {admin && <i className="icon fas fa-lock" />}
         <h4>{sender}</h4>
-        <p className="timestamp">
+        <p className="message__timestamp">
           <em>{formattedTime}</em>
         </p>
       </div>

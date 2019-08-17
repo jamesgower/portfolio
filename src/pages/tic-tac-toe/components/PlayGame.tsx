@@ -6,7 +6,7 @@ import {
   PlayState,
   GameWon,
   Move,
-  AppState,
+  TicTacToeState,
 } from "../interfaces/components.i";
 import ActionTypes, {
   ResetAction,
@@ -125,7 +125,8 @@ class PlayGame extends React.Component<PlayProps, PlayState> {
     const { tiles } = board;
 
     const plays = tiles.reduce(
-      (a, e, i): number[] => (e === counter ? a.concat(i) : a),
+      (play, currentCounter, index): number[] =>
+        currentCounter === counter ? play.concat(index) : play,
       [],
     );
     let gameWon = null;
@@ -377,9 +378,12 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>): PlayDispatchProps 
   addMove: (board): AddMoveAction => dispatch(boardActions.addMove(board)),
 });
 
-const mapStateToProps = ({ player, board }): AppState => ({ player, board });
+const mapStateToProps = ({ tictactoe: { player, board } }): TicTacToeState => ({
+  player,
+  board,
+});
 
-export default connect<AppState, PlayDispatchProps>(
+export default connect<TicTacToeState, PlayDispatchProps>(
   mapStateToProps,
   mapDispatchToProps,
 )(PlayGame);

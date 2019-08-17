@@ -1,4 +1,4 @@
-import { UserProps } from "./interfaces/users.i";
+import { UserProps } from "./interfaces/user.i";
 
 export class Users {
   public users: UserProps[];
@@ -9,11 +9,11 @@ export class Users {
   /*
 		The addUser function pushes the users' data into the array created in the constructor, and returns it.
 	*/
-  public addUser(id: string, name: string, room: string): UserProps[] {
+  public addUser(id: string, name: string, activeRoom: string): UserProps[] {
     this.users.push({
       id,
       name,
-      room,
+      activeRoom,
     });
     return this.users;
   }
@@ -41,16 +41,8 @@ export class Users {
 		user.room value to the room paramter, and returns it.
 	*/
   public getUserList(room: string): string[] {
-    const users = this.users.filter((user): boolean => user.room === room); // filters out all users which are not in the targeted room
+    const users = this.users.filter((user): boolean => user.activeRoom === room); // filters out all users which are not in the targeted room
     const namesArr = users.map((user): string => user.name); // return array of users names
     return namesArr;
-  }
-
-  /*
-		The getRoomSize function filters all users' user.room value to check if it's a match with the room parameter 
-		and returns the length of all the us to get the room size.
-	*/
-  public getRoomSize(room): number {
-    return this.users.filter((user): boolean => user.room === room).length;
   }
 }

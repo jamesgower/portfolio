@@ -12,7 +12,7 @@ import TwitchAPI from "../pages/twitch-api/components/TwitchAPI";
 import SimonSays from "../pages/simon-says/components/SimonSays";
 import DrumMachine from "../pages/drum-machine/components/DrumMachine";
 import Chatter from "../pages/chatter/components/Landing";
-import configureStore from "../pages/tic-tac-toe/store/store";
+import configureStore from "../store/store";
 
 const history = createBrowserHistory();
 const store = configureStore();

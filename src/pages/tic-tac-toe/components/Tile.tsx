@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { TileProps, AppState, PlayerState } from "../interfaces/components.i";
+import { TileProps, PlayerState } from "../interfaces/components.i";
+import { AppState } from "../../../store/store";
 
 const Tile: React.FC<TileProps> = ({
   takeTurn,
@@ -11,9 +12,9 @@ const Tile: React.FC<TileProps> = ({
   currentTurn,
 }): JSX.Element => {
   const { noPlayers, player1, player2, currentPlayer } = useSelector(
-    (state: AppState): PlayerState => state.player,
+    ({ tictactoe }: AppState): PlayerState => tictactoe.player,
   );
-  const tiles = useSelector((state: AppState): number[] => state.board.tiles);
+  const tiles = useSelector(({ tictactoe }: AppState): number[] => tictactoe.board.tiles);
 
   const setDisabled = (): void => {
     disableTileClicks();
