@@ -101,7 +101,6 @@ class Chat extends Component<ChatProps, {}> {
 
   public render(): JSX.Element {
     const { messages } = this.props;
-    console.log(messages);
     return (
       <div className="chat__container">
         <SideBar />
