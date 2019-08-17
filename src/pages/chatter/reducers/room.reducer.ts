@@ -1,4 +1,3 @@
-import { SET_ACTIVE_USERS } from "./../interfaces/actions.i";
 import { RoomsState } from "../interfaces/components.i";
 import {
   ChangeRoomAction,
@@ -145,11 +144,6 @@ export default (state = defaultRoomState, action: RoomActionsTypes): RoomsState 
           },
         },
         currentRoom: nameVar,
-      };
-    }
-    case SET_ACTIVE_USERS: {
-      return {
-        ...state,
       };
     }
     default:
