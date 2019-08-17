@@ -76,7 +76,7 @@ const SideBar: FC = (): JSX.Element => {
           )}
         </div>
       </div>
-      <div className="sidebar__create-container">
+      <div className="sidebar__users-container">
         <h4 className="sidebar__create-title">Create Room</h4>
         <InputGroup>
           <Input
