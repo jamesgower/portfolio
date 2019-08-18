@@ -41,13 +41,13 @@ export default [
   {
     img: chatterImage,
     title: "Chatter (Chat App)",
-    subtitle: "Built with Socket.io, Axios, Express, Moment.js, React & SCSS",
+    subtitle: "Built with TypeScript, Socket.io, Axios, Express, React, Redux & SCSS",
     href: "/chatter",
     featured: true,
     redirect: true,
     color: "#2E5D82",
     class: "far fa-comments",
-    sourceCode: "https://github.com/jamesgower/chatter",
+    sourceCode: "https://github.com/jamesgower/portfolio/tree/prod/src/pages/chatter",
   },
   {
     img: simonImage,
