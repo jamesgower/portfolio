@@ -48,6 +48,7 @@
       "warn",
       { "allowShortCircuit": true, "allowTernary": true }
     ],
+    "linebreak-style": "off",
     "no-param-reassign": "off",
     "no-shadow": "off",
     "class-methods-use-this": "error",

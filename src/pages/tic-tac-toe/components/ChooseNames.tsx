@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Input } from "reactstrap";
 import { Player } from "../interfaces/components.i";
-import { AppState } from "../../../store/store";
+import { AppState } from "../store/store";
 import {
   ResetAction,
   RESET,

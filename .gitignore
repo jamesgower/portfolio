@@ -1,4 +1,4 @@
 node_modules/
 .env
 dist/
-keys.ts
+server/emaily/config/dev.ts

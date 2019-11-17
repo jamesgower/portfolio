@@ -124,8 +124,13 @@ module.exports = {
     contentBase: path.join(__dirname, "public"),
     historyApiFallback: true,
     proxy: {
-      "/api/*": {
-        target: "http://[::1]:5000",
+      "/api/**": {
+        target: "http://localhost:5000",
+        secure: false,
+        changeOrigin: true,
+      },
+      "/auth/google": {
+        target: "http://localhost:5000",
         secure: false,
         changeOrigin: true,
       },
@@ -133,6 +138,6 @@ module.exports = {
   },
 };
 
-if (process.env.NODE_ENV !== "production") {
-  module.exports.plugins.push(new WebpackBundleAnalyzer());
-}
+// if (process.env.NODE_ENV !== "production") {
+//   module.exports.plugins.push(new WebpackBundleAnalyzer());
+// }

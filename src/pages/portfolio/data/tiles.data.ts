@@ -39,8 +39,7 @@ export default [
     title: "Emaily App (Full Stack)",
     subtitle:
       "Built with Express, SendGrid, MongoDB, React, Redux, React-Router, SCSS & Webpack",
-    href: "https://github.com/jamesgower/emaily",
-    redirect: true,
+    href: "/emaily",
     featured: true,
     color: "#ea454b",
     class: "fas fa-envelope",

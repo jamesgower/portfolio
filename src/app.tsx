@@ -2,7 +2,7 @@ import "core-js/stable";
 import "regenerator-runtime/runtime";
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
-import AppRouter from "./routes/Router";
+import AppRouter from "./router/Router";
 import "normalize.css/normalize.css";
 import "./scss/styles.scss";
 import "bootstrap-css-only/css/bootstrap.min.css";
