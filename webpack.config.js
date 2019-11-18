@@ -6,10 +6,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV === "production";
-let Dotenv;
-if (!isProduction) {
-  Dotenv = require("dotenv-webpack");
-}
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   entry: ["./src/app.tsx"],
@@ -114,6 +111,7 @@ module.exports = {
       template: "./public/index.html",
       favicon: "./public/images/favicon.png",
     }),
+    new Dotenv(),
   ],
   devtool: isProduction ? "source-map" : "inline-source-map",
   devServer: {
@@ -149,7 +147,3 @@ module.exports = {
     },
   },
 };
-
-if (!isProduction) {
-  module.exports.plugins.push(new Dotenv());
-}
