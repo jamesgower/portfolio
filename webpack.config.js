@@ -6,7 +6,10 @@ const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV === "production";
-if (!isProduction) const Dotenv = require("dotenv-webpack");
+let Dotenv;
+if (!isProduction) {
+  Dotenv = require("dotenv-webpack");
+}
 
 module.exports = {
   entry: ["./src/app.tsx"],
