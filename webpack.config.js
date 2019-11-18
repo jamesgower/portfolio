@@ -1,4 +1,3 @@
-const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
@@ -6,6 +5,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const WebpackBundleAnalyzer = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const Dotenv = require("dotenv-webpack");
 
 const isProduction = process.env.NODE_ENV === "production";
 !isProduction && require("dotenv").config();
@@ -113,19 +113,36 @@ module.exports = {
       template: "./public/index.html",
       favicon: "./public/images/favicon.png",
     }),
-    new webpack.DefinePlugin({
-      "process.env": {
-        TWITCH_CLIENT_ID: JSON.stringify(process.env.TWITCH_CLIENT_ID),
-      },
-    }),
+    new Dotenv(),
   ],
   devtool: isProduction ? "source-map" : "inline-source-map",
   devServer: {
     contentBase: path.join(__dirname, "public"),
     historyApiFallback: true,
+    port: 8080,
     proxy: {
-      "/api/*": {
-        target: "http://[::1]:5000",
+      "/api/**": {
+        target: "http://localhost:3000",
+        secure: false,
+        changeOrigin: true,
+      },
+      "/auth/google": {
+        target: "http://localhost:3000",
+        secure: false,
+        changeOrigin: true,
+      },
+      "/auth/facebook": {
+        target: "http://localhost:3000",
+        secure: false,
+        changeOrigin: true,
+      },
+      "/auth/github": {
+        target: "http://localhost:3000",
+        secure: false,
+        changeOrigin: true,
+      },
+      "/auth/reddit": {
+        target: "http://localhost:3000",
         secure: false,
         changeOrigin: true,
       },
@@ -133,6 +150,6 @@ module.exports = {
   },
 };
 
-if (process.env.NODE_ENV !== "production") {
-  module.exports.plugins.push(new WebpackBundleAnalyzer());
-}
+// if (process.env.NODE_ENV !== "production") {
+//   module.exports.plugins.push(new WebpackBundleAnalyzer());
+// }

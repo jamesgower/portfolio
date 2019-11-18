@@ -1,0 +1,20 @@
+.login__container {
+  height: 100vh;
+  margin-top: -1px;
+  padding-top: 1px;
+  width: 100vw;
+}
+
+.login__button-container {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border: 2px solid black;
+  width: 360px;
+  margin: 30vh auto;
+  border-radius: 10px;
+  background: #fff;
+  @media screen and (max-width: $s-breakpoint) {
+    width: 70vw;
+  }
+}

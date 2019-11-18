@@ -12,6 +12,7 @@ import expensifyImage from "../images/expensify.jpg";
 import drumImage from "../images/drum.jpg";
 import calculatorImage from "../images/calculator.jpg";
 import portfolioImage from "../images/portfolio.jpg";
+import letsWatchImage from "../images/lets-watch.jpg";
 
 export default [
   {
@@ -35,16 +36,15 @@ export default [
     sourceCode: "https://github.com/jamesgower/portfolio/tree/prod/src/pages/chatter",
   },
   {
-    img: emailyImage,
-    title: "Emaily App (Full Stack)",
-    subtitle:
-      "Built with Express, SendGrid, MongoDB, React, Redux, React-Router, SCSS & Webpack",
-    href: "https://github.com/jamesgower/emaily",
+    img: letsWatchImage,
+    title: "Let's Watch!",
+    subtitle: "Built with React, TypeScript, Redux, TMDB API, Express, Passport & SCSS",
+    href: "/lets-watch",
     redirect: true,
     featured: true,
-    color: "#ea454b",
-    class: "fas fa-envelope",
-    sourceCode: "https://github.com/jamesgower/emaily",
+    color: "#131319",
+    class: "fas fa-video",
+    sourceCode: "https://github.com/jamesgower/lets-watch",
   },
   {
     img: twitterImage,
@@ -129,13 +129,16 @@ export default [
     featured: true,
   },
   {
-    img: drumImage,
-    title: "Drum Machine",
-    subtitle: "Built with React, TypeScript, Howler & SCSS",
-    href: "/drum-machine",
-    color: "#c6c6c6",
-    class: "fas fa-headphones",
-    sourceCode: "https://github.com/jamesgower/expensify",
+    img: emailyImage,
+    title: "Emaily App (Full Stack)",
+    subtitle:
+      "Built with Express, SendGrid, MongoDB, React, Redux, React-Router, SCSS & Webpack",
+    href: "https://github.com/jamesgower/emaily",
+    redirect: true,
+    featured: true,
+    color: "#ea454b",
+    class: "fas fa-envelope",
+    sourceCode: "https://github.com/jamesgower/emaily",
   },
   {
     img: calculatorImage,

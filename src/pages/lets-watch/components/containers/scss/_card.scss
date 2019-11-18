@@ -1,0 +1,26 @@
+.card__container {
+  display: inline-flex;
+  flex-direction: column;
+  height: 340px;
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+}
+
+.card__image {
+  display: block;
+  width: 90%;
+  height: 90%;
+  margin: auto;
+  &:hover {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.card__title {
+  text-align: center;
+}
