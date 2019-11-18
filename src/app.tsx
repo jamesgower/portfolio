@@ -16,8 +16,6 @@ import configureStore from "./store/store";
 
 const store = configureStore();
 
-console.log(process.env);
-
 const App = (): JSX.Element => {
   const [isLoading, setLoading] = useState(true);
   const RouterWithLoading = withLoading(AppRouter);

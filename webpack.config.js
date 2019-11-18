@@ -1,3 +1,4 @@
+const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
@@ -6,7 +7,11 @@ const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV === "production";
-const Dotenv = require("dotenv-webpack");
+let Dotenv;
+
+if (!isProduction) {
+  Dotenv = require("dotenv-webpack");
+}
 
 module.exports = {
   entry: ["./src/app.tsx"],
@@ -75,6 +80,15 @@ module.exports = {
         extractComments: true,
       }),
       new OptimizeCSSAssetsPlugin({}),
+      new webpack.EnvironmentPlugin([
+        "MONGO_DB_URI",
+        "REDDIT_CONSUMER_KEY",
+        "REDDIT_CONSUMER_SECRET",
+        "TMDB_API_KEY",
+        "TMDB_URL",
+        "TWITCH_AUTHORIZATION",
+        "TWITCH_CLIENT_ID",
+      ]),
     ],
     moduleIds: "hashed",
     runtimeChunk: "single",
@@ -111,7 +125,6 @@ module.exports = {
       template: "./public/index.html",
       favicon: "./public/images/favicon.png",
     }),
-    new Dotenv(),
   ],
   devtool: isProduction ? "source-map" : "inline-source-map",
   devServer: {
@@ -147,3 +160,7 @@ module.exports = {
     },
   },
 };
+
+if (!isProduction) {
+  module.exports.plugins.push(new Dotenv());
+}
