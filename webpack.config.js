@@ -4,11 +4,9 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const WebpackBundleAnalyzer = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const Dotenv = require("dotenv-webpack");
 
 const isProduction = process.env.NODE_ENV === "production";
-!isProduction && require("dotenv").config();
 
 module.exports = {
   entry: ["./src/app.tsx"],
@@ -150,6 +148,6 @@ module.exports = {
   },
 };
 
-// if (process.env.NODE_ENV !== "production") {
-//   module.exports.plugins.push(new WebpackBundleAnalyzer());
-// }
+if (!isProduction) {
+  module.exports.plugins.push(new Dotenv());
+}
