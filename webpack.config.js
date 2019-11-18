@@ -4,9 +4,9 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const Dotenv = require("dotenv-webpack");
 
 const isProduction = process.env.NODE_ENV === "production";
+if (!isProduction) const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   entry: ["./src/app.tsx"],
@@ -111,7 +111,6 @@ module.exports = {
       template: "./public/index.html",
       favicon: "./public/images/favicon.png",
     }),
-    new Dotenv(),
   ],
   devtool: isProduction ? "source-map" : "inline-source-map",
   devServer: {
