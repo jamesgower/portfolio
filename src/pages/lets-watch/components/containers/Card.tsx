@@ -22,6 +22,7 @@ const Card: React.FC<CardProps> = ({ posterLink, title, id, type }): JSX.Element
               ? `http://image.tmdb.org/t/p/w300/${posterLink}`
               : "https://www.rspcansw.org.au/wp-content/themes/noPhotoFound.png"
           }
+          style={{ border: posterLink ? "none" : "1px solid white" }}
           alt={title}
           onClick={(): void => isOpen(true)}
         />

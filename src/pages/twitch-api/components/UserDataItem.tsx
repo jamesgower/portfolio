@@ -13,13 +13,22 @@ const initialState: UserDataItemState = {
 class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState> {
   public readonly state = initialState;
 
-  public componentWillMount(): void {
-    const { name } = this.props;
+  public constructor(props) {
+    super(props);
+    const { name } = props;
     const userDataJSON = localStorage.getItem(name);
     const userData = JSON.parse(userDataJSON);
-    this.setState({ userData, desktop: window.innerWidth >= 990 });
+    this.state = {
+      ...initialState,
+      userData,
+    };
+  }
 
+  public componentDidMount(): void {
     window.addEventListener("resize", this.updateWindowDimensions);
+    this.setState({
+      desktop: window.innerWidth >= 990,
+    });
   }
 
   public componentWillUnmount(): void {

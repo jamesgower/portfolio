@@ -63,30 +63,45 @@ class Movies extends Component<Props, State> {
   }
 
   public onSearch = async (page = 1): Promise<void> => {
-    const { discover, query } = this.state;
+    const {
+      discover,
+      query,
+      sortBy,
+      fromYear,
+      toYear,
+      minRating,
+      prefGenre,
+      avoidGenre,
+    } = this.state;
+
     if (!discover && !query) {
       this.setState({ error: "Please enter a valid search" });
       setTimeout((): void => {
-        return this.setState({ error: "" });
-      }, 5000);
+        this.setState({ error: "" });
+      }, 2000);
+      return;
+    }
+    if (discover && prefGenre === avoidGenre && prefGenre && avoidGenre) {
+      this.setState({ error: "You cannot prefer and avoid the same genre" });
+      setTimeout((): void => {
+        this.setState({ error: "" });
+      }, 2000);
+      return;
     }
     this.setState({ results: null, search: true });
     let res;
     if (discover) {
-      const { sortBy, fromYear, toYear, minRating, prefGenre, avoidGenre } = this.state;
-      if (prefGenre === avoidGenre && prefGenre && avoidGenre)
-        return this.setState({ error: "You cannot prefer and avoid the same genre" });
       const query = `${prefGenre && `&with_genres=${prefGenre}`}${avoidGenre &&
         `&without_genres=${avoidGenre}`}&page=${page}&vote_average.gte=${minRating}&sort_by=${sortBy}&primary_release_date.gte=${fromYear}-01-01&primary_release_date.lte=${toYear}-01-01`;
       res = await axios.get(
-        `${process.env.TMDB_URL}/discover/movie/${process.env.TMDB_API_KEY}${query}`,
+        `${process.env.TMDB_URL}/discover/movie${process.env.TMDB_API_KEY}${query}`,
       );
     } else {
       res = await axios.get(
         `${process.env.TMDB_URL}/search/movie${process.env.TMDB_API_KEY}&query=${query}&page=${page}`,
       );
     }
-    return this.setState({
+    this.setState({
       results: res.data.results,
       maxPages: res.data.total_pages,
     });
@@ -242,6 +257,7 @@ class Movies extends Component<Props, State> {
                       <option value="revenue.desc">Revenue</option>
                     </Input>
                   </Col>
+                  {error && <p className="movies__error">{error}</p>}
                   <Button
                     outline
                     color="success"
@@ -254,7 +270,6 @@ class Movies extends Component<Props, State> {
                   >
                     Search
                   </Button>
-                  {error && <p className="movies__error">{error}</p>}
                 </Row>
               </div>
             ) : (
