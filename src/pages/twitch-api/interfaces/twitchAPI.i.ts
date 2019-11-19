@@ -2,51 +2,50 @@ export default interface TwitchState {
   users: string[];
   onlineUserData: OnlineUser[];
   offlineUserData: OfflineUser[];
-  matureFilter: boolean;
-  show: string;
-  newStreamer: string;
-  error?: boolean;
-  usersToKeep?: string[];
 }
 
-export interface APICall {
-  result: object;
-  stream: {
-    game: string;
-    viewers: string;
-    average_fps: number;
-    created_at: string;
-    preview: {
-      medium: string;
-    };
-    channel: {
-      status: string;
-      logo: string;
-      mature: boolean;
-    };
-  };
-  game: object;
+export interface FetchCall {
+  title: string;
+  game_id: string;
+  viewer_count: number;
+  started_at: string;
+  thumbnail_url: string;
+  display_name: string;
+  profile_image_url: string;
+  offline_image_url: string;
+  name: string;
+}
+
+export interface StreamAPICall {
+  title: string;
+  game_id: string;
+  viewer_count: number;
+  started_at: string;
+  thumbnail_url: string;
+}
+
+export interface ProfileAPICall {
+  display_name: string;
+  profile_image_url: string;
+  offline_image_url: string;
 }
 
 export interface OnlineUser {
   name: string;
   game: string;
   status: string;
-  viewers: string;
-  fps: number;
+  viewers: number;
   image: string;
   online: boolean;
   preview: string;
-  mature: boolean;
   link: string;
-  lastSeen?: string;
-  lastGame?: string;
 }
 
 export interface SavedUser {
   name: string;
   lastGame: string;
   image: string;
+  offline_image: string;
   lastSeen: string;
   link: string;
 }
@@ -54,5 +53,7 @@ export interface SavedUser {
 export interface OfflineUser {
   name: string;
   online: boolean;
+  image: string;
   link: string;
+  offline_image: string;
 }

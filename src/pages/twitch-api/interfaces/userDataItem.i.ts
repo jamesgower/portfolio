@@ -1,24 +1,20 @@
-import { OnlineUser } from "./twitchAPI.i";
-
 export interface UserDataItemProps {
   name: string;
   game?: string;
   status?: string;
-  viewers?: string;
-  fps?: number;
+  viewers?: number;
   image?: string;
   online: boolean;
   preview?: string;
-  mature?: boolean;
   link: string;
-  removeUser: Function;
-  usersToKeep: string[];
-  matureFilter: boolean;
+  lastGame?: string;
+  lastSeen?: string;
+  offline_image?: string;
+  removeUser: (user, online) => void;
 }
 
 export interface UserDataItemState {
   showComponent: boolean;
-  userData: OnlineUser;
-  usersToKeep: string[];
+  userData: UserDataItemProps;
   desktop: boolean;
 }
