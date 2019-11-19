@@ -24,15 +24,7 @@ export default (state = defaultState, action: AuthActionTypes): AuthState => {
       };
     case BROWSE_AS_GUEST:
       return {
-        profile: {
-          _id: null,
-          userID: null,
-          firstName: "Guest",
-          lastName: null,
-          email: null,
-          tvShows: null,
-          movies: null,
-        },
+        profile: action.payload,
       };
     case ADD_TO_USER:
       return {

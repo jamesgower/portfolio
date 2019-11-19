@@ -25,6 +25,17 @@ export default [
     sourceCode: "https://github.com/jamesgower/portfolio/tree/prod/src/pages/tic-tac-toe",
   },
   {
+    img: letsWatchImage,
+    title: "Let's Watch (In Progress)",
+    subtitle: "Built with React, TypeScript, Redux, TMDB API, Express, Passport & SCSS",
+    href: "/lets-watch",
+    redirect: true,
+    featured: true,
+    color: "#131319",
+    class: "fas fa-video",
+    sourceCode: "https://github.com/jamesgower/lets-watch",
+  },
+  {
     img: chatterImage,
     title: "Chatter (Chat App)",
     subtitle: "Built with TypeScript, Socket.io, Axios, Express, React, Redux & SCSS",
@@ -34,17 +45,6 @@ export default [
     color: "#2E5D82",
     class: "far fa-comments",
     sourceCode: "https://github.com/jamesgower/portfolio/tree/prod/src/pages/chatter",
-  },
-  {
-    img: letsWatchImage,
-    title: "Let's Watch!",
-    subtitle: "Built with React, TypeScript, Redux, TMDB API, Express, Passport & SCSS",
-    href: "/lets-watch",
-    redirect: true,
-    featured: true,
-    color: "#131319",
-    class: "fas fa-video",
-    sourceCode: "https://github.com/jamesgower/lets-watch",
   },
   {
     img: twitterImage,
@@ -119,16 +119,6 @@ export default [
     sourceCode: "https://github.com/jamesgower/portfolio/tree/prod/src/pages/twitch-api",
   },
   {
-    img: expensifyImage,
-    title: "Expensify App",
-    subtitle: "Built with React, Redux, FireBase & Jest",
-    href: "https://github.com/jamesgower/expensify",
-    redirect: true,
-    color: "#364051",
-    class: "far fa-money-bill-alt",
-    featured: true,
-  },
-  {
     img: emailyImage,
     title: "Emaily App (Full Stack)",
     subtitle:
@@ -139,6 +129,16 @@ export default [
     color: "#ea454b",
     class: "fas fa-envelope",
     sourceCode: "https://github.com/jamesgower/emaily",
+  },
+
+  {
+    img: expensifyImage,
+    title: "Expensify App",
+    subtitle: "Built with React, Redux, FireBase & Jest",
+    href: "https://github.com/jamesgower/expensify",
+    redirect: true,
+    color: "#364051",
+    class: "far fa-money-bill-alt",
   },
   {
     img: calculatorImage,

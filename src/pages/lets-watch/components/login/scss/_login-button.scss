@@ -1,6 +1,6 @@
 .login-button__btn {
   height: 40px;
-  font-family: Roboto, sans-serif;
+  font-family: "Barlow Semi Condensed", sans-serif;
   margin: 5px 0;
   display: inline-block;
   font-weight: 400;
@@ -25,6 +25,8 @@
 }
 
 %btn {
+  width: 80%;
+  margin: 5px auto;
   color: #fff;
   &:hover {
     color: #fff;

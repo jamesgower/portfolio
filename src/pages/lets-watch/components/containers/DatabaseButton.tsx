@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { AppState } from "../../interfaces/app.i";
+import { ProfileState } from "../../interfaces/app.i";
 import * as authActions from "../../actions/auth.actions";
 import spinner from "./spinSmall.gif";
+import { AppState } from "../../../../store/store";
 
 interface Props {
   type: string;
   id: number;
 }
 
-const DatabaseButton: React.FC<Props> = ({ type, id }) => {
+const DatabaseButton: React.FC<Props> = ({ type, id }): JSX.Element => {
   console.log(type);
   const { tvShows, movies } = useSelector(
-    (state): AppState => state.letsWatch.auth.profile,
+    (state: AppState): ProfileState => state.letsWatch.auth.profile,
   );
   const [requesting, setRequesting] = useState(false);
   const dispatch = useDispatch();
   const added = type === "movie" ? movies.indexOf(id) !== -1 : tvShows.indexOf(id) !== -1;
-  console.log(added);
   const text = requesting ? (
     <img src={spinner} alt="Loading..." className="database__spinner" />
   ) : type === "movie" ? (
@@ -36,7 +36,7 @@ const DatabaseButton: React.FC<Props> = ({ type, id }) => {
   const addToDatabase = async (): Promise<void> => {
     setRequesting(true);
     await dispatch(authActions.addToUser(id, type === "tv" ? "tvShows" : "movies"));
-    setTimeout(() => {
+    setTimeout((): void => {
       setRequesting(false);
     }, 800);
   };
@@ -44,7 +44,7 @@ const DatabaseButton: React.FC<Props> = ({ type, id }) => {
   const removeFromDatabase = async (): Promise<void> => {
     setRequesting(true);
     await dispatch(authActions.removeFromUser(id, type === "tv" ? "tvShows" : "movies"));
-    setTimeout(() => {
+    setTimeout((): void => {
       setRequesting(false);
     }, 800);
   };
@@ -54,8 +54,13 @@ const DatabaseButton: React.FC<Props> = ({ type, id }) => {
       <Button
         outline
         className="modal__button"
-        color="success"
-        onClick={added ? () => removeFromDatabase() : () => addToDatabase()}
+        color={added ? "danger" : "success"}
+        size="lg"
+        onClick={
+          added
+            ? (): Promise<void> => removeFromDatabase()
+            : (): Promise<void> => addToDatabase()
+        }
         style={{ display: "inline-block" }}
       >
         {text}

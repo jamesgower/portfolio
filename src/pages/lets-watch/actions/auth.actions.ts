@@ -23,10 +23,6 @@ export const logout = (): ((dispatch: Dispatch) => void) => async (
   dispatch({ type: LOGOUT });
 };
 
-export const browseAsGuest = (): BrowseAsGuestAction => ({
-  type: BROWSE_AS_GUEST,
-});
-
 export const addToUser = (
   showID: number,
   type: string,

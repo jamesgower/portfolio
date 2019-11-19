@@ -89,7 +89,6 @@ module.exports = (app): void => {
           error: "wrong_user",
         });
       }
-      console.log(user, type);
       const index = user[type].indexOf(showID);
       if (index > -1) {
         user[type].splice(index, 1);

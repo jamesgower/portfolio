@@ -28,14 +28,20 @@ const TopMedia: React.FC<Props> = ({ type, autoplay }): JSX.Element => {
             type: "carousel",
             perView: 5,
             breakpoints: {
-              1200: {
-                perView: 3,
+              980: {
+                perView: 4,
               },
-              768: {
+              740: {
+                perView: 3,
+                peek: 50,
+              },
+              480: {
                 perView: 2,
                 peek: 50,
               },
             },
+            swipeThreshold: false,
+            dragThreshold: false,
             autoplay,
             animationTimingFunc: "cubic-bezier(0.680, -0.550, 0.265, 1.550)",
             direction: type === "movies" ? "ltr" : "rtl",

@@ -5,13 +5,26 @@
   width: 100vw;
 }
 
+.login__title {
+  font-size: 24px;
+  text-align: center;
+  font-family: "Barlow Semi Condensed", sans-serif;
+  font-weight: bold;
+}
+
+.login__text {
+  font-size: 16px;
+  text-align: center;
+  font-family: "Barlow Semi Condensed", sans-serif;
+}
+
 .login__button-container {
   display: flex;
   flex-direction: column;
   padding: 30px;
-  border: 2px solid black;
+  border: 2px solid red;
   width: 360px;
-  margin: 30vh auto;
+  margin: 25vh auto;
   border-radius: 10px;
   background: #fff;
   @media screen and (max-width: $s-breakpoint) {

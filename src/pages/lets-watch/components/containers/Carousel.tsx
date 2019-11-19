@@ -20,16 +20,6 @@ const Carousel: React.FC<CarouselProps> = ({
 
   return (
     <div className={`glide ${element}`}>
-      <div className="glide__track" data-glide-el="track">
-        <ul className="glide__slides">
-          {children.map((slide, index) => {
-            return React.cloneElement(slide, {
-              key: index,
-              className: `${slide.props.className} glide__slide`,
-            });
-          })}
-        </ul>
-      </div>
       <div data-glide-el="controls">
         <button type="button" className="carousel__left-arrow" data-glide-dir="<">
           <svg
@@ -51,6 +41,16 @@ const Carousel: React.FC<CarouselProps> = ({
             <path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z" />
           </svg>
         </button>
+      </div>
+      <div className="glide__track" data-glide-el="track">
+        <ul className="glide__slides">
+          {children.map((slide, index) => {
+            return React.cloneElement(slide, {
+              key: index,
+              className: `${slide.props.className} glide__slide`,
+            });
+          })}
+        </ul>
       </div>
     </div>
   );

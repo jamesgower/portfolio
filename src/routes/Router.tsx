@@ -13,15 +13,17 @@ import SimonSays from "../pages/simon-says/components/SimonSays";
 import DrumMachine from "../pages/drum-machine/components/DrumMachine";
 import Chatter from "../pages/chatter/components/Landing";
 import { AppState } from "../store/store";
-import PrivateRoute from "./PrivateRoute";
-import Account from "../pages/lets-watch/components/account/Account";
 import Home from "../pages/lets-watch/components/home/Home";
 import Login from "../pages/lets-watch/components/login/Login";
+import MyTV from "../pages/lets-watch/components/my-tv/MyTV";
+import MyMovies from "../pages/lets-watch/components/my-tv/MyMovies";
+import Movies from "../pages/lets-watch/components/tv/Movies";
+import TVShows from "../pages/lets-watch/components/tv/TVShows";
 
 const history = createBrowserHistory();
 
 const AppRouter: React.SFC = (): JSX.Element => {
-  const { profile } = useSelector((state: AppState) => state.letsWatch.auth);
+  const profile = useSelector((state: AppState) => state.letsWatch.auth.profile);
   return (
     <Router history={history}>
       <Switch>
@@ -34,12 +36,11 @@ const AppRouter: React.SFC = (): JSX.Element => {
         <Route path="/drum-machine" component={DrumMachine} />
         <Route path="/tic-tac-toe" component={TicTacToe} />
         <Route path="/chatter" exact component={Chatter} />
-        <Route
-          path="/lets-watch"
-          exact
-          component={profile?.userID ?? false ? Home : Login}
-        />
-        <PrivateRoute auth={!!profile} path="/lets-watch/account" component={Account} />
+        <Route path="/lets-watch" exact component={profile ?? false ? Home : Login} />
+        <Route path="/lets-watch/my-tv-shows" component={MyTV} />
+        <Route path="/lets-watch/my-movies" component={MyMovies} />
+        <Route path="/lets-watch/movies" component={Movies} />
+        <Route path="/lets-watch/tv-shows" component={TVShows} />
         <Route component={NotFoundPage} />
       </Switch>
     </Router>

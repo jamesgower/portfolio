@@ -7,19 +7,25 @@ interface CardProps {
   title: string;
   id: number;
   type: string;
+  className?: string;
 }
 
 const Card: React.FC<CardProps> = ({ posterLink, title, id, type }): JSX.Element => {
   const [open, isOpen] = useState(false);
   return (
     <>
-      <div className="card__container">
+      <div className="card__container animated fadeIn">
         <img
           className="card__image"
-          src={`http://image.tmdb.org/t/p/w300/${posterLink}`}
+          src={
+            posterLink
+              ? `http://image.tmdb.org/t/p/w300/${posterLink}`
+              : "https://www.rspcansw.org.au/wp-content/themes/noPhotoFound.png"
+          }
           alt={title}
           onClick={(): void => isOpen(true)}
         />
+        <p className="card__text">{title}</p>
       </div>
       {open && (
         <Modal
