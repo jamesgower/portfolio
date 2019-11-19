@@ -31,7 +31,7 @@ const Home: React.FC = (): JSX.Element => {
         <h2 className="home__title">Popular TV Shows</h2>
         <TopMedia type="tv" autoplay={2500} />
       </Container>
-    </div>wwww
+    </div>
   );
 };
 
