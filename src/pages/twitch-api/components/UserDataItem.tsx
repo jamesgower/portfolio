@@ -76,17 +76,17 @@ class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState>
         <p className="user__text">
           <span className="user__boldText">Status:</span> User is offline
         </p>
-        {userData.lastGame && (
+        {userData?.lastGame && (
           <p className="user__text">
             <span className="user__boldText">Last Played: </span> {userData.lastGame}
           </p>
         )}
         <p className="user__text">
           <span className="user__boldText">
-            {userData.lastSeen ? "Last Streamed: " : "Last Seen: "}
+            {userData?.lastGame ? "Last Streamed: " : "Last Seen: "}
           </span>
-          {userData.lastSeen
-            ? ` ${day(userData.lastSeen).format("MMMM D @ hh:mmA")}`
+          {userData?.lastSeen
+            ? day(userData?.lastSeen).format("MMMM D @ hh:mmA")
             : " Never"}
         </p>
       </>

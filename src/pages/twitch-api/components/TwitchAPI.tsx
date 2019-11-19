@@ -12,15 +12,7 @@ import background from "../images/background.jpg";
 import Header from "./Header";
 
 const initialState: TwitchState = {
-  users: [
-    "Yogscast",
-    "FreeCodeCamp",
-    "sips_",
-    "888poker",
-    "NickMercs",
-    "BuckArmy",
-    "BigBangs06",
-  ],
+  users: ["Yogscast", "FreeCodeCamp", "sips_", "888poker", "NickMercs", "BuckArmy"],
   onlineUserData: [],
   offlineUserData: [],
 };
@@ -33,33 +25,29 @@ const initialState: TwitchState = {
 class TwitchAPI extends React.Component<{}, TwitchState> {
   public readonly state = initialState;
 
-  public componentWillMount(): void {
+  public async componentDidMount(): Promise<void> {
     /**
      * Attempt to get information from all saved users in local storage.
      * If any data exists, store it in the state. If there are any errors,
      * log it into the console.
      */
 
-    try {
-      const users = JSON.parse(localStorage.getItem("users"));
-      if (users) {
-        this.setState({ users });
-        for (const user of users) {
-          this.getData(user);
-        }
-      } else {
-        const { users } = this.state;
-        for (const user of users) {
-          this.getData(user);
-        }
+    const users = JSON.parse(localStorage.getItem("users"));
+    if (users) {
+      this.setState({ users });
+      for (const user of users) {
+        this.getData(user);
       }
-    } catch (err) {
-      console.error(err);
+    } else {
+      const { users } = this.state;
+      for (const user of users) {
+        this.getData(user);
+      }
+      localStorage.setItem("users", JSON.stringify(users));
     }
   }
 
   public onNewStreamer = (streamer): void => {
-    console.log(streamer);
     const { users } = this.state;
     users.push(streamer);
     this.getData(streamer);
@@ -89,58 +77,54 @@ class TwitchAPI extends React.Component<{}, TwitchState> {
   };
 
   public getData = async (name: string): Promise<void> => {
-    try {
-      const stream: StreamAPICall = await this.fetchData(`streams?user_login=${name}`);
-      const profile: ProfileAPICall = await this.fetchData(`users?login=${name}`);
-      let game;
-      if (stream && profile) game = await this.fetchData(`games?id=${stream.game_id}`);
+    const stream: StreamAPICall = await this.fetchData(`streams?user_login=${name}`);
+    const profile: ProfileAPICall = await this.fetchData(`users?login=${name}`);
+    let game;
+    if (stream && profile) game = await this.fetchData(`games?id=${stream.game_id}`);
+    if (stream && game) {
+      const { onlineUserData } = this.state;
+      const user: OnlineUser = {
+        name: profile.display_name,
+        game: game.name,
+        status: stream.title,
+        viewers: stream.viewer_count,
+        image: profile.profile_image_url,
+        online: true,
+        preview: this.replaceFields(stream.thumbnail_url),
+        link: `https://www.twitch.tv/${profile.display_name}`,
+      };
 
-      if (stream) {
-        const { onlineUserData } = this.state;
-        const user: OnlineUser = {
-          name: profile.display_name,
-          game: game.name,
-          status: stream.title,
-          viewers: stream.viewer_count,
-          image: profile.profile_image_url,
-          online: true,
-          preview: this.replaceFields(stream.thumbnail_url),
-          link: `https://www.twitch.tv/${name}`,
-        };
+      const savedUser: SavedUser = {
+        name: profile.display_name,
+        lastGame: game.name,
+        image: profile.profile_image_url,
+        offline_image: profile.offline_image_url,
+        lastSeen: stream.started_at,
+        link: `https://www.twitch.tv/${profile.display_name}`,
+      };
 
-        const savedUser: SavedUser = {
-          name: profile.display_name,
-          lastGame: game.name,
-          image: profile.profile_image_url,
-          offline_image: profile.offline_image_url,
-          lastSeen: stream.started_at,
-          link: `https://www.twitch.tv/${profile.display_name}`,
-        };
-
-        onlineUserData.push(user);
-        localStorage.setItem(savedUser.name, JSON.stringify(savedUser));
-        this.setState({
-          onlineUserData,
-        });
-      } else {
-        const { offlineUserData } = this.state;
-        const user = {
-          name: profile.display_name,
-          image: profile.profile_image_url,
-          online: false,
-          offline_image: profile.offline_image_url,
-          link: `https://www.twitch.tv/${name}`,
-        };
-        offlineUserData.push(user);
-        this.setState({
-          offlineUserData,
-        });
-        if (localStorage.getItem(user.name) === null) {
-          localStorage.setItem(user.name, JSON.stringify(user));
-        }
+      onlineUserData.push(user);
+      localStorage.setItem(savedUser.name, JSON.stringify(savedUser));
+      this.setState({
+        onlineUserData,
+      });
+    } else {
+      const { offlineUserData } = this.state;
+      console.log(name, profile.display_name);
+      const user = {
+        name: profile.display_name,
+        image: profile.profile_image_url,
+        online: false,
+        offline_image: profile.offline_image_url,
+        link: `https://www.twitch.tv/${profile.display_name}`,
+      };
+      offlineUserData.push(user);
+      this.setState({
+        offlineUserData,
+      });
+      if (localStorage.getItem(user.name) === null) {
+        localStorage.setItem(user.name, JSON.stringify(user));
       }
-    } catch (err) {
-      console.log(err);
     }
   };
 
