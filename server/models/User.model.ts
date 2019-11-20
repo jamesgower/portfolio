@@ -17,8 +17,8 @@ const userSchema = new Schema({
     default: null,
   },
   image: String,
-  tvShows: { default: [], type: [Number] },
-  movies: { default: [], type: [Number] },
+  tvShows: { type: Array, default: [] },
+  movies: { type: Array, default: [] },
 });
 
 mongoose.model("users", userSchema);
