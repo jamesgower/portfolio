@@ -18,7 +18,10 @@ passport.deserializeUser((id, done): void => {
   });
 });
 
-const URL = process.env.NODE_ENV !== "production" ? "http://localhost:8080" : "";
+const URL =
+  process.env.NODE_ENV !== "production"
+    ? "http://localhost:8080"
+    : "https://www.james-gower.dev";
 
 try {
   passport.use(
