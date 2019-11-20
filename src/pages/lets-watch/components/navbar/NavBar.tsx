@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Dropdown, DropdownMenu, DropdownToggle, DropdownItem } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import { ProfileState } from "../../interfaces/app.i";
 import { AppState } from "../../../../store/store";
 import * as actions from "../../actions/auth.actions";
 
-const NavBar = (): JSX.Element => {
+const NavBar = ({ history }): JSX.Element => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const { image } = useSelector(
@@ -63,11 +63,15 @@ const NavBar = (): JSX.Element => {
           <DropdownItem header style={{ marginTop: "8px" }}>
             Settings
           </DropdownItem>
-          <DropdownItem onClick={() => dispatch(actions.logout())}>Logout</DropdownItem>
+          <DropdownItem
+            onClick={(): ((dispatch) => void) => dispatch(actions.logout(history))}
+          >
+            Logout
+          </DropdownItem>
         </DropdownMenu>
       </Dropdown>
     </div>
   );
 };
 
-export default NavBar;
+export default withRouter(NavBar);

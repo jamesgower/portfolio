@@ -16,10 +16,11 @@ export const fetchUser = (): ((dispatch: Dispatch) => Promise<void>) => async (
   dispatch({ type: FETCH_USER, payload: res.data });
 };
 
-export const logout = (): ((dispatch: Dispatch) => void) => async (
+export const logout = (history): ((dispatch: Dispatch) => void) => async (
   dispatch,
 ): Promise<void> => {
   await axios.get("/api/logout");
+  history.push("/lets-watch");
   dispatch({ type: LOGOUT });
 };
 
