@@ -14,11 +14,10 @@ const userSchema = new Schema({
   lastName: String,
   email: {
     type: String,
-    default: null,
   },
   image: String,
-  tvShows: { type: Array, default: [] },
-  movies: { type: Array, default: [] },
+  tvShows: { type: Array },
+  movies: { type: Array },
 });
 
 mongoose.model("users", userSchema);
