@@ -10,7 +10,7 @@ import { AppState } from "../../../store/store";
 
 const Setup: React.SFC = (): JSX.Element => {
   const { noPlayers, readyToPlay } = useSelector(
-    ({ tictactoe }: AppState): PlayerState => tictactoe.player,
+    (state: AppState): PlayerState => state.tictactoe.player,
   );
 
   return (

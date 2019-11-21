@@ -36,4 +36,18 @@
 @import "./../pages/twitch-api/scss/user-data-item";
 @import "./../pages/wikipedia-api/scss/article";
 @import "./../pages/wikipedia-api/scss/main";
-@import "./../pages/emaily/scss/landing";
+@import "./../pages/lets-watch/components/login/scss/login";
+@import "./../pages/lets-watch/components/login/scss/login-button";
+@import "./../pages/lets-watch/components/navbar/scss/navbar";
+@import "./../pages/lets-watch/components/containers/scss/card";
+@import "./../pages/lets-watch/components/containers/scss/modal";
+@import "./../pages/lets-watch/components/containers/scss/carousel";
+@import "./../pages/lets-watch/components/misc/scss/not-found";
+@import "./../pages/lets-watch/components/home/scss/home";
+@import "./../pages/lets-watch/components/containers/scss/database-button";
+@import "./../pages/lets-watch/components/containers/scss/result";
+@import "./../pages/lets-watch/components/containers/scss/movies";
+@import "./../pages/lets-watch/components/my-tv/scss/my-tv";
+
+@import "@glidejs/glide/src/assets/sass/glide.core.scss";
+@import "@glidejs/glide/src/assets/sass/glide.theme.scss";

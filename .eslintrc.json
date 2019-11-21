@@ -65,6 +65,7 @@
     "global-require": "off",
     "no-loop-func": "off",
     "no-await-in-loop": "off",
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "react-redux/connect-prefer-named-arguments": "off"
   }
 }

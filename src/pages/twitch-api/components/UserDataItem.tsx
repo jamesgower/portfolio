@@ -6,7 +6,6 @@ import placeholder from "../images/placeholder.png";
 
 const initialState: UserDataItemState = {
   showComponent: true,
-  usersToKeep: [],
   desktop: false,
   userData: null,
 };
@@ -14,12 +13,22 @@ const initialState: UserDataItemState = {
 class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState> {
   public readonly state = initialState;
 
-  public componentDidMount(): void {
-    const { name } = this.props;
+  public constructor(props) {
+    super(props);
+    const { name } = props;
     const userDataJSON = localStorage.getItem(name);
     const userData = JSON.parse(userDataJSON);
-    this.setState({ userData, desktop: window.innerWidth >= 990 });
+    this.state = {
+      ...initialState,
+      userData,
+    };
+  }
+
+  public componentDidMount(): void {
     window.addEventListener("resize", this.updateWindowDimensions);
+    this.setState({
+      desktop: window.innerWidth >= 990,
+    });
   }
 
   public componentWillUnmount(): void {
@@ -43,18 +52,7 @@ class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState>
 
   public render(): JSX.Element {
     const { desktop, showComponent, userData } = this.state;
-    const {
-      name,
-      link,
-      online,
-      image,
-      game,
-      viewers,
-      mature,
-      preview,
-      matureFilter,
-      status,
-    } = this.props;
+    const { name, link, online, image, game, viewers, preview, status } = this.props;
 
     const OnlineUserDetails = (): JSX.Element => (
       <>
@@ -70,38 +68,29 @@ class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState>
         <p className="user__text">
           <span className="user__boldText">Viewers: </span> {viewers}
         </p>
-        <p className="user__text">
-          <span className="user__boldText">Mature Content: </span>{" "}
-          {mature ? " Yes " : " No "}
-        </p>
       </>
     );
 
-    const OfflineUserDetails = (): JSX.Element => {
-      return !userData ? (
-        <>
-          <p className="user__text">
-            <span className="user__boldText">Status:</span> User is offline
-          </p>
-          <p className="user__text">
-            <span className="user__boldText">Last Seen:</span> Never
-          </p>
-        </>
-      ) : (
-        <>
-          <p className="user__text">
-            <span className="user__boldText">Status:</span> User is offline
-          </p>
+    const OfflineUserDetails = (): JSX.Element => (
+      <>
+        <p className="user__text">
+          <span className="user__boldText">Status:</span> User is offline
+        </p>
+        {userData?.lastGame && (
           <p className="user__text">
             <span className="user__boldText">Last Played: </span> {userData.lastGame}
           </p>
-          <p className="user__text">
-            <span className="user__boldText">Last Streamed: </span>
-            {day(userData.lastSeen).format("Do MMMM @ hh:mmA")}
-          </p>
-        </>
-      );
-    };
+        )}
+        <p className="user__text">
+          <span className="user__boldText">
+            {userData?.lastGame ? "Last Streamed: " : "Last Seen: "}
+          </span>
+          {userData?.lastSeen
+            ? day(userData?.lastSeen).format("MMMM D @ hh:mmA")
+            : " Never"}
+        </p>
+      </>
+    );
 
     return (
       showComponent && (
@@ -141,13 +130,17 @@ class UserDataItem extends React.Component<UserDataItemProps, UserDataItemState>
               <a href={link} target="_blank" rel="noopener noreferrer">
                 <img
                   alt={`${name} stream preview`}
-                  src={preview !== undefined ? preview : notFoundImage}
-                  id={`${name}-img`}
-                  className={
-                    mature && matureFilter
-                      ? "user__streamPreview--mature"
-                      : "user__streamPreview"
+                  src={
+                    online
+                      ? preview !== undefined
+                        ? preview
+                        : notFoundImage
+                      : userData
+                      ? userData.offline_image || notFoundImage
+                      : notFoundImage
                   }
+                  id={`${name}-img`}
+                  className="user__streamPreview"
                 />
               </a>
             </div>

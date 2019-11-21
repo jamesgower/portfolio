@@ -7,31 +7,19 @@ import bodyParser from "body-parser";
 import nodemailer from "nodemailer";
 import { google } from "googleapis";
 import cors from "cors";
-import requireLogin from "./emaily/middlewares/requireLogin";
-import { AuthRequest } from "./emaily/interfaces/routes.i";
+
+import "./models/User.model";
+
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+require("./services/passport");
 
 // eslint-disable-next-line import/order
-const keys = require("./emaily/config/keys");
 const path = require("path");
-const stripe = require("stripe")(keys.stripeSecretKey);
-
-require("./emaily/models/User");
-require("./emaily/models/Survey");
-require("./emaily/services/passport");
-
-console.log(keys);
-mongoose.Promise = global.Promise;
-mongoose.connect(keys.mongoURI);
 
 const app = express();
 
-app.use(bodyParser.json());
-app.use(
-  cookieSession({
-    maxAge: 30 * 24 * 60 * 60 * 1000,
-    keys: [keys.cookieKey],
-  }),
-);
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -48,49 +36,12 @@ app.use(
   }),
 );
 
-app.get(
-  "/auth/google",
-  passport.authenticate("google", {
-    scope: ["profile", "email"],
-  }),
-);
-
-app.get(
-  "/auth/google/callback",
-  passport.authenticate("google", { failureRedirect: "/" }),
-  (req, res): void => {
-    res.redirect("/emaily/surveys");
-  },
-);
-
-app.get("/api/logout", (req: AuthRequest, res): void => {
-  req.logout();
-  res.redirect("/");
+mongoose.Promise = global.Promise;
+mongoose.connect(process.env.MONGO_DB_URI, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useCreateIndex: true,
 });
-
-app.get("/api/current_user", (req: AuthRequest, res): void => {
-  res.send(req.user);
-});
-
-app.post(
-  "/api/stripe",
-  requireLogin,
-  async (req: AuthRequest, res): Promise<void> => {
-    await stripe.charges.create({
-      amount: 500,
-      currency: "usd",
-      description: "$5.00 for 5 Emaily credits",
-      source: req.body.id,
-    });
-
-    req.user.credits += 5;
-    const user = await req.user.save();
-
-    res.send(user);
-  },
-);
-
-require("./emaily/routes/surveyRoutes")(app, requireLogin, mongoose);
 
 app.post(
   "/api/send_mail",
@@ -111,7 +62,7 @@ app.post(
       process.env.GOOGLE_CLIENT_SECRET,
       process.env.NODE_ENV === "production"
         ? "https://www.james-gower.dev"
-        : "http://localhost:5000",
+        : "http://localhost:3000",
     );
 
     oauth2Client.setCredentials({
@@ -157,11 +108,18 @@ app.post(
   },
 );
 
-require("./sockets")(app);
+app.use(bodyParser.json());
+app.use(
+  cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    keys: [process.env.COOKIE_KEY],
+  }),
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
-}
+require("./routes/auth.routes")(app);
+require("./routes/sockets.routes")(app);
 
 if (process.env.NODE_ENV === "production") {
   const publicPath = path.join(__dirname, "../dist");

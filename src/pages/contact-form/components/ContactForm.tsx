@@ -108,12 +108,6 @@ class ContactForm extends Component<{}, FormState> {
       <>
         <div className="form__text-container" id="contact-form">
           <h1 className="about__title">CONTACT ME</h1>
-          <p className="about__text">
-            I&apos;d love to hear from you, whether it be for a quote or a bit of extra
-            information of projects I have completed. Please complete the form below, or
-            alternatively send me a message on one of the linked social media accounts. I
-            will aim to reply as soon as possible!
-          </p>
         </div>
 
         <div className="form--container" ref={this.formContainerRef}>

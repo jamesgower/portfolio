@@ -97,6 +97,7 @@ const CertificationModal: React.FC = (): JSX.Element => {
   const [isOpen, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAnimating, setAnimating] = useState(false);
+
   const desktop = useScreenWidth(768);
 
   // const checkWindowWidth = (): void => {

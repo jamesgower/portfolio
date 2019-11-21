@@ -31,7 +31,7 @@ const ChooseNames: React.SFC = (): JSX.Element => {
     if (noPlayers === 1) {
       setPlayer2({ ...player2, name: "Normal AI" });
     }
-  });
+  }, []);
 
   const onPlayerNameChange = (
     e: React.ChangeEvent<HTMLInputElement>,

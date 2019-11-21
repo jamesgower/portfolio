@@ -5,16 +5,15 @@ import {
   applyMiddleware,
   compose,
   Store,
-  Reducer,
+  Reducer
 } from "redux";
-import { reducer as reduxForm } from "redux-form";
-import authReducer from "../pages/emaily/reducers/auth.reducer";
-import surveysReducer from "../pages/emaily/reducers/surveys.reducer";
+import { LetsWatchState } from "../pages/lets-watch/interfaces/app.i";
 import playerReducer from "../pages/tic-tac-toe/reducers/player.reducer";
 import boardReducer from "../pages/tic-tac-toe/reducers/board.reducer";
+import authReducer from "../pages/lets-watch/reducers/auth.reducer";
+import tmdbReducer from "../pages/lets-watch/reducers/tmdb.reducer";
 import { TicTacToeState } from "../pages/tic-tac-toe/interfaces/components.i";
 import { ChatterState } from "../pages/chatter/interfaces/components.i";
-import { EmailyState } from "../pages/emaily/interfaces/components.i";
 import usersReducer from "../pages/chatter/reducers/user.reducer";
 import roomReducer from "../pages/chatter/reducers/room.reducer";
 
@@ -28,7 +27,7 @@ declare global {
 export interface AppState {
   chatter: ChatterState;
   tictactoe: TicTacToeState;
-  emaily: EmailyState;
+  letsWatch: LetsWatchState;
 }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -36,27 +35,26 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export default (): Store => {
   const tictactoe: Reducer<TicTacToeState> = combineReducers<TicTacToeState>({
     player: playerReducer,
-    board: boardReducer,
+    board: boardReducer
   });
 
   const chatter: Reducer<ChatterState> = combineReducers<ChatterState>({
     user: usersReducer,
-    room: roomReducer,
+    room: roomReducer
   });
 
-  const emaily: Reducer<EmailyState> = combineReducers<EmailyState>({
+  const letsWatch: Reducer<LetsWatchState> = combineReducers<LetsWatchState>({
     auth: authReducer,
-    form: reduxForm,
-    surveys: surveysReducer,
+    tmdb: tmdbReducer
   });
 
   const store: Store<AppState> = createStore(
     combineReducers<AppState>({
       tictactoe,
       chatter,
-      emaily,
+      letsWatch
     }),
-    composeEnhancers(applyMiddleware(thunk)),
+    composeEnhancers(applyMiddleware(thunk))
   );
   return store;
 };

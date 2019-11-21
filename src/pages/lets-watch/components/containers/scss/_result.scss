@@ -1,0 +1,60 @@
+.result__container {
+  display: inline-flex;
+  width: 100%;
+  padding: 20px 40px;
+  border: 1px solid $off-white;
+  border-radius: 14px;
+  color: $off-white;
+  margin-bottom: 12px;
+  font-family: "Barlow Semi Condensed", sans-serif;
+}
+
+.result__tagline {
+  color: gray;
+  font-size: 16px;
+  font-style: italic;
+}
+
+.result__poster {
+  flex: 1;
+  width: 40%;
+}
+
+.result__genres {
+  margin: 5px 0 10px 0;
+}
+
+.result__title {
+  font-size: 22px;
+}
+
+.result__text {
+  font-size: 14px;
+}
+
+.result__overview {
+  font-style: italic;
+  font-size: 14px;
+}
+
+.result__genre {
+  border-radius: 4px;
+  padding: 2px 4px;
+  border: 2px solid $off-white;
+  display: inline-flex;
+  margin-right: 7px;
+  justify-content: center;
+  color: $off-white;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.result__img {
+  width: 200px;
+}
+.result__text-container {
+  display: flex;
+  flex-direction: column;
+  flex: 3;
+  justify-content: center;
+}
